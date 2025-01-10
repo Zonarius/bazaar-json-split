@@ -1,0 +1,703 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 15
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "JoyApplyAmount" : 45
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "JoyApplyAmount" : 90
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "JoyApplyAmount" : 150
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : {
+    "Heavy" : {
+      "Attributes" : {
+        "SlowTargets" : 2,
+        "SlowAmount" : 3000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardSlow",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Heavy Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "8bee4ccb-b29d-47bf-a57f-94f9e59f9fc7",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "edd8c606-22da-472f-98e9-1ced27ae7cfd"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Slow" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "04135c97-2ade-49fd-b6b8-b6ef2209a3d6",
+            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Icy" : {
+      "Attributes" : {
+        "FreezeTargets" : 1,
+        "FreezeAmount" : 4000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardFreeze",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Icy Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "d2e9ec86-4108-4c58-b14b-81e212c23ec7",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "ff61ac5e-97d2-4ff2-9c6c-ea12c53be44f"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Freeze" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "56587a22-f2b6-45c4-8b33-63314d95ad7b",
+            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Turbo" : {
+      "Attributes" : {
+        "HasteTargets" : 2,
+        "HasteAmount" : 3000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardHaste",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Turbo Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "028a6a61-79bd-41bd-85d7-ddb95554d942",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1280a963-df3d-4dd1-b8a6-ddf724cb6dfe"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Haste" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "5357b78e-f905-4728-941e-419f9db3ca2d",
+            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shielded" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 24
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "20e1eb7c-b3e4-4da5-84ab-7ff241842ab2",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a28aee55-ac82-402b-9fb4-865c2944c885"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Shield" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "2efd80d5-7e78-424a-98a1-1a362d8f2a21",
+            "Text" : "Shield {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Restorative" : {
+      "Attributes" : {
+        "HealAmount" : 32
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "150a91d4-faf0-480d-a423-52332d9ece9e",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "233897db-d349-4f3b-9b79-fef938c3fec5"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Heal" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "279cf9c6-ed20-4b72-ad4b-5d8ceb47829b",
+            "Text" : "Heal {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Toxic" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 4
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerPoisonApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Toxic Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "913dc2f7-d07e-41cc-86c5-42cfc35322ed",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "583ea762-0631-43bb-befc-ea57df685645"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Poison" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "4ce50e31-d573-4b1b-a8ca-17d435f8b9a8",
+            "Text" : "Poison {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Fiery" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 8
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerBurnApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Fiery Rice Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "95a9dab9-8e2f-4c06-9c30-2babc02275c9",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a2c8d511-bcc6-40e7-83b2-bafe0141a5ab"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Burn" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "ec21f601-1b17-4d54-a9f2-f33da425629a",
+            "Text" : "Burn {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shiny" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Multicast",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Rice Aura",
+          "InternalDescription" : "Shiny 1",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "35cd4be0-22e9-41ab-84a0-20a6f6754020"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +1 Multicast."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Deadly" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 50.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Deadly Rice Aura",
+          "InternalDescription" : "Deadly 50",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a385d101-0350-4f6e-9e42-6c7aef69fd6b"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Crit" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +{aura.e1}% Crit Chance."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    }
+  },
+  "Type" : "Item",
+  "Id" : "d1507c0e-0dea-411d-be97-52400ee0ce1a",
+  "Version" : "1.0.0",
+  "InternalName" : "Rice",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Joy" ],
+  "ArtKey" : "ecf571c31722dd2419c109b53063cc91",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "5ced19b207476c79cb1566a58990ce64",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "5ced19b207476c79cb1566a58990ce64",
+      "Text" : "Rice"
+    },
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {ability.0} Joy."
+    },
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "6909bd0f82aed92a4262fdd2c9ae90fb",
+        "Text" : "Gain {ability.0} Joy."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "60662283a67b95de3a277b23c2869edf",
+        "Text" : "When this gains Haste, this gains {ability.1} Joy for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Joy Active 15",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "MigrationData" : "b5967d2f-2dbe-449a-830e-6a53e96ab493",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "6909bd0f82aed92a4262fdd2c9ae90fb"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "InternalName" : "Rice 2",
+      "InternalDescription" : "When this gains Haste, this gains {ability.1} Joy for the fight.",
+      "MigrationData" : "fb510777-9e0f-475f-9557-e6b9cd862e8c",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "60662283a67b95de3a277b23c2869edf"
+    }
+  },
+  "Auras" : { }
+}

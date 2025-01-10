@@ -1,0 +1,401 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "AmmoMax" : 10,
+        "Multicast" : 1,
+        "Custom_0" : 1,
+        "Custom_1" : 0,
+        "DestroyTargets" : 1,
+        "DisableTargets" : 1
+      },
+      "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "6" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Custom_0" : 2
+      },
+      "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "6" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Custom_0" : 3
+      },
+      "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "6" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "Custom_0" : 4
+      },
+      "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "6" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "ca45968e-c996-412b-b359-7bfc3e70e893",
+  "Version" : "1.0.0",
+  "InternalName" : "Epicurean Chocolate",
+  "InternalDescription" : null,
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "DamageReference", "Ammo" ],
+  "ArtKey" : "4a5bdaec910d6804ea1c64da313ee360",
+  "CardPackId" : "Core",
+  "TranslationKey" : "7706d4d438a32eb3d0b05fbe1aa9ae85",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "7706d4d438a32eb3d0b05fbe1aa9ae85",
+      "Text" : "Epicurean Chocolate"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "7706d4d438a32eb3d0b05fbe1aa9ae85",
+        "Text" : "Adjacent Weapons permanently gain +{ability.0} Damage."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "8664e278f8ff3b75fba3d4ecf5afadba",
+        "Text" : "This permanently loses {ability.1} Max Ammo and destroy this if it has 0 Max Ammo."
+      },
+      "TooltipType" : "Active"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "High",
+      "InternalName" : "Epicurean Chocolate",
+      "InternalDescription" : "Adjacent items permanently gain +{ability.0} Damage.",
+      "MigrationData" : "2270402e-f76d-4686-9fd0-873c4f652df9",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "7706d4d438a32eb3d0b05fbe1aa9ae85"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Subtract",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Likit Candy Lose Ammo",
+      "InternalDescription" : "This permanently loses {ability.1} Max Ammo.",
+      "MigrationData" : "854ec609-45cf-4886-88f0-de500a0786cd",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "8664e278f8ff3b75fba3d4ecf5afadba"
+    },
+    "2" : {
+      "Id" : "2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_1",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Likit - Use Counter",
+      "InternalDescription" : "",
+      "MigrationData" : "0c9c8518-9f90-49f0-af2e-25ad634d85fe",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "494b5af657be8131f32e1486d10708e8"
+    },
+    "3" : {
+      "Id" : "3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardUpgraded",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Likit - Add Ammo",
+      "InternalDescription" : "",
+      "MigrationData" : "84395783-f1de-47bb-a20b-d726d00d7955",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "0d29e26cba1c3c0c4e840d444bb3d4fa"
+    },
+    "4" : {
+      "Id" : "4",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardUpgraded",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "AttributeType" : "Custom_1",
+        "Operation" : "Subtract",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Likit - Remove Use Counter",
+      "InternalDescription" : "",
+      "MigrationData" : "e738ff11-1d57-4617-877f-75ea16010fd1",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "b6b228b4214fdc78fdee3919f06a403e"
+    },
+    "5" : {
+      "Id" : "5",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightEnded",
+        "CombatType" : null,
+        "CombatOutcome" : null
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardDestroy",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "LessThanOrEqual",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "High",
+      "InternalName" : "Candy Mail 1",
+      "InternalDescription" : "Self Destroy",
+      "MigrationData" : "5e559886-ed8a-4146-ade0-4cbe08a18204",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "0ff2e7536ddda6e7a57037a656829c0d"
+    },
+    "6" : {
+      "Id" : "6",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardDisable",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "LessThanOrEqual",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "High",
+      "InternalName" : "Candy Mail 1",
+      "InternalDescription" : "Self Destroy",
+      "MigrationData" : "5e559886-ed8a-4146-ade0-4cbe08a18204",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "0ff2e7536ddda6e7a57037a656829c0d"
+    }
+  },
+  "Auras" : { }
+}

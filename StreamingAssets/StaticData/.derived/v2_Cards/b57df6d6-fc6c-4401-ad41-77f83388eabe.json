@@ -1,0 +1,110 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 2,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "HasteAmount" : 3000,
+        "HasteTargets" : 3,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "b57df6d6-fc6c-4401-ad41-77f83388eabe",
+  "Version" : "1.0.0",
+  "InternalName" : "Distributed Systems",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Haste" ],
+  "ArtKey" : "Icon_Skill_DistributedSystems.png",
+  "CardPackId" : "Core",
+  "TranslationKey" : "a0c1a4ebae0dece31aba06216fb1a019",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "a0c1a4ebae0dece31aba06216fb1a019",
+      "Text" : "Distributed Systems"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "a0c1a4ebae0dece31aba06216fb1a019",
+        "Text" : "When you use a large item, haste {ability.0.targets} small items for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Small" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Distributed Systems",
+      "InternalDescription" : "When you use a large item, haste 3 small items for {ability.0} second(s).",
+      "MigrationData" : "757d825b-1e13-45f8-8e32-8cc05376f76e",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a0c1a4ebae0dece31aba06216fb1a019"
+    }
+  },
+  "Auras" : { }
+}

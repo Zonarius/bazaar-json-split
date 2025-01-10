@@ -1,0 +1,666 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "FreezeAmount" : 2000,
+        "FreezeTargets" : 1,
+        "ShieldApplyAmount" : 15,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "ShieldApplyAmount" : 30
+      },
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 45
+      },
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 60
+      },
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    }
+  },
+  "Enchantments" : {
+    "Heavy" : {
+      "Attributes" : {
+        "SlowTargets" : 1,
+        "SlowAmount" : 2000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardSlow",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Heavy Cryosleeve Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "deeef760-3a58-4527-a23f-6fb1ce65c5c1",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "ae6e9ba2-402f-45f5-b7cc-480547bc4ce5"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Slow" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "18a24f43-ee4d-4625-aea9-43ccdb032cf6",
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Turbo" : {
+      "Attributes" : {
+        "HasteTargets" : 1,
+        "HasteAmount" : 2000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardHaste",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Turbo Cryosleeve Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "ea43798f-6ca7-4345-954d-feb914ab08eb",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "05674c2f-d96e-4f3b-95dc-90afa2feb644"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Haste" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "c5d409dd-b075-4055-b896-e8da53b520cb",
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shielded" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Cryosleeve Aura",
+          "InternalDescription" : "",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : ""
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Shield" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
+            "Text" : "This has double Shield."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Restorative" : {
+      "Attributes" : {
+        "HealAmount" : 0
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Cryosleeve Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "274d1a67-9ce5-496c-b37a-941cdf695006",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "90023b40-7d14-424b-a23f-1ea810d087e4"
+        }
+      },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 1.0
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Cryosleeve Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Heal" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "928cc51d-7c38-4f20-9094-c4d0b2b062e4",
+            "Text" : "Heal equal to this item's Shield."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : true
+    },
+    "Toxic" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 2
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerPoisonApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Toxic Cryosleeve Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "759f2655-0f1e-417a-9f2d-f86d3e20e9cc",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "9b9db5d7-c8df-457e-af42-05704dca37bc"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Poison" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "4504e0fd-a67c-42e1-984c-b949def61cd5",
+            "Text" : "Poison {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Fiery" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 4
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerBurnApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Fiery Cryosleeve Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "4eb634bf-5d0b-4bbe-bae4-f47d832456f6",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "97fd4009-12b4-4944-9f67-0fd6c5297c83"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Burn" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "be352fcd-719b-4c0d-8fda-f3cd0cca38fa",
+            "Text" : "Burn {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shiny" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Multicast",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Cryosleeve Aura",
+          "InternalDescription" : "Shiny 1",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "8d36a04a-ae56-4996-962b-8359291a90cf"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +1 Multicast."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    }
+  },
+  "Type" : "Item",
+  "Id" : "1179ed38-2357-4718-a0c7-c30d56493d08",
+  "Version" : "1.0.0",
+  "InternalName" : "Cryosleeve",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Freeze", "Shield" ],
+  "ArtKey" : "1db9ffacce733ed42ba5400c6a0640c3",
+  "CardPackId" : "Core",
+  "TranslationKey" : "6102f791b5a7a2081ba3ba1fc7143ac5",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "6102f791b5a7a2081ba3ba1fc7143ac5",
+      "Text" : "Cryosleeve"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "6102f791b5a7a2081ba3ba1fc7143ac5",
+        "Text" : "Freeze this for {ability.0} second(s)."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "53f141377eacbe415e108a4f328c61e6",
+        "Text" : "Shield {ability.1}."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "53f141377eacbe415e108a4f328c61e6",
+        "Text" : "When ANY item gains Freeze, Charge this {ability.2} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Cryosleeve",
+      "InternalDescription" : "Freeze this for {ability.0} second(s).",
+      "MigrationData" : "331ce831-7a80-43a4-9a58-cf977058a956",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "6102f791b5a7a2081ba3ba1fc7143ac5"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Cryosleeve 2",
+      "InternalDescription" : "Shield [15/30/45/60].",
+      "MigrationData" : "18ac425b-a554-4023-bc4a-18a90a3c39e7",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "53f141377eacbe415e108a4f328c61e0"
+    },
+    "2" : {
+      "Id" : "2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AllHands",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Cryosleeve 2",
+      "InternalDescription" : "When ANY item gains Freeze, Charge this {ability.2} second(s).",
+      "MigrationData" : "18ac425b-a554-4023-bc4a-18a90a3c39e7",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "53f141377eacbe415e108a4f328c61e0"
+    }
+  },
+  "Auras" : { }
+}

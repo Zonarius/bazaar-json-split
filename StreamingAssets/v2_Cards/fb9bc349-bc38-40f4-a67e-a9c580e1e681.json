@@ -1,0 +1,181 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 20
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "ShieldApplyAmount" : 40
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "fb9bc349-bc38-40f4-a67e-a9c580e1e681",
+  "Version" : "1.0.0",
+  "InternalName" : "Fort",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Shield", "Active", "ShieldReference", "Charge", "NonWeapon" ],
+  "ArtKey" : "2dd91f66b2589c446928e6a730e59a7d",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "d611bfb203455185fe8254b27eaa73aa",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "d611bfb203455185fe8254b27eaa73aa",
+      "Text" : "Fort"
+    },
+    "Tooltips" : [ {
+      "Key" : "31d3bfa4bd4e393c75ff1dc524d21966",
+      "Text" : "When you use an item, Shield {ability.0}."
+    }, {
+      "Key" : "7807d49efe4390ad4b1f9a2f9bddfe3d",
+      "Text" : "Enemy cooldowns are increased by {ability.1} second."
+    }, {
+      "Key" : "3dc8c0dc1353a4cf99c82842eabad8e6",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Fort 1",
+      "InternalDescription" : "When you use an item, Shield {ability.0}.",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "35716aa1-75f4-4318-a286-b32f3f2755cf",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "31d3bfa4bd4e393c75ff1dc524d21966",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Fort 2",
+      "InternalDescription" : "Enemy cooldowns are increased by {ability.1} second.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1000.0
+        },
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "ec045cbe-7d7e-44e6-8300-9dd1f6d5bb39",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "7807d49efe4390ad4b1f9a2f9bddfe3d",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightStarted",
+        "CombatType" : null
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Fort 3",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1000.0
+        },
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Subtract",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "fb5c6d21-b3cf-45ea-8b2d-164fc3800dd3",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "3dc8c0dc1353a4cf99c82842eabad8e6",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightEnded",
+        "CombatType" : null,
+        "CombatOutcome" : null
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

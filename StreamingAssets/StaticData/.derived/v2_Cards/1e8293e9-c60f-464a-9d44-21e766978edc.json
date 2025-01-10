@@ -1,0 +1,110 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BuyPrice" : 20,
+        "Custom_0" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 2
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "1e8293e9-c60f-464a-9d44-21e766978edc",
+  "Version" : "1.0.0",
+  "InternalName" : "Improvised Burn",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "BurnReference", "CritReference" ],
+  "ArtKey" : "Icon_Skill_ImprovisedBurn.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "2b79d1c8dcf9d8c93726b46880bf8c21",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "2b79d1c8dcf9d8c93726b46880bf8c21",
+      "Text" : "Improvised Burn"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "2b79d1c8dcf9d8c93726b46880bf8c21",
+        "Text" : "When you Crit, your Burn items gain {ability.0} Burn for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardCritted",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Burn" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Improvised Burn",
+      "InternalDescription" : "When you Crit, your items gain +{ability.0} Burn for the fight.",
+      "MigrationData" : "b91a5124-0b1d-4fd9-891e-1cb35b76bd05",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "2b79d1c8dcf9d8c93726b46880bf8c21"
+    }
+  },
+  "Auras" : { }
+}

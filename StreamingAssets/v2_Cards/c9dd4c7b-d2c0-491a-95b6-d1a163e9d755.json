@@ -1,0 +1,147 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 1 ],
+      "Attributes" : {
+        "CooldownMax" : 3000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 1 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "c9dd4c7b-d2c0-491a-95b6-d1a163e9d755",
+  "Version" : "1.0.0",
+  "InternalName" : "Balloon Bot",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Damage", "Shield", "Active", "NonWeapon" ],
+  "ArtKey" : "d2ad69328f4dee54e9747d8e4c8114ef",
+  "SpawningEligibility" : "GuidOnly",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "92148086518839904a5b1ecea0896a9f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "92148086518839904a5b1ecea0896a9f",
+      "Text" : "Balloon Bot"
+    },
+    "Tooltips" : [ {
+      "Key" : "3b4d2b75bef4155f586216a4b383443c",
+      "Text" : "When you use the weapon to the right of this, give this +{ability.0} Shield for this fight."
+    }, {
+      "Key" : "f8129340de86581ae7e3b3596f0b0363",
+      "Text" : "Shield {ability.1}"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Balloon Bot 2",
+      "InternalDescription" : "When you use the weapon to the right of this, give this +{ability.0} Shield for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "0a676a16-a5a9-4e70-8aa6-eb60502f7283",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "3b4d2b75bef4155f586216a4b383443c",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "RightCard",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "GENERATED/Add/4/8/OnCombat",
+      "InternalDescription" : "Shield {ability.1}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "ff1f869d-dded-4bf3-b6d9-80d28b33f85c",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "f8129340de86581ae7e3b3596f0b0363",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

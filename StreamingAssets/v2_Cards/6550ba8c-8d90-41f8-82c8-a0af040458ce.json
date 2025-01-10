@@ -1,0 +1,164 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "6550ba8c-8d90-41f8-82c8-a0af040458ce",
+  "Version" : "1.0.0",
+  "InternalName" : "Depth Charge",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon", "Aquatic" ],
+  "HiddenTags" : [ "Ammo", "DamageReference" ],
+  "ArtKey" : "Icon_Skill_VAN_DepthCharge.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "82989d677224e5561c32ec081b62b760",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "82989d677224e5561c32ec081b62b760",
+      "Text" : "Depth Charge"
+    },
+    "Tooltips" : [ {
+      "Key" : "da0daf9b1d232534a4cdc6c8c88d5384",
+      "Text" : "If you have exactly one weapon, give it +{aura.0} Max Ammo."
+    }, {
+      "Key" : "0ab8a173dd9b8a50203abee9650e3135",
+      "Text" : "If it is aquatic, give it +{aura.1} damage."
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Depth Charge Skill - IfOnly1Wep Add Ammo/5",
+      "InternalDescription" : "If you have exactly one weapon, give it +{aura.0} Max Ammo.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "AmmoMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "91aea8ef-4182-4e8a-8a1f-934b5eb18b2b",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "TranslationKey" : "da0daf9b1d232534a4cdc6c8c88d5384",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Depth Charge Skill - IfOnly1WepAquatic Add Damage/20",
+      "InternalDescription" : "If it is aquatic, give it +{aura.1} damage.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 20.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Aquatic" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "7261417a-2977-4bd5-800a-cb264a53cd74",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "TranslationKey" : "0ab8a173dd9b8a50203abee9650e3135",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

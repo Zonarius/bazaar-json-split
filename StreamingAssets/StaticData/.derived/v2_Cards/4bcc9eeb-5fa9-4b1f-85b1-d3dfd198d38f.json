@@ -1,0 +1,162 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Bronze",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "Custom_0" : 1,
+        "BuyPrice" : 5,
+        "Custom_1" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "Custom_0" : 2,
+        "BuyPrice" : 10
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "Custom_0" : 3,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "Custom_0" : 4,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "4bcc9eeb-5fa9-4b1f-85b1-d3dfd198d38f",
+  "Version" : "1.0.0",
+  "InternalName" : "Augmented Weaponry",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "DamageReference" ],
+  "ArtKey" : "Icon_SKILL_MON_AugmentedWeaponry.png",
+  "CardPackId" : "Core",
+  "TranslationKey" : "8eca6efdd22eba3260692b3aa523d67f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "8eca6efdd22eba3260692b3aa523d67f",
+      "Text" : "Augmented Weaponry"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "8eca6efdd22eba3260692b3aa523d67f",
+        "Text" : "Your weapons have +{aura.1} Damage. When you sell a small item, increase this bonus by +{ability.0} Damage."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "Custom_1",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Augmented Weaponry",
+      "InternalDescription" : "",
+      "MigrationData" : "ddb5a586-bef7-4349-98a2-5b5f6b62a34c",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "8eca6efdd22eba3260692b3aa523d67f"
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Augmented Weaponry Aura",
+      "InternalDescription" : "",
+      "MigrationData" : "8130250a-8b1c-46e8-bb72-3286d3be2ad8",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "7c6eb9ef4786674c00d5dd3940b4a74b"
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "SlowAmount" : 1000,
+        "SlowTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "SlowAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "SlowAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "1e9649ce-e350-4c0b-b763-5e4c7e038010",
+  "Version" : "1.0.0",
+  "InternalName" : "Earrings",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Health", "Active", "NonWeapon", "Slow" ],
+  "ArtKey" : "82ef94c3a3b4108438f11a630951d396",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "ff8037db4fee7de0275158003cdb5c8c",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "0adf8aa4fba0e7bc7431869873ee695b",
+      "Text" : "slow an item for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "ff8037db4fee7de0275158003cdb5c8c",
+      "Text" : "Earrings"
+    },
+    "Tooltips" : [ {
+      "Key" : "47b7c01f452197c486100f0e9715bcbd",
+      "Text" : "slow an item for {ability.0} seconds."
+    }, {
+      "Key" : "c440f715bb4f1931fc07def2b03b6f29",
+      "Text" : "When you slow, permanently gain {ability.1} Max Health."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Earrings 1",
+      "InternalDescription" : "slow an item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b0db46c4-d54e-4e49-b7dc-5abf78f6ec63",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "47b7c01f452197c486100f0e9715bcbd",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Earrings 2",
+      "InternalDescription" : "When you slow, permanently gain {ability.1} Max Health.",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthMax",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4e250154-d80a-44a5-bbf2-1da4888381ab",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "c440f715bb4f1931fc07def2b03b6f29",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Slow",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

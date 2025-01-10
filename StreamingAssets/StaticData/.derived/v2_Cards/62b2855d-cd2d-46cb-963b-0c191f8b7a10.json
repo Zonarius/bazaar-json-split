@@ -1,0 +1,690 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "CooldownMax" : 10000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 20,
+        "SlowAmount" : 6000,
+        "SlowTargets" : 1
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "JoyApplyAmount" : 60,
+        "SlowAmount" : 6000
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "JoyApplyAmount" : 120,
+        "SlowAmount" : 6000
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "JoyApplyAmount" : 200,
+        "SlowAmount" : 6000
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : {
+    "Heavy" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "SlowAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 4000.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Heavy Excellent Vintage Aura",
+          "InternalDescription" : "Heavy 4",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "ad5fd239-bb90-47d8-9831-cd606f518cdf"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Slow" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "5af4d7b0-3e1b-49b6-a4c0-47af178fa586",
+            "Text" : "Slow {aura.e1.targets} items for {aura.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Icy" : {
+      "Attributes" : {
+        "FreezeTargets" : 1,
+        "FreezeAmount" : 6000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardFreeze",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Icy Excellent Vintage Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "4ac7b216-ba96-43ab-9be1-669a7cc56222",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1f448044-3f17-4e7a-9abf-17ad6fd36386"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Freeze" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "1f22be11-8d43-468e-90c8-40df03b643cb",
+            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Turbo" : {
+      "Attributes" : {
+        "HasteTargets" : 2,
+        "HasteAmount" : 4000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardHaste",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Turbo Excellent Vintage Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "63a93067-fe0d-48a7-9561-6dc6b412e94a",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "6a601c93-2bc8-499b-9c4e-7cb62c070860"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Haste" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "38577909-9e99-4ea0-bc90-29c177bd9164",
+            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shielded" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 30
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Excellent Vintage Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "f8818b51-0b65-4c3d-b515-49548d5b6aad",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "946101db-52f6-49e8-8b9d-8d603832c695"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Shield" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "59d20fad-1bb7-416f-9ca4-6c3f62c7eca1",
+            "Text" : "Shield {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Restorative" : {
+      "Attributes" : {
+        "HealAmount" : 40
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Excellent Vintage Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "847eeff0-0b2a-4e8e-8228-ce131ce3a291",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "8293c5de-cb2c-4084-bc54-ea0c82b659b2"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Heal" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "4abbe5a8-9cd2-4cdb-81cf-f7c5fb9cdf82",
+            "Text" : "Heal {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Toxic" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 6
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerPoisonApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Toxic Excellent Vintage Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "fc998547-6e79-4e91-ba87-73c0252b2854",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "9118f6e3-2399-4ca1-ac53-354c2f0c5748"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Poison" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "9ec118ee-4088-4568-98ec-49f5ebeb7092",
+            "Text" : "Poison {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Fiery" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 10
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerBurnApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Fiery Excellent Vintage Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "bb79eefc-421c-42dc-8085-dc0ed5f01193",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "6a850b68-95bd-4376-8693-126e94eea11e"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Burn" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "8bdb13fa-1b7c-4ef6-bfd6-c0ddf04da03c",
+            "Text" : "Burn {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shiny" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Multicast",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Excellent Vintage Aura",
+          "InternalDescription" : "Shiny 1",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a8c4c898-f1de-4412-acad-00ab0e2a1cc0"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +1 Multicast."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Deadly" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 50.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Deadly Excellent Vintage Aura",
+          "InternalDescription" : "Deadly 50",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "54ca492b-1b53-404a-a40b-0edd47aba179"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Crit" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +{aura.e1}% Crit Chance."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    }
+  },
+  "Type" : "Item",
+  "Id" : "62b2855d-cd2d-46cb-963b-0c191f8b7a10",
+  "Version" : "1.0.0",
+  "InternalName" : "Excellent Vintage",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Joy", "Slow" ],
+  "ArtKey" : "80a09df3c4273a74da29ad25d8464e42",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "f9412085c3ac9685dfe3e57d03a704bb",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "f9412085c3ac9685dfe3e57d03a704bb",
+      "Text" : "Excellent Vintage"
+    },
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {ability.0} Joy."
+    },
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "08e91c85e0a20afafca6eca0c51128c2",
+        "Text" : "Gain {ability.0} Joy."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "f9412085c3ac9685dfe3e57d03a704bb",
+        "Text" : "Slow {ability.1.targets} item for {ability.1} second(s)."
+      },
+      "TooltipType" : "Active"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Joy Active 20",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "MigrationData" : "2c91b385-20fa-4226-9019-6621c34edce6",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "08e91c85e0a20afafca6eca0c51128c2"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Excellent Vintage",
+      "InternalDescription" : "Slow {ability.1.targets} item for {ability.1} second(s).",
+      "MigrationData" : "f7ee3c00-fa6b-4e35-8861-1a480f80a5ce",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "f9412085c3ac9685dfe3e57d03a704bb"
+    }
+  },
+  "Auras" : { }
+}

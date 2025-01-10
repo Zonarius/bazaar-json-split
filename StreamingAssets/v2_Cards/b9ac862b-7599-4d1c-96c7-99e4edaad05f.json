@@ -1,0 +1,152 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "ShieldApplyAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "ShieldApplyAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "b9ac862b-7599-4d1c-96c7-99e4edaad05f",
+  "Version" : "1.0.0",
+  "InternalName" : "Reserve Shield",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Vanessa", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Shield", "HealthReference" ],
+  "ArtKey" : "Icon_Skill_ReserveShield.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "1a744732385ea82c1c468013717e5f06",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "1a744732385ea82c1c468013717e5f06",
+      "Text" : "Reserve Shield"
+    },
+    "Tooltips" : [ {
+      "Key" : "4ace61b5d54849bdacf199966f3f2b5f",
+      "Text" : "The first time you use a Large item each fight, Shield equal to {ability.0.mod|%} of your max health."
+    }, {
+      "Key" : "20f53ec105743863dff6baa154db66b6",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Reserve Shield 1",
+      "InternalDescription" : "The first time you use a Large item each fight, Shield equal to {ability.0.mod|%} of your max health.",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "994bcfd3-e006-4366-88c6-e21e213b279e",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "4ace61b5d54849bdacf199966f3f2b5f",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Reserve Shield 2 - Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Counter",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "d9f567a2-2a64-44c5-a2c9-27b999c0edf9",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "20f53ec105743863dff6baa154db66b6",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

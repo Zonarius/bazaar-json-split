@@ -1,0 +1,588 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "CooldownMax" : 9000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "FreezeAmount" : 1000,
+        "FreezeTargets" : 3
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "FreezeAmount" : 2000
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Enchantments" : {
+    "Heavy" : {
+      "Attributes" : {
+        "SlowTargets" : 1,
+        "SlowAmount" : 4000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardSlow",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Heavy Ice Cubes Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "0378ba07-4196-4a56-9d40-712e1a6b578c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "bfc27ff7-7325-44bf-b18d-44408b4d0909"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Slow" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "fa30d23b-c97c-48ef-87ab-a56b0a8469f8",
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Icy" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "FreezeAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Icy Ice Cubes Aura",
+          "InternalDescription" : "Icy 3",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "3b71e692-9e2f-43fd-ab4a-1cad0a843f1e"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Freeze" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "2e3b170b-c110-42a4-9800-7a78d6cfd84c",
+            "Text" : "This has +{aura.e1} Freeze duration."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Turbo" : {
+      "Attributes" : {
+        "HasteTargets" : 1,
+        "HasteAmount" : 4000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardHaste",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Turbo Ice Cubes Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "00cd4d26-4fdf-481a-b6ae-fca9b3b5681e",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "fe2ff37d-b79c-42d5-a681-7d3082b62b8a"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Haste" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "4e09c3e6-79fb-4a41-a96d-e2c6546d929c",
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shielded" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 60
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Ice Cubes Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "f5ca3aee-a52e-4ed1-b577-b2ab046286d9",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "05e870ae-1056-489d-afd8-3ee7cd704efb"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Shield" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "522dedfc-4a6a-4241-b978-68360999c52b",
+            "Text" : "Shield {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Restorative" : {
+      "Attributes" : {
+        "HealAmount" : 90
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Ice Cubes Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "8c7b4b55-4201-4d47-8b18-828c5e921686",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "cb5824cb-7dcf-4754-a38d-e91801b7f2a2"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Heal" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "8e4decd9-e6f4-4f2a-a4f7-ef65fe62c017",
+            "Text" : "Heal {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Toxic" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 6
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerPoisonApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Toxic Ice Cubes Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "57992433-8830-4b34-a1fe-b34e719b782c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a9178885-32ce-4c28-a66e-e093286365cf"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Poison" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "143cb512-9c12-478c-81f0-53bcb316c48e",
+            "Text" : "Poison {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Fiery" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 9
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerBurnApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Fiery Ice Cubes Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "72593377-5a5b-4d2d-a2b3-90bb1b352bf7",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "57618d68-c5cd-4f2b-9761-21b5de84d36f"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Burn" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "3fafd4cf-a23d-4b48-8c23-6b5db4b06e05",
+            "Text" : "Burn {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shiny" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Multicast",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Ice Cubes Aura",
+          "InternalDescription" : "Shiny 1",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "bb1da0f4-a159-4658-8939-9bc10a4ce193"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +1 Multicast."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    }
+  },
+  "Type" : "Item",
+  "Id" : "ba625e9a-9c8b-4c21-bf6e-e7a6ff264019",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice Cubes",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Freeze" ],
+  "ArtKey" : "6ac7abc91ba391f4189cf17a37e2d88f",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "5a82408639272193a2b2159fd6643f0b",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "5a82408639272193a2b2159fd6643f0b",
+      "Text" : "Ice Cubes"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "5a82408639272193a2b2159fd6643f0b",
+        "Text" : "Freeze {ability.0.targets} small items for {ability.0} second(s)."
+      },
+      "TooltipType" : "Active"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Ice Cubes",
+      "InternalDescription" : "Freeze {ability.0.targets} item for {ability.0} second(s).",
+      "MigrationData" : "3bde9f51-221e-49ed-90d1-63010371a72d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "5a82408639272193a2b2159fd6643f0b"
+    }
+  },
+  "Auras" : { }
+}

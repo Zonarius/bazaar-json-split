@@ -1,0 +1,152 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "4b491993-ccc9-4021-a347-5492a51f7b30",
+  "Version" : "1.0.0",
+  "InternalName" : "Second Wind",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Heal", "HealthReference" ],
+  "ArtKey" : "Icon_Skill_SecondWind.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "93624689e775a3f985da33aed0f9e997",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "93624689e775a3f985da33aed0f9e997",
+      "Text" : "Second Wind"
+    },
+    "Tooltips" : [ {
+      "Key" : "93624689e775a3f985da33aed0f9e997",
+      "Text" : "The first time you use a Large item each fight, heal {ability.0.mod|%} of your max health."
+    }, {
+      "Key" : "8ed66f5101940dacd395fc3957797c7c",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Second Wind",
+      "InternalDescription" : "The first time you use a Large item each fight, heal {ability.0.mod|%} of your max health.",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "04b20524-aa23-4df9-8ebc-fce2141d1844",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "93624689e775a3f985da33aed0f9e997",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Second Wind - Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Counter",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "d6877a51-b964-4499-a897-314ba57024e8",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "8ed66f5101940dacd395fc3957797c7c",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

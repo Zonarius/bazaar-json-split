@@ -1,0 +1,108 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "SlowAmount" : 4000,
+        "BuyPrice" : 20,
+        "SlowTargets" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "SlowAmount" : 4000,
+        "BuyPrice" : 40,
+        "SlowTargets" : 2
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "3dd2dbac-97ee-4fc4-ac31-4d885d19e2ed",
+  "Version" : "1.0.0",
+  "InternalName" : "CPU Throttling",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Core" ],
+  "HiddenTags" : [ "Slow" ],
+  "ArtKey" : "Icon_Skill_CPUThrotteling.png",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "14dbcaf99d2c2e36bb0daf98dc6739af",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "14dbcaf99d2c2e36bb0daf98dc6739af",
+      "Text" : "CPU Throttling"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "14dbcaf99d2c2e36bb0daf98dc6739af",
+        "Text" : "When you use the Core, slow {ability.0.targets} item for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "14dbcaf99d2c2e36bb0daf98dc6739af",
+        "Text" : "When you use the Core, slow {ability.0.targets} items for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "CPU Throttling",
+      "InternalDescription" : "When you use the Core, slow an item for {ability.0} second(s).",
+      "MigrationData" : "2d0ecd5c-6aa9-4264-9f56-35a7d445aa83",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "14dbcaf99d2c2e36bb0daf98dc6739af"
+    }
+  },
+  "Auras" : { }
+}

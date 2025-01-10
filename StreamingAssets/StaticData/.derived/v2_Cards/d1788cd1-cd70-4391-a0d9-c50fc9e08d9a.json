@@ -1,0 +1,845 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "Multicast" : 1,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "BurnApplyAmount" : 4,
+        "PoisonApplyAmount" : 2
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2", "3", "4", "5" ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 6,
+        "PoisonApplyAmount" : 3
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2", "3", "4", "5" ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "BurnApplyAmount" : 8,
+        "PoisonApplyAmount" : 4
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2", "3", "4", "5" ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    }
+  },
+  "Enchantments" : {
+    "Heavy" : {
+      "Attributes" : {
+        "SlowTargets" : 2,
+        "SlowAmount" : 2000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardSlow",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Heavy Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "475d3467-c8fa-4cf0-a2fe-fa3824b08d5f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "5b3c9631-ef5b-4f09-990f-b60819c0a341"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Slow" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "68fe996f-b490-4e26-ac6a-08c9e5599a97",
+            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Icy" : {
+      "Attributes" : {
+        "FreezeTargets" : 1,
+        "FreezeAmount" : 2000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardFreeze",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Icy Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "878a6eee-9c41-46ab-a5a0-7e7619661384",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "7518e9fa-2440-4e20-92b8-2057346d5abf"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Freeze" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "24362fb4-6dc7-4e54-80e1-cb684f4dac28",
+            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Turbo" : {
+      "Attributes" : {
+        "HasteTargets" : 2,
+        "HasteAmount" : 2000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardHaste",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Turbo Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "cde82f7a-6d67-4e0a-8093-0ab7c0d72b22",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "53560d8d-8013-48e9-abfc-84a67fbd9ec2"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Haste" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "025babe8-ddad-491e-9fca-b068b68a3e71",
+            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shielded" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 20
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "c2f6e3f9-138b-47f6-ba33-799ccce23a00",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b26e1ae0-ccdc-40ae-bdf3-26b850284b58"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Shield" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "657207be-fdac-45cb-8c1d-622286226fe0",
+            "Text" : "Shield {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Restorative" : {
+      "Attributes" : {
+        "HealAmount" : 30
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "66a11890-a239-489d-8036-02f38db12d8b",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "5ef3dcf4-281d-4b6b-9121-f1e493807075"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Heal" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "bf08633a-8394-44a5-af3d-c92ee312a84b",
+            "Text" : "Heal {ability.e1}."
+          },
+          "TooltipType" : "Active"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Toxic" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "1fe87e2d-980b-4dbc-ae23-ed67e17a30b3",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "8a81593e-57d0-4e2f-97d7-917168d380fc"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Poison" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has double Poison."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Fiery" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Weather Glass Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "e18ef938-ca13-441f-872a-173474b77d49",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b299093b-06cf-436e-93f4-3ea96bf94a74"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Burn" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has double Burn."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Shiny" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Multicast",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Weather Glass Aura",
+          "InternalDescription" : "Shiny 1",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "0ce6a131-049f-4758-9b16-de9269acd445"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +1 Multicast."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Deadly" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 50.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Deadly Weather Glass Aura",
+          "InternalDescription" : "Deadly 50",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "4290a751-8ff1-4a82-b8cc-b26029a9d51c"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
+            "Text" : "This has +{aura.e1}% Crit Chance."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    }
+  },
+  "Type" : "Item",
+  "Id" : "d1788cd1-cd70-4391-a0d9-c50fc9e08d9a",
+  "Version" : "1.0.0",
+  "InternalName" : "Weather Glass",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Burn", "Poison", "SlowReference", "FreezeReference" ],
+  "ArtKey" : "0715e50d24cb854479bb0fd1e19077fb",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "74178f71b1d6612922138bbe09cc0981",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "74178f71b1d6612922138bbe09cc0981",
+      "Text" : "Weather Glass"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "08320439e4fc0cf5ec04ea494dad16b8",
+        "Text" : "Burn {ability.0}."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "4e702e2dd2357481f7e518d5c5be9ba9",
+        "Text" : "Poison {ability.1}."
+      },
+      "TooltipType" : "Active"
+    }, {
+      "Content" : {
+        "Key" : "eb8857ab4f630fc3eb395fb91068d217",
+        "Text" : "If you have another item with Burn, Poison, Slow, or Freeze, this has +{aura.2} Multicast for each."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Weather Glass 1",
+      "InternalDescription" : "Burn {ability.0}.",
+      "MigrationData" : "8d32cd2d-d1f2-499f-937b-b207eb4095cc",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "c27008eb0045407cebeb9fc7a25ddf38"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Weather Glass 2",
+      "InternalDescription" : "Poison {ability.0}.",
+      "MigrationData" : "7c15bb6b-daf4-4dc9-81d9-bbea1bc26a23",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "716eebb7b32f30ef5d8dd83d861ab8ac"
+    }
+  },
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Burn" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Weather Glass 2",
+      "InternalDescription" : "If you have another item with Burn, Freeze, Slow, or Poison, this has +1 Multicast for each.",
+      "MigrationData" : "cb15d894-1e3e-42a4-95c1-1f0098806f0d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "bc41f32c4aa542fc83ca13079e73dc0d"
+    },
+    "3" : {
+      "Id" : "3",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Poison" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Weather Glass 3",
+      "InternalDescription" : "",
+      "MigrationData" : "55af8c49-bc70-49bc-b7fc-2c28af3b46dc",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a215a6ff25e061d8376ff69b318fa7aa"
+    },
+    "4" : {
+      "Id" : "4",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Slow" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Weather Glass 4",
+      "InternalDescription" : "",
+      "MigrationData" : "d3aa8849-1190-47d2-86c3-1f9dfa934ea9",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9f68d6bc393d944c07e8ecc274cdff0f"
+    },
+    "5" : {
+      "Id" : "5",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Freeze" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Weather Glass 5",
+      "InternalDescription" : "",
+      "MigrationData" : "ce58d9c3-27c4-4392-af33-fbb72e5f0d57",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "21f7359c618f05eee0d98b7b252569a9"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "FreezeAmount" : 2000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "FreezeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "FreezeAmount" : 6000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "fdd78910-3e5c-4244-8c13-ac90a223fae3",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice Swan",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Freeze" ],
+  "ArtKey" : "b456b14ecf4d60546a501579454e03b5",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "e8541d9cb7f1cd119d0ed994c98ccd88",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "89dc909c793eb85b206671d450074f45",
+      "Text" : "freeze an item for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "e8541d9cb7f1cd119d0ed994c98ccd88",
+      "Text" : "Ice Swan"
+    },
+    "Tooltips" : [ {
+      "Key" : "e8541d9cb7f1cd119d0ed994c98ccd88",
+      "Text" : "freeze an item for {ability.0} seconds."
+    }, {
+      "Key" : "e8541d9cb7f1cd119d0ed994c98ccd88",
+      "Text" : "When you freeze, give your food +{ability.1} Joy for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Ice Swan",
+      "InternalDescription" : "freeze an item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e0e67125-8b38-495a-b1d0-0a8cc7ecfe86",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "e8541d9cb7f1cd119d0ed994c98ccd88",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Ice Swan",
+      "InternalDescription" : "When you freeze, give your food +{ability.1} Joy for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "c2913681-de57-4c51-86b0-95615f6b60cc",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "e8541d9cb7f1cd119d0ed994c98ccd88",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,131 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 7
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "BurnApplyAmount" : 7
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "2fd61ab1-d256-4d43-8691-c6f730b41c67",
+  "Version" : "1.0.0",
+  "InternalName" : "Thermal Lance",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Burn", "Active", "NonWeapon", "HasteReference" ],
+  "ArtKey" : "5feb0ae9b89214f47b17eb206b81eab7",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "bb5362e724277e5cbe9bf42113434e09",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "de834839a9cb3ef35867f94c3e63f10b",
+      "Text" : "Burn {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "bb5362e724277e5cbe9bf42113434e09",
+      "Text" : "Thermal Lance"
+    },
+    "Tooltips" : [ {
+      "Key" : "bb5362e724277e5cbe9bf42113434e09",
+      "Text" : "Burn {ability.0}"
+    }, {
+      "Key" : "bb5362e724277e5cbe9bf42113434e09",
+      "Text" : "When this gains Haste, give this +{ability.1} Burn for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Thermal Lance",
+      "InternalDescription" : "Burn {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "dc4c432e-6633-4cc6-9c59-559274a5c5a6",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "bb5362e724277e5cbe9bf42113434e09",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Thermal Lance",
+      "InternalDescription" : "When this gains Haste, give this +{ability.1} Burn for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a26e264a-688a-49f1-b00b-93b8c7774bdc",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "bb5362e724277e5cbe9bf42113434e09",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

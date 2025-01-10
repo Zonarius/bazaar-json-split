@@ -1,0 +1,149 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4
+      },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "02fa39ce-6cc0-4ad2-bd35-5c70a47354d6",
+  "Version" : "1.0.0",
+  "InternalName" : "Silencer",
+  "InternalDescription" : null,
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "NonWeapon", "DamageReference", "Cooldown" ],
+  "ArtKey" : "b96d46f369d00074698d3a9e353b9bbd",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "5e1ddb0ab1cb335819a4d6f4fac11161",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "5e1ddb0ab1cb335819a4d6f4fac11161",
+      "Text" : "Silencer"
+    },
+    "Tooltips" : [ {
+      "Key" : "d13c22fa4eb8ed64cf94996ef088a767",
+      "Text" : "The weapon to the left of this has +{aura.0} damage."
+    }, {
+      "Key" : "77da05bbb403686c95c1234bcba928ed",
+      "Text" : "If you have exactly one weapon, reduce its cooldown by {aura.1}%."
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Silencer 1",
+      "InternalDescription" : "The weapon to the left of this has +{aura.0} damage.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "LeftCard",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "22b48e2f-e963-4bea-ad97-02517b1b309f",
+      "Prerequisites" : null,
+      "TranslationKey" : "d13c22fa4eb8ed64cf94996ef088a767",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Silencer 2",
+      "InternalDescription" : "If you have exactly one weapon, reduce its cooldown by {aura.1}%.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "04f49dcf-701d-4633-88bc-9f2204bff9c4",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "TranslationKey" : "77da05bbb403686c95c1234bcba928ed",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

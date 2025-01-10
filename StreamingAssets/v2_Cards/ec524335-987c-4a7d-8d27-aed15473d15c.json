@@ -1,0 +1,143 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 10
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 20
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 30
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "ec524335-987c-4a7d-8d27-aed15473d15c",
+  "Version" : "1.0.0",
+  "InternalName" : "Colander",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Shield", "Active", "NonWeapon" ],
+  "ArtKey" : "5036fda0b795cc54195fd42aa4a96b65",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "1ccf50011e40c1ff10927187409a7caf",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "1ccf50011e40c1ff10927187409a7caf",
+      "Text" : "Colander"
+    },
+    "Tooltips" : [ {
+      "Key" : "59f9e1a3a273d5e1b3e063f6212c35a6",
+      "Text" : "Shield {ability.0}"
+    }, {
+      "Key" : "86124656700e9d7cf4f1cbc93e1a9bfc",
+      "Text" : "This has +{aura.1} Shield for each small item you have."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Colander 1",
+      "InternalDescription" : "Shield {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "feba3a79-05d3-43c5-82d6-25765c5ad667",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "59f9e1a3a273d5e1b3e063f6212c35a6",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Colander 2",
+      "InternalDescription" : "This has +{aura.1} Shield for each small item you have.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Small" ],
+              "IsNot" : false
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 10.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "533e00b9-157d-4ac0-a8f2-9b59e23a0ae1",
+      "Prerequisites" : null,
+      "TranslationKey" : "86124656700e9d7cf4f1cbc93e1a9bfc",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

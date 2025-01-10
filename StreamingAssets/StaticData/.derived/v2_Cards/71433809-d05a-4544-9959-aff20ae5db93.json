@@ -1,0 +1,161 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "Custom_0" : 2,
+        "BuyPrice" : 10,
+        "Custom_1" : 2
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "Custom_0" : 3,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "Custom_0" : 4,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "71433809-d05a-4544-9959-aff20ae5db93",
+  "Version" : "1.0.0",
+  "InternalName" : "Iron Sharpens Iron",
+  "InternalDescription" : null,
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa", "Jules", "Mak" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "DamageReference" ],
+  "ArtKey" : "Icon_Skill_IronSharpensIron.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "84b3407be74807088e7a8c714729ec1d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "84b3407be74807088e7a8c714729ec1d",
+      "Text" : "Iron Sharpens Iron"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "00191ba6abeb5dd026daf6a9962661d2",
+        "Text" : "Your leftmost Weapon has +{aura.1} damage. When you buy a weapon, increase this bonus by {ability.0}."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalType",
+              "CardType" : "Item",
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "Custom_1",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Iron Sharpens Iron Ability",
+      "InternalDescription" : "Your leftmost Weapon has +2 damage. When you buy a weapon, increase this bonus by [2/3/4/5]",
+      "MigrationData" : "97a897ea-510d-430b-b009-5e3084759c5b",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "00191ba6abeb5dd026daf6a9962661d2"
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardXMost",
+          "TargetSection" : "SelfHand",
+          "TargetMode" : "LeftMostCard",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Iron Sharpens Iron Aura",
+      "InternalDescription" : "",
+      "MigrationData" : "8130250a-8b1c-46e8-bb72-3286d3be2ad8",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "7c6eb9ef4786674c00d5dd3940b4a74b"
+    }
+  }
+}

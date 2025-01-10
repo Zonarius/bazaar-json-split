@@ -1,0 +1,144 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 4
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 6
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "BurnApplyAmount" : 8
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "0d227497-f57f-44ef-98a8-15791e710fb6",
+  "Version" : "1.0.0",
+  "InternalName" : "Skillet",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Burn", "Active", "NonWeapon", "BurnReference" ],
+  "ArtKey" : "805da95794df8cf44823b8bd102cfef4",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "10fdbf207e113506e9e28fdc4ee941d7",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "d07ae4f03131021819204555f7d781db",
+      "Text" : "Burn {i}."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "10fdbf207e113506e9e28fdc4ee941d7",
+      "Text" : "Skillet"
+    },
+    "Tooltips" : [ {
+      "Key" : "bf3af7418c4bf542f063ee03914f1b9c",
+      "Text" : "Burn {ability.0}."
+    }, {
+      "Key" : "dd97e1b7738bb5bf0fe181a2610f270f",
+      "Text" : "If both adjacent items are food, give this +{aura.1} Multicast."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Skillet 1",
+      "InternalDescription" : "Burn {ability.0}.",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "86843440-3fc0-4189-acd9-2bec669b4d24",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "bf3af7418c4bf542f063ee03914f1b9c",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Skillet 2",
+      "InternalDescription" : "If both adjacent items are food, give this +{aura.1} Multicast.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4f4b434a-596d-4272-bf69-6b36ff3861e8",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 2
+      } ],
+      "TranslationKey" : "dd97e1b7738bb5bf0fe181a2610f270f",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

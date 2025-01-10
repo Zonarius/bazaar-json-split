@@ -1,0 +1,172 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "SlowAmount" : 1000,
+        "SlowTargets" : 1,
+        "BuyPrice" : 20,
+        "Custom_0" : 0
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "SlowAmount" : 2000,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "e7488436-6835-4e5e-971c-ba0a60f58529",
+  "Version" : "1.0.0",
+  "InternalName" : "Bullet Time",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Slow", "AmmoReference" ],
+  "ArtKey" : "Icon_Skill_SlowMotion.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "e81bda348a26e433189a899b2954024d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "e81bda348a26e433189a899b2954024d",
+      "Text" : "Bullet Time"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "92acab9395c1e77f28e542f6961d784d",
+        "Text" : "The first 5 times you use an Ammo item each fight, Slow an item for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 5.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Low",
+      "InternalName" : "Bullet Time Skill",
+      "InternalDescription" : "The first 5 times you use an Ammo item each fight, Slow an item for [--/--1/2] seconds.",
+      "MigrationData" : "3840bee1-05e9-49cc-9e37-433f87b2695c",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "92acab9395c1e77f28e542f6961d784d"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
+    }
+  },
+  "Auras" : { }
+}

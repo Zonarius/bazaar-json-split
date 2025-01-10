@@ -1,0 +1,131 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 40000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "AmmoMax" : 1,
+        "Multicast" : 1,
+        "FreezeAmount" : 5000,
+        "FreezeTargets" : 20,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "FreezeAmount" : 5000,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "627ce721-2f70-454d-9aa2-5895ece3e6ee",
+  "Version" : "1.0.0",
+  "InternalName" : "Dam",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Aquatic", "Property" ],
+  "HiddenTags" : [ "Ammo", "Freeze", "NonWeapon", "Charge" ],
+  "ArtKey" : "904c2a4e6c4e62c4483a1674a75132c7",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "f497ee96d87a934feb0a9feb3ace537a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "516868b101eda6659eb2ffbf1768760c",
+      "Text" : "Freeze all enemy items for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "f497ee96d87a934feb0a9feb3ace537a",
+      "Text" : "Dam"
+    },
+    "Tooltips" : [ {
+      "Key" : "cc3b4d17b35b60c27b93621bf2c95151",
+      "Text" : "Freeze all enemy items for {ability.0} seconds."
+    }, {
+      "Key" : "50527d2e567031c27152e4dafeda73eb",
+      "Text" : "When you use another Aquatic item, charge this {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Dam 1",
+      "InternalDescription" : "Freeze all enemy items for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "00399497-6ce7-4302-8bd0-120951967543",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "cc3b4d17b35b60c27b93621bf2c95151",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : "Assets/TheBazaar/Art/FX/DAM/FX_DAM.prefab",
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Dam 2",
+      "InternalDescription" : "When you use another Aquatic item, charge this {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "fdcd8854-5e18-4226-ac02-acf594d2fdc0",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "50527d2e567031c27152e4dafeda73eb",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Aquatic" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

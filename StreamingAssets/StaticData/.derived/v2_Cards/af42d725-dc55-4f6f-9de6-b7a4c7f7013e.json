@@ -1,0 +1,159 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "Custom_0" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "Custom_0" : 2,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "af42d725-dc55-4f6f-9de6-b7a4c7f7013e",
+  "Version" : "1.0.0",
+  "InternalName" : "Heavy Drinker",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Potion", "Weapon" ],
+  "HiddenTags" : [ "DamageReference", "Regen" ],
+  "ArtKey" : "Icon_Skill_Placeholder.png",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "934dd2324b417fd09dee7600e53b268d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "934dd2324b417fd09dee7600e53b268d",
+      "Text" : "Heavy Drinker"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "9171a77da936e1c97b1a1184830edf79",
+        "Text" : "When you use a potion, increase the damage of your weapons by {ability.0} and gain {ability.1} Regeneration for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Potion" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Heavy Drinker 1",
+      "InternalDescription" : "When you use a potion, increase the damage of your weapons by {ability.0} and gain {ability.1} Regeneration for the fight.",
+      "MigrationData" : "3cb321ff-7287-4a69-83d9-863365a0b1bd",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9171a77da936e1c97b1a1184830edf79"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Potion" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthRegen",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Heavy Drinker 2",
+      "InternalDescription" : "",
+      "MigrationData" : "50bb9652-b400-401d-8c67-93f2b55a6e1a",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "2d58768d19c7124304add437eb7033fc"
+    }
+  },
+  "Auras" : { }
+}

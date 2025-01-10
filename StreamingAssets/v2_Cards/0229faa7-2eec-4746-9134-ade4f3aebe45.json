@@ -1,0 +1,139 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 10000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "PoisonApplyAmount" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "PoisonApplyAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "0229faa7-2eec-4746-9134-ade4f3aebe45",
+  "Version" : "1.0.0",
+  "InternalName" : "Gamma Ray",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Poison", "Active", "PoisonReference" ],
+  "ArtKey" : "340af00ee7df6e147a21298cc6c6bfa8",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "7c87a20a7933e20ae9ee8badcc9fb82a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef05351ce3f992cc956a1f7372a66343",
+      "Text" : "Poison {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "7c87a20a7933e20ae9ee8badcc9fb82a",
+      "Text" : "Gamma Ray"
+    },
+    "Tooltips" : [ {
+      "Key" : "345aa2fba4bcf957c7b5798a46ea25f1",
+      "Text" : "Poison {ability.0}"
+    }, {
+      "Key" : "fdf1981ede15df7c73bf0ae200b80c0a",
+      "Text" : "When you use the Core, give this +{ability.1} Poison for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Gamma Ray 1",
+      "InternalDescription" : "Poison {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5c6436ec-4f96-4cff-88b3-08022e7b34ec",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "345aa2fba4bcf957c7b5798a46ea25f1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Gamma Ray 2",
+      "InternalDescription" : "When you use the Core, give this +{ability.1} Poison for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 3.0
+        },
+        "AttributeType" : "PoisonApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Poison" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "dffe32bd-3740-47eb-8a18-dec5a2908874",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "fdf1981ede15df7c73bf0ae200b80c0a",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

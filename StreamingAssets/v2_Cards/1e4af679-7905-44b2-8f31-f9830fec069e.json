@@ -1,0 +1,156 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "FreezeAmount" : 2000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "FreezeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "FreezeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "FreezeAmount" : 5000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "1e4af679-7905-44b2-8f31-f9830fec069e",
+  "Version" : "1.0.0",
+  "InternalName" : "Hourglass",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Cooldown", "Active", "NonWeapon", "Freeze" ],
+  "ArtKey" : "ae0f1400ac8278e4593d7e3c9d307239",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "07f484e89e3e82f48cb7cbebd115cbce",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "8004d84af754ed72dde51710f87174e8",
+      "Text" : "freeze an item for {i} seconds"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "07f484e89e3e82f48cb7cbebd115cbce",
+      "Text" : "Hourglass"
+    },
+    "Tooltips" : [ {
+      "Key" : "129be1707a1ffc2268aa97b6a71aeb05",
+      "Text" : "freeze an item for {ability.0} seconds"
+    }, {
+      "Key" : "1ec0bfbe27f9c9fc12b578258027f3af",
+      "Text" : "At the start of each hour, gain {ability.1} Speed."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "GENERATED/Add/Freeze/2000/OnCombat",
+      "InternalDescription" : "freeze an item for {ability.0} seconds",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "73d8394b-cb5d-401e-87e2-737f6d9989dd",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "129be1707a1ffc2268aa97b6a71aeb05",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Hourglass 2",
+      "InternalDescription" : "At the start of each hour, gain {ability.1} Speed.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CritChance",
+            "ComparisonOperator" : "GreaterThanOrEqual",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "b31343c5-7b62-4b4c-9f53-51ef36faf6f2",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "1ec0bfbe27f9c9fc12b578258027f3af",
+      "Trigger" : {
+        "$type" : "TTriggerOnHourStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

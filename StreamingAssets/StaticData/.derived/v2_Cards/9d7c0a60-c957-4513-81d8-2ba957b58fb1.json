@@ -1,0 +1,164 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 10,
+        "BuyPrice" : 10,
+        "Custom_0" : 0
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 15,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 20,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "9d7c0a60-c957-4513-81d8-2ba957b58fb1",
+  "Version" : "1.0.0",
+  "InternalName" : "Poisonous Opener",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa", "Dooley", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Poison" ],
+  "ArtKey" : "Icon_Skill_PoisonousOpener.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "25a1d9244418d8ef68cf58d754e33118",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "25a1d9244418d8ef68cf58d754e33118",
+      "Text" : "Poisonous Opener"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "2035e3350aedf56be5dde5feca91fd59",
+        "Text" : "The first time you use a Large item each fight, Poison {ability.0}."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "Equal",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Medium",
+      "InternalName" : "Poisonous Opener 1",
+      "InternalDescription" : "The first time you use a Large item each fight, Poison {ability.0}.",
+      "MigrationData" : "61d2f436-105b-41bc-b75f-06a446a0e055",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "2035e3350aedf56be5dde5feca91fd59"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Poisonous Opener - Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "e09e0ce6-9efd-4821-a093-30cef77be7c3",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "73dd3b5d6fb4fc1784efdc9057047152"
+    }
+  },
+  "Auras" : { }
+}

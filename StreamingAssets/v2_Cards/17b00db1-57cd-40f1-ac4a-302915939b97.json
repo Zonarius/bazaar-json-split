@@ -1,0 +1,203 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6010,
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1,
+        "ReloadAmount" : 1,
+        "ReloadTargets" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "ReloadAmount" : 2
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "ReloadAmount" : 3
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "17b00db1-57cd-40f1-ac4a-302915939b97",
+  "Version" : "1.0.0",
+  "InternalName" : "Port",
+  "InternalDescription" : null,
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Property", "Aquatic" ],
+  "HiddenTags" : [ "NonWeapon", "Ammo" ],
+  "ArtKey" : "4729ee9102c869e4894fd90fa96e7431",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "60aaf44d4b562252c04db7f98497e9aa",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "2cdfb27af9ca637e11f09aee463cc795",
+      "Text" : "Reload all your items {i} Ammo."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "60aaf44d4b562252c04db7f98497e9aa",
+      "Text" : "Port"
+    },
+    "Tooltips" : [ {
+      "Key" : "1ae5b9974d788514643767806604b61a",
+      "Text" : "Reload all your items {ability.0} Ammo."
+    }, {
+      "Key" : "62d82bceefeb802dfe6a9de3005c6d51",
+      "Text" : "When you buy this, get a random small item with ammo."
+    }, {
+      "Key" : "1ae5b9974d788514643767806604b61a",
+      "Text" : "Your items have +{aura.1} Max Ammo."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Port 1",
+      "InternalDescription" : "Reload all your items {ability.0} Ammo.",
+      "Action" : {
+        "$type" : "TActionCardReload",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "e349a615-253c-41b0-9d03-7d27b92bf29f",
+      "Prerequisites" : null,
+      "Priority" : "Lowest",
+      "TranslationKey" : "1ae5b9974d788514643767806604b61a",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Port 2",
+      "InternalDescription" : "When you buy this, get a random small item with ammo.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "b89ae3b6-6383-47a3-94fe-2571d30a564a", "2fcdf96f-e1c4-45cd-8efd-0b8352267483", "c65da89e-3504-40e7-87a8-10defcb7f07b", "13f852ba-1d3d-4c1a-b6db-79072e0b19d0", "e13d521c-b960-4072-83db-fe4af598dd57" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "9deb35ed-fdf1-4f73-90dc-aca2cb54c756",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "62d82bceefeb802dfe6a9de3005c6d51",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Port 1",
+      "InternalDescription" : "Your items have +{aura.1} Max Ammo.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "b43deaf7-cec6-40b5-97b8-a2c65875ee0a",
+      "Prerequisites" : null,
+      "TranslationKey" : "1ae5b9974d788514643767806604b61a",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "3" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 1
+      },
+      "AuraIds" : [ "1", "2" ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "3" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "BurnApplyAmount" : 2
+      },
+      "AuraIds" : [ "1", "2" ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "3" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "BurnApplyAmount" : 3
+      },
+      "AuraIds" : [ "1", "2" ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "666f4084-48cc-4558-b678-a46ba18c1bf2",
+  "Version" : "1.0.0",
+  "InternalName" : "Soldering Gun",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "NonWeapon", "Burn" ],
+  "ArtKey" : "548e7d6aada38d84598b7452de850162",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "11cbe710354fab6b951ba8a7b03b1f3b",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "de834839a9cb3ef35867f94c3e63f10b",
+      "Text" : "Burn {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "11cbe710354fab6b951ba8a7b03b1f3b",
+      "Text" : "Soldering Gun"
+    },
+    "Tooltips" : [ {
+      "Key" : "4783f8f78a1be53a9f52985ba68786ea",
+      "Text" : "Burn {ability.0}"
+    }, {
+      "Key" : "92e592d90b9548016776a6fb68dccded",
+      "Text" : ""
+    }, {
+      "Key" : "d0703f79c7bbb899c68bc81dcbe86e89",
+      "Text" : "This has +{aura.1} Multicast if it is adjacent to a Friend."
+    }, {
+      "Key" : "5182e908b08ca61520c95777806062ba",
+      "Text" : "This has +{aura.2} Multicast if it is adjacent to a Tool."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Soldering Gun 1",
+      "InternalDescription" : "Burn {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "98b596f3-70b4-464f-bac3-bb8bdc7bfe0f",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "4783f8f78a1be53a9f52985ba68786ea",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "3" : {
+      "Id" : "3",
+      "InternalName" : "Unused",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Friend" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "faef89a6-c119-4bde-a867-c80e25767740",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "92e592d90b9548016776a6fb68dccded",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Tool" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Soldering Gun 2",
+      "InternalDescription" : "This has +{aura.1} Multicast if it is adjacent to a Friend.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "48ed1fcb-712f-4ec7-940f-fea21f3b75f1",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Friend" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "TranslationKey" : "d0703f79c7bbb899c68bc81dcbe86e89",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Soldering Gun 3",
+      "InternalDescription" : "This has +{aura.2} Multicast if it is adjacent to a Tool.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a37814af-64e6-473a-8b97-be3675a885a0",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Tool" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "TranslationKey" : "5182e908b08ca61520c95777806062ba",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

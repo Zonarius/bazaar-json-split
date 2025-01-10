@@ -1,0 +1,188 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 12000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 10,
+        "FreezeAmount" : 1000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 30,
+        "FreezeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 60,
+        "FreezeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 100,
+        "FreezeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "53b62ecb-bcbc-4a86-bd6f-027467970109",
+  "Version" : "1.0.0",
+  "InternalName" : "Frozen Bludgeon",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "Freeze", "DamageReference" ],
+  "ArtKey" : "728e6a861a56dbe48a5e37c3943d0bec",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "d50c68dbe4d2e4e6257441b587e039db",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "d50c68dbe4d2e4e6257441b587e039db",
+      "Text" : "Frozen Bludgeon"
+    },
+    "Tooltips" : [ {
+      "Key" : "1762761445e88da20d3a4ed5ca5042c7",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "a801a08d203d881d9522d31aa3aed712",
+      "Text" : "Freeze an item for {ability.1} seconds."
+    }, {
+      "Key" : "1ceca8410fbf9ff038a312b5184b5f1c",
+      "Text" : "When you freeze an item, give your weapons +{ability.2} damage for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Frozen Bludgeon 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "3d6f5161-7451-435b-9bd9-0fb80d61da70",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "1762761445e88da20d3a4ed5ca5042c7",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Frozen Bludgeon 2",
+      "InternalDescription" : "Freeze an item for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "31a6f789-050e-4883-8aa3-761ab6acdac5",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "a801a08d203d881d9522d31aa3aed712",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Frozen Bludgeon 3",
+      "InternalDescription" : "When you freeze an item, give your weapons +{ability.2} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 4.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "699d8818-10a1-47f4-b9db-434e34747bcb",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1ceca8410fbf9ff038a312b5184b5f1c",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

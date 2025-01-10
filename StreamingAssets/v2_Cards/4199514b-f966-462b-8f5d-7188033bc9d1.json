@@ -1,0 +1,111 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "4199514b-f966-462b-8f5d-7188033bc9d1",
+  "Version" : "1.0.0",
+  "InternalName" : "Secret Ingredient",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food", "Weapon" ],
+  "HiddenTags" : [ "DamageReference" ],
+  "ArtKey" : "Icon_Skill_Placeholder.png",
+  "SpawningEligibility" : "Never",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "d5ec20cdb38f83aa6309d69adc12943d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "d5ec20cdb38f83aa6309d69adc12943d",
+      "Text" : "Secret Ingredient"
+    },
+    "Tooltips" : [ {
+      "Key" : "d5ec20cdb38f83aa6309d69adc12943d",
+      "Text" : "If you have exactly 1 food, when you use it increase the damage of your weapons by {ability.0} for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Secret Ingredient",
+      "InternalDescription" : "If you have exactly 1 food, when you use it increase the damage of your weapons by {ability.0} for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "36f55aed-96a8-4aa5-8633-bae88f8decf4",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Low",
+      "TranslationKey" : "d5ec20cdb38f83aa6309d69adc12943d",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

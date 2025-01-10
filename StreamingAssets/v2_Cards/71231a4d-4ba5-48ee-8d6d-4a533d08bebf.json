@@ -1,0 +1,137 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "71231a4d-4ba5-48ee-8d6d-4a533d08bebf",
+  "Version" : "1.0.0",
+  "InternalName" : "Lens",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "DamageReference", "Active", "NonWeapon", "HasteReference", "Charge" ],
+  "ArtKey" : "93d51c84c9a8f9c47b410f2ab5ae8b1d",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "443b8e6205a0c76a3e6a2eed788215e0",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "eb5cf4645a5155a9c5f550d2a186e03d",
+      "Text" : "Give the core +{i} damage for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "443b8e6205a0c76a3e6a2eed788215e0",
+      "Text" : "Lens"
+    },
+    "Tooltips" : [ {
+      "Key" : "d7f52973ff25e4fcdcac6dc14429b243",
+      "Text" : "Give the core +{ability.0} damage for this fight."
+    }, {
+      "Key" : "03a84e7c7f34ac06a3c4c89dc398642d",
+      "Text" : "When this gains haste, charge it {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Lens 1",
+      "InternalDescription" : "Give the core +{ability.0} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "941de97c-407f-42e4-a6f8-0b8ee9ae3cd4",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "d7f52973ff25e4fcdcac6dc14429b243",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Lens 2",
+      "InternalDescription" : "When this gains haste, charge it {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "eeeed212-bbf1-4298-935f-117caad7fada",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "03a84e7c7f34ac06a3c4c89dc398642d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

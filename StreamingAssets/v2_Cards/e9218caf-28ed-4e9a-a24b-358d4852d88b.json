@@ -1,0 +1,157 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Bronze",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1,
+        "FreezeAmount" : 3000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "FreezeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "FreezeAmount" : 5000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "FreezeAmount" : 6000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "e9218caf-28ed-4e9a-a24b-358d4852d88b",
+  "Version" : "1.0.0",
+  "InternalName" : "Frostfire",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley", "Vanessa", "Mak", "Jules", "Stelle" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "BurnReference", "Freeze" ],
+  "ArtKey" : "Icon_Skill_Frostfire.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "f545c48bd9199a6ee4fa663800e33f0a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "f545c48bd9199a6ee4fa663800e33f0a",
+      "Text" : "Frostfire"
+    },
+    "Tooltips" : [ {
+      "Key" : "e067f6f34c15d0fea265765cf3180ff7",
+      "Text" : "The first time you Burn each fight, Freeze an item for {ability.0} seconds."
+    }, {
+      "Key" : "8a3f93bf10abcd19455f884facc07772",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Frostfire 1",
+      "InternalDescription" : "The first time you Burn each fight, Freeze an item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "794718f8-ae83-4329-9fc7-f2a1ba07f7c9",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "e067f6f34c15d0fea265765cf3180ff7",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Frostfire 2 - Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Counter",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "2269f9dc-a21d-4e13-b559-2e802c06a5a3",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "8a3f93bf10abcd19455f884facc07772",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

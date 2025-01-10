@@ -1,0 +1,146 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "35ca6175-1317-4f32-b953-dbe6c9acd8cd",
+  "Version" : "1.0.0",
+  "InternalName" : "Barrel",
+  "InternalDescription" : null,
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Shield", "NonWeapon" ],
+  "ArtKey" : "fe56db2846dc6984791016fb7c05182f",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "2dcddc9774549c867a0867b25d526f2f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "2dcddc9774549c867a0867b25d526f2f",
+      "Text" : "Barrel"
+    },
+    "Tooltips" : [ {
+      "Key" : "df1519f2258ca61d0d83ad7bd9d8b31d",
+      "Text" : "Shield {ability.0}"
+    }, {
+      "Key" : "14d07473e74b7666cdbe789d39307f5a",
+      "Text" : "When you use a non-weapon item, give this +{ability.1} Shield for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Barrel 1 Shield",
+      "InternalDescription" : "Shield {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a714c591-a605-47d0-b4d4-63872a3b02cc",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "df1519f2258ca61d0d83ad7bd9d8b31d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Barrel 2",
+      "InternalDescription" : "When you use a non-weapon item, give this +{ability.1} Shield for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "adae5611-0ace-4c80-9900-a3db5c2a3727",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "14d07473e74b7666cdbe789d39307f5a",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "None"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,159 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "57842875-bc49-4ec9-af82-29c2dbed4087",
+  "Version" : "1.0.0",
+  "InternalName" : "Mortar & Pestle",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Damage", "Lifesteal", "Active", "NonWeapon" ],
+  "ArtKey" : "8248081c837fd2b4fae754b857ce2c19",
+  "SpawningEligibility" : "Never",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "de224c9730b511197f74590706b9f2f1",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "a437d8b02efc32c95be523981b9056fe",
+      "Text" : "Give your Lifesteal Weapons +{i} damage for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "de224c9730b511197f74590706b9f2f1",
+      "Text" : "Mortar & Pestle"
+    },
+    "Tooltips" : [ {
+      "Key" : "12f7c787c10025a0aac3b08e78f6ae95",
+      "Text" : "Give your Lifesteal Weapons +{ability.0} damage for this fight."
+    }, {
+      "Key" : "bbd7c0600e65d942f3f07e8062677832",
+      "Text" : "The weapon on the right has Lifesteal."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Mortar & Pestle 1",
+      "InternalDescription" : "Give your Lifesteal Weapons +{ability.0} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Lifesteal",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "6118de54-7945-4a12-839b-806d2d071169",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "12f7c787c10025a0aac3b08e78f6ae95",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Mortar & Pestle 2",
+      "InternalDescription" : "The weapon on the right has Lifesteal.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Lifesteal",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 100.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "RightCard",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "dd8a174c-1c2d-4bc5-a72f-7d182f6198e7",
+      "Prerequisites" : null,
+      "TranslationKey" : "bbd7c0600e65d942f3f07e8062677832",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

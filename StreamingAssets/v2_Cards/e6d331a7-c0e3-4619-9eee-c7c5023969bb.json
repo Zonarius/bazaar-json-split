@@ -1,0 +1,153 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 2,
+        "BurnApplyAmount" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "BurnApplyAmount" : 2,
+        "ChargeAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 3,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "BurnApplyAmount" : 4,
+        "ChargeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "e6d331a7-c0e3-4619-9eee-c7c5023969bb",
+  "Version" : "1.0.0",
+  "InternalName" : "Black Pepper",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Burn", "Damage", "Active", "NonWeapon", "Multicast" ],
+  "ArtKey" : "0f895229cd84f5444ac015c25fe68094",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "158cd2088729892b9e39e6f87d659ed9",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "de834839a9cb3ef35867f94c3e63f10b",
+      "Text" : "Burn {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "158cd2088729892b9e39e6f87d659ed9",
+      "Text" : "Black Pepper"
+    },
+    "Tooltips" : [ {
+      "Key" : "9ff1c011b97876a5ee3359999c31893b",
+      "Text" : "Burn {ability.0}"
+    }, {
+      "Key" : "15ace8f9c986006260f21f26bdfe7766",
+      "Text" : "Charge adjacent items {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Welding Helmet 2",
+      "InternalDescription" : "Burn {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "cdc1d283-ec38-4b25-a330-55f516cd80d2",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "9ff1c011b97876a5ee3359999c31893b",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Black Pepper 2",
+      "InternalDescription" : "Charge adjacent items {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "e3cf32c5-cbb5-45d0-9c60-ea6c065e1f46",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "15ace8f9c986006260f21f26bdfe7766",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

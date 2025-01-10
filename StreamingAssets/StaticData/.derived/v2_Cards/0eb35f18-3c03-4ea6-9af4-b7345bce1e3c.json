@@ -1,0 +1,114 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Custom_0" : 3,
+        "Multicast" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "Custom_0" : 6,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "0eb35f18-3c03-4ea6-9af4-b7345bce1e3c",
+  "Version" : "1.0.0",
+  "InternalName" : "Beautiful Friendship",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Friend", "Weapon" ],
+  "HiddenTags" : [ "DamageReference" ],
+  "ArtKey" : "Icon_Skill_DOO_BeautifulFriendship.png",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "9ccdce2e14313dca0ef4abe3f89c2497",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "9ccdce2e14313dca0ef4abe3f89c2497",
+      "Text" : "Beautiful Friendship"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "9ccdce2e14313dca0ef4abe3f89c2497",
+        "Text" : "When you use a Friend, your weapons gain {ability.0} damage for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Friend" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Beautiful Friendship",
+      "InternalDescription" : "When you use a Friend, increase the damage of your weapons by {ability.0} for the fight.",
+      "MigrationData" : "27cd394b-4218-48f9-a1ca-466883c7ecb9",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ccdce2e14313dca0ef4abe3f89c2497"
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,151 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 4,
+        "ChargeAmount" : 3000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "BurnApplyAmount" : 6,
+        "ChargeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 9,
+        "ChargeAmount" : 6000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "8ff7ebb6-a783-403a-ae29-7e89d0c90040",
+  "Version" : "1.0.0",
+  "InternalName" : "Curry",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Burn", "Active", "NonWeapon" ],
+  "ArtKey" : "7cedec35cbaab3a47938e5c82240c82a",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "5933baf90dcec96ffa6ecdaf30299550",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "d07ae4f03131021819204555f7d781db",
+      "Text" : "Burn {i}."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "5933baf90dcec96ffa6ecdaf30299550",
+      "Text" : "Curry"
+    },
+    "Tooltips" : [ {
+      "Key" : "5933baf90dcec96ffa6ecdaf30299550",
+      "Text" : "Burn {ability.0}."
+    }, {
+      "Key" : "5933baf90dcec96ffa6ecdaf30299550",
+      "Text" : "Charge another small Food {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Curry",
+      "InternalDescription" : "Burn {ability.0}.",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e9ac0233-f750-4a05-b3b6-03bbae0a7cee",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5933baf90dcec96ffa6ecdaf30299550",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Curry",
+      "InternalDescription" : "Charge another small Food {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : true,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 1000.0
+              }
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Food" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Small" ],
+              "IsNot" : false
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "b2829bc8-f6aa-4656-ba06-9825cd7f15c1",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "5933baf90dcec96ffa6ecdaf30299550",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

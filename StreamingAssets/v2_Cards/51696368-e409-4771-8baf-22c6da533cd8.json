@@ -1,0 +1,156 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "HealAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "HealAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HealAmount" : 60
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "HealAmount" : 100
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "51696368-e409-4771-8baf-22c6da533cd8",
+  "Version" : "1.0.0",
+  "InternalName" : "Junkyard Repairbot",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Damage", "Active", "NonWeapon", "Heal", "HealReference" ],
+  "ArtKey" : "5d542d33d842aa743aa60db028bb816f",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "e867a4d832dab6934bdf72538664e018",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "78597be87e9163f775f3b7d50cb293f2",
+      "Text" : "Heal {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "e867a4d832dab6934bdf72538664e018",
+      "Text" : "Junkyard Repairbot"
+    },
+    "Tooltips" : [ {
+      "Key" : "ef943965b1ccabc48bc2eee048898009",
+      "Text" : "Heal {ability.0}"
+    }, {
+      "Key" : "e51e401d0b3249055a6a4ba973410841",
+      "Text" : "When you sell this, give your leftmost Heal item +{ability.1} Heal."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Junkyard Repairbot 1",
+      "InternalDescription" : "Heal {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "99cb717c-9f4a-43f6-8404-94362fb11aae",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "ef943965b1ccabc48bc2eee048898009",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Junkyard Repairbot 2",
+      "InternalDescription" : "When you sell this, give your leftmost Heal item +{ability.1} Heal.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardXMost",
+          "TargetSection" : "SelfHand",
+          "TargetMode" : "LeftMostCard",
+          "IncludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Heal" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "a2823144-bdd1-4c34-90d4-d4b4974d1937",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "e51e401d0b3249055a6a4ba973410841",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,98 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "f0955884-1ea7-4cac-ad73-c30798d3642c",
+  "Version" : "1.0.0",
+  "InternalName" : "Sharp Corners",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Dooley", "Stelle" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "ShieldReference", "DamageReference" ],
+  "ArtKey" : "Icon_Skill_SharpCorners.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "2748e4da819332c4d28881e40a792269",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "2748e4da819332c4d28881e40a792269",
+      "Text" : "Sharp Corners"
+    },
+    "Tooltips" : [ {
+      "Key" : "2748e4da819332c4d28881e40a792269",
+      "Text" : "When you Shield, give a Weapon +{ability.0} damage for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Sharp Corners",
+      "InternalDescription" : "When you Shield, give a Weapon +{ability.0} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "eadbeedf-0a7f-4bc0-9256-8b09e307dd72",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "2748e4da819332c4d28881e40a792269",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "ShieldMax",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

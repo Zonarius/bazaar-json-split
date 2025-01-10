@@ -1,0 +1,127 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Custom_0" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "Custom_0" : 2,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "32e45628-c864-4f99-a2e8-94efe6f37cdc",
+  "Version" : "1.0.0",
+  "InternalName" : "Static Acceleration",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley", "Stelle", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "HasteReference", "Crit" ],
+  "ArtKey" : "Icon_Skill_StaticAcceleration.png",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "58e9b1327f62c5bf064fdfe9f781bbdd",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "58e9b1327f62c5bf064fdfe9f781bbdd",
+      "Text" : "Static Acceleration"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "58e9b1327f62c5bf064fdfe9f781bbdd",
+        "Text" : "When you Haste, your items gain +{ability.0}% crit chance for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedHaste",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Static Acceleration",
+      "InternalDescription" : "When you Haste an item, your items gain +{ability.0}% crit chance for the fight.",
+      "MigrationData" : "a7e802b5-7ebd-4b37-bea2-34bae5d86f06",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "58e9b1327f62c5bf064fdfe9f781bbdd"
+    }
+  },
+  "Auras" : { }
+}

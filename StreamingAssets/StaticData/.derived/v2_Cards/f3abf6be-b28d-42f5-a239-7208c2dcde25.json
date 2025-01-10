@@ -1,0 +1,104 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "HasteAmount" : 2000,
+        "HasteTargets" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "HasteAmount" : 4000,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "f3abf6be-b28d-42f5-a239-7208c2dcde25",
+  "Version" : "1.0.0",
+  "InternalName" : "Outmaneuver",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa", "Stelle" ],
+  "Tags" : [ "Vehicle" ],
+  "HiddenTags" : [ "Cooldown", "SlowReference" ],
+  "ArtKey" : "Icon_Skill_Outmaneuver.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "6ee78cd8d73acf957d8df5c4f1f6ad30",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "6ee78cd8d73acf957d8df5c4f1f6ad30",
+      "Text" : "Outmaneuver"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "cfb1008944df0da625cb97ae8b46a76e",
+        "Text" : "When you Slow, Haste a vehicle for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedSlow",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Vehicle" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Outmaneuver skill",
+      "InternalDescription" : "When you Slow, Haste a vehicle {ability.0} second(s).",
+      "MigrationData" : "7699ba11-8d78-4ab1-8950-168641d94b9f",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "cfb1008944df0da625cb97ae8b46a76e"
+    }
+  },
+  "Auras" : { }
+}

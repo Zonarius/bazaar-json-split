@@ -1,0 +1,233 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "DamageAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 20
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "cb519fbf-1f2c-4dd1-ba9b-3dc031fd7cbe",
+  "Version" : "1.0.0",
+  "InternalName" : "Refractor",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "PoisonReference", "BurnReference", "SlowReference", "FreezeReference" ],
+  "ArtKey" : "ffca3a758ef3601468f224e11276ee7c",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "eddb744c0b8293e7dd3e5a1e01319e92",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "eddb744c0b8293e7dd3e5a1e01319e92",
+      "Text" : "Refractor"
+    },
+    "Tooltips" : [ {
+      "Key" : "25a677b268e6596d69e3ba149b1954b8",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "8e48f9783c6bcf4a932d4b9023b1735f",
+      "Text" : "When you Slow, Freeze, Burn or Poison, give this +{ability.1} damage for this fight."
+    }, {
+      "Key" : "2c382c779efc39ed5b3241bfc168add3",
+      "Text" : ""
+    }, {
+      "Key" : "58bb6e238e293167da969daf31945a53",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Refractor 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "3414b7a3-34ad-48f1-9d49-f2c6ef718fce",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "25a677b268e6596d69e3ba149b1954b8",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Refractor 2 (Slow)",
+      "InternalDescription" : "When you Slow, Freeze, Burn or Poison, give this +{ability.1} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "70856b67-8770-4da1-a069-60cced6a45b5",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "8e48f9783c6bcf4a932d4b9023b1735f",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Slow",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Refractor 3 (Freeze)",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "89c6e747-3416-4049-bd8b-9cc9dcb387f1",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "2c382c779efc39ed5b3241bfc168add3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "3" : {
+      "Id" : "3",
+      "InternalName" : "Refractor 4 (Burn)",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "fe5c03b8-b7d2-426d-b3c3-a622bf1a0216",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "58bb6e238e293167da969daf31945a53",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

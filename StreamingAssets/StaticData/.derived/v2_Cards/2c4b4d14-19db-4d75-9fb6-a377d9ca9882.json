@@ -1,0 +1,165 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "SlowAmount" : 3000,
+        "BuyPrice" : 10,
+        "Custom_0" : 0
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "SlowAmount" : 5000,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "SlowAmount" : 7000,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "2c4b4d14-19db-4d75-9fb6-a377d9ca9882",
+  "Version" : "1.0.0",
+  "InternalName" : "Chilling Touch",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "FreezeReference", "Slow" ],
+  "ArtKey" : "Icon_Skill_MON_ChillingTouch.png",
+  "CardPackId" : "Core",
+  "TranslationKey" : "f42d20a2e39de44044968157e7e661e9",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "f42d20a2e39de44044968157e7e661e9",
+      "Text" : "Chilling Touch"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "688a8cbc0c4e126dfadd56a9ffee88d7",
+        "Text" : "The first time you Freeze each fight, Slow all your opponent's items for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedFreeze",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "Equal",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Medium",
+      "InternalName" : "Chilling Touch 1",
+      "InternalDescription" : "The first time you Freeze each fight, Slow all your opponent's items for {ability.0} second(s).",
+      "MigrationData" : "96b9093c-0a0c-49a3-82f0-0d3174ab412e",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "688a8cbc0c4e126dfadd56a9ffee88d7"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedFreeze",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Chilling Touch 2 - Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
+    }
+  },
+  "Auras" : { }
+}

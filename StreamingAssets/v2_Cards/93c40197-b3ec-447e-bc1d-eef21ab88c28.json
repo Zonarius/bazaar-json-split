@@ -1,0 +1,145 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "ChargeAmount" : 2000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "ChargeAmount" : 2500
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "93c40197-b3ec-447e-bc1d-eef21ab88c28",
+  "Version" : "1.0.0",
+  "InternalName" : "Laurel's Fortress",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Cooldown", "NonWeapon", "Shield" ],
+  "ArtKey" : "89d61aee7a39ddc40ada2756d6e062ae",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "19882ab1dc0641e71eced2398d4ff4f3",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "1e3c1ac6bee24cf229432f2e6812a17c",
+      "Text" : "Charge your Shield items {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "19882ab1dc0641e71eced2398d4ff4f3",
+      "Text" : "Laurel's Fortress"
+    },
+    "Tooltips" : [ {
+      "Key" : "30b11eda3bb144626789c6af8f84100a",
+      "Text" : "Charge your Shield items {ability.0} seconds."
+    }, {
+      "Key" : "eaa4bcc5fdee5f2b52ae9bbd2509a8dc",
+      "Text" : "When you shield, give adjacent food +{ability.1} Joy for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Laurel's Fortress 1",
+      "InternalDescription" : "Charge your Shield items {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Shield" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "be6678b9-ce46-477a-8b09-bc0f34931d47",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "30b11eda3bb144626789c6af8f84100a",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Laurel's Fortress 2",
+      "InternalDescription" : "When you shield, give adjacent food +{ability.1} Joy for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 20.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Joy" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "e2ad326e-ba5a-4314-ba88-f3e94243970c",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "eaa4bcc5fdee5f2b52ae9bbd2509a8dc",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "ShieldMax",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

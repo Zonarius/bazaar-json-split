@@ -1,0 +1,144 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ "0", "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "fb89bd6d-2677-435a-a73a-e0350cdab29e",
+  "Version" : "1.0.0",
+  "InternalName" : "Overclocked",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Core" ],
+  "HiddenTags" : [ "BurnReference", "Cooldown" ],
+  "ArtKey" : "Icon_Skill_DOO_Overclocked.png",
+  "SpawningEligibility" : "Never",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "176cd5b97ca62550dd1c73c97d33d1cd",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "176cd5b97ca62550dd1c73c97d33d1cd",
+      "Text" : "Overclocked"
+    },
+    "Tooltips" : [ {
+      "Key" : "176cd5b97ca62550dd1c73c97d33d1cd",
+      "Text" : "Reduce the cooldown of The Core by {aura.0.mod|%}."
+    }, {
+      "Key" : "9a6a34723fe5d3736cc20c06b71ba16c",
+      "Text" : "While you have Burn, double this effect."
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Overclocked",
+      "InternalDescription" : "Reduce the cooldown of The Core by {aura.0.mod|%}.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "JoyApplyAmount",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.1
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "285beb75-cf71-4f47-a86e-5e98e7149e6b",
+      "Prerequisites" : null,
+      "TranslationKey" : "176cd5b97ca62550dd1c73c97d33d1cd",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Overclocked 2",
+      "InternalDescription" : "While you have Burn, double this effect.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Self",
+            "Conditions" : null
+          },
+          "AttributeType" : "Burn",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "31b7d393-917f-47b3-bb16-e74b0428944b",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "TranslationKey" : "9a6a34723fe5d3736cc20c06b71ba16c",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

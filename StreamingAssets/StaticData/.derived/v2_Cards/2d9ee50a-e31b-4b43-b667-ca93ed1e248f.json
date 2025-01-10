@@ -1,0 +1,144 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 1000,
+        "Custom_1" : 1,
+        "Custom_2" : 0
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 2000,
+        "Custom_1" : 2
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "2d9ee50a-e31b-4b43-b667-ca93ed1e248f",
+  "Version" : "1.0.0",
+  "InternalName" : "Quicken Weapons",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules", "Stelle", "Mak", "Dooley", "Vanessa", "Pygmalien" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Cooldown" ],
+  "ArtKey" : "Icon_Skill_QuickDraw.png",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "e72e5a53cfa03961d3573303a204dc76",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "e72e5a53cfa03961d3573303a204dc76",
+      "Text" : "Quicken Weapons"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "e72e5a53cfa03961d3573303a204dc76",
+        "Text" : "Your Weapons with cooldowns greater than 10 seconds have their cooldowns reduced by {aura.9} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Subtract",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 10000.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Quick Draw",
+      "InternalDescription" : "",
+      "MigrationData" : "d8278704-f3d5-44b6-a572-65ecaa0ce68a",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "e72e5a53cfa03961d3573303a204dc76"
+    },
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_2",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
+}

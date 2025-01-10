@@ -1,0 +1,142 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1,
+        "FreezeAmount" : 1000,
+        "FreezeTargets" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "FreezeAmount" : 2000,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "FreezeAmount" : 3000,
+        "ChargeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "012658f4-b289-4f10-917c-a9a1f3f9ca03",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice Cream Truck",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Vehicle" ],
+  "HiddenTags" : [ "NonWeapon", "Freeze", "Charge" ],
+  "ArtKey" : "f6b1f59eccbfef2489d00dda15c6dd5e",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "0d12e43a0d2b609f4c54a18aa562a04a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "f31928a944342ba86b044e2ece7229f0",
+      "Text" : "Freeze an item for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "0d12e43a0d2b609f4c54a18aa562a04a",
+      "Text" : "Ice Cream Truck"
+    },
+    "Tooltips" : [ {
+      "Key" : "6dfe9a57be65f71c83e63793985db949",
+      "Text" : "Freeze an item for {ability.0} seconds."
+    }, {
+      "Key" : "5939511f476ad93f296a5fb79328d1d6",
+      "Text" : "When you use another non-weapon item, charge this {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Ice Cream Truck 1",
+      "InternalDescription" : "Freeze an item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "57727d5f-a3ed-4d59-ab32-88f780c4d320",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "6dfe9a57be65f71c83e63793985db949",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Ice Cream Truck 2",
+      "InternalDescription" : "When you use another non-weapon item, charge this {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5a7407d8-67b5-4c18-a4b5-01a82c6178da",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "5939511f476ad93f296a5fb79328d1d6",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "None"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

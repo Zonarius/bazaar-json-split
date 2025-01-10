@@ -1,0 +1,171 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 10,
+        "Custom_0" : 95,
+        "Custom_1" : 5,
+        "Custom_2" : 0
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 90,
+        "Custom_1" : 10
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 80,
+        "Custom_1" : 20
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "42a245de-4281-40d1-ad98-7a79b471aefe",
+  "Version" : "1.0.0",
+  "InternalName" : "Berserker",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Cooldown" ],
+  "ArtKey" : "Icon_Skill_Berserker.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "5ee5ec9d8e6b181960c2be1df5f1ad81",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "5ee5ec9d8e6b181960c2be1df5f1ad81",
+      "Text" : "Berserker"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "39ee5b723aae0ec0d554187c734e6cc9",
+        "Text" : "While your enemy has more health than you, your Weapons have their cooldowns reduced by {aura.9}%."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.01
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : {
+            "$type" : "TPlayerConditionalAttribute",
+            "Attribute" : "Health",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValuePlayerAttribute",
+              "Target" : {
+                "$type" : "TTargetPlayerRelative",
+                "TargetMode" : "Opponent",
+                "Conditions" : null
+              },
+              "AttributeType" : "Health",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 1.0
+              }
+            }
+          }
+        }
+      } ],
+      "InternalName" : "Berserker 1",
+      "InternalDescription" : "While your enemy has more health than you, your Weapons have their cooldowns reduced by 10%.",
+      "MigrationData" : "5aa601c2-4bfe-4f5f-9960-5a8dcafaba6e",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "39ee5b723aae0ec0d554187c734e6cc9"
+    },
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_2",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
+}

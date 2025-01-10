@@ -1,0 +1,204 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 13000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 150,
+        "BurnApplyAmount" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2, 3 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "JoyApplyAmount" : 300,
+        "BurnApplyAmount" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2, 3 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "325788ee-7465-4bd3-9233-df2dedb98439",
+  "Version" : "1.0.0",
+  "InternalName" : "Jumbo Wok",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food", "Tool" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Burn" ],
+  "ArtKey" : "f4118925cfe4681459fa88f47f92c7f6",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "c0606bac64f7cf1389a14dd74abd0f43",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {i} Joy."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "c0606bac64f7cf1389a14dd74abd0f43",
+      "Text" : "Jumbo Wok"
+    },
+    "Tooltips" : [ {
+      "Key" : "1b1cf4ad0dbbe3a5e263b9de275c0601",
+      "Text" : "Gain {ability.0} Joy."
+    }, {
+      "Key" : "481d12a1d8581172133f1e03e1da8790",
+      "Text" : "Burn {ability.1}"
+    }, {
+      "Key" : "b3b5852c2d8a71281bf96863867e52e4",
+      "Text" : "When you buy Food, give this +{ability.2} Joy."
+    }, {
+      "Key" : "ce7c2c50b2ce0c3420ecd16f6b32f6cc",
+      "Text" : "When you buy Food, give this +{ability.3} Burn."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Joy Active 150",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a395971e-f567-4006-af9a-78ed67703da3",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "1b1cf4ad0dbbe3a5e263b9de275c0601",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Jumbo Wok temp",
+      "InternalDescription" : "Burn {ability.1}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f9fe6cb8-48c5-492d-a8a7-b9097f417eb2",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "481d12a1d8581172133f1e03e1da8790",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Jumbo temp 2",
+      "InternalDescription" : "When you buy Food, give this +{ability.2} Joy.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5c853fe6-0941-4c48-80f1-2ed02c374c65",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "b3b5852c2d8a71281bf96863867e52e4",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "3" : {
+      "Id" : "3",
+      "InternalName" : "Jumbo temp 3",
+      "InternalDescription" : "When you buy Food, give this +{ability.3} Burn.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "9f32c3fd-0e56-47d7-b5ed-1cba5b8ea858",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "ce7c2c50b2ce0c3420ecd16f6b32f6cc",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

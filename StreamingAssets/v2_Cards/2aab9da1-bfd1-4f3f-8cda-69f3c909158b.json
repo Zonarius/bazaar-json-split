@@ -1,0 +1,113 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "HasteAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HasteAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "2aab9da1-bfd1-4f3f-8cda-69f3c909158b",
+  "Version" : "1.0.0",
+  "InternalName" : "Holsters",
+  "InternalDescription" : null,
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "NonWeapon", "Haste" ],
+  "ArtKey" : "513d64d21fc717f4bb74c377e977c46e",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "8ace46fb163d346f1d41c05b970756f5",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "8ace46fb163d346f1d41c05b970756f5",
+      "Text" : "Holsters"
+    },
+    "Tooltips" : [ {
+      "Key" : "3ba95bd41cd5edf0e5543f7e9b7c9049",
+      "Text" : "At the start of each fight, give your small items Haste for {ability.0} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Holsters OnFightStart Haste all small items",
+      "InternalDescription" : "At the start of each fight, give your small items Haste for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Small" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 1000.0
+              }
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "fa996b08-9250-45ed-8660-3a9a61f92536",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "3ba95bd41cd5edf0e5543f7e9b7c9049",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightStarted",
+        "CombatType" : null
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

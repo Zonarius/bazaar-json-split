@@ -1,0 +1,222 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Diamond",
+  "Tiers" : {
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 0
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "8d41a164-2667-4df4-91ed-3da224b8c63a",
+  "Version" : "1.0.0",
+  "InternalName" : "Focused Rage",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Crit" ],
+  "ArtKey" : "Icon_Skill_FocusedRage.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "c091ef0917b2b07f1eb5e2db7d96ccac",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "c091ef0917b2b07f1eb5e2db7d96ccac",
+      "Text" : "Focused Rage"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "e72e5a53cfa03961d3573303a204dc76",
+        "Text" : "The first time you fall below half health each fight, double all your items' Crit Chance for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        },
+        "AttributeType" : "Health",
+        "ChangeType" : "Loss"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Multiply",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "Equal",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      }, {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : {
+            "$type" : "TPlayerConditionalAttribute",
+            "Attribute" : "Health",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValuePlayerAttribute",
+              "Target" : {
+                "$type" : "TTargetPlayerRelative",
+                "TargetMode" : "Self",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealthMax",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 0.5
+              }
+            }
+          }
+        }
+      } ],
+      "Priority" : "Medium",
+      "InternalName" : "Focused Rage",
+      "InternalDescription" : "The first time you fall below half health each fight, double all your items' crit chance for the fight.",
+      "MigrationData" : "d8278704-f3d5-44b6-a572-65ecaa0ce68a",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "e72e5a53cfa03961d3573303a204dc76"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        },
+        "AttributeType" : "Health",
+        "ChangeType" : "Loss"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : {
+            "$type" : "TPlayerConditionalAttribute",
+            "Attribute" : "Health",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValuePlayerAttribute",
+              "Target" : {
+                "$type" : "TTargetPlayerRelative",
+                "TargetMode" : "Self",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealthMax",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 0.5
+              }
+            }
+          }
+        }
+      } ],
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
+    }
+  },
+  "Auras" : { }
+}

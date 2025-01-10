@@ -1,0 +1,218 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Bronze",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BurnApplyAmount" : 10,
+        "BuyPrice" : 5,
+        "Custom_0" : 0
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 15,
+        "BuyPrice" : 10
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 20,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 25,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "ee178ba8-666d-426f-8499-1bd611a91802",
+  "Version" : "1.0.0",
+  "InternalName" : "Burst of Flame",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Burn" ],
+  "ArtKey" : "Icon_Skill_MON_LivingFlame_01",
+  "CardPackId" : "Core",
+  "TranslationKey" : "d571d28dc975d087831a849e3996069f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "d571d28dc975d087831a849e3996069f",
+      "Text" : "Burst of Flame"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "d571d28dc975d087831a849e3996069f",
+        "Text" : "The first time your enemy falls below half health, Burn {ability.0}."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Health",
+        "ChangeType" : "Loss"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "ReferenceValue" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "Equal",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      }, {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : {
+            "$type" : "TPlayerConditionalAttribute",
+            "Attribute" : "Health",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValuePlayerAttribute",
+              "Target" : {
+                "$type" : "TTargetPlayerRelative",
+                "TargetMode" : "Opponent",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealthMax",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 0.5
+              }
+            }
+          }
+        }
+      } ],
+      "Priority" : "Medium",
+      "InternalName" : "Burst of Flame",
+      "InternalDescription" : "The first time your enemy falls below half health, Burn [10/15/20/25].",
+      "MigrationData" : "7806e209-bbae-4a38-8a82-5cc618463a24",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d571d28dc975d087831a849e3996069f"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Health",
+        "ChangeType" : "Loss"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : {
+            "$type" : "TPlayerConditionalAttribute",
+            "Attribute" : "Health",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValuePlayerAttribute",
+              "Target" : {
+                "$type" : "TTargetPlayerRelative",
+                "TargetMode" : "Opponent",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealthMax",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 0.5
+              }
+            }
+          }
+        }
+      } ],
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
+    }
+  },
+  "Auras" : { }
+}

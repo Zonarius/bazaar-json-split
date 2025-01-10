@@ -1,0 +1,172 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Bronze",
+  "Tiers" : {
+    "Bronze" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BuyPrice" : 5,
+        "Custom_0" : 50,
+        "Custom_1" : 99
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0", "1" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 10,
+        "Custom_0" : 150,
+        "Custom_1" : 98
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0", "1" ],
+      "TooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 300,
+        "Custom_1" : 97
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0", "1" ],
+      "TooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 500,
+        "Custom_1" : 96
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0", "1" ],
+      "TooltipIds" : [ 3 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "279ca038-9f02-45ea-a946-7bd05be37d57",
+  "Version" : "1.0.0",
+  "InternalName" : "Defender",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Vanessa", "Dooley", "Jules", "Stelle" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "ShieldReference", "Health" ],
+  "ArtKey" : "Icon_Skills_Defender.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "ee90445284a3f5eb04b08417e16ecb95",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "ee90445284a3f5eb04b08417e16ecb95",
+      "Text" : "Defender"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "181d40dfd0bd741adc60a5951f7c514e",
+        "Text" : "You have +{aura.0} Health and your Shield items have their cooldowns reduced by 1%."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "181d40dfd0bd741adc60a5951f7c514f",
+        "Text" : "You have +{aura.0} Health and your Shield items have their cooldowns reduced by 2%."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "181d40dfd0bd741adc60a5951f7c514g",
+        "Text" : "You have +{aura.0} Health and your Shield items have their cooldowns reduced by 3%."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "181d40dfd0bd741adc60a5951f7c514h",
+        "Text" : "You have +{aura.0} Health and your Shield items have their cooldowns reduced by 4%."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionPlayerModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "HealthMax",
+        "Operation" : "Add",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Defender 1",
+      "InternalDescription" : "You have +[50/150/300/500] Health and your Shield items have their cooldowns reduced by [1/2/3/4]%.",
+      "MigrationData" : "88674802-1a70-460a-829b-c7839b039ff1",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "181d40dfd0bd741adc60a5951f7c514e"
+    },
+    "1" : {
+      "Id" : "1",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.01
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Shield" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Defender 2",
+      "InternalDescription" : "",
+      "MigrationData" : "27b77512-1b22-45ad-af62-1ea49b9a4585",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "71411713224671fc78276d65600aa8de"
+    }
+  }
+}

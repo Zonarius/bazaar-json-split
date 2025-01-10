@@ -1,0 +1,106 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "fdeee7b2-7c1f-48e0-8fe1-e5a43e7a6726",
+  "Version" : "1.0.0",
+  "InternalName" : "Dirty Dishes",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Weapon", "Food" ],
+  "HiddenTags" : [ "JoyReference" ],
+  "ArtKey" : "Icon_Skill_Placeholder.png",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "bd5eb2bf24a9a19bec3bbba106470520",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "bd5eb2bf24a9a19bec3bbba106470520",
+      "Text" : "Dirty Dishes"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "2b31da77f98dfa256ff6c532a92be2f5",
+        "Text" : "When you use a weapon, give a food +{ability.0} joy for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "dirty dishes",
+      "InternalDescription" : "When you use a weapon, give a food +{ability.0} joy for the fight.",
+      "MigrationData" : "d656c33c-a3a1-4823-8fe2-bf71304e8b1d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "2b31da77f98dfa256ff6c532a92be2f5"
+    }
+  },
+  "Auras" : { }
+}

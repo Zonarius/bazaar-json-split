@@ -1,0 +1,184 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "DamageAmount" : 12,
+        "BurnApplyAmount" : 3
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 24,
+        "BurnApplyAmount" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 36,
+        "BurnApplyAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "7e2634eb-9489-4462-8fe4-1c5b8c07adc2",
+  "Version" : "1.0.0",
+  "InternalName" : "Sunlight Spear",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "DamageReference", "Active", "BurnReference", "Burn" ],
+  "ArtKey" : "e39d78c5a240c6d449c6ed5f0e01a8b0",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "a84a3e11740bb1ef2923ce4f58aa88ac",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "a84a3e11740bb1ef2923ce4f58aa88ac",
+      "Text" : "Sunlight Spear"
+    },
+    "Tooltips" : [ {
+      "Key" : "30cd530d062a87f738bacfda2a7f7278",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "c25a1a6828a9d37bf6d1c218934535c9",
+      "Text" : "Burn {ability.1}"
+    }, {
+      "Key" : "b0e13508d9a1ec3cea3bee2ba9ec5892",
+      "Text" : "When you burn, gain {ability.2} Strength for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Sunlight Spear 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "fcc4133b-4876-404a-adb7-626c2202afac",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "30cd530d062a87f738bacfda2a7f7278",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Sunlight Spear 2",
+      "InternalDescription" : "Burn {ability.1}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "622a54e6-c1b6-4727-b2d1-230580995f62",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "c25a1a6828a9d37bf6d1c218934535c9",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Sunlight Spear 3",
+      "InternalDescription" : "When you burn, gain {ability.2} Strength for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "DamageAmount",
+            "ComparisonOperator" : "GreaterThanOrEqual",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "456ea499-89dd-4d5f-954f-a1b940172d7e",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "b0e13508d9a1ec3cea3bee2ba9ec5892",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

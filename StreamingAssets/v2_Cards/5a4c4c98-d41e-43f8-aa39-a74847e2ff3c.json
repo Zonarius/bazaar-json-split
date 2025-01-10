@@ -1,0 +1,157 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "5a4c4c98-d41e-43f8-aa39-a74847e2ff3c",
+  "Version" : "1.0.0",
+  "InternalName" : "Deed",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Value" ],
+  "ArtKey" : "003a439b4f198cc4884df008a49442d1",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "3efc0f9d30242aca0f09552a2c5016ee",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "e25483f0811cfc2e1beacf668692c3ce",
+      "Text" : "When you sell a Large item, give this +{i} Sell Value."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "3efc0f9d30242aca0f09552a2c5016ee",
+      "Text" : "Deed"
+    },
+    "Tooltips" : [ {
+      "Key" : "9f44d13178f374f0e9bf166f974acfe2",
+      "Text" : "When you sell a Large item, give this +{ability.0} Sell Value."
+    }, {
+      "Key" : "81a1192e61bb86146e74ca1501d7382d",
+      "Text" : "Your large items have increase crit chance equal to this item's value."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Deed 1",
+      "InternalDescription" : "When you sell a Large item, give this +{ability.0} Sell Value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "064eff30-89db-4cf2-b172-2654930d8679",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "9f44d13178f374f0e9bf166f974acfe2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Deed 2",
+      "InternalDescription" : "Your large items have increase crit chance equal to this item's value.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "SellPrice",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "MigrationData" : "d49fd05d-cf1a-4b72-b417-7adc0095c68f",
+      "Prerequisites" : null,
+      "TranslationKey" : "81a1192e61bb86146e74ca1501d7382d",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

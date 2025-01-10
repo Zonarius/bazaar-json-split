@@ -1,0 +1,213 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "f4827638-60ff-4101-a52f-037c04791ee5",
+  "Version" : "1.0.0",
+  "InternalName" : "Schematics",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Passive", "NonWeapon", "Value", "EconomyReference" ],
+  "ArtKey" : "5eb898aea4a347c49b6f99ba5a25d5f0",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "c4d1b093201944bc8f39d6f061b86a11",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "c26e0c208bca6e14639ea99f8b7ce195",
+      "Text" : "When you sell this, give the Core +Crit Chance equal to this item's value."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "c4d1b093201944bc8f39d6f061b86a11",
+      "Text" : "Schematics"
+    },
+    "Tooltips" : [ {
+      "Key" : "1a4468222a9745acb4207d9cdee6779c",
+      "Text" : "When you upgrade an item or skill, give this +{ability.1} value."
+    }, {
+      "Key" : "3cb8f66fc58e24e4f7f15afc13869e79",
+      "Text" : "When you sell this, give the Core +Crit Chance equal to this item's value."
+    }, {
+      "Key" : "2fae103a20df4b4f92e9855f736f1ce1",
+      "Text" : "Your items have +Crit Chance equal to this item's value"
+    } ]
+  },
+  "Abilities" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Schematics 2",
+      "InternalDescription" : "When you upgrade an item or skill, give this +{ability.1} value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 0.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a673b95c-acec-4e43-9d97-4c639661bff6",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1a4468222a9745acb4207d9cdee6779c",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardUpgraded",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Schematics 3",
+      "InternalDescription" : "When you sell this, give the Core +Crit Chance equal to this item's value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "SellPrice",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "7335adf3-7435-4d4f-a1e9-8671c096e01d",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "3cb8f66fc58e24e4f7f15afc13869e79",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Schematics 1",
+      "InternalDescription" : "Your items have +Crit Chance equal to this item's value",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "SellPrice",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "125e802f-5336-4780-8f85-cb97c6780f47",
+      "Prerequisites" : null,
+      "TranslationKey" : "2fae103a20df4b4f92e9855f736f1ce1",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

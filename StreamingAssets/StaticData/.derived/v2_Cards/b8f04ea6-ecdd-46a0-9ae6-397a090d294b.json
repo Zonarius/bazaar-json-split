@@ -1,0 +1,109 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 2
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 4
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "b8f04ea6-ecdd-46a0-9ae6-397a090d294b",
+  "Version" : "1.0.0",
+  "InternalName" : "Corrosive Toxins",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "PoisonReference" ],
+  "ArtKey" : "Icon_Skill_RapidInfection.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "af5ca733759001182b6a62f7f14060e8",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "af5ca733759001182b6a62f7f14060e8",
+      "Text" : "Corrosive Toxins"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "c6f225f40ddaa35df48bd6a78bd01739",
+        "Text" : "When you Poison, enemy Weapons lose {ability.0} damage."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedPoison",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Subtract",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Corrosive Toxins",
+      "InternalDescription" : "",
+      "MigrationData" : "517fdc5a-b41f-4cad-b689-ddf1a227b021",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "c6f225f40ddaa35df48bd6a78bd01739"
+    }
+  },
+  "Auras" : { }
+}

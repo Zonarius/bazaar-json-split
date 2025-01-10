@@ -1,0 +1,174 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 3000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 15
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 30
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 50
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "07df297d-e116-42a4-9596-4af674764d1b",
+  "Version" : "1.0.0",
+  "InternalName" : "Globe",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Shield", "ShieldReference", "HealthReference", "NonWeapon", "Health" ],
+  "ArtKey" : "699bdc0078eff6742b22797eb7ed51c5",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "4a32f7fbd17e7cabb06ec72e1e9f263d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "4a32f7fbd17e7cabb06ec72e1e9f263d",
+      "Text" : "Globe"
+    },
+    "Tooltips" : [ {
+      "Key" : "fea111e2209fa330e78112b3ca044da4",
+      "Text" : "Shield {ability.0}"
+    }, {
+      "Key" : "ba6fd00b0bde7bf23ad986326b135e47",
+      "Text" : "At the start of each day, gain {ability.1} Max Health."
+    }, {
+      "Key" : "b7b5eb7a5a13972fda92a1b30ab82ea9",
+      "Text" : "If you have more health than your enemy, this deals double Shield."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Globe 1",
+      "InternalDescription" : "Shield {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f37b94bc-6a56-4706-9179-435faf45c42e",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "fea111e2209fa330e78112b3ca044da4",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Globe 2",
+      "InternalDescription" : "At the start of each day, gain {ability.1} Max Health.",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthMax",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 100.0
+        },
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f54ee1be-c1bc-44c1-a726-9f803090a248",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "ba6fd00b0bde7bf23ad986326b135e47",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Globe 3",
+      "InternalDescription" : "If you have more health than your enemy, this deals double Shield.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Opponent",
+            "Conditions" : null
+          },
+          "AttributeType" : "Poison",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "681aab8d-7752-49f6-9ba7-03ed86f3b850",
+      "Prerequisites" : null,
+      "TranslationKey" : "b7b5eb7a5a13972fda92a1b30ab82ea9",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

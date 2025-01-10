@@ -1,0 +1,109 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "HasteAmount" : 6000,
+        "HasteTargets" : 1,
+        "BuyPrice" : 10
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "HasteTargets" : 2,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "HasteTargets" : 3,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "42ca6153-fe5b-44b4-a043-f14870659472",
+  "Version" : "1.0.0",
+  "InternalName" : "Oceanic Rush",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Aquatic" ],
+  "HiddenTags" : [ "Haste" ],
+  "ArtKey" : "Icon_Skill_ChillZone.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "c327fc97e790844e3ed55fb257527b67",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "c327fc97e790844e3ed55fb257527b67",
+      "Text" : "Oceanic Rush"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "c327fc97e790844e3ed55fb257527b67",
+        "Text" : "At the start of each fight, Haste {ability.0.targets} Aquatic items for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightStarted",
+        "CombatType" : null
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Aquatic" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "InternalName" : "Oceanic Rush",
+      "InternalDescription" : "At the start of each fight, Haste {ability.0.targets} Aquatic items for {ability.0} second(s).",
+      "MigrationData" : "214b3aac-d263-464c-a84b-fb296da18f09",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "954601796c16fa224b98f54b380855c7"
+    }
+  },
+  "Auras" : { }
+}

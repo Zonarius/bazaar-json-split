@@ -1,0 +1,103 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "53aa52ea-b2b7-4b8a-8109-4f67fb4a3e29",
+  "Version" : "1.0.0",
+  "InternalName" : "Adaptive Ordinance",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Regen", "AmmoReference" ],
+  "ArtKey" : "Icon_Skill_MON_HulkingExperiment_01",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "30052e9e9cf5c038c9d2593d33530445",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "30052e9e9cf5c038c9d2593d33530445",
+      "Text" : "Adaptive Ordinance"
+    },
+    "Tooltips" : [ {
+      "Key" : "30052e9e9cf5c038c9d2593d33530445",
+      "Text" : "You have {aura.0} Regeneration for each Ammo item you have."
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Adaptive Ordinance",
+      "InternalDescription" : "You have {aura.0} Regeneration for each Ammo item you have.",
+      "Action" : {
+        "$type" : "TAuraActionPlayerModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "AmmoMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 2.0
+          }
+        },
+        "AttributeType" : "HealthRegen",
+        "Operation" : "Add",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "27803d1e-a4af-472a-8bc3-5b741dc269db",
+      "Prerequisites" : null,
+      "TranslationKey" : "30052e9e9cf5c038c9d2593d33530445",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

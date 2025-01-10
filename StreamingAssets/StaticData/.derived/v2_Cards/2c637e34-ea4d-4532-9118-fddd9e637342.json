@@ -1,0 +1,119 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BuyPrice" : 10,
+        "Custom_0" : 10
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 30
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "2c637e34-ea4d-4532-9118-fddd9e637342",
+  "Version" : "1.0.0",
+  "InternalName" : "Improvised Heal",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Vanessa", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "HealReference", "CritReference" ],
+  "ArtKey" : "Icon_Skill_ImprovisedHealing.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "4a8c01eaafe17c9fae9f0c08d53e041d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "4a8c01eaafe17c9fae9f0c08d53e041d",
+      "Text" : "Improvised Heal"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "4a8c01eaafe17c9fae9f0c08d53e041d",
+        "Text" : "When you Crit, your Heal items gain {ability.0} Heal for the fight."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardCritted",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Heal" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Improvised Heal",
+      "InternalDescription" : "When you Crit, your items gain +{ability.0} Healing for the fight.",
+      "MigrationData" : "49bcc2d5-d4cf-49fb-bc91-e0f7865f45a9",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "4a8c01eaafe17c9fae9f0c08d53e041d"
+    }
+  },
+  "Auras" : { }
+}

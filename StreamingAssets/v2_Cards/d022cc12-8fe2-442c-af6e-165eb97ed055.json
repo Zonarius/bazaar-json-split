@@ -1,0 +1,190 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 20,
+        "SlowAmount" : 3000,
+        "SlowTargets" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 60,
+        "SlowAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 120,
+        "SlowAmount" : 5000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 200,
+        "SlowAmount" : 6000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "d022cc12-8fe2-442c-af6e-165eb97ed055",
+  "Version" : "1.0.0",
+  "InternalName" : "Improvised Bludgeon",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "Slow", "SlowReference" ],
+  "ArtKey" : "0adf4464012d40a43922ad86d564f7f2",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "54ea2018dd99de920bc3df9edf18949a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "54ea2018dd99de920bc3df9edf18949a",
+      "Text" : "Improvised Bludgeon"
+    },
+    "Tooltips" : [ {
+      "Key" : "54ea2018dd99de920bc3df9edf18949a",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "d97aa240ad3670ec24f07f42303f4838",
+      "Text" : "Slow 2 items for {ability.1} seconds."
+    }, {
+      "Key" : "48b01703e52ff379dd9277ce4c4db771",
+      "Text" : "When you sell this, give your leftmost Slow item +{ability.2} Slow."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Improvised Bludgeon",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4237874c-d52c-45a9-be7f-45bb8a6cdd3d",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "54ea2018dd99de920bc3df9edf18949a",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Improvised Bludgeon 2",
+      "InternalDescription" : "Slow 2 items for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "1b247382-a366-499f-8629-859a8984e2fa",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "d97aa240ad3670ec24f07f42303f4838",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Improvised Bludgeon 3",
+      "InternalDescription" : "When you sell this, give your leftmost Slow item +{ability.2} Slow.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1000.0
+        },
+        "AttributeType" : "SlowAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardXMost",
+          "TargetSection" : "SelfHand",
+          "TargetMode" : "LeftMostCard",
+          "IncludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Slow" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "046ce46e-60f5-4aeb-8d35-d199d03713e5",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "48b01703e52ff379dd9277ce4c4db771",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

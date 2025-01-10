@@ -1,0 +1,163 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 6,
+        "SellPrice" : 3,
+        "Multicast" : 1,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "HasteAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "HasteAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "HasteAmount" : 5000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "9de5b9e6-d2a7-46f1-be70-ee6bded32ead",
+  "Version" : "1.0.0",
+  "InternalName" : "Food Truck",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Large",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Vehicle" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Haste", "Gold" ],
+  "ArtKey" : "b2c50609172d7e44d90dde976f7861c9",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "4cb0f6c5c2847c3d242b6441e8c186de",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "10fe0b7958beede71b5ee7f0451436ae",
+      "Text" : "Adjacent items gain haste for {i} seconds"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "4cb0f6c5c2847c3d242b6441e8c186de",
+      "Text" : "Food Truck"
+    },
+    "Tooltips" : [ {
+      "Key" : "8e5f3e14f5e5a1fdbcfda429edfc4a8d",
+      "Text" : "Adjacent items gain haste for {ability.0} seconds"
+    }, {
+      "Key" : "0ef31b73d871a7437e094672ffc70dbb",
+      "Text" : "When you Haste a food, give it +{ability.1} Joy for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Food Truck 1",
+      "InternalDescription" : "Adjacent items gain haste for {ability.0} seconds",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "cf87029d-7f4d-43a8-a0ce-044d0db06ade",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "8e5f3e14f5e5a1fdbcfda429edfc4a8d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Food Truck 2",
+      "InternalDescription" : "When you Haste a food, give it +{ability.1} Joy for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "60f2aa3e-29bf-42d0-b867-6bb849f8a0d9",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "0ef31b73d871a7437e094672ffc70dbb",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

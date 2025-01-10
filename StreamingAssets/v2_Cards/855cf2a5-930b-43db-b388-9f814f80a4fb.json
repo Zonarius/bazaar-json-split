@@ -1,0 +1,155 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "855cf2a5-930b-43db-b388-9f814f80a4fb",
+  "Version" : "1.0.0",
+  "InternalName" : "Piggy Bank",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "EconomyReference", "NonWeapon", "Value" ],
+  "ArtKey" : "e0a4c7b5ceb66f047b83c0ed3e7fa0f7",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "feae3f46179f372445c9fbfa18e701b3",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7d92d970fa4069644489ddbf1aa84466",
+      "Text" : "When you sell this, get Spare Change equal to its value."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "feae3f46179f372445c9fbfa18e701b3",
+      "Text" : "Piggy Bank"
+    },
+    "Tooltips" : [ {
+      "Key" : "feae3f46179f372445c9fbfa18e701b3",
+      "Text" : "When you sell this, get Spare Change equal to its value."
+    }, {
+      "Key" : "feae3f46179f372445c9fbfa18e701b3",
+      "Text" : "This has no base value. At the start of each hour, give this +{ability.1} value."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Piggy Bank",
+      "InternalDescription" : "When you sell this, get Spare Change equal to its value.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "f212afe2-08d1-40e3-978b-762d345bc7e5" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 0.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "460a99f6-a818-40a9-aef3-ad86631281ba",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "feae3f46179f372445c9fbfa18e701b3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Piggy Bank",
+      "InternalDescription" : "This has no base value. At the start of each hour, give this +{ability.1} value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "9fa9fc2b-9ce2-46e2-9c35-eb578805a7fe",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "feae3f46179f372445c9fbfa18e701b3",
+      "Trigger" : {
+        "$type" : "TTriggerOnHourStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,158 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "DamageAmount" : 5
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "DamageAmount" : 10
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 20
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "e574a4ba-f984-446c-ae5b-75d75cd4b857",
+  "Version" : "1.0.0",
+  "InternalName" : "Tazidian Dagger",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "Ammo" ],
+  "ArtKey" : "53667700378b243418f575170ab8cf9e",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "ac18cea7227b3bdaacf3dc4d7ba7501c",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "ac18cea7227b3bdaacf3dc4d7ba7501c",
+      "Text" : "Tazidian Dagger"
+    },
+    "Tooltips" : [ {
+      "Key" : "ac18cea7227b3bdaacf3dc4d7ba7501c",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "767ce96385de9a72fe320565c0907e94",
+      "Text" : "Adjacent Potions have +{aura.1} Ammo."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Tazidian Dagger",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "d6ac624e-9c74-4601-8a1b-12bb6dec920c",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "ac18cea7227b3bdaacf3dc4d7ba7501c",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : "Assets/TheBazaar/Projectiles/Slash/VFX_Slash_Tier1_PV.prefab",
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Tazidian Dagger 2",
+      "InternalDescription" : "Adjacent Potions have +{aura.1} Ammo.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "AmmoMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Potion" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "200549e3-ae1d-42d4-8b28-e3ad6edf10dc",
+      "Prerequisites" : null,
+      "TranslationKey" : "767ce96385de9a72fe320565c0907e94",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

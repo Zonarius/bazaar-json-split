@@ -1,0 +1,172 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 10,
+        "Custom_0" : 95,
+        "Custom_1" : 5,
+        "Custom_2" : 0
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 90,
+        "Custom_1" : 10,
+        "Custom_2" : 0
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 80,
+        "Custom_1" : 20
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "8c16e6c8-2f44-4335-b31e-5b2268bf790e",
+  "Version" : "1.0.0",
+  "InternalName" : "Finesse Shield",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Dooley", "Stelle" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "ShieldReference", "Cooldown" ],
+  "ArtKey" : "Icon_Skill_FinesseShield.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "f066311a2f58fa2baef621a9cfe1fc13",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "f066311a2f58fa2baef621a9cfe1fc13",
+      "Text" : "Finesse Shield"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "0465a04e2c50418e9f87c91faa3601c9",
+        "Text" : "While your enemy has more health than you, your Shield items have their cooldowns reduced by {aura.6}%."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.01
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Shield" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : {
+            "$type" : "TPlayerConditionalAttribute",
+            "Attribute" : "Health",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValuePlayerAttribute",
+              "Target" : {
+                "$type" : "TTargetPlayerRelative",
+                "TargetMode" : "Opponent",
+                "Conditions" : null
+              },
+              "AttributeType" : "Health",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : 1.0
+              }
+            }
+          }
+        }
+      } ],
+      "InternalName" : "Finesse Shield 1",
+      "InternalDescription" : "Your rightmost Shield item has +{aura.0} Shield and have a cooldown reduction of {aura.1}%.",
+      "MigrationData" : "4a8c0951-8375-4aa1-a4ed-70caa2cbaa09",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "0465a04e2c50418e9f87c91faa3601c9"
+    },
+    "6" : {
+      "Id" : "6",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_2",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
+}

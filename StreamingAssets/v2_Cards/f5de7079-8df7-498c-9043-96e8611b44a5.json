@@ -1,0 +1,150 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 2000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 5
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 30
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "f5de7079-8df7-498c-9043-96e8611b44a5",
+  "Version" : "1.0.0",
+  "InternalName" : "Mouse Trap",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "Ammo" ],
+  "ArtKey" : "a56cbb26a4cf6924588ee2141b7ffe4d",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "5a51321902b36d98c7a669307daa9de4",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef049944d227844355fd4b635bcf1877",
+      "Text" : "Deal {i} damage."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "5a51321902b36d98c7a669307daa9de4",
+      "Text" : "Mouse Trap"
+    },
+    "Tooltips" : [ {
+      "Key" : "5a51321902b36d98c7a669307daa9de4",
+      "Text" : "Deal {ability.0} damage."
+    }, {
+      "Key" : "29411b11458539829978a8a3bd8a1297",
+      "Text" : "This has +{aura.1} Ammo for each small food you have."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Mouse Trap",
+      "InternalDescription" : "Deal {ability.0} damage.",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "29ce57f5-e115-40f0-980d-0f62dbd08b81",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5a51321902b36d98c7a669307daa9de4",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Mouse Trap 2",
+      "InternalDescription" : "This has +{aura.1} Ammo for each small food you have.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalAnd",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }, {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Food" ],
+                "Operator" : "Any"
+              } ]
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 2.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "3703636d-068c-4d8c-a531-8fde06344eb7",
+      "Prerequisites" : null,
+      "TranslationKey" : "29411b11458539829978a8a3bd8a1297",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

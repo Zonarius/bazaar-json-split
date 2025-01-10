@@ -1,0 +1,160 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "DamageAmount" : 5,
+        "HasteAmount" : 1000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "DamageAmount" : 15,
+        "HasteAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 30,
+        "HasteAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 50,
+        "HasteAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "c25780af-ae03-4fcf-b8ea-a2bd096ec215",
+  "Version" : "1.0.0",
+  "InternalName" : "Bread Knife",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Weapon", "Tool" ],
+  "HiddenTags" : [ "Damage", "Active", "Haste" ],
+  "ArtKey" : "e9f21f64173013244a248a02ca351275",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "3597d8581b88ecbc1f197336ca48bb00",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "3597d8581b88ecbc1f197336ca48bb00",
+      "Text" : "Bread Knife"
+    },
+    "Tooltips" : [ {
+      "Key" : "96aed3424c1844f97d868aa6a2cf7fa5",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "2d1319c9a816bc6090f841ca73fdcbdf",
+      "Text" : "Give adjacent Food haste for {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Knife Set 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5c8f1be2-2cc9-4e32-bb58-9a2eeaba03c5",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "96aed3424c1844f97d868aa6a2cf7fa5",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : "Assets/TheBazaar/Projectiles/Slash/VFX_Slash_Tier1_PV.prefab",
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Bread Knife 2",
+      "InternalDescription" : "Give adjacent Food haste for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 1000.0
+              }
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Food" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "5e61af57-90cc-4ac0-9c26-ae2e9388e985",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "2d1319c9a816bc6090f841ca73fdcbdf",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

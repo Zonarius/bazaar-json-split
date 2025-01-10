@@ -1,0 +1,197 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 45
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "c53eff8b-0407-4e8c-adaf-70b2a66b3528",
+  "Version" : "1.0.0",
+  "InternalName" : "Gumball Machine",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Shield", "Gold", "NonWeapon" ],
+  "ArtKey" : "59e50a43d17bf6b4593b22a5f36a0d94",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "69d1f37d94ddc3150f8dd44d12d53ced",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "69d1f37d94ddc3150f8dd44d12d53ced",
+      "Text" : "Gumball Machine"
+    },
+    "Tooltips" : [ {
+      "Key" : "7a47e8fa45a783251b40d4f4205f0eb7",
+      "Text" : "Shield {ability.0}"
+    }, {
+      "Key" : "423bcb93e97e528ca37b7c159799ffeb",
+      "Text" : ""
+    }, {
+      "Key" : "4e670ee7453142e26c5082d040db0836",
+      "Text" : "At the start of each hour, spend {ability.2} gold to get a Gumball."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Gumball Machine 1",
+      "InternalDescription" : "Shield {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c898bf6a-7fbc-4953-ab29-0dc421d053dd",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "7a47e8fa45a783251b40d4f4205f0eb7",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Gumball Machine 2",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "Gold",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Operation" : "Subtract",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "23b68526-62fe-4f73-a99b-5be68a23754a",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "423bcb93e97e528ca37b7c159799ffeb",
+      "Trigger" : {
+        "$type" : "TTriggerOnHourStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Gumball Machine 3",
+      "InternalDescription" : "At the start of each hour, spend {ability.2} gold to get a Gumball.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "73998555-1f68-440b-b28f-84c0f9f07579", "acbddaec-41a7-452e-b4aa-357e75553d55", "6d6199b4-82a4-441d-9329-f4164737ac6b", "d0a15bf6-fc3a-47c5-84c5-7c34c6996598" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "43a92a19-b07e-42cb-b782-d3b34b0d0ebb",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "4e670ee7453142e26c5082d040db0836",
+      "Trigger" : {
+        "$type" : "TTriggerOnHourStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

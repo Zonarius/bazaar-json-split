@@ -1,0 +1,235 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ "1", "2", "3" ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HasteAmount" : 4000
+      },
+      "AuraIds" : [ "1", "2", "3" ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "HasteAmount" : 6000
+      },
+      "AuraIds" : [ "1", "2", "3" ],
+      "PassiveTooltipIds" : [ 1, 2, 3 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "49d2fab6-9076-4a81-a7f6-b2409b6b5021",
+  "Version" : "1.0.0",
+  "InternalName" : "Kitchen Scale",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Haste" ],
+  "ArtKey" : "effc8463352a15e4384b54b808f14cea",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "7fba40f9eb2cf955e0a6026c3c414dba",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6b8a5b85ee0f6c9de74e3e2524dffcf4",
+      "Text" : "Haste adjacent items for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "7fba40f9eb2cf955e0a6026c3c414dba",
+      "Text" : "Kitchen Scale"
+    },
+    "Tooltips" : [ {
+      "Key" : "6d7609a2e34b26f945c4cf764999cf0a",
+      "Text" : "Haste adjacent items for {ability.0} seconds."
+    }, {
+      "Key" : "7d7522456659bf4a7405c21fb2c9ba38",
+      "Text" : "If adjacent items are the same size, this charges twice as fast."
+    }, {
+      "Key" : "ecef6cef4e03ab447080f911b101bf7a",
+      "Text" : ""
+    }, {
+      "Key" : "9e9dbbf1dd14c0b6fbcca4b0d265fa01",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Kitchen Scale 1",
+      "InternalDescription" : "Haste adjacent items for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "acdc3df7-4e98-4911-9bd3-0d1b1375e3b0",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "6d7609a2e34b26f945c4cf764999cf0a",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Kitchen Scale 2",
+      "InternalDescription" : "If adjacent items are the same size, this charges twice as fast.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 100.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b44ac0d7-f1f0-4e18-bfb0-38ce7f2ac5db",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 2
+      } ],
+      "TranslationKey" : "7d7522456659bf4a7405c21fb2c9ba38",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Kitchen Scale 3",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 100.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a197ac3c-9a25-44a1-9e63-0d70d1b0a7fc",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Medium" ],
+            "IsNot" : false
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 2
+      } ],
+      "TranslationKey" : "ecef6cef4e03ab447080f911b101bf7a",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "3" : {
+      "Id" : "3",
+      "InternalName" : "Kitchen Scale 4",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 100.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f1831dea-04cd-44ea-9f27-67442a5e15c9",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 2
+      } ],
+      "TranslationKey" : "9e9dbbf1dd14c0b6fbcca4b0d265fa01",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

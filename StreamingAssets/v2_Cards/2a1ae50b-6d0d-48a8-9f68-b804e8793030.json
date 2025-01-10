@@ -1,0 +1,146 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 3,
+        "DamageAmount" : 10
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 20
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 30
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "2a1ae50b-6d0d-48a8-9f68-b804e8793030",
+  "Version" : "1.0.0",
+  "InternalName" : "Rocket Launcher",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "BurnReference", "Damage", "Active" ],
+  "ArtKey" : "a677f026a30e0a04fa72ccfb1b6e7dec",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "fefd528b50ff171e044ae478c84704af",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "fefd528b50ff171e044ae478c84704af",
+      "Text" : "Rocket Launcher"
+    },
+    "Tooltips" : [ {
+      "Key" : "b63a1597fb979944308235e6cef1a791",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "eff17cfc8ab3667de0e715ae3d4c20cb",
+      "Text" : "While your enemy has Burn, this has double damage."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Rocket Launcher 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4a995c66-bb7d-492b-8c72-a6b7de9c47e0",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "b63a1597fb979944308235e6cef1a791",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Rocket Launcher 2",
+      "InternalDescription" : "While your enemy has Burn, this has double damage.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Self",
+            "Conditions" : null
+          },
+          "AttributeType" : "Burn",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "18ae2026-0eb2-4b20-8a88-eddc29f7b18d",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "TranslationKey" : "eff17cfc8ab3667de0e715ae3d4c20cb",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

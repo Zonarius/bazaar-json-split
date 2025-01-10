@@ -1,0 +1,133 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "PoisonApplyAmount" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "PoisonApplyAmount" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "f0a58209-1a26-42ac-a243-7c2fd9d6ce33",
+  "Version" : "1.0.0",
+  "InternalName" : "Black Ice",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active", "Poison", "NonWeapon", "FreezeReference" ],
+  "ArtKey" : "b830a7aa6ebf7fe488f26c693408ecdc",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "b25e688118d03207c65ffe7bf7ffc2d8",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef05351ce3f992cc956a1f7372a66343",
+      "Text" : "Poison {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "b25e688118d03207c65ffe7bf7ffc2d8",
+      "Text" : "Black Ice"
+    },
+    "Tooltips" : [ {
+      "Key" : "6870e931b037454e4df4ef0e78a33655",
+      "Text" : "Poison {ability.0}"
+    }, {
+      "Key" : "561c241afcaac069083cfe0c3f4a1996",
+      "Text" : "When you Freeze, give this +{ability.1} Poison for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Black Ice 1",
+      "InternalDescription" : "Poison {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "8ef2bb2d-7764-440d-9d7d-46b9b0017c9a",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "6870e931b037454e4df4ef0e78a33655",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Black Ice 2",
+      "InternalDescription" : "When you Freeze, give this +{ability.1} Poison for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "PoisonApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "90089b2c-6220-47ff-bb9c-1f6f8d8ca0a1",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "561c241afcaac069083cfe0c3f4a1996",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

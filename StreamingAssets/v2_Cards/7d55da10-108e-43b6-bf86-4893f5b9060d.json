@@ -1,0 +1,170 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 50
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "7d55da10-108e-43b6-bf86-4893f5b9060d",
+  "Version" : "1.0.0",
+  "InternalName" : "Shovel",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon", "Tool" ],
+  "HiddenTags" : [ "Damage" ],
+  "ArtKey" : "ed94a515383225d4e861d07cebb57da1",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "9c8a407db3815b91a2d55a6fb5c9b575",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "9c8a407db3815b91a2d55a6fb5c9b575",
+      "Text" : "Shovel"
+    },
+    "Tooltips" : [ {
+      "Key" : "3c58650fc92c17423c9b573ed25fbeb9",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "f4087218682bc0dd35378bfadc465d14",
+      "Text" : "At the start of each day, get a random small item from any hero."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Shovel 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e179136b-ed6c-4548-bd9d-1eb977ed9a50",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "3c58650fc92c17423c9b573ed25fbeb9",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Shovel 2",
+      "InternalDescription" : "At the start of each day, get a random small item from any hero.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterQuery",
+              "Constraints" : {
+                "$type" : "ConstraintAnd",
+                "Constraints" : [ {
+                  "$type" : "ConstraintSize",
+                  "Sizes" : [ "Small" ],
+                  "IsNot" : false
+                }, {
+                  "$type" : "ConstraintHero",
+                  "Heroes" : [ "Vanessa", "Mak", "Jules", "Stelle", "Dooley", "Pygmalien" ],
+                  "IsNot" : false
+                } ]
+              }
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "10c55973-e372-4c84-aa8b-e7ef5e4855ec",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "f4087218682bc0dd35378bfadc465d14",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

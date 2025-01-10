@@ -1,0 +1,146 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 25
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 50
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 100
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "468a8300-4fb1-4ba6-bdf8-59794111c0d4",
+  "Version" : "1.0.0",
+  "InternalName" : "Spatula",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Weapon", "Tool" ],
+  "HiddenTags" : [ "Damage", "Active" ],
+  "ArtKey" : "78a87d9d38bbf404ebe428cc5f7c4476",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "1e62f25cb081c0e4c9cbcf8835e05c5d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef049944d227844355fd4b635bcf1877",
+      "Text" : "Deal {i} damage."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "1e62f25cb081c0e4c9cbcf8835e05c5d",
+      "Text" : "Spatula"
+    },
+    "Tooltips" : [ {
+      "Key" : "1e62f25cb081c0e4c9cbcf8835e05c5d",
+      "Text" : "Deal {ability.0} damage."
+    }, {
+      "Key" : "1e62f25cb081c0e4c9cbcf8835e05c5d",
+      "Text" : "When you use a food, give this +{ability.1} damage for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Spatula",
+      "InternalDescription" : "Deal {ability.0} damage.",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b3144312-1108-4e8f-9abe-54aebc8d6316",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "1e62f25cb081c0e4c9cbcf8835e05c5d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Spatula",
+      "InternalDescription" : "When you use a food, give this +{ability.1} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "ea89226e-3ec2-4883-a31a-8ef7891c6ba4",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1e62f25cb081c0e4c9cbcf8835e05c5d",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,126 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "Custom_0" : 10,
+        "Multicast" : 1,
+        "BuyPrice" : 10
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "Custom_0" : 15,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "Custom_0" : 20,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "ae41f574-fc9f-492a-8ae0-45853ab607a6",
+  "Version" : "1.0.0",
+  "InternalName" : "Critical Investments",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Crit" ],
+  "ArtKey" : "Icon_Skill_CriticalInvestments.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "9f25e36a13e6372842837e96960f6321",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "9f25e36a13e6372842837e96960f6321",
+      "Text" : "Critical Investments"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "9f25e36a13e6372842837e96960f6321",
+        "Text" : "Your Properties have +{aura.0}% Crit chance."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Property" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Critical Investments",
+      "InternalDescription" : "Your Properties have +{aura.0}% Crit chance.",
+      "MigrationData" : "bf254833-7335-4d37-b936-18cc5392dc67",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9f25e36a13e6372842837e96960f6321"
+    }
+  }
+}

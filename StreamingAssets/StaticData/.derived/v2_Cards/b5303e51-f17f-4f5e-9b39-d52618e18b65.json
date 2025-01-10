@@ -1,0 +1,169 @@
+{
+  "$type" : "TCardEncounterStep",
+  "IsReselectable" : false,
+  "Type" : "EncounterStep",
+  "Attributes" : null,
+  "Id" : "b5303e51-f17f-4f5e-9b39-d52618e18b65",
+  "Version" : "1.0.0",
+  "InternalName" : "No Pain No Gain",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Cooldown", "Heal" ],
+  "ArtKey" : "Reward_Naughty_D.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "dbfe1d3f9593b18016b8e88efc12558a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "dbfe1d3f9593b18016b8e88efc12558a",
+      "Text" : "No Pain No Gain"
+    },
+    "Description" : {
+      "Key" : "1764885437fab6fa1fcbbc3c22db3b5d",
+      "Text" : "Lose 10% Max Health. Your Weapons gain +{ability.0} damage and gain +{ability.1}% Crit Chance."
+    },
+    "FlavorText" : null,
+    "Tooltips" : [ ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSelected"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AbsolutePlayerHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "effect - No Pain No Gain",
+      "InternalDescription" : "Your Weapons gain +{ability.0} damage and gain +{ability.1}% Crit Chance.",
+      "MigrationData" : "5d4514ff-32a6-4668-9544-aca3bc2c32b3",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "4fd2220323a6518e9924d727b7662d68"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSelected"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AbsolutePlayerHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "No Pain No Gain 2",
+      "InternalDescription" : "",
+      "MigrationData" : "f1c76258-ed87-41de-a30e-ba6a76b8c8cc",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "7377ac7b3730cbe27f8a49e19f7832de"
+    },
+    "2" : {
+      "Id" : "2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSelected"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthMax",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerAbsolute",
+            "TargetMode" : "Player",
+            "Conditions" : null
+          },
+          "AttributeType" : "HealthMax",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.1
+          }
+        },
+        "Operation" : "Subtract",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "No Pain No Gain 3",
+      "InternalDescription" : "Lose {ability.2.mod|%} Max Health.",
+      "MigrationData" : "dfc43f7c-6c59-4508-8430-9d4a879bbd8d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9601aba00d252fed5962620358c2b4b5"
+    }
+  },
+  "Auras" : { }
+}

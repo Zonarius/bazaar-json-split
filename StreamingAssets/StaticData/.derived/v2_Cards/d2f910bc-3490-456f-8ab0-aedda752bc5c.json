@@ -1,0 +1,109 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "HasteAmount" : 1000,
+        "HasteTargets" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "HasteAmount" : 2000,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "d2f910bc-3490-456f-8ab0-aedda752bc5c",
+  "Version" : "1.0.0",
+  "InternalName" : "Crashing Waves",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon", "Aquatic" ],
+  "HiddenTags" : [ "Haste" ],
+  "ArtKey" : "Icon_Skill_VAN_CrashingWaves",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "a442d0b37ca5ae9a717d8743f3ec75d5",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "a442d0b37ca5ae9a717d8743f3ec75d5",
+      "Text" : "Crashing Waves"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "a442d0b37ca5ae9a717d8743f3ec75d5",
+        "Text" : "When you use an Aquatic item, Haste a weapon for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Aquatic" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Crashing Waves",
+      "InternalDescription" : "When you use an Aquatic item, Haste a weapon for {ability.0} second(s).",
+      "MigrationData" : "923eb4e7-bbb6-406b-b664-2c7098ec1bd5",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a442d0b37ca5ae9a717d8743f3ec75d5"
+    }
+  },
+  "Auras" : { }
+}

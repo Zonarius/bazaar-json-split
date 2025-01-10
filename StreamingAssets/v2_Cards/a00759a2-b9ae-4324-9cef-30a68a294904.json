@@ -1,0 +1,174 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 20000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 25,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "JoyApplyAmount" : 25,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "a00759a2-b9ae-4324-9cef-30a68a294904",
+  "Version" : "1.0.0",
+  "InternalName" : "Giant Sub",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Active", "NonWeapon" ],
+  "ArtKey" : "d5445c6c58698694cb6b320004e619a0",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "201bd313fb7fc1a320e214957ee4e0f1",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {i} Joy."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "201bd313fb7fc1a320e214957ee4e0f1",
+      "Text" : "Giant Sub"
+    },
+    "Tooltips" : [ {
+      "Key" : "f5ead5deaff41f5e04dc146e8e341854",
+      "Text" : "Gain {ability.0} Joy."
+    }, {
+      "Key" : "1b739c79cd04d8a0be8c2dc639bb4265",
+      "Text" : "When you use an adjacent tool, charge this {ability.1} second(s)."
+    }, {
+      "Key" : "7bc6ac1ec28610ed5d1e8011bb29c0ae",
+      "Text" : "When you use another food, give this +{ability.2} joy for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Giant sub 25",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f813767d-72eb-454f-88c8-f37af8c92e71",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "f5ead5deaff41f5e04dc146e8e341854",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Giant Sub 2",
+      "InternalDescription" : "When you use an adjacent tool, charge this {ability.1} second(s).",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c59625c8-ff39-4cc0-a1ed-dd9b7c5cebd7",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1b739c79cd04d8a0be8c2dc639bb4265",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Tool" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Giant Sub 3",
+      "InternalDescription" : "When you use another food, give this +{ability.2} joy for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 25.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c41e715f-99b9-4301-bad4-8a363ed91aaf",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "7bc6ac1ec28610ed5d1e8011bb29c0ae",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

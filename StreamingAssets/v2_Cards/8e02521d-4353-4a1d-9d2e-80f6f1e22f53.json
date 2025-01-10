@@ -1,0 +1,95 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : { },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "8e02521d-4353-4a1d-9d2e-80f6f1e22f53",
+  "Version" : "1.0.0",
+  "InternalName" : "Purifying Flame",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "BurnReference", "RegenReference" ],
+  "ArtKey" : "Icon_Skill_Placeholder.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "0c7aff3d7261271f090e1c3ab924a96a",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "0c7aff3d7261271f090e1c3ab924a96a",
+      "Text" : "Purifying Flame"
+    },
+    "Tooltips" : [ {
+      "Key" : "0c7aff3d7261271f090e1c3ab924a96a",
+      "Text" : "When you gain Regeneration, increase the burn of one of your burn items by {ability.0}."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Purifying Flame",
+      "InternalDescription" : "When you gain Regeneration, increase the burn of one of your burn items by {ability.0}.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Burn" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "2580f167-9f2f-4983-b61b-1b0309ff4aa8",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "0c7aff3d7261271f090e1c3ab924a96a",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "HealthRegen",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

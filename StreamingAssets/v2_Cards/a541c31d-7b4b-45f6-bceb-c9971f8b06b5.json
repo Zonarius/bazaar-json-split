@@ -1,0 +1,158 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "a541c31d-7b4b-45f6-bceb-c9971f8b06b5",
+  "Version" : "1.0.0",
+  "InternalName" : "Cooling Fan",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Haste" ],
+  "ArtKey" : "8569fa39899c79d438f5715b0dea33c8",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "f7595e50113707ed3754ce8488bdbc11",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "8eee7b2744ef70de869a1b59b93f906b",
+      "Text" : "Give the Core +{i}% Crit Chance for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "f7595e50113707ed3754ce8488bdbc11",
+      "Text" : "Cooling Fan"
+    },
+    "Tooltips" : [ {
+      "Key" : "e0ca604fc838c09206a4b9b47cd236e2",
+      "Text" : "Give the Core +{ability.0}% Crit Chance for this fight."
+    }, {
+      "Key" : "52449846d363cbff12125a4c3f3898c3",
+      "Text" : "While you have Burn, reduce this item's cooldown by 50%."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Cooling Fans 1",
+      "InternalDescription" : "Give the Core +{ability.0}% Crit Chance for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "df7f0336-03fc-418d-9c33-82873f5d9f5d",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "e0ca604fc838c09206a4b9b47cd236e2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Cooling Fans 2",
+      "InternalDescription" : "While you have Burn, reduce this item's cooldown by 50%.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Self",
+            "Conditions" : null
+          },
+          "AttributeType" : "Burn",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "06e4aa44-7753-4412-93ac-700b84c908b0",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "TranslationKey" : "52449846d363cbff12125a4c3f3898c3",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

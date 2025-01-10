@@ -1,0 +1,148 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "HasteAmount" : 3000
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "HasteAmount" : 4000
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "552247e1-74f8-4414-88bb-1b868f3f296d",
+  "Version" : "1.0.0",
+  "InternalName" : "Solar Farm",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Haste" ],
+  "ArtKey" : "fd2c794b86d373f4199640af9a5507d3",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "0e6f70304077b8095f110ad66ed354fd",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6ee456a67e33ab999993b891ada6580d",
+      "Text" : "Give your other items Haste for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "0e6f70304077b8095f110ad66ed354fd",
+      "Text" : "Solar Farm"
+    },
+    "Tooltips" : [ {
+      "Key" : "6fff50f62a9c98be4db50bc4bcc22a5e",
+      "Text" : "Give your other items Haste for {ability.0} seconds."
+    }, {
+      "Key" : "8cc87467fda76c2e565df56bfe2de402",
+      "Text" : "While your enemy has Burn, reduce this item's cooldown by 50%."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Solar Panels",
+      "InternalDescription" : "Give your other items Haste for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AbsolutePlayerHand",
+          "ExcludeSelf" : true,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "439b5da1-8b39-4123-9090-0564a7d01d31",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "6fff50f62a9c98be4db50bc4bcc22a5e",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Solar Farm 2",
+      "InternalDescription" : "While your enemy has Burn, reduce this item's cooldown by 50%.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Opponent",
+            "Conditions" : null
+          },
+          "AttributeType" : "Burn",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a7efb7e4-236e-403c-b5df-c17f6987e435",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "TranslationKey" : "8cc87467fda76c2e565df56bfe2de402",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

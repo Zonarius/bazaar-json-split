@@ -1,0 +1,160 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "783cda9d-1550-42d5-9651-51883da5ad66",
+  "Version" : "1.0.0",
+  "InternalName" : "Cargo Shorts",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "HealthReference", "NonWeapon", "DamageReference", "EconomyReference" ],
+  "ArtKey" : "b499935ea325f3546be31807a6662c38",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "fd67573e5558c787c819517be80dc453",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "fd67573e5558c787c819517be80dc453",
+      "Text" : "Cargo Shorts"
+    },
+    "Tooltips" : [ {
+      "Key" : "8c645972a301e563c75f2629d5bab7e1",
+      "Text" : "At the start of each day, get 2 Chocolate Bars or Spare Change."
+    }, {
+      "Key" : "f169bab971ede75839f0855bf14fbaa8",
+      "Text" : "Your Weapons have +{aura.0} damage for each small item you have."
+    } ]
+  },
+  "Abilities" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Cargo Shorts 2",
+      "InternalDescription" : "At the start of each day, get 2 Chocolate Bars or Spare Change.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "1a3d4cde-333c-4936-b147-263d73f6d200", "f212afe2-08d1-40e3-978b-762d345bc7e5" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 2.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "d976dfe7-4282-4042-8e7a-20d920473373",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "8c645972a301e563c75f2629d5bab7e1",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Cargo Shorts 1",
+      "InternalDescription" : "Your Weapons have +{aura.0} damage for each small item you have.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Small" ],
+              "IsNot" : false
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 2.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "d1ddb1af-48ae-4a08-9667-1aac849e6366",
+      "Prerequisites" : null,
+      "TranslationKey" : "f169bab971ede75839f0855bf14fbaa8",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

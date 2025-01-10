@@ -1,0 +1,153 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Bronze",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1,
+        "FreezeAmount" : 4000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "FreezeAmount" : 6000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "FreezeAmount" : 8000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "FreezeAmount" : 10000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "1e75f81b-f982-4642-b33d-497336784f9e",
+  "Version" : "1.0.0",
+  "InternalName" : "Stunning Hit",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley", "Vanessa", "Mak", "Pygmalien", "Jules", "Stelle" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "CritReference", "Freeze" ],
+  "ArtKey" : "Icon_Skill_StunningHit.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "2c607357d4cfdee4765ca1ba4e0c16d3",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "2c607357d4cfdee4765ca1ba4e0c16d3",
+      "Text" : "Stunning Hit"
+    },
+    "Tooltips" : [ {
+      "Key" : "65e081ab3444cd69ce5eb7936e715cd7",
+      "Text" : "The first time you Crit each fight, Freeze a random item for {ability.0} seconds."
+    }, {
+      "Key" : "8c7028425687161578963aa496f40c4b",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Stunning Hit 1",
+      "InternalDescription" : "The first time you Crit each fight, Freeze a random item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "44d206aa-2862-488a-a51e-77ea89253f0e",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "65e081ab3444cd69ce5eb7936e715cd7",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardCritted",
+        "Subject" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Stunning Hit 2 - Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Counter",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "02dad8eb-59d1-4134-9d32-c7683113f81a",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "8c7028425687161578963aa496f40c4b",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardCritted",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

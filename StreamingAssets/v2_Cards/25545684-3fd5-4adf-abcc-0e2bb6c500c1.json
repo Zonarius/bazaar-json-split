@@ -1,0 +1,164 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ChargeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ChargeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "25545684-3fd5-4adf-abcc-0e2bb6c500c1",
+  "Version" : "1.0.0",
+  "InternalName" : "Pendulum",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Active", "Cooldown", "Charge" ],
+  "ArtKey" : "5f13d12ffd788cb40a639aabc9817a4e",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "167c5afc9c99284c4d31b0c225665979",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "647c13eca70e225e64eee674c6a8d210",
+      "Text" : "Gain {i} Speed for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "167c5afc9c99284c4d31b0c225665979",
+      "Text" : "Pendulum"
+    },
+    "Tooltips" : [ {
+      "Key" : "debca155285356174e323dea123bea60",
+      "Text" : "Gain {ability.0} Speed for this fight."
+    }, {
+      "Key" : "b33b8d191b46bbe60e90c36d2d9b0ba0",
+      "Text" : "When you use an adjacent item, charge this {ability.1} second."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Pendulum 1",
+      "InternalDescription" : "Gain {ability.0} Speed for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CritChance",
+            "ComparisonOperator" : "GreaterThanOrEqual",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "54ca4d3b-974c-4533-bda8-0e4f86acc281",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "debca155285356174e323dea123bea60",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Eye of the Colossus - 2",
+      "InternalDescription" : "When you use an adjacent item, charge this {ability.1} second.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "8089352a-ac42-4035-a39f-460231d31e69",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "b33b8d191b46bbe60e90c36d2d9b0ba0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

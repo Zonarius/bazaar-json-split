@@ -1,0 +1,143 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "JoyApplyAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "JoyApplyAmount" : 50
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "618271c5-5721-40ac-b1c7-43aa06a02d07",
+  "Version" : "1.0.0",
+  "InternalName" : "Honeycomb",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Active", "NonWeapon" ],
+  "ArtKey" : "c19c19bf4ada41b488da85d3a37a1a70",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "2815e498b71e465c80e19de1eb264619",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {i} Joy."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "2815e498b71e465c80e19de1eb264619",
+      "Text" : "Honeycomb"
+    },
+    "Tooltips" : [ {
+      "Key" : "5bcda4f8d754e6bc113d92ddb9bfebd9",
+      "Text" : "Gain {ability.0} Joy."
+    }, {
+      "Key" : "2815e498b71e465c80e19de1eb264619",
+      "Text" : "Give adjacent Food +{ability.1} Joy."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Joy10",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5c0aaff7-fcb1-4d34-8e7a-fb6f82bf5147",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5bcda4f8d754e6bc113d92ddb9bfebd9",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Honeycomb",
+      "InternalDescription" : "Give adjacent Food +{ability.1} Joy.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "c8f4f2dc-d627-44fd-abb3-e2c07cdb8fb2",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "2815e498b71e465c80e19de1eb264619",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

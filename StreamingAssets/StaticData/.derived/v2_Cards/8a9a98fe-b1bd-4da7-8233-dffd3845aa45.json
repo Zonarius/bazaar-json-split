@@ -1,0 +1,104 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "HasteAmount" : 3000,
+        "HasteTargets" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "HasteAmount" : 4000,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "8a9a98fe-b1bd-4da7-8233-dffd3845aa45",
+  "Version" : "1.0.0",
+  "InternalName" : "Dumpster Diving",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Potion" ],
+  "HiddenTags" : [ "Haste", "AmmoReference" ],
+  "ArtKey" : "Icon_Skill_Placeholder.png",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "98a76caa7e435b2b340cd53624a1aa31",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "98a76caa7e435b2b340cd53624a1aa31",
+      "Text" : "Dumpster Diving"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "98a76caa7e435b2b340cd53624a1aa31",
+        "Text" : "When you reload a potion, give an item haste for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Potion" ],
+            "Operator" : "Any"
+          }
+        },
+        "AttributeChanged" : "AmmoMax",
+        "ChangeType" : "Gain"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Lowest",
+      "InternalName" : "Dumpster Diving",
+      "InternalDescription" : "When you reload a potion, give an item haste for {ability.0} second(s).",
+      "MigrationData" : "52ed5922-3fda-4e73-9fe5-0d983b22933b",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "98a76caa7e435b2b340cd53624a1aa31"
+    }
+  },
+  "Auras" : { }
+}

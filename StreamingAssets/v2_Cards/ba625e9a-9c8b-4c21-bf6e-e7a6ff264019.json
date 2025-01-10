@@ -1,0 +1,130 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 10000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "FreezeAmount" : 1000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "FreezeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "ba625e9a-9c8b-4c21-bf6e-e7a6ff264019",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice Cubes",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Freeze" ],
+  "ArtKey" : "6ac7abc91ba391f4189cf17a37e2d88f",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "5a82408639272193a2b2159fd6643f0b",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "89dc909c793eb85b206671d450074f45",
+      "Text" : "freeze an item for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "5a82408639272193a2b2159fd6643f0b",
+      "Text" : "Ice Cubes"
+    },
+    "Tooltips" : [ {
+      "Key" : "5a82408639272193a2b2159fd6643f0b",
+      "Text" : "freeze an item for {ability.0} seconds."
+    }, {
+      "Key" : "5a82408639272193a2b2159fd6643f0b",
+      "Text" : "When you use an adjacent food, freeze an item for {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Ice Cubes",
+      "InternalDescription" : "freeze an item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "3bde9f51-221e-49ed-90d1-63010371a72d",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5a82408639272193a2b2159fd6643f0b",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Ice Cubes",
+      "InternalDescription" : "When you use an adjacent food, freeze an item for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c01892a4-ac37-402f-a948-6a11b1f9ed04",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "5a82408639272193a2b2159fd6643f0b",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

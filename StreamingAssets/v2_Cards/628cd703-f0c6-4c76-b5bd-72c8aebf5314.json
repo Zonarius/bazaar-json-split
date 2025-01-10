@@ -1,0 +1,142 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "628cd703-f0c6-4c76-b5bd-72c8aebf5314",
+  "Version" : "1.0.0",
+  "InternalName" : "Bellelista",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Friend", "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "HasteReference", "Multicast" ],
+  "ArtKey" : "58068884f80c3e644b0a1459187af16d",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "ef01a8de42552d760528df66e864d9d1",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef049944d227844355fd4b635bcf1877",
+      "Text" : "Deal {i} damage."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "ef01a8de42552d760528df66e864d9d1",
+      "Text" : "Bellelista"
+    },
+    "Tooltips" : [ {
+      "Key" : "ac0bf26c7906a661a6b1ac2b778df1c4",
+      "Text" : "Deal {ability.0} damage."
+    }, {
+      "Key" : "1e28737efff81bd95f11ba802c62a374",
+      "Text" : "When this gains Haste, give this +{ability.1} damage for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Bellelista 1",
+      "InternalDescription" : "Deal {ability.0} damage.",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e91e2b88-d469-40f7-b180-e18ce39ac3cf",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "ac0bf26c7906a661a6b1ac2b778df1c4",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Bellelista 2",
+      "InternalDescription" : "When this gains Haste, give this +{ability.1} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 15.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "fd884045-d446-4291-989d-693f006336c3",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1e28737efff81bd95f11ba802c62a374",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

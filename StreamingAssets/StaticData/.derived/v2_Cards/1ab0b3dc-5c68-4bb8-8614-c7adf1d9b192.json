@@ -1,0 +1,136 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BuyPrice" : 10,
+        "Custom_0" : 5
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 10
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 15
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "1ab0b3dc-5c68-4bb8-8614-c7adf1d9b192",
+  "Version" : "1.0.0",
+  "InternalName" : "Balanced Specialist",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Vanessa", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Crit" ],
+  "ArtKey" : "Icon_Skill_BalanceSpecialist.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "d546bd60bb96623f405081c728caa518",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "d546bd60bb96623f405081c728caa518",
+      "Text" : "Balanced Specialist"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "d546bd60bb96623f405081c728caa518",
+        "Text" : "Your items have +{aura.0}% crit chance if you have 2 or more medium items."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Medium" ],
+            "IsNot" : false
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 2
+      } ],
+      "InternalName" : "Balanced Specialist",
+      "InternalDescription" : "Your items have +{aura.0}% crit chance if you have 2 or more medium items.",
+      "MigrationData" : "4b5705bf-afef-4a5c-ad13-2b1b6bbb0a94",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d546bd60bb96623f405081c728caa518"
+    }
+  }
+}

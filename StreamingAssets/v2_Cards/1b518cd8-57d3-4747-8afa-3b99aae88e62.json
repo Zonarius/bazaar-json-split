@@ -1,0 +1,156 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "ChargeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ChargeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "1b518cd8-57d3-4747-8afa-3b99aae88e62",
+  "Version" : "1.0.0",
+  "InternalName" : "Walter Cooler",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Health", "Charge" ],
+  "ArtKey" : "6566f3ae424074c4baeedec10d2346be",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "e8a9f7bcf368d4ba4cf62b738de15493",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "14b94c0e07531fb1e8635bd7635d865b",
+      "Text" : "Permanently gain {i} Max Health."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "e8a9f7bcf368d4ba4cf62b738de15493",
+      "Text" : "Walter Cooler"
+    },
+    "Tooltips" : [ {
+      "Key" : "8d6a02b8b6458013559970c47ff1efbe",
+      "Text" : "Permanently gain {ability.0} Max Health."
+    }, {
+      "Key" : "7eac3b064039df39b9b8ab118be95d89",
+      "Text" : "When you use an adjacent friend, charge this {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Walter Cooler 1",
+      "InternalDescription" : "Permanently gain {ability.0} Max Health.",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthMax",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5c9b2233-f67a-42dc-a404-0da0f0195067",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "8d6a02b8b6458013559970c47ff1efbe",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Walter Cooler 2",
+      "InternalDescription" : "When you use an adjacent friend, charge this {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f2082d72-d127-40ab-b697-66f3cecb7b26",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "7eac3b064039df39b9b8ab118be95d89",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Friend" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

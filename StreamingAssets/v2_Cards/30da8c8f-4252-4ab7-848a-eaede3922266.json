@@ -1,0 +1,159 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "JoyApplyAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "JoyApplyAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "JoyApplyAmount" : 50
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "30da8c8f-4252-4ab7-848a-eaede3922266",
+  "Version" : "1.0.0",
+  "InternalName" : "Foraged Mushrooms",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Joy" ],
+  "ArtKey" : "fe5a83c34f0e59941877ef2206d21f2f",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "0edc51a3ca330355e01eb24e78c50cf6",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {i} Joy."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "0edc51a3ca330355e01eb24e78c50cf6",
+      "Text" : "Foraged Mushrooms"
+    },
+    "Tooltips" : [ {
+      "Key" : "67e02fee174b49a9e696ba0f3183a0ed",
+      "Text" : "Gain {ability.0} Joy."
+    }, {
+      "Key" : "0edc51a3ca330355e01eb24e78c50cf6",
+      "Text" : "When you buy a Food, give this +{ability.1} Joy."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Joy Active 5 Active",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "6707d7bd-a226-4c21-b9d3-2fd5327b1f7e",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "67e02fee174b49a9e696ba0f3183a0ed",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Foraged Mushrooms",
+      "InternalDescription" : "When you buy a Food, give this +{ability.1} Joy.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4a056245-478c-4d08-98db-0f5305607b13",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "0edc51a3ca330355e01eb24e78c50cf6",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Joy" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Food" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

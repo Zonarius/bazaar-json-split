@@ -1,0 +1,198 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "42f78ed2-0141-47f3-9bcd-71b433b1273b",
+  "Version" : "1.0.0",
+  "InternalName" : "Ambergris",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Aquatic" ],
+  "HiddenTags" : [ "EconomyReference", "NonWeapon", "Value", "Heal" ],
+  "ArtKey" : "fb9e16748f4a80c4c8abb440aa92714c",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "8ea8674ccf69678f5908b48052d354b0",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "16629416dcfd848b5bc9704463e22d62",
+      "Text" : "Heal equal to {i-%} of this item's value."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "8ea8674ccf69678f5908b48052d354b0",
+      "Text" : "Ambergris"
+    },
+    "Tooltips" : [ {
+      "Key" : "b997d6314c409cd6eb91d448264d4bde",
+      "Text" : "Heal equal to {ability.0.mod|%} of this item's value."
+    }, {
+      "Key" : "9531e056d4eccdb1aa635c49f03ffa55",
+      "Text" : "When you buy another Aquatic item, give this +{ability.1} Value."
+    }, {
+      "Key" : "f021c9d6913597df73f6fd8b9901b6e3",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Ambergris 1",
+      "InternalDescription" : "Heal equal to {ability.0.mod|%} of this item's value.",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "254f9309-22a4-4027-8af0-c9b491a784f5",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "b997d6314c409cd6eb91d448264d4bde",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Ambergris 2",
+      "InternalDescription" : "When you buy another Aquatic item, give this +{ability.1} Value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c4b5f5b7-8571-4039-9ae7-6b0cf0239f69",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "9531e056d4eccdb1aa635c49f03ffa55",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Aquatic" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Ambergris 2 Self Trigger Fix",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Subtract",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "cccdc1f4-066e-457e-8219-09386d151e40",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "f021c9d6913597df73f6fd8b9901b6e3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

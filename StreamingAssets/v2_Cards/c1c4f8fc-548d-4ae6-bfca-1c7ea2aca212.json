@@ -1,0 +1,141 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 6
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 9
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "c1c4f8fc-548d-4ae6-bfca-1c7ea2aca212",
+  "Version" : "1.0.0",
+  "InternalName" : "Omega Ray",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Burn", "BurnReference", "Active" ],
+  "ArtKey" : "2dd8bd383c74dc04ba4fd9a310466356",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "aec84533db7ac284d1db440533b98283",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "de834839a9cb3ef35867f94c3e63f10b",
+      "Text" : "Burn {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "aec84533db7ac284d1db440533b98283",
+      "Text" : "Omega Ray"
+    },
+    "Tooltips" : [ {
+      "Key" : "350a84c2a1bb93a46bf471b34b3a9127",
+      "Text" : "Burn {ability.0}"
+    }, {
+      "Key" : "8a862b5ee09cb8117b1b5fa999dc6e6f",
+      "Text" : "When you use the Core, give your items +{ability.1} Burn for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Omega Ray 1",
+      "InternalDescription" : "Burn {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e82aeb7d-16c8-4498-828a-4b9a7cac3fab",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "350a84c2a1bb93a46bf471b34b3a9127",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Omega Ray 2",
+      "InternalDescription" : "When you use the Core, give your items +{ability.1} Burn for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Burn" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "684039c2-0340-41eb-b68c-558a81314a2b",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "8a862b5ee09cb8117b1b5fa999dc6e6f",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,151 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "7f706346-b364-4791-a104-ed6fe03e87e1",
+  "Version" : "1.0.0",
+  "InternalName" : "Broken Shackles",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active" ],
+  "ArtKey" : "f50a353ee24732341b23c8cc4372da4f",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "4634a18c0f13637304665c7546ff4f42",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "eae96985a52b4c3752d715aa009ad91e",
+      "Text" : "Give your weapons +{i} damage for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "4634a18c0f13637304665c7546ff4f42",
+      "Text" : "Broken Shackles"
+    },
+    "Tooltips" : [ {
+      "Key" : "1717c9e9e2927d73a9d86cb2bb3498db",
+      "Text" : "Give your weapons +{ability.0} damage for this fight."
+    }, {
+      "Key" : "97a09dd30bb948284ed3806c0adad46a",
+      "Text" : "This charges 10% faster for each weapon you have."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Broken Shackles - 1",
+      "InternalDescription" : "Give your weapons +{ability.0} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "80b98a5a-81f3-49a8-9cf5-638c7d5d5f46",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "1717c9e9e2927d73a9d86cb2bb3498db",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Broken Shackles - 3",
+      "InternalDescription" : "This charges 10% faster for each weapon you have.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 10.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b09e573f-cadc-417b-ac32-53de6f4f0239",
+      "Prerequisites" : null,
+      "TranslationKey" : "97a09dd30bb948284ed3806c0adad46a",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

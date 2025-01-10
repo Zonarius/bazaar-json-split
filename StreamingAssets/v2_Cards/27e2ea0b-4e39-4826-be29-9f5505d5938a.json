@@ -1,0 +1,140 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 3000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "27e2ea0b-4e39-4826-be29-9f5505d5938a",
+  "Version" : "1.0.0",
+  "InternalName" : "Wrench",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Stelle" ],
+  "Tags" : [ "Weapon", "Tool" ],
+  "HiddenTags" : [ "Damage", "Active" ],
+  "ArtKey" : "05b01f4831f8689459ac4b9c863d531a",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Stelle_Core",
+  "TranslationKey" : "d0e410ca11db8103b87c4f66e2659067",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "d0e410ca11db8103b87c4f66e2659067",
+      "Text" : "Wrench"
+    },
+    "Tooltips" : [ {
+      "Key" : "df4deb2bd5e8a36dfc66eb5bae98e5ea",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "5c4c334140219eba63b9c2cc1e2032d9",
+      "Text" : "At the start of each day, upgrade a random tool."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Wrench 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b415cc2d-46aa-4cba-ad66-54c6a73f8d84",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "df4deb2bd5e8a36dfc66eb5bae98e5ea",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Wrench 2",
+      "InternalDescription" : "At the start of each day, upgrade a random tool.",
+      "Action" : {
+        "$type" : "TActionCardUpgrade",
+        "UpgradeToTier" : null,
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTier",
+              "Tiers" : [ "Diamond" ],
+              "IsNot" : true
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Tool" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "7455b118-d039-4875-a8cc-8979ca79399c",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5c4c334140219eba63b9c2cc1e2032d9",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

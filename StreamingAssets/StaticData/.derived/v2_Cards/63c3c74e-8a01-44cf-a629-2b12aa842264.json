@@ -1,0 +1,111 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 1000
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 2000
+      },
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "63c3c74e-8a01-44cf-a629-2b12aa842264",
+  "Version" : "1.0.0",
+  "InternalName" : "Quick Fix",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Jules", "Stelle", "Mak", "Dooley", "Vanessa", "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Cooldown" ],
+  "ArtKey" : "Icon_Skill_QuickFix.png",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "195bcac20351723f06925220fa5fb247",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "195bcac20351723f06925220fa5fb247",
+      "Text" : "Quick Fix"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "195bcac20351723f06925220fa5fb247",
+        "Text" : "Your Non-Weapon items with cooldowns greater than 10 seconds have their cooldowns reduced by 1 second(s)."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "195bcac20351723f06925220fa5fb248",
+        "Text" : "Your Non-Weapon items with cooldowns greater than 10 seconds have their cooldowns reduced by 2 second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : { },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Subtract",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "None"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 10000.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Quick Fix",
+      "InternalDescription" : "",
+      "MigrationData" : "36410add-d0de-4618-a099-ceb32a87c589",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "195bcac20351723f06925220fa5fb247"
+    }
+  }
+}

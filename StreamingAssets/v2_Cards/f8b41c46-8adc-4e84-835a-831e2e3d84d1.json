@@ -1,0 +1,161 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "HealAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "HealAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "HealAmount" : 60
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HealAmount" : 100
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "f8b41c46-8adc-4e84-835a-831e2e3d84d1",
+  "Version" : "1.0.0",
+  "InternalName" : "Goggles",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Stelle" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Shield", "Crit", "Active", "NonWeapon", "HasteReference" ],
+  "ArtKey" : "783c219b4d7f3db4ab70d33ec2e9c1d2",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Stelle_Core",
+  "TranslationKey" : "63690a44b65fab2a188ed872ba099576",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "78597be87e9163f775f3b7d50cb293f2",
+      "Text" : "Heal {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "63690a44b65fab2a188ed872ba099576",
+      "Text" : "Goggles"
+    },
+    "Tooltips" : [ {
+      "Key" : "c7626904944d016b9d06a91fafef012d",
+      "Text" : "Heal {ability.0}"
+    }, {
+      "Key" : "1c1b0828cc4f03b1b54f1d7d06eb053e",
+      "Text" : "When this gains Haste, give your Weapons +{ability.1}% Crit chance this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Goggles 1",
+      "InternalDescription" : "Heal {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "68c3053c-3252-4cd8-b48a-e6a35c878a85",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "c7626904944d016b9d06a91fafef012d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Goggles 2",
+      "InternalDescription" : "When this gains Haste, give your Weapons +{ability.1}% Crit chance this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "d193ea97-d664-4750-8d21-de45e4782d33",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "1c1b0828cc4f03b1b54f1d7d06eb053e",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

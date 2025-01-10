@@ -1,0 +1,167 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "JoyApplyAmount" : 30
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "JoyApplyAmount" : 50
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "90acad0b-2154-4af1-a448-5f8dc304612e",
+  "Version" : "1.0.0",
+  "InternalName" : "Farmer's Market",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Gold" ],
+  "ArtKey" : "cdd198d533c835848bc25e43f4f151ac",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "6bec117037de1d87c45da7f596fada90",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7b4e2ca52964381d5c7afba0e21ad97a",
+      "Text" : "Gain {i} Joy."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "6bec117037de1d87c45da7f596fada90",
+      "Text" : "Farmer's Market"
+    },
+    "Tooltips" : [ {
+      "Key" : "1e4c15aad0fb0b2321db87c5b267568d",
+      "Text" : "Gain {ability.0} Joy."
+    }, {
+      "Key" : "5e1163588f37b9d7364b825a01f34a5e",
+      "Text" : "When you sell a food, give this +{ability.2} Joy."
+    }, {
+      "Key" : "985171cc72ec4cb5a2288889c3df1e0f",
+      "Text" : "Your food have +{aura.1} sell value."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Farmer's Market 1",
+      "InternalDescription" : "Gain {ability.0} Joy.",
+      "Action" : {
+        "$type" : "TActionPlayerJoyApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b732dca7-fbe0-478a-b9da-5e7f281b6f73",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "1e4c15aad0fb0b2321db87c5b267568d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Farmer's Market 3",
+      "InternalDescription" : "When you sell a food, give this +{ability.2} Joy.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 15.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "ead01bd3-b193-4387-b7a5-d7fef442ef93",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "5e1163588f37b9d7364b825a01f34a5e",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Farmer's Market 2",
+      "InternalDescription" : "Your food have +{aura.1} sell value.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "b6841ae2-f958-4675-8778-ffa24c05a61c",
+      "Prerequisites" : null,
+      "TranslationKey" : "985171cc72ec4cb5a2288889c3df1e0f",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

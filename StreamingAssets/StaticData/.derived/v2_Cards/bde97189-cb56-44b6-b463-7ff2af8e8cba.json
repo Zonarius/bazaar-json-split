@@ -1,0 +1,94 @@
+{
+  "$type" : "TCardEncounterStep",
+  "IsReselectable" : false,
+  "Type" : "EncounterStep",
+  "Attributes" : null,
+  "Id" : "bde97189-cb56-44b6-b463-7ff2af8e8cba",
+  "Version" : "1.0.0",
+  "InternalName" : "Barrier Protocol",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Cooldown", "Heal" ],
+  "ArtKey" : "Reward_Armor_D.png",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "c19c6bec481e8c69ab1e74a008f67fd7",
+      "Text" : "Barrier Protocol"
+    },
+    "Description" : {
+      "Key" : "8c3dac512952c9d2c5bb131bca80220b",
+      "Text" : "Your Core gains {ability.0.mod} Shield for each non-Weapon you have (including stash). [{ability.0}]"
+    },
+    "FlavorText" : null,
+    "Tooltips" : [ ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSelected"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "AbsolutePlayerHandAndStash",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "None"
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 3.0
+          }
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AbsolutePlayerHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Shield" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Core" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "InternalName" : "Barrier Protocol",
+      "InternalDescription" : "Give the Core +{ability.0} damage for each Weapon you have.",
+      "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+    }
+  },
+  "Auras" : { }
+}

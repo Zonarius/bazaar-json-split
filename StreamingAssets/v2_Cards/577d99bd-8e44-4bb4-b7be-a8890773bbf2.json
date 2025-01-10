@@ -1,0 +1,139 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 3000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "AmmoMax" : 2,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "577d99bd-8e44-4bb4-b7be-a8890773bbf2",
+  "Version" : "1.0.0",
+  "InternalName" : "Universal Sauce",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Active", "NonWeapon" ],
+  "ArtKey" : "f1248370a8e06d647986b2dbd82538c0",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "af2a2ac5f825532ba876a2ed356657a3",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "19069ba77393876fe184fa7ce9e72396",
+      "Text" : "Give a random food +{i} joy for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "af2a2ac5f825532ba876a2ed356657a3",
+      "Text" : "Universal Sauce"
+    },
+    "Tooltips" : [ {
+      "Key" : "d5dd5331c1cb3cddd6c391664543d1b0",
+      "Text" : "Give a random food +{ability.0} joy for this fight."
+    }, {
+      "Key" : "d05eb6e2a714ec9225a9708999ec05eb",
+      "Text" : "Adjacent food have +{aura.1} Crit Chance."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Universal Sauce 1",
+      "InternalDescription" : "Give a random food +{ability.0} joy for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 15.0
+        },
+        "AttributeType" : "JoyApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "11bd9103-da25-4db1-a978-173bce5ec3bf",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "d5dd5331c1cb3cddd6c391664543d1b0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Universal Sauce 2",
+      "InternalDescription" : "Adjacent food have +{aura.1} Crit Chance.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 4.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "6c9c86d6-530f-4652-9619-8af107d7587b",
+      "Prerequisites" : null,
+      "TranslationKey" : "d05eb6e2a714ec9225a9708999ec05eb",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

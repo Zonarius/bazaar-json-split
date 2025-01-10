@@ -1,0 +1,140 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "FreezeAmount" : 1000,
+        "FreezeTargets" : 1,
+        "PoisonApplyAmount" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "FreezeAmount" : 2000,
+        "PoisonApplyAmount" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "FreezeAmount" : 3000,
+        "PoisonApplyAmount" : 3
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "1fbbefea-2da0-46a5-b60d-dad9478ade86",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice 9000",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Freeze", "Poison" ],
+  "ArtKey" : "21c32243e0f50424ebeae4ea7404fc30",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "3dd359e1e59af4a0642a6074574af268",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "f31928a944342ba86b044e2ece7229f0",
+      "Text" : "Freeze an item for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "3dd359e1e59af4a0642a6074574af268",
+      "Text" : "Ice 9000"
+    },
+    "Tooltips" : [ {
+      "Key" : "aa50e3937aa4a6a5f40e7f11a3368376",
+      "Text" : "Freeze an item for {ability.0} seconds."
+    }, {
+      "Key" : "53f141377eacbe415e108a4f328c61e0",
+      "Text" : "When you Freeze, Poison {ability.1}"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Ice 9000 1",
+      "InternalDescription" : "Freeze an item for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "56c279bb-e688-4279-9d08-6ac65e439d02",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "aa50e3937aa4a6a5f40e7f11a3368376",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Ice 9000 2",
+      "InternalDescription" : "When you Freeze, Poison {ability.1}",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "18ac425b-a554-4023-bc4a-18a90a3c39e7",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "53f141377eacbe415e108a4f328c61e0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

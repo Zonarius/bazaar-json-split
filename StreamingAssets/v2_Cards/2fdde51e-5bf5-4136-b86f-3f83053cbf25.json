@@ -1,0 +1,134 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "HealAmount" : 30
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "HealAmount" : 60
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "2fdde51e-5bf5-4136-b86f-3f83053cbf25",
+  "Version" : "1.0.0",
+  "InternalName" : "Vineyard",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Heal", "DamageReference", "Active", "NonWeapon" ],
+  "ArtKey" : "9ba4bd669b785044782389ccb93b34ca",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "d904c79f8bee68dc007de9efd2231843",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "78597be87e9163f775f3b7d50cb293f2",
+      "Text" : "Heal {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "d904c79f8bee68dc007de9efd2231843",
+      "Text" : "Vineyard"
+    },
+    "Tooltips" : [ {
+      "Key" : "99b42b900bd798f57b8b64312f87774c",
+      "Text" : "Heal {ability.0}"
+    }, {
+      "Key" : "e20f8427094d4f8379bcae261efdf706",
+      "Text" : "When you heal, your weapons gain +{ability.1} damage for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Vineyard 1",
+      "InternalDescription" : "Heal {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "14cc438e-fde5-419d-8f59-65af80fe5a73",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "99b42b900bd798f57b8b64312f87774c",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Vineyard 2",
+      "InternalDescription" : "When you heal, your weapons gain +{ability.1} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5bbd8e50-ee86-4c3e-aa40-7ec7ff959ba9",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "e20f8427094d4f8379bcae261efdf706",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "HealthMax",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

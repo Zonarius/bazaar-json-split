@@ -1,0 +1,130 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 1
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 2
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "14b297c5-db65-492d-aad7-9ffe101cae5f",
+  "Version" : "1.0.0",
+  "InternalName" : "Incendiary Rounds",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Burn", "NonWeapon", "Ammo" ],
+  "ArtKey" : "1f99c4a4f1a211a45a88970937465c02",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "041dff0271818a9eb498e8bf50fc3d64",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "041dff0271818a9eb498e8bf50fc3d64",
+      "Text" : "Incendiary Rounds"
+    },
+    "Tooltips" : [ {
+      "Key" : "7d76e6ab8581bbe7859b31b7f7ee6c0d",
+      "Text" : "When you use an adjacent item, Burn {ability.1}"
+    }, {
+      "Key" : "52ac5698f7cd1a14b3c1312a1bf59a1e",
+      "Text" : "Adjacent items have +{aura.0} ammo. "
+    } ]
+  },
+  "Abilities" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Incendiary Rounds OnAdjacentItemUse Burn/4",
+      "InternalDescription" : "When you use an adjacent item, Burn {ability.1}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "d36e301f-ae30-45eb-afb4-1b859a9da15a",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "7d76e6ab8581bbe7859b31b7f7ee6c0d",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : true,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Incendiary Rounds Passive Increase adjacent Ammo 1",
+      "InternalDescription" : "Adjacent items have +{aura.0} ammo. ",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "54635d99-0bee-43a8-bc13-98db4696b2db",
+      "Prerequisites" : null,
+      "TranslationKey" : "52ac5698f7cd1a14b3c1312a1bf59a1e",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

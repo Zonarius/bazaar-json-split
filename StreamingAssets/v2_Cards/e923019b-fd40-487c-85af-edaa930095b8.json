@@ -1,0 +1,160 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 25
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "ShieldApplyAmount" : 50
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "e923019b-fd40-487c-85af-edaa930095b8",
+  "Version" : "1.0.0",
+  "InternalName" : "Bunker",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Shield", "Active", "NonWeapon", "DamageReference", "Toughness" ],
+  "ArtKey" : "bc087bcdb212d2b449365c5aab69473b",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "432b9dd4e6a90d90173cc025c7710861",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "432b9dd4e6a90d90173cc025c7710861",
+      "Text" : "Bunker"
+    },
+    "Tooltips" : [ {
+      "Key" : "78d5e8670d88516a486726c28e6a37f1",
+      "Text" : "Shield {ability.0}"
+    }, {
+      "Key" : "30bbc951b149882f12e361d8a7e3594f",
+      "Text" : "Give your items +{ability.1} Shield for this fight."
+    }, {
+      "Key" : "e9874ec302c7660119f334d0a35fdf25",
+      "Text" : "When your enemy Crits, use this."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Bunker 1",
+      "InternalDescription" : "Shield {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Bunker 2",
+      "InternalDescription" : "Give your items +{ability.1} Shield for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 25.0
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "da8a9fa6-e625-4abf-b201-0ac266781e7f",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "30bbc951b149882f12e361d8a7e3594f",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Bunker 3",
+      "InternalDescription" : "When your enemy Crits, use this.",
+      "Action" : {
+        "$type" : "TActionCardForceUse",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "553cbd3e-efe6-4493-9be6-a1a99956bf98",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "e9874ec302c7660119f334d0a35fdf25",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardCritted",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

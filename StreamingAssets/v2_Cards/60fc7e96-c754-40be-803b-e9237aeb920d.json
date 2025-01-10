@@ -1,0 +1,185 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 10000,
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "DamageAmount" : 250,
+        "FreezeAmount" : 100000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "DamageAmount" : 500,
+        "FreezeAmount" : 100000
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "60fc7e96-c754-40be-803b-e9237aeb920d",
+  "Version" : "1.0.0",
+  "InternalName" : "Giant Ice Club",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "FreezeReference", "Freeze", "HealthReference", "DamageReference" ],
+  "ArtKey" : "9fc85e50b172f22428f277b803ebb1a7",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "16ab03334c8dea2fd4a6fb240543355e",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "16ab03334c8dea2fd4a6fb240543355e",
+      "Text" : "Giant Ice Club"
+    },
+    "Tooltips" : [ {
+      "Key" : "98cf7ff63c5067e55c4a2b006cc4afc3",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "2447810d55f7fe20b724df27002dfee7",
+      "Text" : "The first time you fall below half health each fight, Freeze an item for {ability.1} seconds."
+    }, {
+      "Key" : "c2ad015c81e4ea396fc526d94cdd49e8",
+      "Text" : "If your enemy has a Frozen item, this deals double damage."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Giant Ice Club - 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "879e944f-bb76-466d-a9c1-8494adc474eb",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "98cf7ff63c5067e55c4a2b006cc4afc3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Giant Ice Club - 2",
+      "InternalDescription" : "The first time you fall below half health each fight, Freeze an item for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e448c70a-b33b-468d-aeb9-1bb4a8400943",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "2447810d55f7fe20b724df27002dfee7",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributePercentChange",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Poison"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Giant Ice Club - 3",
+      "InternalDescription" : "If your enemy has a Frozen item, this deals double damage.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "OpponentHand",
+            "ExcludeSelf" : false,
+            "Conditions" : null
+          },
+          "AttributeType" : "Freeze",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "67c374ca-1fbf-47df-a043-4860570fa7df",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Freeze",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "TranslationKey" : "c2ad015c81e4ea396fc526d94cdd49e8",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

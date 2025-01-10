@@ -1,0 +1,165 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "DamageAmount" : 20,
+        "FreezeAmount" : 2000,
+        "FreezeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 20,
+        "FreezeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "a8664dac-7a88-4af0-990e-afe7217e123f",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice Pick (formerly Sickle)",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Active", "Freeze", "DamageReference", "FreezeReference" ],
+  "ArtKey" : "698f3cd011a5e2d48a505df58ae19e03",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "105a4952bfa71e6e7656b861fb023f80",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "105a4952bfa71e6e7656b861fb023f80",
+      "Text" : "Ice Pick"
+    },
+    "Tooltips" : [ {
+      "Key" : "58449951a2dbbdcd5e9d0ec43fb11715",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "bdea18be2c9c5e614225985b8320b022",
+      "Text" : "Freeze an item for {ability.1} seconds."
+    }, {
+      "Key" : "13c7205242aca83d1f829006591a8656",
+      "Text" : "When you Freeze, give this +{ability.2} damage for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Ice Pick 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a56e50b9-2e10-46be-acc9-34cbc17f7cc0",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "58449951a2dbbdcd5e9d0ec43fb11715",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Ice Pick 2",
+      "InternalDescription" : "Freeze an item for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "01771797-d725-423c-ba96-021e5d53a5bb",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "bdea18be2c9c5e614225985b8320b022",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Ice Pick 3",
+      "InternalDescription" : "When you Freeze, give this +{ability.2} damage for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c43ca79e-187e-450a-b583-1bf98c24684d",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "13c7205242aca83d1f829006591a8656",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

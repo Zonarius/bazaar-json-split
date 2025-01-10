@@ -1,0 +1,179 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 100
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 200
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "fea7450f-bc68-4bf9-8d34-99acd9399cbe",
+  "Version" : "1.0.0",
+  "InternalName" : "Chronobarrier",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Shield", "Active", "NonWeapon" ],
+  "ArtKey" : "c40551b736be9a64d909f18296064b87",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "78ae2f70410196aed1b33f5ba67dc9a3",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6d7e7b9fc3e469197aa6313d98af139c",
+      "Text" : "Shield {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "78ae2f70410196aed1b33f5ba67dc9a3",
+      "Text" : "Chronobarrier"
+    },
+    "Tooltips" : [ {
+      "Key" : "3d07f1373522a1d3c9352027115a214e",
+      "Text" : "Shield {ability.0}"
+    }, {
+      "Key" : "d847d582cdb4714e47024ab9e52d06bc",
+      "Text" : "Enemy cooldowns are increased by {ability.1} second."
+    }, {
+      "Key" : "ea4d4594118e3109b9a5f3fe02a72869",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Chronobarrier 1",
+      "InternalDescription" : "Shield {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5bfc463d-0623-461d-9a38-e5e3a70e314c",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "3d07f1373522a1d3c9352027115a214e",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Chronobarrier 2",
+      "InternalDescription" : "Enemy cooldowns are increased by {ability.1} second.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1000.0
+        },
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "106d53d2-63a3-4061-b620-355a36b926fe",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "d847d582cdb4714e47024ab9e52d06bc",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightStarted",
+        "CombatType" : null
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Chronobarrier 3",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1000.0
+        },
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Subtract",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "a7c92f3e-4875-4fa4-a683-93d140edfabc",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "ea4d4594118e3109b9a5f3fe02a72869",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightEnded",
+        "CombatType" : null,
+        "CombatOutcome" : null
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

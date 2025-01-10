@@ -1,0 +1,158 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 2,
+        "SellPrice" : 2,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "ec327a59-8fde-444f-b29b-73b22c248c4e",
+  "Version" : "1.0.0",
+  "InternalName" : "Renovation",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ ],
+  "ArtKey" : "Icon_Skill_PYG_Renovation.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "31b41a8e58789ea5985d07a1c25ada09",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "31b41a8e58789ea5985d07a1c25ada09",
+      "Text" : "Renovation"
+    },
+    "Tooltips" : [ {
+      "Key" : "31b41a8e58789ea5985d07a1c25ada09",
+      "Text" : "When you level up, upgrade a random Bronze Property"
+    }, {
+      "Key" : "6a10a13ed9130846861d081c360551dd",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Renovation",
+      "InternalDescription" : "When you level up, upgrade a random Bronze Property",
+      "Action" : {
+        "$type" : "TActionCardUpgrade",
+        "UpgradeToTier" : null,
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTier",
+              "Tiers" : [ "Bronze" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Property" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "112685e0-580b-4003-92f4-74ac556459c4",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "31b41a8e58789ea5985d07a1c25ada09",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Renovation (Counter Increment by 1)",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Counter",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalTier",
+            "Tiers" : [ "Diamond" ],
+            "IsNot" : true
+          }
+        }
+      },
+      "MigrationData" : "c63eef6e-2954-4e95-831a-43ab67a926cf",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "6a10a13ed9130846861d081c360551dd",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Property" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

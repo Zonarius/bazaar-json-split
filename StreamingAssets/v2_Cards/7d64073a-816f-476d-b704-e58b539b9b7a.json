@@ -1,0 +1,156 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "HasteAmount" : 3000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "HasteAmount" : 4500
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 64,
+        "SellPrice" : 32,
+        "HasteAmount" : 6000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "7d64073a-816f-476d-b704-e58b539b9b7a",
+  "Version" : "1.0.0",
+  "InternalName" : "Motherboard",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Haste" ],
+  "ArtKey" : "750a452f8598d704d93a30ab38d5c13f",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "35519890098d3127781ea8eeb38923fa",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "56990c065a9aad6d2d7547935cc5133c",
+      "Text" : "Haste the Core for {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "35519890098d3127781ea8eeb38923fa",
+      "Text" : "Motherboard"
+    },
+    "Tooltips" : [ {
+      "Key" : "167a3ce5d6d7e36d83af0b4930eee307",
+      "Text" : "Haste the Core for {ability.0} seconds."
+    }, {
+      "Key" : "02c03f7ece9293b3f5b0b62fd0d5239b",
+      "Text" : "When the Core gains Haste, give it +{ability.1} damage this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Motherboard 1",
+      "InternalDescription" : "Haste the Core for {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "662dfa45-fd09-43df-ac1b-4ebf7b1c010d",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "167a3ce5d6d7e36d83af0b4930eee307",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Motherboard 2",
+      "InternalDescription" : "When the Core gains Haste, give it +{ability.1} damage this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "d81e36f9-cfac-4065-9626-99e08fb79733",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "02c03f7ece9293b3f5b0b62fd0d5239b",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

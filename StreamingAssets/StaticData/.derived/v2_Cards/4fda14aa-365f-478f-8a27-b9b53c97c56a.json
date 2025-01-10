@@ -1,0 +1,115 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "HasteAmount" : 1000,
+        "HasteTargets" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "4fda14aa-365f-478f-8a27-b9b53c97c56a",
+  "Version" : "1.0.0",
+  "InternalName" : "Mixed Message",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Haste" ],
+  "ArtKey" : "Icon_Skill_MixedMessage.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "c404d9fea697149c678e6767d3977b98",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "c404d9fea697149c678e6767d3977b98",
+      "Text" : "Mixed Message"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "53ffb6a34cb1f0cb538d52b6d87bb248",
+        "Text" : "When you use a non-Weapon item, a Weapon gains Haste for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "53ffb6a34cb1f0cb538d52b6d87bb248",
+        "Text" : "When you use a non-Weapon item, a Weapon gains Haste for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "None"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Mixed Message 1",
+      "InternalDescription" : "When you use a non-Weapon item, Haste a Weapon for {ability.0} second(s).",
+      "MigrationData" : "a6858030-e732-4987-91e7-c7a6da0e8eb3",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "53ffb6a34cb1f0cb538d52b6d87bb248"
+    }
+  },
+  "Auras" : { }
+}

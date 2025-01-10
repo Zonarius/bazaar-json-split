@@ -1,0 +1,168 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1, 2 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 4,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1, 2 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "BurnApplyAmount" : 6,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1, 2 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 8,
+        "ChargeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "ae039b3e-ef98-4dc7-a97c-1e06d2627e57",
+  "Version" : "1.0.0",
+  "InternalName" : "Nitro",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Active", "NonWeapon", "Burn", "Charge" ],
+  "ArtKey" : "2763281f49d223643a1c9bdb9207d28c",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "e3f89d86f9f0d7cadc270dbfb54fc423",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "a8019d60a0e69b6a5093468e791aa153",
+      "Text" : "Burn both players {i}."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "e3f89d86f9f0d7cadc270dbfb54fc423",
+      "Text" : "Nitro"
+    },
+    "Tooltips" : [ {
+      "Key" : "e867f281a0356e36742489efd3d5e464",
+      "Text" : "Burn both players {ability.0}."
+    }, {
+      "Key" : "e867f281a0356e36742489efd3d5e464",
+      "Text" : ""
+    }, {
+      "Key" : "281272c5cbbf5d1a412375bede1b387b",
+      "Text" : "Charge an item {ability.2} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Nitro 1",
+      "InternalDescription" : "Burn both players {ability.0}.",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "34c88d3c-6e66-4b8e-9873-d72b9e76e4f9",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "e867f281a0356e36742489efd3d5e464",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Nitro 1",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "616c6e54-07d4-44a8-aaa4-2865ab5cce85",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "e867f281a0356e36742489efd3d5e464",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Nitro 2",
+      "InternalDescription" : "Charge an item {ability.2} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "249b91fe-c396-4c90-b43d-0bf162a3c52d",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "281272c5cbbf5d1a412375bede1b387b",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

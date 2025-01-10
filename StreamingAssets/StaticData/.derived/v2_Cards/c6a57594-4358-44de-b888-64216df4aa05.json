@@ -1,0 +1,146 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "SellPrice" : 4,
+        "Multicast" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "SellPrice" : 8
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 1 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "c6a57594-4358-44de-b888-64216df4aa05",
+  "Version" : "1.0.0",
+  "InternalName" : "Healthy Tip",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Health", "EconomyReference" ],
+  "ArtKey" : "Icon_Skill_PYG_GenerousTip.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "e4b6904adb227dabc22873fe80a016e2",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "e4b6904adb227dabc22873fe80a016e2",
+      "Text" : "Healthy Tip"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "e4b6904adb227dabc22873fe80a016e2",
+        "Text" : "When you gain gold, gain Max Health equal to the amount of gold gained."
+      },
+      "TooltipType" : "Passive"
+    }, {
+      "Content" : {
+        "Key" : "e4b6904adb227dabc22873fe80a016e2",
+        "Text" : "When you gain gold, gain Max Health equal to double the amount of gold gained."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        },
+        "AttributeType" : "Gold",
+        "ChangeType" : "Gain"
+      },
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthMax",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttributeChange",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Self",
+            "Conditions" : null
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Healthy Tip",
+      "InternalDescription" : "When you gain gold, gain Max Health equal to {ability.0.mod|%} the amount of gold gained.",
+      "MigrationData" : "7de2aee1-9c4b-4fa0-9a9d-2a38cb2cd153",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "e4b6904adb227dabc22873fe80a016e2"
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionPlayerModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Self",
+            "Conditions" : null
+          },
+          "AttributeType" : "HealthMax",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 2.0
+          }
+        },
+        "AttributeType" : "HealthMax",
+        "Operation" : "Add",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Healthy Tip",
+      "InternalDescription" : "When you gain gold, gain Max Health equal to {ability.0.mod|%} the amount of gold gained.",
+      "MigrationData" : "",
+      "VFXConfig" : null,
+      "TranslationKey" : ""
+    }
+  }
+}

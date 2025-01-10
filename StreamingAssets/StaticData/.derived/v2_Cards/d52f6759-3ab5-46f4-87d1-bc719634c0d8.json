@@ -1,0 +1,99 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Diamond",
+  "Tiers" : {
+    "Diamond" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "ReloadAmount" : 1,
+        "ReloadTargets" : 1,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "d52f6759-3ab5-46f4-87d1-bc719634c0d8",
+  "Version" : "1.0.0",
+  "InternalName" : "Ice Bullets",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "FreezeReference", "Ammo" ],
+  "ArtKey" : "Icon_Skill_BulletTime.png",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "828ce1b3cb8ffa2f25eacc2fa1f31960",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "828ce1b3cb8ffa2f25eacc2fa1f31960",
+      "Text" : "Ice Bullets"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "828ce1b3cb8ffa2f25eacc2fa1f31960",
+        "Text" : "When you Freeze, reload an Weapon 1 ammo."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedFreeze",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardReload",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Lowest",
+      "InternalName" : "Ice Bullets",
+      "InternalDescription" : "When you Freeze, reload an item.",
+      "MigrationData" : "55bc3207-62ae-4e12-b676-fb4c1f2c6011",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "828ce1b3cb8ffa2f25eacc2fa1f31960"
+    }
+  },
+  "Auras" : { }
+}

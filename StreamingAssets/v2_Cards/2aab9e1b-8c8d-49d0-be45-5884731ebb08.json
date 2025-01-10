@@ -1,0 +1,130 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HealAmount" : 0
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "2aab9e1b-8c8d-49d0-be45-5884731ebb08",
+  "Version" : "1.0.0",
+  "InternalName" : "Truffles",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Food" ],
+  "HiddenTags" : [ "Heal", "NonWeapon", "Value" ],
+  "ArtKey" : "5b0a8c30a39503a4ab54e18fff9635aa",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "cb0135d9004304981153d5ac5ac179f1",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "f28a30f2baf267be065cbad4c97bc0aa",
+      "Text" : "Heal for {i-%} of the value of your highest value item."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "cb0135d9004304981153d5ac5ac179f1",
+      "Text" : "Truffles"
+    },
+    "Tooltips" : [ {
+      "Key" : "14183af566b6a9368585c125c9081a4c",
+      "Text" : "Heal for {ability.0.mod|%} of the value of your highest value item."
+    }, {
+      "Key" : "decfbaa5256939c97787a109e57b0ae3",
+      "Text" : "Give your highest value item +{ability.1} value."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Truffles 1",
+      "InternalDescription" : "Heal for {ability.0.mod|%} of the value of your highest value item.",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4a538dd7-6a0c-48b9-84c3-7287a8e7bf01",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "14183af566b6a9368585c125c9081a4c",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Truffles 2",
+      "InternalDescription" : "Give your highest value item +{ability.1} value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttributeHighest",
+            "AttributeType" : "SellPrice"
+          }
+        }
+      },
+      "MigrationData" : "c9cb4b0b-0ccd-4445-8d9e-e877518808f8",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "decfbaa5256939c97787a109e57b0ae3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

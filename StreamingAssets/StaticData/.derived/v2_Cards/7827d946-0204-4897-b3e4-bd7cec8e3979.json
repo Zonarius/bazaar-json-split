@@ -1,0 +1,159 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Enchantments" : {
+    "Golden" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "SellPrice",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalOr",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalId",
+                  "Id" : "f212afe2-08d1-40e3-978b-762d345bc7e5",
+                  "IsNot" : false
+                }, {
+                  "$type" : "TCardConditionalId",
+                  "Id" : "1a3d4cde-333c-4936-b147-263d73f6d200",
+                  "IsNot" : false
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Golden Vending Machine Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "1b9b2c76-3da3-4b44-9b79-b93d362b9c3a",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "e3696b06-e4fc-4a6c-a933-3ddc3fa0f429"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Value" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "c2708b9b-0db4-47d6-8843-34eae50f3526",
+            "Text" : "Your Chocolate Bars and Spare Change have +{aura.e1} value."
+          },
+          "TooltipType" : "Passive"
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    }
+  },
+  "Type" : "Item",
+  "Id" : "7827d946-0204-4897-b3e4-bd7cec8e3979",
+  "Version" : "1.0.0",
+  "InternalName" : "Vending Machine",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ ],
+  "ArtKey" : "db8a34b69d0c20947af8ded59bc1d8cf",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "e32178f7579fe5c6826039400d412049",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "e32178f7579fe5c6826039400d412049",
+      "Text" : "Vending Machine"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "e32178f7579fe5c6826039400d412049",
+        "Text" : "At the start of each day, get 3 Chocolate Bars or Spare Changes."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 3.0
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Vending Machine",
+      "InternalDescription" : "At the start of each hour, get a Chocolate Bar or Spare Change.",
+      "MigrationData" : "54ef4b2a-e1cb-48ae-8d6e-bcd377442954",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "e32178f7579fe5c6826039400d412049"
+    }
+  },
+  "Auras" : { }
+}

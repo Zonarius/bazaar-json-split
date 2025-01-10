@@ -1,0 +1,144 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 12,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 2,
+        "HasteAmount" : 1000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 16,
+        "BurnApplyAmount" : 3,
+        "HasteAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 32,
+        "BurnApplyAmount" : 4,
+        "HasteAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "124862bc-eb77-4835-9e3b-68a4c3e4490e",
+  "Version" : "1.0.0",
+  "InternalName" : "Grill",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Burn", "Active", "NonWeapon" ],
+  "ArtKey" : "6ad38f6e663050747a4c63795facce85",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "475de6eac229ec35f1b543628c381d6b",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "d07ae4f03131021819204555f7d781db",
+      "Text" : "Burn {i}."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "475de6eac229ec35f1b543628c381d6b",
+      "Text" : "Grill"
+    },
+    "Tooltips" : [ {
+      "Key" : "1e6eec4743d4aba5ab3ef9a1a99dd300",
+      "Text" : "Burn {ability.0}."
+    }, {
+      "Key" : "b593ca0a0fdc6b780cbcf39052ea1816",
+      "Text" : "When you burn, give adjacent Food haste for {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Grill 1t",
+      "InternalDescription" : "Burn {ability.0}.",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "8c321915-2929-45af-91ee-26c18d2580f6",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "1e6eec4743d4aba5ab3ef9a1a99dd300",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Grill 2",
+      "InternalDescription" : "When you burn, give adjacent Food haste for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "76f4b062-a3ff-4f4b-880b-262134812b01",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "b593ca0a0fdc6b780cbcf39052ea1816",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

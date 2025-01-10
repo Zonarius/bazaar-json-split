@@ -1,0 +1,154 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 4000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "HealAmount" : 5
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "HealAmount" : 15
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "HealAmount" : 30
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "HealAmount" : 50
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "54c74b82-0a7d-4dab-a335-f3b0b8b2157c",
+  "Version" : "1.0.0",
+  "InternalName" : "Uwashiwali Bird",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Heal", "Multicast" ],
+  "ArtKey" : "5711b25e7e4f12b458bb75b080fbfca8",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "4e95a85466a3a2ae6549383bfe304c23",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "78597be87e9163f775f3b7d50cb293f2",
+      "Text" : "Heal {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "4e95a85466a3a2ae6549383bfe304c23",
+      "Text" : "Uwashiwali Bird"
+    },
+    "Tooltips" : [ {
+      "Key" : "c13769283379acda5341aba3c4ae60a1",
+      "Text" : "Heal {ability.0}"
+    }, {
+      "Key" : "04f8c372cd98312de13512356200c515",
+      "Text" : "This has +{aura.1} Multicast for each Property you have."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Uwashiwali Bird 1",
+      "InternalDescription" : "Heal {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerHeal",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "33d73bb9-fba7-4d68-922c-404bb9cde5b8",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "c13769283379acda5341aba3c4ae60a1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Uwashiwali Bird 2",
+      "InternalDescription" : "This has +{aura.1} Multicast for each Property you have.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Property" ],
+              "Operator" : "Any"
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "3e7ae58c-5417-4018-8077-60ecfc69ae85",
+      "Prerequisites" : null,
+      "TranslationKey" : "04f8c372cd98312de13512356200c515",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

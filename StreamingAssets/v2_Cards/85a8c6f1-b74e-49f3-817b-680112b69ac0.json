@@ -1,0 +1,200 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 10000,
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7500,
+        "BuyPrice" : 24,
+        "SellPrice" : 12
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5250,
+        "BuyPrice" : 48,
+        "SellPrice" : 24
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "85a8c6f1-b74e-49f3-817b-680112b69ac0",
+  "Version" : "1.0.0",
+  "InternalName" : "Assembly Line",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Passive", "NonWeapon" ],
+  "ArtKey" : "0d02c77653943b34db89d164c817d863",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "8e5751c39615e1bf57946117bc85cc1f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "1e437588c7db0ca2b6e273f23e74f983",
+      "Text" : "Use an adjacent Friend."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "8e5751c39615e1bf57946117bc85cc1f",
+      "Text" : "Assembly Line"
+    },
+    "Tooltips" : [ {
+      "Key" : "61f2b93400d1bc6c3253cdf221f96a47",
+      "Text" : "Use an adjacent Friend."
+    }, {
+      "Key" : "fb356ed6a4ff10a4b250a2e884503934",
+      "Text" : "When you buy this, get 2 Nanobots."
+    }, {
+      "Key" : "730dede6d210b0c166e13262667af853",
+      "Text" : "At the start of each day, upgrade your leftmost Bronze or Silver Friend."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Assembly Line 1",
+      "InternalDescription" : "Use an adjacent Friend.",
+      "Action" : {
+        "$type" : "TActionCardForceUse",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Friend" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "6fbde675-6f99-4991-a056-d225b3cc2a97",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "61f2b93400d1bc6c3253cdf221f96a47",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Assembly Line 2",
+      "InternalDescription" : "When you buy this, get 2 Nanobots.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "764ad6f5-f9a0-4edc-8692-fa166abe2ba3" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 2.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "a2b85f16-0f38-41bd-a3f3-b81bf3c6e193",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "fb356ed6a4ff10a4b250a2e884503934",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Assembly Line 3",
+      "InternalDescription" : "At the start of each day, upgrade your leftmost Bronze or Silver Friend.",
+      "Action" : {
+        "$type" : "TActionCardUpgrade",
+        "UpgradeToTier" : null,
+        "Target" : {
+          "$type" : "TTargetCardXMost",
+          "TargetSection" : "SelfHand",
+          "TargetMode" : "LeftMostCard",
+          "IncludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTier",
+              "Tiers" : [ "Gold" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Friend" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "076ea77a-395f-4842-8702-b7df8599a370",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "730dede6d210b0c166e13262667af853",
+      "Trigger" : {
+        "$type" : "TTriggerOnDayStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

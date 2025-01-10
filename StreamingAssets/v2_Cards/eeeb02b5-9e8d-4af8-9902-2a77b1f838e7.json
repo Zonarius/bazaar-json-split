@@ -1,0 +1,182 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "Multicast" : 1,
+        "DamageAmount" : 10,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "DamageAmount" : 30,
+        "ChargeAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 5999,
+        "DamageAmount" : 60,
+        "ChargeAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 4999,
+        "DamageAmount" : 100,
+        "ChargeAmount" : 1000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "eeeb02b5-9e8d-4af8-9902-2a77b1f838e7",
+  "Version" : "1.0.0",
+  "InternalName" : "The Core",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Dooley" ],
+  "Tags" : [ "Core", "Weapon", "Unsellable" ],
+  "HiddenTags" : [ "Damage", "Active", "Charge" ],
+  "ArtKey" : "7d81375214921324f83b53fef4ba5693",
+  "SpawningEligibility" : "GuidOnly",
+  "CardPackId" : "Dooley_Core",
+  "TranslationKey" : "6aa13511c00734c400381c50fd98a130",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "6aa13511c00734c400381c50fd98a130",
+      "Text" : "The Core"
+    },
+    "Tooltips" : [ {
+      "Key" : "b1e3aa1fb03f9ea61faa2f392f5de5c6",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "e70d3cd2c249bc10a140d920457b27c0",
+      "Text" : "Charge all items to the right of this {ability.1} second."
+    }, {
+      "Key" : "ced2dd53cf2fd665301200b7d3773d47",
+      "Text" : "When you use any item to the left of this, Charge this {ability.2} second."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "The Core 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "036ce8b9-1060-4a36-a186-a4c25d2928b0",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "b1e3aa1fb03f9ea61faa2f392f5de5c6",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "The Core 2",
+      "InternalDescription" : "Charge all items to the right of this {ability.1} second.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "AllRightCards",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "MigrationData" : "b8eae74e-ed8d-4a33-8e70-5e0bd64d2207",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "e70d3cd2c249bc10a140d920457b27c0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "The Core 3",
+      "InternalDescription" : "When you use any item to the left of this, Charge this {ability.2} second.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f919a765-5a2b-471e-b142-f856013438b2",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "ced2dd53cf2fd665301200b7d3773d47",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "AllLeftCards",
+          "IncludeOrigin" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

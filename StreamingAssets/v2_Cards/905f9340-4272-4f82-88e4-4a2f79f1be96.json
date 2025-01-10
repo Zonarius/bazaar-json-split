@@ -1,0 +1,162 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16
+      },
+      "AuraIds" : [ "0" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "905f9340-4272-4f82-88e4-4a2f79f1be96",
+  "Version" : "1.0.0",
+  "InternalName" : "Disguise",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Crit", "NonWeapon" ],
+  "ArtKey" : "10898538c111cd242a9c0eae5dc6a030",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "616d8ea055532b9a89d6d43ad31c0a98",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "616d8ea055532b9a89d6d43ad31c0a98",
+      "Text" : "Disguise"
+    },
+    "Tooltips" : [ {
+      "Key" : "003d66199f7f19153aefab1fb2b720ef",
+      "Text" : "When you buy this, get a random item from any hero."
+    }, {
+      "Key" : "c26181c3cd9645e1383f394cc8a95137",
+      "Text" : "Your items from other Heroes have +{aura.0}% Crit Chance."
+    } ]
+  },
+  "Abilities" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Disguise 2",
+      "InternalDescription" : "When you buy this, get a random item from any hero.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterQuery",
+              "Constraints" : {
+                "$type" : "ConstraintAnd",
+                "Constraints" : [ {
+                  "$type" : "ConstraintSize",
+                  "Sizes" : [ "Small", "Medium" ],
+                  "IsNot" : false
+                }, {
+                  "$type" : "ConstraintHiddenTag",
+                  "HiddenTags" : [ "Active" ],
+                  "IsNot" : false
+                }, {
+                  "$type" : "ConstraintHero",
+                  "Heroes" : [ "Pygmalien", "Stelle", "Mak", "Jules", "Dooley" ],
+                  "IsNot" : false
+                }, {
+                  "$type" : "ConstraintCardType",
+                  "Types" : [ "Item" ],
+                  "IsNot" : false
+                } ]
+              }
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "eb00812a-192c-4e66-a827-b1fca6880921",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "003d66199f7f19153aefab1fb2b720ef",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Disguise 1",
+      "InternalDescription" : "Your items from other Heroes have +{aura.0}% Crit Chance.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 25.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalPlayerHero",
+            "IsSameAsPlayerHero" : false
+          }
+        }
+      },
+      "MigrationData" : "1a3151d3-e388-408b-a8f0-17f3205658f9",
+      "Prerequisites" : null,
+      "TranslationKey" : "c26181c3cd9645e1383f394cc8a95137",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

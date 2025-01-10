@@ -1,0 +1,214 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "6676145e-d1e2-469a-b111-d5c4edfc0a30",
+  "Version" : "1.0.0",
+  "InternalName" : "Beehive",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "NonWeapon", "DamageReference" ],
+  "ArtKey" : "b10a24cec8d3e0047aeb0ea2b96e61a2",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "1755406997226130329afcb6d381dd71",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "1755406997226130329afcb6d381dd71",
+      "Text" : "Beehive"
+    },
+    "Tooltips" : [ {
+      "Key" : "1755406997226130329afcb6d381dd71",
+      "Text" : "When your enemy uses a weapon, use a random Busy Bees."
+    }, {
+      "Key" : "1c3a061e51b81f21438c436e921d784f",
+      "Text" : "When you buy a Property, get a Busy Bee and give your Busy Bees +{ability.2} damage."
+    }, {
+      "Key" : "d5e7eb3e7224650b1a8452b77f15f1e1",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Beehive",
+      "InternalDescription" : "When your enemy uses a weapon, use a random Busy Bees.",
+      "Action" : {
+        "$type" : "TActionCardForceUse",
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalId",
+            "Id" : "94e28682-a012-4dd0-8ce8-7fe180aa6127",
+            "IsNot" : false
+          }
+        }
+      },
+      "MigrationData" : "10309619-c224-4d16-a77e-d96a5e5f9215",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1755406997226130329afcb6d381dd71",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Beehive 2",
+      "InternalDescription" : "When you buy a Property, get a Busy Bee and give your Busy Bees +{ability.2} damage.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "94e28682-a012-4dd0-8ce8-7fe180aa6127" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "a5254b74-c2e3-4bf8-8fdd-013a793dce24",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1c3a061e51b81f21438c436e921d784f",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Property" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Beehive 3",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 5.0
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalId",
+            "Id" : "94e28682-a012-4dd0-8ce8-7fe180aa6127",
+            "IsNot" : false
+          }
+        }
+      },
+      "MigrationData" : "56c8db05-a424-490b-9d09-324e1b0cbd74",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "d5e7eb3e7224650b1a8452b77f15f1e1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Property" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

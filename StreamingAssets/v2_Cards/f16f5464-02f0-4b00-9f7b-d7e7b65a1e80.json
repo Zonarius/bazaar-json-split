@@ -1,0 +1,137 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 15
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "ShieldApplyAmount" : 20
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "f16f5464-02f0-4b00-9f7b-d7e7b65a1e80",
+  "Version" : "1.0.0",
+  "InternalName" : "Turtle Shell",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Aquatic" ],
+  "HiddenTags" : [ "ShieldReference", "Shield", "NonWeapon" ],
+  "ArtKey" : "99796868cc77a5f48b480081b78d207a",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "9461524aeeb141b8405421196ac3d67c",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "6efe33f9ec0050aebd0d09bcdd25d340",
+      "Text" : "Give your items +{i} Shield for this fight."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "9461524aeeb141b8405421196ac3d67c",
+      "Text" : "Turtle Shell"
+    },
+    "Tooltips" : [ {
+      "Key" : "dff429a360dd4075b16b2f9d5cb59903",
+      "Text" : "Give your items +{ability.0} Shield for this fight."
+    }, {
+      "Key" : "65a1d6c20a5207e053d8d2ed1f7215dc",
+      "Text" : "When you use another non-weapon, Shield {ability.1}"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Turtle Shell 1",
+      "InternalDescription" : "Give your items +{ability.0} Shield for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 3.0
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "98b03a96-8b3f-43fa-8a4a-c11e4469f21b",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "dff429a360dd4075b16b2f9d5cb59903",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Turtle Shell 2",
+      "InternalDescription" : "When you use another non-weapon, Shield {ability.1}",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4d9419ae-2b8f-473d-8a58-196d863527fe",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "65a1d6c20a5207e053d8d2ed1f7215dc",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "None"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

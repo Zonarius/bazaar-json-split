@@ -1,0 +1,135 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "ShieldApplyAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ShieldApplyAmount" : 10
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "f274b6aa-5e2a-4bad-8cbd-9f110ac9833b",
+  "Version" : "1.0.0",
+  "InternalName" : "Chef Hat",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Jules" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Shield", "Active", "NonWeapon" ],
+  "ArtKey" : "c29ca3133c6ab954182c33eff6c649ee",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Jules_Core",
+  "TranslationKey" : "a90c7aa84874e54b073a6635abf23edd",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "7a2ca0c94179c639ceeb7e30f881315a",
+      "Text" : "Gain {i} shield."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "a90c7aa84874e54b073a6635abf23edd",
+      "Text" : "Chef Hat"
+    },
+    "Tooltips" : [ {
+      "Key" : "a90c7aa84874e54b073a6635abf23edd",
+      "Text" : "Gain {ability.0} shield."
+    }, {
+      "Key" : "55710b3b89ad3044613b1d642f6f9b64",
+      "Text" : "When you use a food, give this +{ability.1} Shield for this fight."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Chef Hat",
+      "InternalDescription" : "Gain {ability.0} shield.",
+      "Action" : {
+        "$type" : "TActionPlayerShieldApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f7601983-e90b-402d-bb25-bba3d550bf29",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "a90c7aa84874e54b073a6635abf23edd",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Chef Hat 2",
+      "InternalDescription" : "When you use a food, give this +{ability.1} Shield for this fight.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4b45945c-a57d-46bf-8855-673da6a2999b",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "55710b3b89ad3044613b1d642f6f9b64",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Food" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

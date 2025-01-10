@@ -1,0 +1,100 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Diamond",
+  "Tiers" : {
+    "Diamond" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1,
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "d071e4de-f87f-41b5-b02d-d622e35c0b4d",
+  "Version" : "1.0.0",
+  "InternalName" : "Juggler",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Cooldown" ],
+  "ArtKey" : "Icon_Skill_MON_TrashTitan_02.png",
+  "CardPackId" : "Core",
+  "TranslationKey" : "4645064339a375d5ea117a94503efc1f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "4645064339a375d5ea117a94503efc1f",
+      "Text" : "Juggler"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "4645064339a375d5ea117a94503efc1f",
+        "Text" : "When you use a small item, Charge a large item for {ability.0} second(s)."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Large" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Juggler",
+      "InternalDescription" : "When you use a small item, Charge a large item for {ability.0} second(s).",
+      "MigrationData" : "5b2abe87-8fbc-483b-af11-40314a0017ec",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "4645064339a375d5ea117a94503efc1f"
+    }
+  },
+  "Auras" : { }
+}

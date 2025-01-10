@@ -1,0 +1,156 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 5000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "PoisonApplyAmount" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "PoisonApplyAmount" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "PoisonApplyAmount" : 3
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "PoisonApplyAmount" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "014d9c98-e823-443c-98a3-6367ab81c956",
+  "Version" : "1.0.0",
+  "InternalName" : "Trained Spider",
+  "InternalDescription" : null,
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Poison", "Damage", "Active", "NonWeapon", "PoisonReference" ],
+  "ArtKey" : "1e4df0d48639a704e903a678087f48d8",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "d31676c6f990425a0e8470ab52a1cb00",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef05351ce3f992cc956a1f7372a66343",
+      "Text" : "Poison {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "d31676c6f990425a0e8470ab52a1cb00",
+      "Text" : "Trained Spider"
+    },
+    "Tooltips" : [ {
+      "Key" : "3d2d9cbd1629c661821d270b483c4e63",
+      "Text" : "Poison {ability.0}"
+    }, {
+      "Key" : "1dd36380b1e26efcbcefaf1cfab2aeb5",
+      "Text" : "When you sell this, give your leftmost Poison item +{ability.1} Poison."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Trained Spider - 1",
+      "InternalDescription" : "Poison {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b9866797-0839-41ff-8c14-4a859bcc2a0e",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "3d2d9cbd1629c661821d270b483c4e63",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Trained Spider - 2",
+      "InternalDescription" : "When you sell this, give your leftmost Poison item +{ability.1} Poison.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "PoisonApplyAmount",
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetCardXMost",
+          "TargetSection" : "SelfHand",
+          "TargetMode" : "LeftMostCard",
+          "IncludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Poison" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "033664ed-a067-46d5-90d8-3c36275f3117",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "1dd36380b1e26efcbcefaf1cfab2aeb5",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

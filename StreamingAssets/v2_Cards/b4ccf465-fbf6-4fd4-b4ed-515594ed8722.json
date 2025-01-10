@@ -1,0 +1,152 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "PoisonApplyAmount" : 1,
+        "HasteAmount" : 1000,
+        "HasteTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "PoisonApplyAmount" : 2,
+        "HasteAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "PoisonApplyAmount" : 3,
+        "HasteAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "PoisonApplyAmount" : 4,
+        "HasteAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "b4ccf465-fbf6-4fd4-b4ed-515594ed8722",
+  "Version" : "1.0.0",
+  "InternalName" : "Jellyfish",
+  "InternalDescription" : null,
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Aquatic", "Friend" ],
+  "HiddenTags" : [ "Poison", "NonWeapon", "Haste" ],
+  "ArtKey" : "16fb0ac9f698eff4e98870956aa86eba",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "28f4e638fbcacc4dcf40a55c12a218d0",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef05351ce3f992cc956a1f7372a66343",
+      "Text" : "Poison {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "28f4e638fbcacc4dcf40a55c12a218d0",
+      "Text" : "Jellyfish"
+    },
+    "Tooltips" : [ {
+      "Key" : "014c853c715c8065a20ced124021a7eb",
+      "Text" : "Poison {ability.0}"
+    }, {
+      "Key" : "4cc8cd773031688dd2e6e124d2792dcd",
+      "Text" : "When you use another Aquatic item, give this Haste for {ability.1} seconds."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Jellyfish 1",
+      "InternalDescription" : "Poison {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "aeca8ec4-d3b7-4f8e-906e-df05ff497c3d",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "014c853c715c8065a20ced124021a7eb",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Jellyfish OnOwnAquaticItemUse Haste/2000",
+      "InternalDescription" : "When you use another Aquatic item, give this Haste for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardHaste",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "cb7e52ad-6638-425f-888f-5841d2578e8b",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "4cc8cd773031688dd2e6e124d2792dcd",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Aquatic" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

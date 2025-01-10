@@ -1,0 +1,145 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 3000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "AmmoMax" : 2,
+        "Multicast" : 1,
+        "DamageAmount" : 10,
+        "ReloadAmount" : 1,
+        "ReloadTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "DamageAmount" : 20,
+        "ReloadAmount" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "DamageAmount" : 30,
+        "ReloadAmount" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "e6a183ce-0ea9-4981-bbfb-95be32b93de2",
+  "Version" : "1.0.0",
+  "InternalName" : "Grapeshot",
+  "InternalDescription" : null,
+  "StartingTier" : "Silver",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "AmmoReference", "Ammo" ],
+  "ArtKey" : "26e035cb0493dbb4cabc599498aefc83",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "5b30b22a27eb34b510c5e62ca47b1db8",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "5b30b22a27eb34b510c5e62ca47b1db8",
+      "Text" : "Grapeshot"
+    },
+    "Tooltips" : [ {
+      "Key" : "eddf24fc0f7cb764bef75e8c0c5e9340",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "d141eb5ef7ac5ef830283b039b333ca7",
+      "Text" : "When you use another ammo item, this reloads 1 ammo."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Grapeshot 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "37561907-f025-4698-8423-480cbcfa6d1c",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "eddf24fc0f7cb764bef75e8c0c5e9340",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : "Assets/TheBazaar/Projectiles/ProjectilesForDerek/Projectile_ShootShotgun_PV.prefab",
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Grapeshot 2",
+      "InternalDescription" : "When you use another ammo item, this reloads 1 ammo.",
+      "Action" : {
+        "$type" : "TActionCardReload",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "03d68e75-bb21-47a7-895c-95a51c30fbae",
+      "Prerequisites" : null,
+      "Priority" : "Lowest",
+      "TranslationKey" : "d141eb5ef7ac5ef830283b039b333ca7",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

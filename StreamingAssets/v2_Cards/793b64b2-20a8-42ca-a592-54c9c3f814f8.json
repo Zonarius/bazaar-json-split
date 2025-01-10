@@ -1,0 +1,186 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1,
+        "DamageAmount" : 50,
+        "FreezeAmount" : 1000,
+        "FreezeTargets" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "DamageAmount" : 100,
+        "FreezeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "DamageAmount" : 150,
+        "FreezeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "793b64b2-20a8-42ca-a592-54c9c3f814f8",
+  "Version" : "1.0.0",
+  "InternalName" : "Colossal Popsicle",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Weapon", "Food" ],
+  "HiddenTags" : [ "Damage", "Active", "Freeze", "FreezeReference" ],
+  "ArtKey" : "e0d91d70391b2ac4f871d2619a49f064",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "3ebee196da5966dec3057ff44747c639",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "3ebee196da5966dec3057ff44747c639",
+      "Text" : "Colossal Popsicle"
+    },
+    "Tooltips" : [ {
+      "Key" : "5c895d5b7990d4ab11debcfcaf77d923",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "7f8609495510771eee86b95a53b6bf82",
+      "Text" : "Freeze 2 items for {ability.1} seconds."
+    }, {
+      "Key" : "7f75786b9f6b3df879effb32ee808fbe",
+      "Text" : "When you sell this, gain {ability.2} Icicles."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Colossal Popsicle - 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "4e3daf4a-ced9-4aef-b34a-b2f773c88497",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5c895d5b7990d4ab11debcfcaf77d923",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Colossal Popsicle - 2",
+      "InternalDescription" : "Freeze 2 items for {ability.1} seconds.",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "ba7efb31-42cd-48cc-8acd-91ad4bccf6ce",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "7f8609495510771eee86b95a53b6bf82",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Colossal Popsicle 3",
+      "InternalDescription" : "When you sell this, gain {ability.2} Icicles.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "e21985a8-fe05-4142-ab65-93c110545ec3" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 2.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "1e8f22a0-0a79-40a4-aa86-1b305561defc",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "7f75786b9f6b3df879effb32ee808fbe",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

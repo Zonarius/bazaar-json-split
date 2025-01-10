@@ -1,0 +1,170 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "DamageAmount" : 50
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "DamageAmount" : 100
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "9a7d5711-930a-4815-86cc-4e357680730c",
+  "Version" : "1.0.0",
+  "InternalName" : "Lion Cane",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "DamageReference", "Health", "HealthReference" ],
+  "ArtKey" : "bd06d0ecd633a4f41805b0d33a9a721d",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "e3cd61f6ef3584d02d1b9356c7984e01",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef049944d227844355fd4b635bcf1877",
+      "Text" : "Deal {i} damage."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "e3cd61f6ef3584d02d1b9356c7984e01",
+      "Text" : "Lion Cane"
+    },
+    "Tooltips" : [ {
+      "Key" : "670de5bdda1831e484c6943970875809",
+      "Text" : "Deal {ability.0} damage."
+    }, {
+      "Key" : "6fa57d5324d1f8720ebe6885f01f481c",
+      "Text" : "When you Level Up, gain {ability.1} Max Health."
+    }, {
+      "Key" : "1f77f71392e0e2a9a66648e38350d09e",
+      "Text" : "If you have more health than your enemy, this deals double damage."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Lion Cane 1",
+      "InternalDescription" : "Deal {ability.0} damage.",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "0c961a2f-4380-480b-894a-40c75ced4339",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "670de5bdda1831e484c6943970875809",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Lion Cane 2",
+      "InternalDescription" : "When you Level Up, gain {ability.1} Max Health.",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthMax",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 100.0
+        },
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a6819efe-4158-423b-baca-4e9dfb522072",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "6fa57d5324d1f8720ebe6885f01f481c",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Level",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Lion Cane 3",
+      "InternalDescription" : "If you have more health than your enemy, this deals double damage.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Opponent",
+            "Conditions" : null
+          },
+          "AttributeType" : "Poison",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 0.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "bcad3001-3ae3-49bb-b1bd-a89e25c113d2",
+      "Prerequisites" : null,
+      "TranslationKey" : "1f77f71392e0e2a9a66648e38350d09e",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

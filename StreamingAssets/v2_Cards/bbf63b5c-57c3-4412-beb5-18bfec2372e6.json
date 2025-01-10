@@ -1,0 +1,177 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 6000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "Multicast" : 1,
+        "BurnApplyAmount" : 4
+      },
+      "AuraIds" : [ "1", "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "BurnApplyAmount" : 6
+      },
+      "AuraIds" : [ "1", "2" ],
+      "PassiveTooltipIds" : [ 1, 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "bbf63b5c-57c3-4412-beb5-18bfec2372e6",
+  "Version" : "1.0.0",
+  "InternalName" : "Pesky Pete",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Small",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Friend" ],
+  "HiddenTags" : [ "Burn", "BurnReference", "NonWeapon" ],
+  "ArtKey" : "ee76a627aa888c341a7bb426b2d4f3f8",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "83c3c2786f47fee72671c60326ac7e9d",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "de834839a9cb3ef35867f94c3e63f10b",
+      "Text" : "Burn {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "83c3c2786f47fee72671c60326ac7e9d",
+      "Text" : "Pesky Pete"
+    },
+    "Tooltips" : [ {
+      "Key" : "83c3c2786f47fee72671c60326ac7e9d",
+      "Text" : "Burn {ability.0}"
+    }, {
+      "Key" : "ccac4203079bd4d182bda84610266684",
+      "Text" : "For each adjacent Friend or Property, give this +{aura.1} Burn."
+    }, {
+      "Key" : "7bb7c5121820c1b38e5801b250187799",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Pesky Pete",
+      "InternalDescription" : "Burn {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "6a9b2198-d357-4859-9726-05dc7cb4263a",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "83c3c2786f47fee72671c60326ac7e9d",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Pesky Pete 2",
+      "InternalDescription" : "For each adjacent Friend or Property, give this +{aura.1} Burn.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardPositional",
+            "Origin" : "Self",
+            "TargetMode" : "Neighbor",
+            "IncludeOrigin" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Friend" ],
+              "Operator" : "Any"
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 4.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "a288e819-b0dd-4c5b-a048-27d69913f903",
+      "Prerequisites" : null,
+      "TranslationKey" : "ccac4203079bd4d182bda84610266684",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Pesky Pete 3",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardCount",
+          "Target" : {
+            "$type" : "TTargetCardPositional",
+            "Origin" : "Self",
+            "TargetMode" : "Neighbor",
+            "IncludeOrigin" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Property" ],
+              "Operator" : "Any"
+            }
+          },
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 4.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e9f8fbe4-616c-4e21-aca2-58025d56afba",
+      "Prerequisites" : null,
+      "TranslationKey" : "7bb7c5121820c1b38e5801b250187799",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

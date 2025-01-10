@@ -1,0 +1,141 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12,
+        "Multicast" : 1,
+        "RegenApplyAmount" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24,
+        "RegenApplyAmount" : 2
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "4da45ad1-6793-458c-9c72-d03fa273ebfd",
+  "Version" : "1.0.0",
+  "InternalName" : "Tropical Island",
+  "InternalDescription" : null,
+  "StartingTier" : "Gold",
+  "Size" : "Large",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Property", "Aquatic" ],
+  "HiddenTags" : [ "Regen", "NonWeapon", "SlowReference" ],
+  "ArtKey" : "48cce0a6bfa442440a119968620de3b4",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Vanessa_Core",
+  "TranslationKey" : "48eadfc01f1dc7f33a1bdf392d6514c1",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "48eadfc01f1dc7f33a1bdf392d6514c1",
+      "Text" : "Tropical Island"
+    },
+    "Tooltips" : [ {
+      "Key" : "98d13db2d3ce388abc0ce3897ccf9cab",
+      "Text" : "When you Slow, gain {ability.0} Regen for this fight."
+    }, {
+      "Key" : "8495667131cb4b76e1b89c3029a4f4b0",
+      "Text" : "At the start of each hour, get a Coconut or Citrus."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Tropical Island 1",
+      "InternalDescription" : "When you Slow, gain {ability.0} Regen for this fight.",
+      "Action" : {
+        "$type" : "TActionPlayerRegenApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f48543b1-4bf2-4f02-97e3-eaeb502668ac",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "98d13db2d3ce388abc0ce3897ccf9cab",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Slow",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Tropical Island 2",
+      "InternalDescription" : "At the start of each hour, get a Coconut or Citrus.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "9ad15f24-4def-4d82-8545-d73794cfbaf2", "deaad0b0-27bc-4800-928f-0fdf443d2c2d" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "fe95c88a-a74a-4010-a90f-01004a8a9662",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "8495667131cb4b76e1b89c3029a4f4b0",
+      "Trigger" : {
+        "$type" : "TTriggerOnHourStarted"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

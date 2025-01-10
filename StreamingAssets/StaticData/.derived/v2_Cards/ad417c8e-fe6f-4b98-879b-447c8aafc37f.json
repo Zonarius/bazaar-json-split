@@ -1,0 +1,101 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "Multicast" : 1,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "ad417c8e-fe6f-4b98-879b-447c8aafc37f",
+  "Version" : "1.0.0",
+  "InternalName" : "Thieves Guild Discount",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Damage" ],
+  "ArtKey" : "Icon_Skill_MON_BarrelOfThieves_03.png",
+  "CardPackId" : "Core",
+  "TranslationKey" : "cdfaa3c5d16fea408159ae3d4f7e9122",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "cdfaa3c5d16fea408159ae3d4f7e9122",
+      "Text" : "Thieves Guild Discount"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "3d239f5f1e46ae637a35fcec1385f0be",
+        "Text" : "When you visit a Merchant, a Small item is free."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnEncounterSelected",
+        "Conditions" : {
+          "$type" : "TCardConditionalTag",
+          "Tags" : [ "Merchant" ],
+          "Operator" : "Any"
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 10.0
+        },
+        "AttributeType" : "BuyPrice",
+        "Operation" : "Subtract",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Thieves Guild Member",
+      "InternalDescription" : "When you visit a Merchant, a Small item is free.",
+      "MigrationData" : "9ee57508-200f-47a2-91bb-cf0b43a91227",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "3d239f5f1e46ae637a35fcec1385f0be"
+    }
+  },
+  "Auras" : { }
+}

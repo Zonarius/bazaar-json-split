@@ -1,0 +1,93 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Diamond",
+  "Tiers" : {
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "SellPrice" : 8,
+        "UpgradeTargets" : 1
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "ec327a59-8fde-444f-b29b-73b22c248c4e",
+  "Version" : "1.0.0",
+  "InternalName" : "Renovation",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ ],
+  "ArtKey" : "Icon_Skill_PYG_Renovation.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "31b41a8e58789ea5985d07a1c25ada09",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "31b41a8e58789ea5985d07a1c25ada09",
+      "Text" : "Renovation"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "31b41a8e58789ea5985d07a1c25ada09",
+        "Text" : "When you level up, upgrade a Property."
+      },
+      "TooltipType" : "Passive"
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "AttributeType" : "Level",
+        "ChangeType" : "Gain"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardUpgrade",
+        "UpgradeToTier" : null,
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "AbsolutePlayerHandAndStash",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTier",
+              "Tiers" : [ "Bronze", "Silver", "Gold" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Property" ],
+              "Operator" : "Any"
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Renovation Gold-tier to Diamond",
+      "InternalDescription" : "When you level up, upgrade anyProperty to Diamond.",
+      "MigrationData" : "4a5f88b7-1d3f-4825-bc6e-13b9d9eaa499",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "31b41a8e58789ea5985d07a1c25ada09"
+    }
+  },
+  "Auras" : { }
+}

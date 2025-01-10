@@ -1,0 +1,400 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Gold",
+  "Tiers" : {
+    "Gold" : {
+      "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "8", "9" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1,
+        "ChargeAmount" : 2000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "8", "9" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "ChargeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "f9170d20-9caa-41ca-82dd-9536f2f75dd6",
+  "Version" : "1.0.0",
+  "InternalName" : "Neophiliac",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "FreezeReference", "SlowReference", "PoisonReference", "BurnReference", "HasteReference", "Cooldown" ],
+  "ArtKey" : "Icon_Skill_Placeholder.png",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "8bfa869c8ff412bf7eb5631846b9815e",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "8bfa869c8ff412bf7eb5631846b9815e",
+      "Text" : "Neophiliac"
+    },
+    "Tooltips" : [ {
+      "Key" : "6917cac5d5d9a813c1d5a37a8fd36e75",
+      "Text" : "The first time you freeze, burn, slow, poison, and haste each fight, charge an item {ability.0} seconds."
+    }, {
+      "Key" : "9e6d6b69d79ba6147b09af47b661bc75",
+      "Text" : ""
+    }, {
+      "Key" : "e664805011e89acafd2d7ada58e228cc",
+      "Text" : ""
+    }, {
+      "Key" : "2104ea46cabf07762ed73b70030e2ca0",
+      "Text" : ""
+    }, {
+      "Key" : "12e39ca6f4afb6fa759e09cb9bdaec87",
+      "Text" : ""
+    }, {
+      "Key" : "a67517b9040ee047750cb0e9bc411e05",
+      "Text" : ""
+    }, {
+      "Key" : "fa236e79a985d98c4cefea54566beb69",
+      "Text" : ""
+    }, {
+      "Key" : "5e982200e255519d0b255686771ca639",
+      "Text" : ""
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Neophiliac Freeze 1",
+      "InternalDescription" : "The first time you freeze, burn, slow, poison, and haste each fight, charge an item {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e7473609-61a6-497f-bff3-5518b73eca9f",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "6917cac5d5d9a813c1d5a37a8fd36e75",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Neophiliac 2 - Freeze Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Counter",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "918716c7-7d8a-4a0b-8c93-517be3f41eb2",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "9e6d6b69d79ba6147b09af47b661bc75",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Freeze",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Neophiliac Burn 3",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b7a85c0a-30df-43ce-a706-3ae75f9f46ad",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "e664805011e89acafd2d7ada58e228cc",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "3" : {
+      "Id" : "3",
+      "InternalName" : "Neophiliac 4 - Burn Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "DamageCrit",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "ced1545f-3466-4b3d-a02d-ca316e1c82d8",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "2104ea46cabf07762ed73b70030e2ca0",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "Burn",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "4" : {
+      "Id" : "4",
+      "InternalName" : "Neophiliac Slow 5",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "21acf3af-0cc6-42eb-9c6f-43392d185b7b",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "12e39ca6f4afb6fa759e09cb9bdaec87",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Slow",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "5" : {
+      "Id" : "5",
+      "InternalName" : "Neophiliac 6 - Slow Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "HealCrit",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "b83f7ba4-182a-4717-8818-411a483ed1cd",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "a67517b9040ee047750cb0e9bc411e05",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Slow",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "8" : {
+      "Id" : "8",
+      "InternalName" : "Neophiliac Haste 9",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "f3bf8e74-9282-425a-bdc3-1923224d030a",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisitePlayer",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      } ],
+      "Priority" : "Medium",
+      "TranslationKey" : "fa236e79a985d98c4cefea54566beb69",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "9" : {
+      "Id" : "9",
+      "InternalName" : "Neophiliac 10 - Haste Counter Increment",
+      "InternalDescription" : "",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "DamageCrit",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "c422519b-8f1d-4d34-9272-7da2e033ee1a",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "5e982200e255519d0b255686771ca639",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

@@ -1,0 +1,179 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 7000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "ChargeAmount" : 2000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "ChargeAmount" : 3000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "ChargeAmount" : 4000
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "7fa2b9c8-f038-44f9-8143-a4f8ee7f34bf",
+  "Version" : "1.0.0",
+  "InternalName" : "Piggles",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Small",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "NonWeapon", "Charge" ],
+  "ArtKey" : "c85556c717a77f440acc6bbf00e6ab95",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "7b27d48e2bf5386f23c9cc4f8cbf55ab",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "afd0df506e8ea37961a4eebf5fbcc3f6",
+      "Text" : "Charge adjacent Small items {i} seconds."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "7b27d48e2bf5386f23c9cc4f8cbf55ab",
+      "Text" : "Piggles"
+    },
+    "Tooltips" : [ {
+      "Key" : "34d13a9a7df19cf0ff96698b7fcddca4",
+      "Text" : "Charge adjacent Small items {ability.0} seconds."
+    }, {
+      "Key" : "fa6a20d0242241fbf7e805085a8458bf",
+      "Text" : "When you win a fight, get a random Piggle."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Piggles 1",
+      "InternalDescription" : "Charge adjacent Small items {ability.0} seconds.",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Small" ],
+              "IsNot" : false
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "MigrationData" : "419f0d1a-6081-4fcf-8b3a-0f75fbc5c5e7",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "34d13a9a7df19cf0ff96698b7fcddca4",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Piggles 2",
+      "InternalDescription" : "When you win a fight, get a random Piggle.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterIdList",
+              "Ids" : [ "8124f91b-3b4f-40ae-9493-057a0be7feb9", "48d24eb0-d953-409c-9602-1d3d4c4278c5", "d4586506-d4d6-45d5-866b-796203f8d9d3" ]
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "7b92f4c7-ce39-4c3e-adac-6802494c303f",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "fa6a20d0242241fbf7e805085a8458bf",
+      "Trigger" : {
+        "$type" : "TTriggerOnFightEnded",
+        "CombatType" : null,
+        "CombatOutcome" : null
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

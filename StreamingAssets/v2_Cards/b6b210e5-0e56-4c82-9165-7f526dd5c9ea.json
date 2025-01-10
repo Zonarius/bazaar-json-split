@@ -1,0 +1,175 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Bronze" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 4,
+        "SellPrice" : 2,
+        "Multicast" : 1,
+        "PoisonApplyAmount" : 3
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Silver" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "PoisonApplyAmount" : 4
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "PoisonApplyAmount" : 5
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0 ],
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "PoisonApplyAmount" : 6
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "b6b210e5-0e56-4c82-9165-7f526dd5c9ea",
+  "Version" : "1.0.0",
+  "InternalName" : "Alembic",
+  "InternalDescription" : "",
+  "StartingTier" : "Bronze",
+  "Size" : "Medium",
+  "Heroes" : [ "Mak" ],
+  "Tags" : [ "Tool" ],
+  "HiddenTags" : [ "Poison", "Active", "NonWeapon" ],
+  "ArtKey" : "fbf208792eb6e454a8147591745439a7",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Mak_Core",
+  "TranslationKey" : "07e9a2635552ad4eda49758d36170da0",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "ef05351ce3f992cc956a1f7372a66343",
+      "Text" : "Poison {i}"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "07e9a2635552ad4eda49758d36170da0",
+      "Text" : "Alembic"
+    },
+    "Tooltips" : [ {
+      "Key" : "625f1edbaefa99b1852f7bdcc113cb98",
+      "Text" : "Poison {ability.0}"
+    }, {
+      "Key" : "8fb4ce59fe993c3e0718ea79e97c8f29",
+      "Text" : "When you buy this, get a Potion."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Alembic 1",
+      "InternalDescription" : "Poison {ability.0}",
+      "Action" : {
+        "$type" : "TActionPlayerPoisonApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "89eb312d-dc7e-4df7-b102-c5afa565dc09",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "625f1edbaefa99b1852f7bdcc113cb98",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Alembic 2",
+      "InternalDescription" : "When you buy this, get a Potion.",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Groups" : [ {
+            "$type" : "TSpawnGroup",
+            "Filters" : [ {
+              "$type" : "TSpawnFilterQuery",
+              "Constraints" : {
+                "$type" : "ConstraintAnd",
+                "Constraints" : [ {
+                  "$type" : "ConstraintTag",
+                  "Tags" : [ "Potion" ],
+                  "IsNot" : false
+                }, {
+                  "$type" : "ConstraintCardType",
+                  "Types" : [ "Item" ],
+                  "IsNot" : false
+                } ]
+              }
+            } ],
+            "SelectionMethod" : "Random",
+            "Limit" : null,
+            "Prerequisite" : null,
+            "RandomWeight" : 0,
+            "Behaviors" : null
+          } ],
+          "SelectionMethod" : "Sequential",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          },
+          "Behaviors" : null
+        }
+      },
+      "MigrationData" : "37a932dc-2518-406b-9a62-ef25d28298b5",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "8fb4ce59fe993c3e0718ea79e97c8f29",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPurchased",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

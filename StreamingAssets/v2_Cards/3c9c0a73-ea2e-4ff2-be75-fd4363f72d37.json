@@ -1,0 +1,146 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Diamond" : {
+      "AbilityIds" : [ "0", "1" ],
+      "ActiveTooltipIds" : [ 0, 1 ],
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 100,
+        "SellPrice" : 50,
+        "Multicast" : 1,
+        "DamageAmount" : 2,
+        "BurnApplyAmount" : 0
+      },
+      "AuraIds" : [ "2" ],
+      "PassiveTooltipIds" : [ 2 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "3c9c0a73-ea2e-4ff2-be75-fd4363f72d37",
+  "Version" : "1.0.0",
+  "InternalName" : "Infernal Greatsword",
+  "InternalDescription" : "",
+  "StartingTier" : "Legendary",
+  "Size" : "Large",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Damage", "Burn", "Active", "DamageReference" ],
+  "ArtKey" : "457b7cfd1bd2de74484f0598bdda8d70",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Core",
+  "TranslationKey" : "41b7c97d61a626ceb82887e6fc038ccb",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "61373c48c1c667df96293c57afd48346",
+      "Text" : "Deal {i} damage"
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "41b7c97d61a626ceb82887e6fc038ccb",
+      "Text" : "Infernal Greatsword"
+    },
+    "Tooltips" : [ {
+      "Key" : "ca31f47fc43c034af55995c60976adb3",
+      "Text" : "Deal {ability.0} damage"
+    }, {
+      "Key" : "690cf8bb4bcc3ad7365bacedf56db4f8",
+      "Text" : "Burn equal to this item's damage."
+    }, {
+      "Key" : "bcda70c6a248a1076e316c7d31b287a9",
+      "Text" : "This has +damage equal to your enemy's Burn."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Infernal Greatsword - 1",
+      "InternalDescription" : "Deal {ability.0} damage",
+      "Action" : {
+        "$type" : "TActionPlayerDamage",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e5da0ff9-d85b-4034-9838-9523ce9036e4",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "ca31f47fc43c034af55995c60976adb3",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : "Assets/TheBazaar/Projectiles/Slash/VFX_Slash_Tier1_PV.prefab",
+        "VFXShouldPlay" : true
+      }
+    },
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Infernal Greatsword - 2",
+      "InternalDescription" : "Burn equal to this item's damage.",
+      "Action" : {
+        "$type" : "TActionPlayerBurnApply",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "5ea09f8d-64d0-4963-b9c7-1106316cfe4d",
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "TranslationKey" : "690cf8bb4bcc3ad7365bacedf56db4f8",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "InternalName" : "Infernal Greatsword - 3",
+      "InternalDescription" : "This has +damage equal to your enemy's Burn.",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValuePlayerAttribute",
+          "Target" : {
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Opponent",
+            "Conditions" : null
+          },
+          "AttributeType" : "Burn",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 1.0
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "8eb04183-965a-43bd-83a2-c0b6cfb27af4",
+      "Prerequisites" : null,
+      "TranslationKey" : "bcda70c6a248a1076e316c7d31b287a9",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Diamond",
+  "Tiers" : {
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "Multicast" : 1
+      },
+      "AuraIds" : [ ],
+      "PassiveTooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "f7ae1ab0-16dc-46af-9a77-b23b7f33104f",
+  "Version" : "1.0.0",
+  "InternalName" : "Backup Defenses",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Pygmalien", "Dooley", "Stelle" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "HealthReference", "Shield" ],
+  "ArtKey" : "Icon_Skill_BackupDefenses.png",
+  "SpawningEligibility" : "Never",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "0cbdd5f1b7fdea3c9a7bf0d4e51f326c",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : null,
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "0cbdd5f1b7fdea3c9a7bf0d4e51f326c",
+      "Text" : "Backup Defenses"
+    },
+    "Tooltips" : [ {
+      "Key" : "0cbdd5f1b7fdea3c9a7bf0d4e51f326c",
+      "Text" : "The first time you fall below half health each fight, double the Shield of your items."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Backup Defenses",
+      "InternalDescription" : "The first time you fall below half health each fight, double the Shield of your items.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 0.0
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Shield" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "MigrationData" : "0a5735e4-3eb8-420b-ac20-931b942aef89",
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "TranslationKey" : "0cbdd5f1b7fdea3c9a7bf0d4e51f326c",
+      "Trigger" : {
+        "$type" : "TTriggerOnPlayerAttributePercentChange",
+        "Subject" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
+          "Conditions" : null
+        },
+        "AttributeType" : "HealthMax"
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : { }
+}

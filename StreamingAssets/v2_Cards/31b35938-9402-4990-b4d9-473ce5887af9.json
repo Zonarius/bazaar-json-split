@@ -1,0 +1,148 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Silver" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 12,
+        "SellPrice" : 6,
+        "Multicast" : 1
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 24,
+        "SellPrice" : 12
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "AbilityIds" : [ "0" ],
+      "ActiveTooltipIds" : [ ],
+      "Attributes" : {
+        "BuyPrice" : 48,
+        "SellPrice" : 24
+      },
+      "AuraIds" : [ "1" ],
+      "PassiveTooltipIds" : [ 0, 1 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "31b35938-9402-4990-b4d9-473ce5887af9",
+  "Version" : "1.0.0",
+  "InternalName" : "Pawn Shop",
+  "InternalDescription" : "",
+  "StartingTier" : "Silver",
+  "Size" : "Large",
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Property" ],
+  "HiddenTags" : [ "Health", "Value", "NonWeapon", "EconomyReference" ],
+  "ArtKey" : "30e28522be946fa459f0ca6fc02c9210",
+  "SpawningEligibility" : "Always",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "b6c99068aabe58c4cdc0de69b8f2504f",
+  "AudioKey" : "",
+  "Localization" : {
+    "Description" : {
+      "Key" : "8d3b501b77f09a99e78902cbb4ef90ee",
+      "Text" : "When you sell an item, give this +{i} value."
+    },
+    "FlavorText" : null,
+    "Title" : {
+      "Key" : "b6c99068aabe58c4cdc0de69b8f2504f",
+      "Text" : "Pawn Shop"
+    },
+    "Tooltips" : [ {
+      "Key" : "372f19e3875a2e534d350b676608549e",
+      "Text" : "When you sell an item, give this +{ability.0} value."
+    }, {
+      "Key" : "dd653c57cec4e25a64eee2f4d852bc40",
+      "Text" : "You have increased max health equal to {aura.1.mod|%} times this item's value."
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "InternalName" : "Pawn Shop 1",
+      "InternalDescription" : "When you sell an item, give this +{ability.0} value.",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "SellPrice",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "e04be0f0-713f-4443-b383-a47c80a205eb",
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "TranslationKey" : "372f19e3875a2e534d350b676608549e",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  },
+  "Auras" : {
+    "1" : {
+      "Id" : "1",
+      "InternalName" : "Pawn Shop 2",
+      "InternalDescription" : "You have increased max health equal to {aura.1.mod|%} times this item's value.",
+      "Action" : {
+        "$type" : "TAuraActionPlayerModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "SellPrice",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : 10.0
+          }
+        },
+        "AttributeType" : "HealthMax",
+        "Operation" : "Add",
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "MigrationData" : "0783a5df-b6ef-4cf4-87cd-abac070bc450",
+      "Prerequisites" : null,
+      "TranslationKey" : "dd653c57cec4e25a64eee2f4d852bc40",
+      "VFXConfig" : {
+        "VFXIsTakeover" : false,
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true
+      }
+    }
+  }
+}
