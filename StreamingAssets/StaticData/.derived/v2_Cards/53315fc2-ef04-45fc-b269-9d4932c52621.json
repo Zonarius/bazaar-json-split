@@ -4,45 +4,41 @@
   "Tiers" : {
     "Silver" : {
       "Attributes" : {
-        "Multicast" : 1,
         "BuyPrice" : 10,
-        "Custom_0" : 10,
-        "Custom_1" : 3
+        "Custom_0" : 1
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "Custom_0" : 20,
-        "Custom_1" : 6
+        "Custom_0" : 2
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 30,
-        "Custom_1" : 9
+        "Custom_0" : 3
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
   },
   "Type" : "Skill",
   "Id" : "53315fc2-ef04-45fc-b269-9d4932c52621",
   "Version" : "1.0.0",
-  "InternalName" : "Searing Blade",
+  "InternalName" : "Searing Flames",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Vanessa", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Heroes" : [ "Dooley" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "DamageReference", "BurnReference" ],
+  "HiddenTags" : [ "BurnReference", "HasteReference" ],
   "ArtKey" : "Icon_Skill_SearingBlade.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "a3f5bc26ce0126c98fe511541d2ac033",
@@ -50,27 +46,51 @@
   "Localization" : {
     "Title" : {
       "Key" : "a3f5bc26ce0126c98fe511541d2ac033",
-      "Text" : "Searing Blade"
+      "Text" : "Searing Flames"
     },
     "Description" : null,
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
         "Key" : "4cf82f269cd2cd61db6150142912520b",
-        "Text" : "Your leftmost item has +{aura.0} Damage if it is a Weapon and +{aura.1} Burn if it is a Burn item."
+        "Text" : "When one of your Burn items gains Haste, if it already has Haste, it gains {ability.0} Burn for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
-  "Abilities" : { },
-  "Auras" : {
+  "Abilities" : {
     "0" : {
       "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Burn" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Haste",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "DamageAmount",
-        "Operation" : "Add",
+        "$type" : "TActionCardModifyAttribute",
         "Value" : {
           "$type" : "TReferenceValueCardAttribute",
           "Target" : {
@@ -81,21 +101,38 @@
           "DefaultValue" : 0.0,
           "Modifier" : null
         },
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
         "Target" : {
-          "$type" : "TTargetCardXMost",
-          "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
-          "ExcludeSelf" : true,
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
           "Conditions" : {
-            "$type" : "TCardConditionalTag",
-            "Tags" : [ "Weapon" ],
-            "Operator" : "Any"
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Burn" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Haste",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
           }
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Searing Blade 1",
-      "InternalDescription" : "Your leftmost Item has +{aura.0} Damage and +{aura.1} Burn.",
+      "Priority" : "Low",
+      "InternalName" : "Searing Flames 1",
+      "InternalDescription" : "When one of your Burn items gains Haste, if it already has Haste, it gains [--/1/2/3] Burn for the fight.",
       "MigrationData" : "24037059-ba9a-486d-99fe-59eefd97b23b",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -103,46 +140,7 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "4cf82f269cd2cd61db6150142912520b"
-    },
-    "1" : {
-      "Id" : "1",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "BurnApplyAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_1",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
-        },
-        "Target" : {
-          "$type" : "TTargetCardXMost",
-          "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
-          "ExcludeSelf" : true,
-          "Conditions" : {
-            "$type" : "TCardConditionalHiddenTag",
-            "Tags" : [ "Burn" ],
-            "Operator" : "Any"
-          }
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Searing Blade 2",
-      "InternalDescription" : "",
-      "MigrationData" : "9e8e7462-78d2-4020-801d-1435c583925f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "3c3a3b43b750f0d5ef1ce2fec0b4e639"
     }
-  }
+  },
+  "Auras" : { }
 }

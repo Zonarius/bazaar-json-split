@@ -1,11 +1,21 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Diamond",
+  "StartingTier" : "Gold",
   "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "HasteTargets" : 2,
+        "HasteAmount" : 2000,
+        "BuyPrice" : 20
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
     "Diamond" : {
       "Attributes" : {
-        "BuyPrice" : 40,
-        "HasteAmount" : 2000
+        "HasteTargets" : 3,
+        "BuyPrice" : 40
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -35,9 +45,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "e72e5a53cfa03961d3573303a204dc76",
-        "Text" : "At the start of each fight, Haste your burn items for {ability.0} second(s)."
+        "Text" : "At the start of each fight, Haste {ability.0.targets} Burn items for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -60,6 +71,14 @@
               "$type" : "TCardConditionalHiddenTag",
               "Tags" : [ "Burn" ],
               "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
             } ]
           }
         }

@@ -4,21 +4,26 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
-        "Multicast" : 1,
         "HasteAmount" : 1000,
         "HasteTargets" : 1,
-        "BuyPrice" : 20
+        "BuyPrice" : 20,
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
-        "HasteAmount" : 2000,
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
@@ -46,9 +51,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "a442d0b37ca5ae9a717d8743f3ec75d5",
-        "Text" : "When you use an Aquatic item, Haste a weapon for {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you use an Aquatic item each fight, Haste {ability.0.targets} weapon for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -92,10 +98,45 @@
           }
         }
       },
-      "Prerequisites" : null,
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      }, {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
       "Priority" : "Low",
       "InternalName" : "Crashing Waves",
-      "InternalDescription" : "When you use an Aquatic item, Haste a weapon for {ability.0} second(s).",
+      "InternalDescription" : "The first [-/-/5/10] times you use an Aquatic item each fight, Haste 1 weapon for 1 second.",
       "MigrationData" : "923eb4e7-bbb6-406b-b664-2c7098ec1bd5",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -103,7 +144,93 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "a442d0b37ca5ae9a717d8743f3ec75d5"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Aquatic" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a193d872e6cb3a8dc2d05aedb98955c0"
+    }
+  }
 }

@@ -1,58 +1,44 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Silver",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 5,
-        "Custom_0" : 50,
-        "Custom_1" : 99
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 10,
-        "Custom_0" : 150,
-        "Custom_1" : 98
+        "Custom_0" : 2
       },
       "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 1 ]
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "Custom_0" : 300,
-        "Custom_1" : 97
+        "Custom_0" : 4
       },
       "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 2 ]
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 500,
-        "Custom_1" : 96
+        "Custom_0" : 6
       },
       "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 3 ]
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
     }
   },
   "Type" : "Skill",
   "Id" : "202e4917-e744-41bf-965a-81edcded9d5f",
   "Version" : "1.0.0",
-  "InternalName" : "",
+  "InternalName" : "Toxic Weapons",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Vanessa", "Dooley", "Mak" ],
-  "Tags" : [ ],
-  "HiddenTags" : [ "PoisonReference", "Health" ],
+  "Heroes" : [ "Vanessa", "Mak" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "PoisonReference" ],
   "ArtKey" : "Icon_Skill_ExoticHerbs.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "d2b18ea5f2da9785fe479b1cc2fc008c",
@@ -60,34 +46,17 @@
   "Localization" : {
     "Title" : {
       "Key" : "d2b18ea5f2da9785fe479b1cc2fc008c",
-      "Text" : "Exotic Herbs"
+      "Text" : "Toxic Weapons"
     },
     "Description" : null,
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
         "Key" : "da2066039def1c88654e90b5c550ac22",
-        "Text" : "You have +{aura.0} Health and your Poison items have their cooldowns reduced by 1%."
+        "Text" : "Your Poison items have +{aura.0.mod} Poison for each Weapon you have. [{aura.0}]"
       },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "da2066039def1c88654e90b5c550ac23",
-        "Text" : "You have +{aura.0} Health and your Poison items have their cooldowns reduced by 2%."
-      },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "da2066039def1c88654e90b5c550ac24",
-        "Text" : "You have +{aura.0} Health and your Poison items have their cooldowns reduced by 3%."
-      },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "da2066039def1c88654e90b5c550ac25",
-        "Text" : "You have +{aura.0} Health and your Poison items have their cooldowns reduced by 4%."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : { },
@@ -96,81 +65,50 @@
       "Id" : "0",
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TAuraActionPlayerModifyAttribute",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
-        },
-        "AttributeType" : "HealthMax",
-        "Operation" : "Add",
-        "Target" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Exotic Herbs 1",
-      "InternalDescription" : "You have +{aura.0} Health",
-      "MigrationData" : "2c7ace80-0d09-45a3-b191-042012a7a10e",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "da2066039def1c88654e90b5c550ac22"
-    },
-    "1" : {
-      "Id" : "1",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "CooldownMax",
-        "Operation" : "Multiply",
+        "AttributeType" : "PoisonApplyAmount",
+        "Operation" : "Add",
         "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
+          "$type" : "TReferenceValueCardCount",
           "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }
           },
-          "AttributeType" : "Custom_1",
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 0.01
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
           }
         },
         "Target" : {
           "$type" : "TTargetCardSection",
           "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
+          "ExcludeSelf" : true,
           "Conditions" : {
-            "$type" : "TCardConditionalAnd",
-            "Conditions" : [ {
-              "$type" : "TCardConditionalAttribute",
-              "Attribute" : "CooldownMax",
-              "ComparisonOperator" : "GreaterThan",
-              "ComparisonValue" : {
-                "$type" : "TFixedValue",
-                "Value" : 0.0
-              }
-            }, {
-              "$type" : "TCardConditionalHiddenTag",
-              "Tags" : [ "Poison" ],
-              "Operator" : "Any"
-            } ]
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Poison" ],
+            "Operator" : "Any"
           }
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Exotic Herbs 2",
-      "InternalDescription" : "Your Poison items have their cooldowns reduced by {aura.1}%.",
+      "InternalName" : "Toxic Weapons 1",
+      "InternalDescription" : "Your Poison items have +[--/2/4/6] Poison for each Weapon you have.",
       "MigrationData" : "3a280b62-571d-41c9-84fc-a542d4562f2f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

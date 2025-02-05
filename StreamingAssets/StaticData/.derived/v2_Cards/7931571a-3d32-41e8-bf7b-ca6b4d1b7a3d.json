@@ -1,24 +1,39 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Gold",
+  "StartingTier" : "Silver",
   "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 10,
+        "ShieldApplyAmount" : 0,
+        "Custom_0" : 0,
+        "Custom_1" : 2,
+        "Custom_2" : 2,
+        "Custom_3" : 0
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0 ]
+    },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "ShieldApplyAmount" : 0,
-        "Custom_0" : 0
+        "Custom_1" : 3,
+        "Custom_2" : 3
       },
-      "AbilityIds" : [ "0", "3" ],
-      "AuraIds" : [ "1" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2" ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_1" : 4,
+        "Custom_2" : 4
       },
-      "AbilityIds" : [ "0", "3" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ "2" ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Type" : "Skill",
@@ -44,15 +59,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "8714f666ac62d2596dc408e24cf5e2c3",
-        "Text" : "The first time you fall below half health each fight, Shield equal to the total Burn of your items. {ability.0}"
+        "Text" : "The first time you fall below half health each fight, Shield equal to {aura.9} times the Burn on your opponent. [{ability.0}]"
       },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "8714f666ac62d2596dc408e24cf5e2c4",
-        "Text" : "The first time you fall below half health each fight, Shield equal to double the total Burn of your items. {ability.0}"
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -114,7 +124,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 0.5
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.5
+                }
               }
             }
           }
@@ -122,7 +135,7 @@
       } ],
       "Priority" : "Medium",
       "InternalName" : "Burning Shield Ability",
-      "InternalDescription" : "",
+      "InternalDescription" : "The first time you fall below half health each fight, Shield equal to [--/2/3/4] times the Burn on your opponent.",
       "MigrationData" : "4069ddae-24d4-4d1f-a261-48dd58144623",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -131,8 +144,8 @@
       },
       "TranslationKey" : "957fb252-8a09-4dbc-8ded-b074ba9a8f6f"
     },
-    "3" : {
-      "Id" : "3",
+    "1" : {
+      "Id" : "",
       "Trigger" : {
         "$type" : "TTriggerOnPlayerAttributeChanged",
         "Subject" : {
@@ -182,7 +195,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 0.5
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.5
+                }
               }
             }
           }
@@ -201,26 +217,34 @@
     }
   },
   "Auras" : {
-    "1" : {
-      "Id" : "1",
+    "2" : {
+      "Id" : "2",
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
         "AttributeType" : "ShieldApplyAmount",
         "Operation" : "Add",
         "Value" : {
-          "$type" : "TReferenceValueCardAttributeAggregate",
+          "$type" : "TReferenceValuePlayerAttribute",
           "Target" : {
-            "$type" : "TTargetCardSection",
-            "TargetSection" : "SelfHand",
-            "ExcludeSelf" : false,
+            "$type" : "TTargetPlayerRelative",
+            "TargetMode" : "Opponent",
             "Conditions" : null
           },
-          "AttributeType" : "BurnApplyAmount",
+          "AttributeType" : "Burn",
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 1.0
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
           }
         },
         "Target" : {
@@ -229,7 +253,7 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Burning Shield Value Gold",
+      "InternalName" : "Burning Shield Value",
       "InternalDescription" : "",
       "MigrationData" : "696fe5c3-8c68-440a-a6ad-4d1ae8c9a8fe",
       "VFXConfig" : {
@@ -239,26 +263,27 @@
       },
       "TranslationKey" : "ba9121073a8872b756a3f1b6f8714b91"
     },
-    "2" : {
-      "Id" : "2",
+    "9" : {
+      "Id" : "9",
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "ShieldApplyAmount",
+        "AttributeType" : "Custom_3",
         "Operation" : "Add",
         "Value" : {
-          "$type" : "TReferenceValueCardAttributeAggregate",
+          "$type" : "TReferenceValueCardAttribute",
           "Target" : {
-            "$type" : "TTargetCardSection",
-            "TargetSection" : "SelfHand",
-            "ExcludeSelf" : false,
+            "$type" : "TTargetCardSelf",
             "Conditions" : null
           },
-          "AttributeType" : "BurnApplyAmount",
+          "AttributeType" : "Custom_2",
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 2.0
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
           }
         },
         "Target" : {
@@ -267,15 +292,15 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Burning Shield Value Diamond",
+      "InternalName" : "Tooltip Handling",
       "InternalDescription" : "",
-      "MigrationData" : "696fe5c3-8c68-440a-a6ad-4d1ae8c9a8fe",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "ba9121073a8872b756a3f1b6f8714b91"
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
     }
   }
 }

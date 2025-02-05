@@ -102,7 +102,8 @@
             "Key" : "f7637138-d570-45ec-9b78-f68b7615810a",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -151,68 +152,59 @@
             "Key" : "6ffa2b82-4d70-4174-8f87-46aabd51567e",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
       "HasAuras" : false
     },
     "Turbo" : {
-      "Attributes" : {
-        "HasteTargets" : 1,
-        "HasteAmount" : 1000
-      },
-      "Abilities" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardHaste",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HasteAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
             "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "SelfHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Turbo First Aiden Ability",
-          "InternalDescription" : "",
-          "MigrationData" : "77204a0e-0631-473b-b46d-57ddb0dd1766",
+          "InternalName" : "Turbo First Aiden Aura",
+          "InternalDescription" : "Heavy 1",
+          "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "e8576ff1-8d81-4b84-ad66-9225c429e179"
+          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Haste" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "84449125-bb43-4846-a57b-43b09f5a5c34",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d1",
+            "Text" : "This has double Haste duration."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAbilities" : false,
+      "HasAuras" : true
     },
     "Shielded" : {
       "Attributes" : {
@@ -265,7 +257,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 1.0
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
               }
             },
             "Target" : {
@@ -293,7 +288,8 @@
             "Key" : "38d47471-e34b-4214-94a1-d289afe3381e",
             "Text" : "Shield equal to this item's Heal."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -339,7 +335,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has double Heal."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -387,7 +384,8 @@
             "Key" : "b26a1579-b0c8-45bb-aa89-d9908e223bbe",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -435,7 +433,8 @@
             "Key" : "1cb5732d-c35b-439a-adcc-80c87a522f49",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -481,7 +480,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -527,7 +527,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -624,7 +625,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -657,13 +659,15 @@
         "Key" : "35faabf0a928bc61c76d97b81f0160e6",
         "Text" : "Heal {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "058de4a57cdbcf617158220347cc5149",
         "Text" : "Haste {ability.1.targets} item for {ability.1} second(s)."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {

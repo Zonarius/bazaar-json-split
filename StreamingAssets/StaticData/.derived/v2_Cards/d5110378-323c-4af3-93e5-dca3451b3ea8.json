@@ -3,15 +3,15 @@
   "Tiers" : {
     "Bronze" : {
       "Attributes" : {
-        "CooldownMax" : 10000,
+        "CooldownMax" : 8000,
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
         "DamageAmount" : 10,
-        "BurnApplyAmount" : 2,
+        "BurnApplyAmount" : 1,
         "Custom_0" : 10,
         "Custom_1" : 1,
-        "AmmoMax" : 1
+        "AmmoMax" : 2
       },
       "AbilityIds" : [ "0", "1", "2", "3" ],
       "AuraIds" : [ ],
@@ -21,6 +21,8 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
+        "DamageAmount" : 20,
+        "BurnApplyAmount" : 2,
         "Custom_0" : 20,
         "Custom_1" : 2
       },
@@ -32,6 +34,8 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
+        "DamageAmount" : 30,
+        "BurnApplyAmount" : 3,
         "Custom_0" : 30,
         "Custom_1" : 3
       },
@@ -43,6 +47,8 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
+        "DamageAmount" : 40,
+        "BurnApplyAmount" : 4,
         "Custom_0" : 40,
         "Custom_1" : 4
       },
@@ -103,7 +109,8 @@
             "Key" : "01585b5d-fe7c-43fe-8cd1-d1aa06a71d58",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -152,7 +159,8 @@
             "Key" : "bcf0f464-056f-4f7d-9791-95e71623918c",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -209,7 +217,8 @@
             "Key" : "9bae2c49-cc3c-4c43-b48d-4afdbfea4357",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -217,7 +226,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 100
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -248,24 +257,65 @@
           "TranslationKey" : "e24940d3-c859-4444-abb1-68e4292563b0"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Mantis Shrimp Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "25f5424e-8369-4fcf-a5ef-20dcddbb28c7",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "Shield equal to this item's damage."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 150
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -296,24 +346,66 @@
           "TranslationKey" : "2df9e583-cddc-406e-95bb-ba82aaf89993"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Mantis Shrimp Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "3550915c-a2ec-4188-bf1e-7af9666f7913",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "Heal equal to this item's damage."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 10
+        "PoisonApplyAmount" : 10,
+        "Custom_0" : 2
       },
       "Abilities" : {
         "e1" : {
@@ -342,6 +434,54 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "2b57c80b-2331-4dee-b3b1-a3ac09869698"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            },
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "High",
+          "InternalName" : "Toxic Mantis Shrimp Ability 2",
+          "InternalDescription" : "When you Slow, this gains +2 Poison for the fight",
+          "MigrationData" : "f457e8ef-855f-4681-943c-9c6741a17edb",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "70381393a66e67bb76dca05c62f623b2"
         }
       },
       "Auras" : { },
@@ -353,7 +493,15 @@
             "Key" : "3396dbaf-0f72-42d4-8b36-1b9cf0a115df",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "3396dbaf-0f72-42d4-8b36-1b9cf0a115df",
+            "Text" : "When you Slow, this gains +{ability.e2} Poison for the fight."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -399,7 +547,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has double Burn."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -445,7 +594,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -491,7 +641,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -588,7 +739,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -608,7 +760,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This has Lifesteal."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -641,19 +794,22 @@
         "Key" : "16bdb2b66dbc50154753a07462f45fda",
         "Text" : "Deal {ability.0} damage."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "8b357c72e63933feac1bff9fcb331cc7",
         "Text" : "Burn {ability.1}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "8b357c72e63933feac1bff9fcb331cc7",
-        "Text" : "When you slow, this item gains {ability.2} damage and {ability.3} burn for the fight."
+        "Text" : "When you slow, this gains {ability.2} damage and {ability.3} burn for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {

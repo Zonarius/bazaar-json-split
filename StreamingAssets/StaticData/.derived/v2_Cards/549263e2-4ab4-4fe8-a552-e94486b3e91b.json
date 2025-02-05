@@ -1,36 +1,30 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Silver",
+  "StartingTier" : "Gold",
   "Tiers" : {
-    "Silver" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 10,
-        "Custom_0" : 10,
-        "Custom_1" : 10
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Gold" : {
       "Attributes" : {
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1,
         "BuyPrice" : 20,
-        "Custom_0" : 20,
-        "Custom_1" : 20
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 30,
-        "Custom_1" : 30
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
   },
@@ -40,9 +34,9 @@
   "InternalName" : "Invigorating Blade",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Pygmalien", "Vanessa", "Mak" ],
-  "Tags" : [ ],
-  "HiddenTags" : [ "DamageReference", "HealReference" ],
+  "Heroes" : [ "Pygmalien" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Charge", "HealReference" ],
   "ArtKey" : "Icon_Skill_HealingWeapon.png",
   "CardPackId" : "Pygmalien_Core",
   "TranslationKey" : "5dece7c7156c60bbc4ff8b5a5e01fa20",
@@ -57,34 +51,20 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "f9b2b754947b7750c4605f6b6444e585",
-        "Text" : "Your leftmost item has +{aura.0} Damage if it is a Weapon and +{aura.1} Heal if it is a Heal item."
+        "Text" : "The first {aura.9} times you use a Weapon each fight, Charge {ability.0.targets} Heal item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
-  "Abilities" : { },
-  "Auras" : {
+  "Abilities" : {
     "0" : {
       "Id" : "0",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "DamageAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
-        },
-        "Target" : {
-          "$type" : "TTargetCardXMost",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
           "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
           "ExcludeSelf" : true,
           "Conditions" : {
             "$type" : "TCardConditionalTag",
@@ -93,9 +73,57 @@
           }
         }
       },
-      "Prerequisites" : null,
-      "InternalName" : "Heal Weapon 1",
-      "InternalDescription" : "Your leftmost item has +{aura.0} Damage and +{aura.1} Heal.",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Heal" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Low",
+      "InternalName" : "Invigorating Blade 1",
+      "InternalDescription" : "The first [-/-/4/8] times you use a Weapon each fight, Charge 1 Heal item 1 second.",
       "MigrationData" : "b9d62250-d4f2-48a0-ac90-c823332cd238",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -106,10 +134,58 @@
     },
     "1" : {
       "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
+    }
+  },
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
+        "AttributeType" : "Custom_3",
         "Operation" : "Add",
         "Value" : {
           "$type" : "TReferenceValueCardAttribute",
@@ -117,24 +193,23 @@
             "$type" : "TTargetCardSelf",
             "Conditions" : null
           },
-          "AttributeType" : "Custom_1",
+          "AttributeType" : "Custom_2",
           "DefaultValue" : 0.0,
-          "Modifier" : null
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
         },
         "Target" : {
-          "$type" : "TTargetCardXMost",
-          "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
-          "ExcludeSelf" : true,
-          "Conditions" : {
-            "$type" : "TCardConditionalHiddenTag",
-            "Tags" : [ "Heal" ],
-            "Operator" : "Any"
-          }
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Heal Weapon 2",
+      "InternalName" : "Tooltip Handling",
       "InternalDescription" : "",
       "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
       "VFXConfig" : {

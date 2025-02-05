@@ -6,9 +6,11 @@
         "CooldownMax" : 10000,
         "BuyPrice" : 100,
         "SellPrice" : 50,
-        "Multicast" : 1
+        "Multicast" : 1,
+        "ChargeAmount" : 2000,
+        "ChargeTargets" : 1
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0, 1 ]
     },
@@ -19,7 +21,7 @@
         "SellPrice" : 50,
         "Multicast" : 1
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0, 1 ]
     }
@@ -27,8 +29,8 @@
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 1,
-        "SlowAmount" : 4000
+        "SlowTargets" : 2,
+        "SlowAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -76,7 +78,8 @@
             "Key" : "3727b912-f649-4681-90e0-c0704ebca487",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -85,7 +88,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 3000
+        "FreezeAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -125,7 +128,8 @@
             "Key" : "8f1032e2-be5d-484e-9a14-a10e0136d7de",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -133,8 +137,8 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 1,
-        "HasteAmount" : 4000
+        "HasteTargets" : 2,
+        "HasteAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -182,7 +186,8 @@
             "Key" : "1d4320ad-03c1-4c75-b1e6-ba2945766564",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -190,7 +195,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 15
+        "ShieldApplyAmount" : 50
       },
       "Abilities" : {
         "e1" : {
@@ -230,7 +235,8 @@
             "Key" : "418d1687-272f-4900-9123-affea5ed65fa",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -238,7 +244,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 20
+        "HealAmount" : 75
       },
       "Abilities" : {
         "e1" : {
@@ -278,7 +284,8 @@
             "Key" : "3fc408ba-fe90-433b-a78c-e8f63f9d4b68",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -286,7 +293,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 5
       },
       "Abilities" : {
         "e1" : {
@@ -326,7 +333,8 @@
             "Key" : "9470e90b-e60c-4fde-a5b0-571256f9d8f4",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -334,7 +342,7 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 5
+        "BurnApplyAmount" : 7
       },
       "Abilities" : {
         "e1" : {
@@ -374,7 +382,8 @@
             "Key" : "3ab2edfe-7f79-40f9-8152-87a8c7374871",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -420,7 +429,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -430,32 +440,38 @@
       "Attributes" : { },
       "Abilities" : { },
       "Auras" : {
-        "e1" : {
+        "e" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "CritChance",
             "Operation" : "Add",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 50.0
+              "Value" : 25.0
             },
             "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Burn" ],
+                "Operator" : "Any"
+              }
             }
           },
           "Prerequisites" : null,
           "InternalName" : "Deadly Dragon Heart Aura",
-          "InternalDescription" : "Deadly 50",
-          "MigrationData" : "",
+          "InternalDescription" : "",
+          "MigrationData" : "2302efe6-347f-4c26-b343-f6b3476399f1",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "30ff55a5-1f41-46c0-bf7f-52a6fe917104"
+          "TranslationKey" : "2939e5a995c7e015e2397c99821aba64"
         }
       },
       "Tags" : [ ],
@@ -464,9 +480,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +{aura.e1}% Crit Chance."
+            "Text" : "Your Burn items have +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -563,7 +580,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -578,8 +596,8 @@
   "StartingTier" : "Legendary",
   "Size" : "Medium",
   "Heroes" : [ "Common" ],
-  "Tags" : [ ],
-  "HiddenTags" : [ "Active", "NonWeapon", "DamageReference", "Toughness" ],
+  "Tags" : [ "Dragon" ],
+  "HiddenTags" : [ "BurnReference" ],
   "ArtKey" : "654433c060e6ba9439c3e178f2cae18e",
   "CardPackId" : "Core",
   "TranslationKey" : "c08410764a2f948b355a67d548b86c8d",
@@ -589,23 +607,22 @@
       "Key" : "c08410764a2f948b355a67d548b86c8d",
       "Text" : "Dragon Heart"
     },
-    "Description" : {
-      "Key" : "e28137c0ca8d67d81e1f6081b2b30436",
-      "Text" : "Double your Strength and Toughness for the fight."
-    },
+    "Description" : null,
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
         "Key" : "c08410764a2f948b355a67d548b86c8d",
-        "Text" : "Double your Strength and Toughness for the fight."
+        "Text" : "Double the Burn of an item for the fight."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "70b79b7ea90c6301104d662a757aae8c",
-        "Text" : ""
+        "Text" : "When you Burn or use a Dragon item, charge this 2 seconds."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -619,73 +636,26 @@
         "$type" : "TActionCardModifyAttribute",
         "Value" : {
           "$type" : "TFixedValue",
-          "Value" : 0.0
+          "Value" : 2.0
         },
-        "AttributeType" : "DamageAmount",
-        "Operation" : "Add",
+        "AttributeType" : "BurnApplyAmount",
+        "Operation" : "Multiply",
         "Duration" : {
           "$type" : "TDeterminantDuration",
           "DurationType" : "UntilEndOfCombat"
         },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
-          "Conditions" : {
-            "$type" : "TCardConditionalAttribute",
-            "Attribute" : "DamageAmount",
-            "ComparisonOperator" : "GreaterThanOrEqual",
-            "ComparisonValue" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.0
-            }
-          }
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "High",
-      "InternalName" : "Dragon Heart",
-      "InternalDescription" : "Double your Strength and Toughness for the fight.",
-      "MigrationData" : "18071055-b3a1-422f-8105-e82d030f9f20",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "c08410764a2f948b355a67d548b86c8d"
-    },
-    "1" : {
-      "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
+        "TargetCount" : {
           "$type" : "TFixedValue",
-          "Value" : 0.0
+          "Value" : 1.0
         },
-        "AttributeType" : "ShieldApplyAmount",
-        "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
         "Target" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
+          "$type" : "TTargetCardRandom",
           "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
           "Conditions" : {
-            "$type" : "TCardConditionalAttribute",
-            "Attribute" : "ShieldApplyAmount",
-            "ComparisonOperator" : "GreaterThanOrEqual",
-            "ComparisonValue" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.0
-            }
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Burn" ],
+            "Operator" : "Any"
           }
         }
       },
@@ -700,6 +670,79 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "70b79b7ea90c6301104d662a757aae8c"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalOr",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Dragon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Burn" ],
+              "Operator" : "None"
+            } ]
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Dragon Heart",
+      "InternalDescription" : "When you use a Dragon item (non-Burn)",
+      "MigrationData" : "9eb3773a-10f0-41d3-bbea-7bbe816a9f74",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "aca53e5cf2ffc889c78b2b39cfe02b85"
+    },
+    "2" : {
+      "Id" : "2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedBurn",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Dragon Wing 2",
+      "InternalDescription" : "When you Burn, charge this {ability.1} second(s).",
+      "MigrationData" : "42276301-c043-46b9-a01b-72f281b641d7",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "51cd63976e512b04f6e20309791b6bff"
     }
   },
   "Auras" : { }

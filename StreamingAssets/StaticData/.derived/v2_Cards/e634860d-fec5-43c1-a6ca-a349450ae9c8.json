@@ -1,21 +1,11 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Silver",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 5,
-        "Custom_0" : 6
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 10,
-        "Custom_0" : 18
+        "Custom_0" : 25
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -24,7 +14,7 @@
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "Custom_0" : 36
+        "Custom_0" : 50
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -33,7 +23,7 @@
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 60
+        "Custom_0" : 75
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -63,9 +53,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "ef364edfb2b66f5eaa91029a19326a69",
-        "Text" : "Your slowest weapon has +{aura.0} damage."
+        "Text" : "If you have 4 or fewer items in play, your Weapons have +{aura.0} damage."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : { },
@@ -92,21 +83,25 @@
           "TargetSection" : "SelfHand",
           "ExcludeSelf" : false,
           "Conditions" : {
-            "$type" : "TCardConditionalAnd",
-            "Conditions" : [ {
-              "$type" : "TCardConditionalTag",
-              "Tags" : [ "Weapon" ],
-              "Operator" : "Any"
-            }, {
-              "$type" : "TCardConditionalAttributeHighest",
-              "AttributeType" : "CooldownMax"
-            } ]
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
           }
         }
       },
-      "Prerequisites" : null,
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "Comparison" : "LessThanOrEqual",
+        "Amount" : 4
+      } ],
       "InternalName" : "Heavy Firepower",
-      "InternalDescription" : "Your slowest weapon has +{aura.0} damage.",
+      "InternalDescription" : "If you have 4 or fewer items in play, your Weapons have +[--/25/50/75] damage.",
       "MigrationData" : "ec7226b4-5316-4870-a805-721bd07c685c",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

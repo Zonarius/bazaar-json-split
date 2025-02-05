@@ -1,38 +1,16 @@
 {
   "$type" : "TCardItem",
   "Tiers" : {
-    "Silver" : {
-      "Attributes" : {
-        "CooldownMax" : 6000,
-        "BuyPrice" : 4,
-        "SellPrice" : 2,
-        "Multicast" : 1,
-        "BurnApplyAmount" : 3,
-        "ChargeTargets" : 1,
-        "ChargeAmount" : 1000
-      },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
-    },
-    "Gold" : {
-      "Attributes" : {
-        "BuyPrice" : 8,
-        "SellPrice" : 4,
-        "ChargeAmount" : 2000
-      },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
-    },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 3000
+        "Multicast" : 1,
+        "BurnApplyAmount" : 2,
+        "Custom_0" : 1
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     }
   },
@@ -46,7 +24,14 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -86,9 +71,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "8c96071a-ec21-4d1c-be77-4e4b580af04b",
-            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you use an adjacent item, slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -103,7 +89,14 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -112,7 +105,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -135,9 +132,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "71af4b81-0931-4780-8110-a3b42542a071",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you use an adjacent item, freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -152,7 +150,14 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -191,9 +196,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "f8aec4ee-0a57-43a8-b017-31acb24d6ddb",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you use an adjacent item, haste it for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -201,13 +207,20 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 15
+        "ShieldApplyAmount" : 10
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -239,9 +252,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "84f34206-1a5f-4eb7-af9f-afda5e5ffa9c",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "When you use an adjacent item, shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -249,13 +263,20 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 20
+        "HealAmount" : 15
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -287,9 +308,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "23d18d55-5456-4360-b8cc-99b6b64a7563",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "When you use an adjacent item, heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -303,7 +325,14 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -335,9 +364,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "7b03085f-d81a-43b1-ada2-5a10a6b63945",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "When you use an adjacent item, poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -383,7 +413,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has double Burn."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -398,11 +429,11 @@
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "Multicast",
-            "Operation" : "Add",
+            "AttributeType" : "Custom_0",
+            "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 1.0
+              "Value" : 2.0
             },
             "Target" : {
               "$type" : "TTargetCardSelf",
@@ -422,14 +453,15 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ ],
+      "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +1 Multicast."
+            "Text" : "This gives double + Max Ammo."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -441,18 +473,43 @@
       "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "CritChance",
             "Operation" : "Add",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 50.0
+              "Value" : 25.0
             },
             "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                }, {
+                  "$type" : "TCardConditionalOr",
+                  "Conditions" : [ {
+                    "$type" : "TCardConditionalTag",
+                    "Tags" : [ "Weapon" ],
+                    "Operator" : "Any"
+                  }, {
+                    "$type" : "TCardConditionalHiddenTag",
+                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                    "Operator" : "Any"
+                  } ]
+                } ]
+              }
             }
           },
           "Prerequisites" : null,
@@ -468,14 +525,15 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ ],
+      "HiddenTags" : [ "Crit" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "b55e33b0-3bcb-42ab-9864-46195bc68437",
-            "Text" : "This has +{aura.e1}% Crit Chance."
+            "Text" : "Adjacent items have +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -572,7 +630,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -584,11 +643,11 @@
   "Version" : "1.0.0",
   "InternalName" : "Incendiary Rounds",
   "InternalDescription" : null,
-  "StartingTier" : "Silver",
+  "StartingTier" : "Diamond",
   "Size" : "Small",
   "Heroes" : [ "Vanessa" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "Burn" ],
+  "HiddenTags" : [ "Burn", "Ammo" ],
   "ArtKey" : "1f99c4a4f1a211a45a88970937465c02",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "041dff0271818a9eb498e8bf50fc3d64",
@@ -603,22 +662,31 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "7d76e6ab8581bbe7859b31b7f7ee6c0d",
-        "Text" : "Burn {ability.0}."
+        "Text" : "When you use an adjacent item, Burn {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "52ac5698f7cd1a14b3c1312a1bf59a1e",
-        "Text" : "When you use an adjacent item, Charge this {ability.1} second(s)."
+        "Text" : "Adjacent items have +{aura.1} ammo."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
       "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : null
+        }
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
@@ -632,8 +700,8 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Incendiary Rounds",
-      "InternalDescription" : "Burn {ability.0}.",
+      "InternalName" : "Incendiary Rounds 1",
+      "InternalDescription" : "When you use an adjacent item, Burn 2.",
       "MigrationData" : "d36e301f-ae30-45eb-afb4-1b859a9da15a",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -641,31 +709,51 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "7d76e6ab8581bbe7859b31b7f7ee6c0d"
-    },
+    }
+  },
+  "Auras" : {
     "1" : {
       "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "AmmoMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
           "$type" : "TTargetCardPositional",
           "Origin" : "Self",
           "TargetMode" : "Neighbor",
           "IncludeOrigin" : false,
-          "Conditions" : null
-        }
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardCharge",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "AmmoMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Incendiary Rounds Self Charge",
-      "InternalDescription" : "When you use an adjacent item, charge this [1/2/3/4] second(s).",
+      "InternalName" : "Incendiary Rounds 2",
+      "InternalDescription" : "Adjacent items have +{aura.0} ammo.",
       "MigrationData" : "54635d99-0bee-43a8-bc13-98db4696b2db",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -674,6 +762,5 @@
       },
       "TranslationKey" : "52ac5698f7cd1a14b3c1312a1bf59a1e"
     }
-  },
-  "Auras" : { }
+  }
 }

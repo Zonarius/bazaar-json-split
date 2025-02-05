@@ -1,20 +1,11 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Silver",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "BuyPrice" : 5,
-        "Custom_0" : 5
-      },
-      "AbilityIds" : [ "0" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0 ]
-    },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 10,
-        "Custom_0" : 10
+        "Custom_0" : 3
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -23,7 +14,7 @@
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "Custom_0" : 15
+        "Custom_0" : 6
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -32,7 +23,7 @@
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 20
+        "Custom_0" : 9
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -42,10 +33,10 @@
   "Type" : "Skill",
   "Id" : "3d9279b1-dbf8-4193-8989-8d2b022533af",
   "Version" : "1.0.0",
-  "InternalName" : "Finesse Weapon",
+  "InternalName" : "Streamline Weapon",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Pygmalien", "Vanessa", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Heroes" : [ "Vanessa" ],
   "Tags" : [ "Weapon" ],
   "HiddenTags" : [ "DamageReference", "HasteReference" ],
   "ArtKey" : "Icon_Skill_FinesseWeapon.png",
@@ -55,7 +46,7 @@
   "Localization" : {
     "Title" : {
       "Key" : "a644ad56cbd0ab4fd1c86735640de3da",
-      "Text" : "Finesse Weapon"
+      "Text" : "Streamline Weapon"
     },
     "Description" : null,
     "FlavorText" : null,
@@ -64,24 +55,40 @@
         "Key" : "663345f83843f36d468fbe191aa49da7",
         "Text" : "When your Weapons gain Haste, if it already has Haste, it gains +{ability.0} damage."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
-    "1" : {
-      "Id" : "1",
+    "0" : {
+      "Id" : "0",
       "Trigger" : {
         "$type" : "TTriggerOnCardAttributeChanged",
         "Subject" : {
           "$type" : "TTargetCardSection",
           "TargetSection" : "SelfHand",
           "ExcludeSelf" : false,
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Haste",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
         },
         "AttributeChanged" : "Haste",
         "ChangeType" : "Gain"
       },
-      "ActiveIn" : "HandAndStash",
+      "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TActionCardModifyAttribute",
         "Value" : {
@@ -94,27 +101,44 @@
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 1.0
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
           }
         },
-        "AttributeType" : "SellPrice",
+        "AttributeType" : "DamageAmount",
         "Operation" : "Add",
-        "Duration" : null,
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
         "TargetCount" : null,
         "Target" : {
           "$type" : "TTargetCardTriggerSource",
           "ExcludeSelf" : false,
           "Conditions" : {
-            "$type" : "TCardConditionalTag",
-            "Tags" : [ "Weapon" ],
-            "Operator" : "Any"
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Haste",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
           }
         }
       },
       "Prerequisites" : null,
       "Priority" : "Medium",
-      "InternalName" : "Finesse Weapon",
-      "InternalDescription" : "",
+      "InternalName" : "Streamline Weapon",
+      "InternalDescription" : "When one of your Weapons gains Haste, if it already has Haste, it gains [--/3/6/9] damage for the fight.",
       "MigrationData" : "00fae0e5-2fa3-4495-955a-3f73bc799c68",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

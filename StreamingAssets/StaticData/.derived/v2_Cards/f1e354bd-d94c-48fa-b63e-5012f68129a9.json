@@ -4,21 +4,25 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
-        "Multicast" : 1,
-        "HasteAmount" : 1000,
-        "HasteTargets" : 1,
-        "BuyPrice" : 20
+        "HasteAmount" : 2000,
+        "BuyPrice" : 20,
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
-        "HasteAmount" : 2000,
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
@@ -46,9 +50,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "b219bd8705bc4df9cbb4354d4a38e307",
-        "Text" : "When you Burn, Haste the Core for {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you Burn each fight, Haste the Core for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -77,10 +82,32 @@
           }
         }
       },
-      "Prerequisites" : null,
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
       "Priority" : "Low",
       "InternalName" : "Letting Off Steam",
-      "InternalDescription" : "When you Burn, give the Core Haste for {ability.0} second(s).",
+      "InternalDescription" : "The first [-/-/5/10] times you Burn each fight, Haste the Core for 2 seconds.",
       "MigrationData" : "521243fd-a68d-4c75-98f7-b3a90a7dd501",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -88,7 +115,89 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "b219bd8705bc4df9cbb4354d4a38e307"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedBurn",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a193d872e6cb3a8dc2d05aedb98955c0"
+    }
+  }
 }

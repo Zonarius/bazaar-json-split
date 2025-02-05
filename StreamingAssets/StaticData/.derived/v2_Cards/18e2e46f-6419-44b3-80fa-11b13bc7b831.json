@@ -106,7 +106,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This gives double + Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -152,11 +153,110 @@
             "Key" : "a6d7121b-b1af-4b9f-94f9-b128cea2b83c",
             "Text" : "This has double value gain."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
       "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
     }
   },
   "Type" : "Item",
@@ -185,13 +285,15 @@
         "Key" : "9bf4dae73297e44661440e555ff241a1",
         "Text" : "Your Properties have +{aura.0}% Crit Chance."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "c22a3329b9d23382fe13b69cadab096c",
         "Text" : "At the start of each day, your items gain {ability.0} value."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -213,7 +315,10 @@
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 1.0
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
           }
         },
         "AttributeType" : "SellPrice",
@@ -258,7 +363,10 @@
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 1.0
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
           }
         },
         "Target" : {

@@ -4,24 +4,28 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
-        "Multicast" : 1,
-        "HasteAmount" : 4000,
+        "HasteAmount" : 2000,
         "HasteTargets" : 1,
-        "BuyPrice" : 20
+        "BuyPrice" : 20,
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
-        "SlowAmount" : 4000,
         "BuyPrice" : 40,
-        "HasteTargets" : 2
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Type" : "Skill",
@@ -47,15 +51,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "133ad76b9b37cd4ed1b7ec61b16441e2",
-        "Text" : "When you use the Core, Haste {ability.0.targets} item for {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you use The Core each fight, Haste {ability.0.targets} item for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "133ad76b9b37cd4ed1b7ec61b16441e2",
-        "Text" : "When you use the Core, Haste {ability.0.targets} items for {ability.0} second(s)."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -95,7 +94,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Heavy Machinery",
-      "InternalDescription" : "When you use the Core, Haste {ability.0.targets} item for {ability.0} second(s).",
+      "InternalDescription" : "The first [-/-/5/10] times you use the Core each fight, Haste 1 item for 2 seconds.",
       "MigrationData" : "f9970da9-584c-4043-8f8c-93d17e6e87dc",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -103,7 +102,93 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "133ad76b9b37cd4ed1b7ec61b16441e2"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Core" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a193d872e6cb3a8dc2d05aedb98955c0"
+    }
+  }
 }

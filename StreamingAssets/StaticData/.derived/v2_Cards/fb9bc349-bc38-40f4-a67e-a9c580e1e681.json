@@ -3,28 +3,26 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
-        "CooldownMax" : 4000,
+        "CooldownMax" : 7000,
         "BuyPrice" : 24,
         "SellPrice" : 12,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 20,
-        "Custom_0" : 1000,
-        "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "ShieldApplyAmount" : 50,
+        "Custom_0" : 1000
       },
-      "AbilityIds" : [ "0", "2" ],
-      "AuraIds" : [ "1" ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1", "2", "3" ],
       "TooltipIds" : [ 0, 1, 2 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 48,
         "SellPrice" : 24,
-        "Custom_0" : 2000,
-        "ChargeAmount" : 2000
+        "ShieldApplyAmount" : 100,
+        "Custom_0" : 2000
       },
-      "AbilityIds" : [ "0", "2" ],
-      "AuraIds" : [ "1" ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1", "2", "3" ],
       "TooltipIds" : [ 0, 1, 2 ]
     }
   },
@@ -32,7 +30,7 @@
     "Heavy" : {
       "Attributes" : {
         "SlowTargets" : 1,
-        "SlowAmount" : 3000
+        "SlowAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -80,7 +78,8 @@
             "Key" : "87433409-7127-4050-bcac-909e1ee1fbcc",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -89,7 +88,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 1000
+        "FreezeAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -129,7 +128,8 @@
             "Key" : "d76a39cc-29fc-4644-9555-ebcf61f792cd",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -138,7 +138,7 @@
     "Turbo" : {
       "Attributes" : {
         "HasteTargets" : 1,
-        "HasteAmount" : 3000
+        "HasteAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -186,7 +186,8 @@
             "Key" : "5a4d5119-055f-4888-a508-7adf11f3ffa8",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -232,7 +233,8 @@
             "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
             "Text" : "This has double Shield."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -289,7 +291,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 1.0
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
               }
             },
             "Target" : {
@@ -317,7 +322,8 @@
             "Key" : "7a8e1cfb-feaa-4a39-88dc-69d3f43dfafd",
             "Text" : "Heal equal to this item's Shield."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -325,7 +331,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 10
       },
       "Abilities" : {
         "e1" : {
@@ -365,7 +371,8 @@
             "Key" : "be8dc8fe-745e-44a9-a5aa-ae38d664c004",
             "Text" : "Poison {ability.e1}"
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -373,7 +380,7 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 15
       },
       "Abilities" : {
         "e1" : {
@@ -413,7 +420,8 @@
             "Key" : "228822e6-120e-4216-a5a5-2b4e0c726cba",
             "Text" : "Burn {ability.e1}"
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -459,7 +467,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -505,9 +514,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "3951f6b2-2688-424e-beec-a2bb5792711d",
-            "Text" : "Enemy items have -100% Crit Chance."
+            "Text" : "Enemy items have -{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -604,7 +614,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -637,19 +648,22 @@
         "Key" : "31d3bfa4bd4e393c75ff1dc524d21966",
         "Text" : "Shield {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "7807d49efe4390ad4b1f9a2f9bddfe3d",
-        "Text" : "Enemy item cooldowns are increased by {aura.1} second(s)."
+        "Text" : "All item cooldowns are increased by {aura.1} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "7807d49efe4390ad4b1f9a2f9bddfe3d",
-        "Text" : "When you use another item, Charge this {ability.2} second(s)."
+        "Text" : "Your items with a cooldown of 8 seconds or greater have +{aura.3} Multicast."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -679,37 +693,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "31d3bfa4bd4e393c75ff1dc524d21966"
-    },
-    "2" : {
-      "Id" : "2",
-      "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
-          "ExcludeSelf" : true,
-          "Conditions" : null
-        }
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardCharge",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Fort 3",
-      "InternalDescription" : "When you use an item, Charge this [--/--/2/4] second(s).",
-      "MigrationData" : "02525ae0-013e-4b9e-97dd-0bab0fbcfad3",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "6add5e1c5c9c390626c5e3823dc1b9b4"
     }
   },
   "Auras" : {
@@ -730,7 +713,10 @@
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 1.0
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
           }
         },
         "Target" : {
@@ -742,7 +728,7 @@
       },
       "Prerequisites" : null,
       "InternalName" : "Fort 2",
-      "InternalDescription" : "Enemy item cooldowns are increased by 1/2 second(s).",
+      "InternalDescription" : "All item cooldowns are increased by 1/2 second(s).",
       "MigrationData" : "128c1967-45b1-47fc-b9a4-a24cae47f5e6",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -750,6 +736,84 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "28b7fe448850238ce99254ac597200aa"
+    },
+    "2" : {
+      "Id" : "2",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Fort 3",
+      "InternalDescription" : "All item cooldowns are increased by 1/2 second(s).",
+      "MigrationData" : "128c1967-45b1-47fc-b9a4-a24cae47f5e6",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "28b7fe448850238ce99254ac597200aa"
+    },
+    "3" : {
+      "Id" : "3",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThanOrEqual",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 8000.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Fort 4",
+      "InternalDescription" : "Your items with a cooldown 8 or greater have +1 Multicast.",
+      "MigrationData" : "128c1967-45b1-47fc-b9a4-a24cae47f5e7",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "28b7fe448850238ce99254ac597200ab"
     }
   }
 }

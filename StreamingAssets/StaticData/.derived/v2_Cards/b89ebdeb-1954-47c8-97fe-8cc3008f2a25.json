@@ -43,7 +43,7 @@
   "Type" : "Skill",
   "Id" : "b89ebdeb-1954-47c8-97fe-8cc3008f2a25",
   "Version" : "1.0.0",
-  "InternalName" : "Revitalizing Toxins",
+  "InternalName" : "Poison Tyrant",
   "InternalDescription" : "",
   "Size" : "Medium",
   "Heroes" : [ "Common" ],
@@ -56,16 +56,17 @@
   "Localization" : {
     "Title" : {
       "Key" : "f94662c4c9f8b34c4f47867b9baa7a41",
-      "Text" : "Revitalizing Toxins"
+      "Text" : "Poison Tyrant"
     },
     "Description" : null,
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
         "Key" : "17dc617fe9c415dfa1af2b0f32f84695",
-        "Text" : "When you Poison, gain {ability.0} Regeneration for the fight."
+        "Text" : "When you or your enemy Poisons, gain {ability.0} Regeneration for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -107,7 +108,55 @@
       },
       "Prerequisites" : null,
       "Priority" : "Medium",
-      "InternalName" : "Revitalizing Toxins 1",
+      "InternalName" : "Poison Tyrant 1",
+      "InternalDescription" : "When you poison, gain [1/2/3/4] regeneration for the fight.",
+      "MigrationData" : "86843440-3fc0-4189-acd9-2bec669b4d24",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "bf3af7418c4bf542f063ee03914f1b9c"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedPoison",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthRegen",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "Target" : {
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Poison Tyrant 1",
       "InternalDescription" : "When you poison, gain [1/2/3/4] regeneration for the fight.",
       "MigrationData" : "86843440-3fc0-4189-acd9-2bec669b4d24",
       "VFXConfig" : {

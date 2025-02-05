@@ -7,9 +7,8 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "PoisonApplyAmount" : 2,
-        "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "PoisonApplyAmount" : 3,
+        "Custom_0" : 1
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -19,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ChargeAmount" : 2000
+        "Custom_0" : 2
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -29,7 +28,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 3000
+        "Custom_0" : 3
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -88,7 +87,8 @@
             "Key" : "dd8d31a1-de77-42bd-9149-99561facf2e0",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -137,7 +137,8 @@
             "Key" : "d0e3f018-23e8-4bd7-8a7c-491504f75fa3",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -194,7 +195,8 @@
             "Key" : "adf707a9-a104-427f-ba3c-b751ef28e730",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -242,7 +244,8 @@
             "Key" : "66b02300-1b91-4d81-aa65-aaab10edb7cf",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -290,7 +293,8 @@
             "Key" : "d98f3d87-0f41-49ea-b932-ae7694fc0d05",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -336,7 +340,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has double Poison."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -384,7 +389,8 @@
             "Key" : "053ebe54-9671-4732-830b-5fc1f95cc383",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -430,7 +436,8 @@
             "Key" : "515091f7-51ff-4576-8323-221e5f34e0d4",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -476,7 +483,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -573,7 +581,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -606,13 +615,15 @@
         "Key" : "e6d1652384b9cfef1c6e5e7a7407a709",
         "Text" : "Poison {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "e6d1652384b9cfef1c6e5e7a7407a709",
-        "Text" : "When you use an adjacent Weapon, Charge this {ability.1} second(s)."
+        "Text" : "When you use an adjacent Weapon, this gains +{ability.1} Poison for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -633,7 +644,7 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Venom Effect",
+      "InternalName" : "Venom",
       "InternalDescription" : "Poison 2",
       "MigrationData" : "f036a039-59d1-4e1a-86da-04a5bea7930b",
       "VFXConfig" : {
@@ -661,7 +672,30 @@
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionCardCharge",
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "AttributeType" : "PoisonApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
         "Target" : {
           "$type" : "TTargetCardSelf",
           "Conditions" : null
@@ -669,8 +703,8 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Neural Toxin 2",
-      "InternalDescription" : "When you use an adjacent Weapon, Charge this [1/2/3/4] second(s).",
+      "InternalName" : "Venom",
+      "InternalDescription" : "When you use an adjacent Weapon, this gains [--/1/2/3] Poison for the fight.",
       "MigrationData" : "420fd12c-64ad-4af6-9f30-9b1ef0085ddc",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

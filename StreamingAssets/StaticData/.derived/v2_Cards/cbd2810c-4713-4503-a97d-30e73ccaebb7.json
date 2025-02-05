@@ -1,37 +1,26 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Silver",
+  "StartingTier" : "Gold",
   "Tiers" : {
-    "Silver" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 10,
-        "Custom_0" : 3,
-        "Custom_1" : 2
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "Custom_0" : 6,
-        "Custom_1" : 4
+        "PoisonApplyAmount" : 1,
+        "BurnApplyAmount" : 2
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 0 ]
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 9,
-        "Custom_1" : 6
+        "PoisonApplyAmount" : 2,
+        "BurnApplyAmount" : 4
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 0 ]
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
     }
   },
   "Type" : "Skill",
@@ -42,7 +31,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Vanessa", "Dooley", "Mak" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "PoisonReference", "BurnReference" ],
+  "HiddenTags" : [ "Poison", "Burn" ],
   "ArtKey" : "Icon_Skill_ToxicFlame.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "54c30b6806cfe7d4ccfcf62480fb9500",
@@ -57,41 +46,49 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "10c378911af9392f3d26a3f4845b1e07",
-        "Text" : "Your leftmost item has +{aura.0} Burn and +{aura.1} Poison."
+        "Text" : "When you Burn with an item, Poison {ability.0}."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "10c378911af9392f3d26a3f4845b1e08",
+        "Text" : "When you Poison with an item, Burn {ability.1}."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
-  "Abilities" : { },
-  "Auras" : {
+  "Abilities" : {
     "0" : {
       "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedBurn",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalType",
+            "CardType" : "Item",
+            "IsNot" : false
+          }
+        }
+      },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "BurnApplyAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
-        },
+        "$type" : "TActionPlayerPoisonApply",
+        "ReferenceValue" : null,
         "Target" : {
-          "$type" : "TTargetCardXMost",
-          "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
-          "ExcludeSelf" : true,
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
           "Conditions" : null
         }
       },
       "Prerequisites" : null,
+      "Priority" : "Medium",
       "InternalName" : "Toxic Flame 1",
-      "InternalDescription" : "Your leftmost item has +{aura.0} Burn and +{aura.1} Poison.",
+      "InternalDescription" : "When you Burn with an item, Poison [--/--/1/2].",
       "MigrationData" : "9a7dd536-0137-47b2-8cc5-7eb2252ee357",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -102,32 +99,33 @@
     },
     "1" : {
       "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedPoison",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalType",
+            "CardType" : "Item",
+            "IsNot" : false
+          }
+        }
+      },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "PoisonApplyAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
-        },
+        "$type" : "TActionPlayerBurnApply",
+        "ReferenceValue" : null,
         "Target" : {
-          "$type" : "TTargetCardXMost",
-          "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
-          "ExcludeSelf" : true,
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Opponent",
           "Conditions" : null
         }
       },
       "Prerequisites" : null,
+      "Priority" : "Medium",
       "InternalName" : "Toxic Flame 2",
-      "InternalDescription" : "",
+      "InternalDescription" : "When you Poison with an item, Burn [--/--/2/4].",
       "MigrationData" : "7c753089-fc77-4cf9-9a5c-a721ee5cf468",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -136,5 +134,6 @@
       },
       "TranslationKey" : "abbf79a166f1b6232e481f227b29be7c"
     }
-  }
+  },
+  "Auras" : { }
 }

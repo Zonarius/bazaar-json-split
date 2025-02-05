@@ -7,7 +7,10 @@
         "FreezeAmount" : 1000,
         "FreezeTargets" : 1,
         "BuyPrice" : 20,
-        "Custom_0" : 0
+        "Custom_0" : 0,
+        "Custom_1" : 4,
+        "Custom_2" : 4,
+        "Custom_3" : 0
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -15,8 +18,9 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "FreezeAmount" : 2000,
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_1" : 8,
+        "Custom_2" : 8
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -46,9 +50,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "692425a1289c1826ae25460dc4b6a018",
-        "Text" : "The first 5 times you use your rightmost item, freeze {ability.0.targets} item for {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you use your rightmost item each fight, Freeze {ability.0.targets} item for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -81,10 +86,16 @@
           "Conditions" : {
             "$type" : "TCardConditionalAttribute",
             "Attribute" : "Custom_0",
-            "ComparisonOperator" : "LessThanOrEqual",
+            "ComparisonOperator" : "LessThan",
             "ComparisonValue" : {
-              "$type" : "TFixedValue",
-              "Value" : 4.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -92,8 +103,8 @@
         "Amount" : 1
       } ],
       "Priority" : "Medium",
-      "InternalName" : "Coolant Leak Skill OnRightmostUse Freeze/1",
-      "InternalDescription" : "When you use your rightmost item, freeze an item for {ability.0} second(s).",
+      "InternalName" : "Coolant Leak 1",
+      "InternalDescription" : "The first [--/4/8] times you use your rightmost item each fight, freeze 1 item for 1 second.",
       "MigrationData" : "24f9c75a-7696-4ff6-b620-e2885aa4ecf5",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -146,5 +157,45 @@
       "TranslationKey" : "addd58cb20c13b02b433940601a41d13"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

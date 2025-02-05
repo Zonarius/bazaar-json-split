@@ -6,18 +6,23 @@
       "Attributes" : {
         "BuyPrice" : 20,
         "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "ChargeTargets" : 1,
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "ChargeAmount" : 2000
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
@@ -45,9 +50,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "416e8b5efe1b2f14dd3111a416d181bh",
-        "Text" : "When you Poison, Charge {ability.0.targets} Burn item for {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you Poison each fight, charge {ability.0.targets} Burn item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -76,10 +82,32 @@
           }
         }
       },
-      "Prerequisites" : null,
-      "Priority" : "Low",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Medium",
       "InternalName" : "Sick Burn",
-      "InternalDescription" : "When you Poison, charge a Burn item [--/--/1/2] seconds.",
+      "InternalDescription" : "The first [-/-/5/10] times you Poison each fight, charge 1 Burn item 1 second.",
       "MigrationData" : "d5a4c58e-7740-4ad0-b300-1cd80c79af92",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -87,7 +115,89 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "159725786ad3e07f490b788652626432"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedPoison",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "ca935468-9cab-4627-874b-66d353ed7b09",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "addd58cb20c13b02b433940601a41d13"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

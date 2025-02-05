@@ -1,36 +1,30 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Silver",
+  "StartingTier" : "Gold",
   "Tiers" : {
-    "Silver" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 10,
-        "Custom_0" : 10,
-        "Custom_1" : 2
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Gold" : {
       "Attributes" : {
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1,
         "BuyPrice" : 20,
-        "Custom_0" : 20,
-        "Custom_1" : 4
+        "Custom_0" : 0,
+        "Custom_1" : 4,
+        "Custom_2" : 4,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 30,
-        "Custom_1" : 6
+        "Custom_0" : 0,
+        "Custom_1" : 8,
+        "Custom_2" : 8
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
   },
@@ -41,8 +35,8 @@
   "InternalDescription" : "",
   "Size" : "Medium",
   "Heroes" : [ "Vanessa", "Mak" ],
-  "Tags" : [ ],
-  "HiddenTags" : [ "DamageReference", "PoisonReference" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "Charge", "PoisonReference" ],
   "ArtKey" : "Icon_Skill_VenomousBlade.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "c6b000e1edd982d05ebd0e8f631e4ff9",
@@ -57,55 +51,141 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "d0b6b488492e28522bd24c1cb2eadf3f",
-        "Text" : "Your leftmost item has +{aura.0} Damage and +{aura.1} Poison."
+        "Text" : "The first {aura.9} times you use a Weapon each fight, Charge {ability.0.targets} Poison item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
-  "Abilities" : { },
-  "Auras" : {
+  "Abilities" : {
     "0" : {
       "Id" : "0",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "DamageAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
-        },
-        "Target" : {
-          "$type" : "TTargetCardXMost",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
           "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
           "ExcludeSelf" : true,
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
         }
       },
-      "Prerequisites" : null,
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Poison" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Low",
       "InternalName" : "Venomous Blade 1",
-      "InternalDescription" : "Your leftmost Item has +{aura.0} Damage and +{aura.1} Poison.",
-      "MigrationData" : "18fb8354-2e0a-4f76-b845-582cf10a1135",
+      "InternalDescription" : "The first [-/-/4/8] times you use a Weapon each fight, Charge 1 Poison item 1 second.",
+      "MigrationData" : "a6858030-e732-4987-91e7-c7a6da0e8eb3",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "d0b6b488492e28522bd24c1cb2eadf3f"
+      "TranslationKey" : "53ffb6a34cb1f0cb538d52b6d87bb248"
     },
     "1" : {
       "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
+    }
+  },
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "PoisonApplyAmount",
+        "AttributeType" : "Custom_3",
         "Operation" : "Add",
         "Value" : {
           "$type" : "TReferenceValueCardAttribute",
@@ -113,28 +193,31 @@
             "$type" : "TTargetCardSelf",
             "Conditions" : null
           },
-          "AttributeType" : "Custom_1",
+          "AttributeType" : "Custom_2",
           "DefaultValue" : 0.0,
-          "Modifier" : null
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
         },
         "Target" : {
-          "$type" : "TTargetCardXMost",
-          "TargetSection" : "SelfHand",
-          "TargetMode" : "LeftMostCard",
-          "ExcludeSelf" : true,
+          "$type" : "TTargetCardSelf",
           "Conditions" : null
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Venomous Blade 2",
+      "InternalName" : "Tooltip Handling",
       "InternalDescription" : "",
-      "MigrationData" : "c890c6e0-5f33-42cc-931b-b81122b7f829",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "492bba37f026b996d82ef3b6c6e3af32"
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
     }
   }
 }

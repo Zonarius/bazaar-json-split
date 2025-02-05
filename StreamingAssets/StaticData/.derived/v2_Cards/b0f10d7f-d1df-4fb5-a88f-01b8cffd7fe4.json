@@ -1,50 +1,26 @@
 {
   "$type" : "TCardItem",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "CooldownMax" : 5000,
-        "BuyPrice" : 4,
-        "SellPrice" : 2,
-        "Multicast" : 1,
-        "SlowAmount" : 1000,
-        "ChargeAmount" : 1000,
-        "SlowTargets" : 1,
-        "ChargeTargets" : 1
-      },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
-    },
-    "Silver" : {
-      "Attributes" : {
-        "BuyPrice" : 8,
-        "SellPrice" : 4,
-        "ChargeAmount" : 2000
-      },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
-    },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 3000
+        "SlowAmount" : 1000,
+        "SlowTargets" : 1
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ChargeAmount" : 4000
+        "SlowAmount" : 2000
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Enchantments" : {
@@ -88,7 +64,8 @@
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d2",
             "Text" : "This has double Slow duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -96,23 +73,35 @@
     },
     "Icy" : {
       "Attributes" : {
-        "FreezeTargets" : 1,
         "FreezeAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardFreeze",
             "Target" : {
-              "$type" : "TTargetCardRandom",
+              "$type" : "TTargetCardTriggerSource",
               "ExcludeSelf" : false,
-              "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -135,9 +124,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "68465878-bf45-4420-b8ff-b3fb027b649b",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When your enemy uses an item of equal or smaller size, Freeze it for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -152,7 +142,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -192,9 +188,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "f5818102-ca2b-4b64-bda0-ea29f4e140c6",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When your enemy uses an item, haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -208,7 +205,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -240,9 +243,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "be728f0f-58dd-4580-89fe-188ff3b70b82",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "When your enemy uses an item, shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -256,7 +260,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -288,9 +298,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "134c3732-cbdc-4a34-be09-2797e656ad5b",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "When your enemy uses an item, heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -304,7 +315,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -336,9 +353,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "4ce0dc83-6bd5-4e23-b2a3-235abb2246e7",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "When your enemy uses an item, poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -352,7 +370,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -384,9 +408,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ff75fc1e-4939-4632-9750-93ca922d69bf",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "When your enemy uses an item, Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -401,11 +426,11 @@
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "Multicast",
-            "Operation" : "Add",
+            "AttributeType" : "SlowAmount",
+            "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 1.0
+              "Value" : 2.0
             },
             "Target" : {
               "$type" : "TTargetCardSelf",
@@ -430,9 +455,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d2",
-            "Text" : "This has +1 Multicast"
+            "Text" : "This has double Slow duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -529,7 +555,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -541,7 +568,7 @@
   "Version" : "1.0.0",
   "InternalName" : "Tripwire",
   "InternalDescription" : null,
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Gold",
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
   "Tags" : [ ],
@@ -560,30 +587,30 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "20c1a21f0e6c5a9d8b7741dacf72afde",
-        "Text" : "Slow {ability.0.targets} item for {ability.0} second(s)."
+        "Text" : "When your enemy uses an item, Slow it for {ability.0} second(s)."
       },
-      "TooltipType" : "Active"
-    }, {
-      "Content" : {
-        "Key" : "20c1a21f0e6c5a9d8b7741dacf72afde",
-        "Text" : "When your enemy uses an item, Charge this {ability.1} second(s)"
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
       "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TActionCardSlow",
         "Target" : {
-          "$type" : "TTargetCardRandom",
+          "$type" : "TTargetCardTriggerSource",
           "ExcludeSelf" : false,
-          "TargetSection" : "OpponentHand",
           "Conditions" : {
             "$type" : "TCardConditionalAttribute",
             "Attribute" : "CooldownMax",
@@ -596,9 +623,9 @@
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Medium",
+      "Priority" : "Low",
       "InternalName" : "Tripwire 1",
-      "InternalDescription" : "Slow an item for [--/1/2/3] second(s).",
+      "InternalDescription" : "When your enemy uses an item, Slow it for {ability.0} second(s).",
       "MigrationData" : "09a6f487-02d8-4cc9-9246-6cdfe3b45025",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -606,37 +633,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "20c1a21f0e6c5a9d8b7741dacf72afde"
-    },
-    "1" : {
-      "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "OpponentHand",
-          "ExcludeSelf" : false,
-          "Conditions" : null
-        }
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardCharge",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Tripwire 2",
-      "InternalDescription" : "When your enemy uses an item, charge this [--/1/2/3] second(s)",
-      "MigrationData" : "420fd12c-64ad-4af6-9f30-9b1ef0085ddc",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "4b4cf2264f5bc49b80dc743ab5ab2b37"
     }
   },
   "Auras" : { }

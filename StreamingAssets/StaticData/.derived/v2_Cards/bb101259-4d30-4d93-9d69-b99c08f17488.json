@@ -76,7 +76,8 @@
             "Key" : "095d285c-fc2c-4c3b-b38f-59014a9b1f7f",
             "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -125,7 +126,8 @@
             "Key" : "095d285c-fc2c-4c3b-b38f-59014a9b1f7f",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -182,7 +184,8 @@
             "Key" : "15e714d6-c954-43cc-9b68-69e05ce739aa",
             "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -228,7 +231,8 @@
             "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
             "Text" : "This has double Shield."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -236,7 +240,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 60
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -265,22 +269,120 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "f5854ed9-a565-4599-8d66-4a03ea9fb076"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "AllHands",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 10.0
+            },
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield" ],
+                "Operator" : "Any"
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Restorative Aurora Dome Ability 2",
+          "InternalDescription" : "When any item gains Freeze, your other Heal items get +{ability.1} Heal for the fight.",
+          "MigrationData" : "f85aeff1-49ec-4a20-bf19-76be83466917",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "0a412ade517ebd34dbe653b1f9a26939"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Aurora Dome Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "371aa56f-c20a-4b39-87af-58c2a6725699",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "Heal equal to this item's Shield."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "371aa56f-c20a-4b39-87af-58c2a6725699",
+            "Text" : "When any item gains Freeze, your other Heal items get +{ability.e2} Heal for the fight."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
@@ -324,7 +426,8 @@
             "Key" : "04bf9d5c-079a-46d2-abd8-5a76c978dda1",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -372,7 +475,8 @@
             "Key" : "01ed7299-7417-4d36-bd70-b5a8392056f7",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -418,7 +522,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -464,7 +569,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -561,7 +667,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -594,13 +701,15 @@
         "Key" : "ea742958042120e95e3461e410380884",
         "Text" : "Shield {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "0a412ade517ebd34dbe653b1f9a26939",
         "Text" : "When any item gains Freeze, your Shield items get +{ability.1} Shield for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {

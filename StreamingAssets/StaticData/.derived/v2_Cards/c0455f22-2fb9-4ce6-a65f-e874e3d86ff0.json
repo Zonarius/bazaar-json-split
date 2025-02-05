@@ -28,7 +28,7 @@
     "Heavy" : {
       "Attributes" : {
         "SlowTargets" : 1,
-        "SlowAmount" : 4000
+        "SlowAmount" : 3000
       },
       "Abilities" : {
         "e1" : {
@@ -76,7 +76,8 @@
             "Key" : "a81a361b-3d4a-4ae8-a580-18422e5203d8",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -85,7 +86,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 3000
+        "FreezeAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -100,7 +101,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -123,9 +128,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "03e2df42-6d1f-45cc-b4db-3ad55f185cf0",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} item of equal or smaller size for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -134,7 +140,7 @@
     "Turbo" : {
       "Attributes" : {
         "HasteTargets" : 1,
-        "HasteAmount" : 4000
+        "HasteAmount" : 3000
       },
       "Abilities" : {
         "e1" : {
@@ -182,7 +188,8 @@
             "Key" : "870de70f-2d30-465b-a508-34dad3641380",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -190,7 +197,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 15
+        "ShieldApplyAmount" : 50
       },
       "Abilities" : {
         "e1" : {
@@ -230,7 +237,8 @@
             "Key" : "2f87ded8-2533-421e-880a-db5bdd029b9f",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -238,7 +246,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 20
+        "HealAmount" : 75
       },
       "Abilities" : {
         "e1" : {
@@ -278,7 +286,8 @@
             "Key" : "4fd5a9b7-8fa9-486e-bb63-9844bb7471d2",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -286,7 +295,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 5
       },
       "Abilities" : {
         "e1" : {
@@ -326,7 +335,8 @@
             "Key" : "2a42f004-8e36-4e60-bf32-e429a455d974",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -342,10 +352,10 @@
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "BurnApplyAmount",
-            "Operation" : "Add",
+            "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 5.0
+              "Value" : 2.0
             },
             "Target" : {
               "$type" : "TTargetCardSelf",
@@ -370,9 +380,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "d24ac04d-b1a6-4bf4-924a-3e7f48a8581d",
-            "Text" : "burn {aura.e1}"
+            "Text" : "This has double Burn."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -418,7 +429,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -464,7 +476,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -561,7 +574,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -577,7 +591,7 @@
   "Size" : "Small",
   "Heroes" : [ "Jules" ],
   "Tags" : [ "Food" ],
-  "HiddenTags" : [ "Burn", "Active", "NonWeapon" ],
+  "HiddenTags" : [ "Burn" ],
   "ArtKey" : "f0b5c6c371164db4fac88a887a87e2ec",
   "CardPackId" : "Jules_Core",
   "TranslationKey" : "c35bea3d8546f2c331a59e07fde46bfe",
@@ -594,13 +608,15 @@
         "Key" : "c52b95b0c208ee041bd5d3dea4d56b3f",
         "Text" : "Burn {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "c35bea3d8546f2c331a59e07fde46bfe",
-        "Text" : "For each adjacent Food, this gains {aura.1.mod} Multicast."
+        "Text" : "For each adjacent Food, this has +{aura.1.mod} Multicast."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -656,7 +672,10 @@
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
-            "Value" : 1.0
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
           }
         },
         "Target" : {
@@ -666,7 +685,7 @@
       },
       "Prerequisites" : null,
       "InternalName" : "Hot Sauce 2",
-      "InternalDescription" : "+1 Multicast for each adjacent Food.",
+      "InternalDescription" : "For each adjacent Food, this has +1 Multicast.",
       "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

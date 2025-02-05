@@ -17,7 +17,9 @@ class update {
     public static final Path BAZAAR_DIR = Path.of("C:\\Program Files\\Tempo Launcher - Beta\\The Bazaar game_64\\bazaarwinprodlatest\\TheBazaar_Data\\StreamingAssets");
     public static final Path OUT_DIR = Path.of("./StreamingAssets");
     public static final Set<String> SPLIT_FILES = Set.of(
-        "v2_Cards.json"
+        "v2_Cards.json",
+        "battlePlayers.json",
+        "cardEffects.json"
     );
     private final ObjectMapper mapper = new ObjectMapper();
     private final ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());

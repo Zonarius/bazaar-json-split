@@ -3,11 +3,11 @@
   "Tiers" : {
     "Bronze" : {
       "Attributes" : {
-        "CooldownMax" : 5000,
+        "CooldownMax" : 4000,
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 20,
+        "ShieldApplyAmount" : 10,
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1
       },
@@ -19,7 +19,7 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ChargeAmount" : 2000
+        "ShieldApplyAmount" : 20
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -29,7 +29,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ChargeAmount" : 3000
+        "ShieldApplyAmount" : 30
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -39,7 +39,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 4000
+        "ShieldApplyAmount" : 40
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -98,7 +98,8 @@
             "Key" : "cf98581a-40bf-4209-8520-76bbe654abfa",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -122,7 +123,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -145,9 +150,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "59987499-c194-4464-882a-67a0e827a626",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -204,7 +210,8 @@
             "Key" : "3e762d4e-fac4-458b-8b3e-171749440bc1",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -250,7 +257,8 @@
             "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
             "Text" : "This has double Shield."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -307,7 +315,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 1.0
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
               }
             },
             "Target" : {
@@ -335,7 +346,8 @@
             "Key" : "02bff8d9-150c-42c7-81f0-6f086b273018",
             "Text" : "Heal equal to this item's Shield."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -383,7 +395,8 @@
             "Key" : "20dce0bf-3227-4579-8c7e-a96f28877889",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -431,7 +444,8 @@
             "Key" : "53448a83-7910-44f2-95af-d1892bbbda99",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -477,7 +491,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -574,7 +589,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -620,7 +636,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -653,13 +670,15 @@
         "Key" : "731a6ff1-a5b1-4f54-a7eb-99f8776a1c3d",
         "Text" : "Shield {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "13182d0d4aab7035ff8d73f487f363d9",
-        "Text" : "When you use another Aquatic item, Charge this {ability.1} second."
+        "Text" : "When you use another Aquatic item, Charge this {ability.1} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -715,7 +734,7 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Peal 2",
+      "InternalName" : "Pearl 2",
       "InternalDescription" : "When you use another Aquatic item, charge this {ability.1} second(s).",
       "MigrationData" : "02525ae0-013e-4b9e-97dd-0bab0fbcfad3",
       "VFXConfig" : {

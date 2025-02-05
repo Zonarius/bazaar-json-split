@@ -6,9 +6,12 @@
       "Attributes" : {
         "BuyPrice" : 10,
         "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "ChargeTargets" : 1,
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
@@ -18,9 +21,9 @@
         "ChargeAmount" : 1000,
         "ChargeTargets" : 2
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
@@ -28,9 +31,9 @@
         "ChargeAmount" : 1000,
         "ChargeTargets" : 3
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 2 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Type" : "Skill",
@@ -42,7 +45,7 @@
   "Heroes" : [ "Common" ],
   "Tags" : [ "Weapon" ],
   "HiddenTags" : [ "Charge" ],
-  "ArtKey" : "",
+  "ArtKey" : "Icon_Skill_MON_Counterattack.png",
   "CardPackId" : "Core",
   "TranslationKey" : "df11ca9c198147f49775d5db46ebfb96",
   "AudioKey" : "",
@@ -56,21 +59,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "f98367e1845f4f1dbd43e8f6d138dc74",
-        "Text" : "When an enemy uses a weapon, Charge 1 of your weapons 1 second(s)."
+        "Text" : "The first {aura.9} times your enemy uses a weapon, Charge {ability.0.targets} item(s) {ability.0} second."
       },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "db34b5a1c89b47e29e9ba19db126b26f",
-        "Text" : "When an enemy uses a weapon, Charge 2 of your weapons 1 second(s)."
-      },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "f335a1cd65304c3f93a56b2d8b2795f8",
-        "Text" : "When an enemy uses a weapon, Charge 3 of your weapons 1 second(s)."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -97,16 +89,42 @@
           "TargetSection" : "SelfHand",
           "ExcludeSelf" : true,
           "Conditions" : {
-            "$type" : "TCardConditionalTag",
-            "Tags" : [ "Weapon" ],
-            "Operator" : "Any"
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
           }
         }
       },
-      "Prerequisites" : null,
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
       "Priority" : "Low",
       "InternalName" : "Counterstrike 1",
-      "InternalDescription" : "When an enemy uses a weapon, Charge your weapons",
+      "InternalDescription" : "When an enemy uses a weapon, charge an item",
       "MigrationData" : "b78b752d-4dd7-4df7-923a-07ed4a7d3e60",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -114,7 +132,93 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "f98367e1845f4f1dbd43e8f6d138dc74"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "OpponentHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "None"
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "ca935468-9cab-4627-874b-66d353ed7b09",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "addd58cb20c13b02b433940601a41d13"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_2",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

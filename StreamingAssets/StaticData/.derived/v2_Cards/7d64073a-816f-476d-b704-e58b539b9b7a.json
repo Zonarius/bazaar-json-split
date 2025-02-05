@@ -89,7 +89,8 @@
             "Key" : "9a7f1759-8c43-4d78-bb95-4467714f0740",
             "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -138,7 +139,8 @@
             "Key" : "a54257a3-f064-4757-b0e6-688aa4a7d5f7",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -184,7 +186,8 @@
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d1",
             "Text" : "This has double Haste duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -232,7 +235,8 @@
             "Key" : "9db1b820-fa0d-4fc5-a5e8-72f86a0192ac",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -280,7 +284,8 @@
             "Key" : "88d6942c-2452-4c46-babf-71fd16be9059",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -328,7 +333,8 @@
             "Key" : "89b26033-4445-401e-95f1-d654f2facf41",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -376,7 +382,8 @@
             "Key" : "94374e75-1782-4064-9046-c7fefbb30127",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -422,7 +429,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -444,8 +452,36 @@
               "Value" : 50.0
             },
             "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Core" ],
+                  "Operator" : "Any"
+                }, {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                }, {
+                  "$type" : "TCardConditionalOr",
+                  "Conditions" : [ {
+                    "$type" : "TCardConditionalTag",
+                    "Tags" : [ "Weapon" ],
+                    "Operator" : "Any"
+                  }, {
+                    "$type" : "TCardConditionalHiddenTag",
+                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                    "Operator" : "Any"
+                  } ]
+                } ]
+              }
             }
           },
           "Prerequisites" : null,
@@ -466,9 +502,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +{aura.e1}% Crit Chance."
+            "Text" : "Your Core has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -565,7 +602,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -580,7 +618,7 @@
   "StartingTier" : "Silver",
   "Size" : "Medium",
   "Heroes" : [ "Dooley" ],
-  "Tags" : [ ],
+  "Tags" : [ "Tech" ],
   "HiddenTags" : [ "DamageReference", "Haste" ],
   "ArtKey" : "750a452f8598d704d93a30ab38d5c13f",
   "CardPackId" : "Dooley_Core",
@@ -598,13 +636,15 @@
         "Key" : "167a3ce5d6d7e36d83af0b4930eee307",
         "Text" : "Haste the Core for {ability.0} second(s)."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "02c03f7ece9293b3f5b0b62fd0d5239b",
         "Text" : "When the Core gains Haste, give it +{ability.1} damage for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {

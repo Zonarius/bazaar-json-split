@@ -7,33 +7,31 @@
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "Multicast" : 1,
-        "HasteAmount" : 2000,
-        "HasteTargets" : 2,
-        "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "HasteAmount" : 1000,
+        "HasteTargets" : 2
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 2000
+        "HasteAmount" : 2000
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ChargeAmount" : 3000
+        "HasteAmount" : 3000
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     }
   },
@@ -89,7 +87,8 @@
             "Key" : "3ebe2f64-5ffc-4866-9f6c-250c6183106c",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -138,7 +137,8 @@
             "Key" : "ebf54999-c73d-44ef-82fb-6e70f63601d0",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -184,7 +184,8 @@
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d1",
             "Text" : "This has double Haste duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -232,7 +233,8 @@
             "Key" : "dc26fe81-4c0f-4b47-99a4-ee45da18bc0a",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -280,7 +282,8 @@
             "Key" : "753cedc2-f266-4fb3-9bdb-879fc47aca5e",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -328,7 +331,8 @@
             "Key" : "e7968776-ee99-476a-89c5-528fc1d80352",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -376,7 +380,8 @@
             "Key" : "4575c8c3-5562-4d87-af87-007c7d672ff0",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -422,7 +427,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -519,7 +525,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -552,13 +559,15 @@
         "Key" : "35ae85516ad3f9df5ff386a89c665767",
         "Text" : "Haste adjacent items for {ability.0} second(s)."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "75b5f7191c0ff0605c053853a4e55645",
-        "Text" : "When you use a Vehicle or Large item, charge this {ability.1} second(s)."
+        "Text" : "If you have a Vehicle or Large item, reduce this item's cooldown by 50%."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -597,39 +606,47 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "35ae85516ad3f9df5ff386a89c665767"
-    },
+    }
+  },
+  "Auras" : {
     "1" : {
       "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
-          "Conditions" : {
-            "$type" : "TCardConditionalOr",
-            "Conditions" : [ {
-              "$type" : "TCardConditionalSize",
-              "Sizes" : [ "Large" ],
-              "IsNot" : false
-            }, {
-              "$type" : "TCardConditionalTag",
-              "Tags" : [ "Vehicle" ],
-              "Operator" : "Any"
-            } ]
-          }
-        }
-      },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionCardCharge",
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Multiply",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 0.5
+        },
         "Target" : {
           "$type" : "TTargetCardSelf",
           "Conditions" : null
         }
       },
-      "Prerequisites" : null,
-      "Priority" : "Low",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AbsolutePlayerHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalOr",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Vehicle" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalSize",
+              "Sizes" : [ "Large" ],
+              "IsNot" : false
+            } ]
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
       "InternalName" : "Captain's Wheel 2",
       "InternalDescription" : "When you use a Vehicle or Large item, charge this {ability.1} second(s).",
       "MigrationData" : "02525ae0-013e-4b9e-97dd-0bab0fbcfad3",
@@ -640,6 +657,5 @@
       },
       "TranslationKey" : "6add5e1c5c9c390626c5e3823dc1b9b4"
     }
-  },
-  "Auras" : { }
+  }
 }

@@ -4,11 +4,13 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
-        "Multicast" : 1,
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1,
         "BuyPrice" : 20,
-        "Custom_0" : 0
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -16,11 +18,10 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "Multicast" : 1,
-        "ChargeAmount" : 2000,
-        "ChargeTargets" : 1,
         "BuyPrice" : 40,
-        "Custom_0" : 0
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -33,7 +34,7 @@
   "InternalName" : "Alacrity",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Vanessa" ],
+  "Heroes" : [ "Vanessa", "Mak" ],
   "Tags" : [ ],
   "HiddenTags" : [ "Charge", "CritReference" ],
   "ArtKey" : "Icon_Skill_Alacrity.png",
@@ -50,9 +51,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "d86f7a367f6dc3fa0635d12a979bb4fe",
-        "Text" : "The first 5 times you Crit each fight, charge an item {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you Crit each fight, Charge {ability.0.targets} item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -94,8 +96,14 @@
             "Attribute" : "Custom_0",
             "ComparisonOperator" : "LessThan",
             "ComparisonValue" : {
-              "$type" : "TFixedValue",
-              "Value" : 5.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -104,7 +112,7 @@
       } ],
       "Priority" : "Medium",
       "InternalName" : "Alacrity",
-      "InternalDescription" : "When you Crit, charge an item {ability.0} second(s).",
+      "InternalDescription" : "The first [--/--/5/10] times you crit each fight, Charge 1 item 1 second.",
       "MigrationData" : "cf9986ff-92be-4152-bcba-7b4f064aec5b",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -156,5 +164,45 @@
       "TranslationKey" : "addd58cb20c13b02b433940601a41d13"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a193d872e6cb3a8dc2d05aedb98955c0"
+    }
+  }
 }

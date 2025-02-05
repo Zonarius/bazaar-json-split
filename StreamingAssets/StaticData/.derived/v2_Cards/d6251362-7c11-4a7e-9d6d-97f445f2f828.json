@@ -4,19 +4,26 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1,
         "BuyPrice" : 20,
-        "ShieldApplyAmount" : 20
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "ShieldApplyAmount" : 40
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
@@ -29,7 +36,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Dooley" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "BurnReference", "Shield" ],
+  "HiddenTags" : [ "Charge", "BurnReference", "ShieldReference" ],
   "ArtKey" : "Icon_Skill_Incinerate.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "627ec43106f24fc39351d6680c0e516e",
@@ -44,38 +51,75 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "9bd4fa5141a0518ce1174f4de52b4aee",
-        "Text" : "When you gain Burn, Shield {ability.0}."
+        "Text" : "The first {aura.9} times you Burn each fight, Charge {ability.0.targets} Shield item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
       "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
+        "$type" : "TTriggerOnCardPerformedBurn",
         "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Burn",
-        "ChangeType" : "Gain"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionPlayerShieldApply",
-        "ReferenceValue" : null,
-        "Target" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
           "Conditions" : null
         }
       },
-      "Prerequisites" : null,
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Shield" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
       "Priority" : "Low",
       "InternalName" : "Burn Containment 1",
-      "InternalDescription" : "",
+      "InternalDescription" : "The first [-/-/5/10] times you Burn each fight, Charge 1 Shield item 1 second.",
       "MigrationData" : "c1e98dba-c9b3-4d6f-8a61-92c1780984a0",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -83,7 +127,89 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "9bd4fa5141a0518ce1174f4de52b4aee"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedBurn",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a193d872e6cb3a8dc2d05aedb98955c0"
+    }
+  }
 }

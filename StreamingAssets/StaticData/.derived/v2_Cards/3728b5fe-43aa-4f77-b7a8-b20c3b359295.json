@@ -1,42 +1,30 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Gold",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 5,
-        "Custom_0" : 3
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
-      "TooltipIds" : [ 0 ]
-    },
-    "Silver" : {
-      "Attributes" : {
-        "BuyPrice" : 10,
-        "Custom_0" : 5
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Gold" : {
       "Attributes" : {
+        "ChargeAmount" : 1000,
+        "ChargeTargets" : 1,
         "BuyPrice" : 20,
-        "Custom_0" : 7
+        "Custom_0" : 0,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 9
+        "Custom_0" : 0,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
   },
@@ -48,7 +36,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Vanessa", "Dooley", "Mak" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "PoisonReference" ],
+  "HiddenTags" : [ "Charge", "PoisonReference", "SlowReference" ],
   "ArtKey" : "Icon_Skill_CreepingToxines.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "f1af8812361bbbbee48104df4e195cab",
@@ -63,37 +51,31 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "f1af8812361bbbbee48104df4e195cab",
-        "Text" : "Your slowest Poison item has +{aura.0} Poison."
+        "Text" : "The first {aura.9} times you Slow each fight, Charge {ability.0.targets} Poison item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
-  "Abilities" : { },
-  "Auras" : {
+  "Abilities" : {
     "0" : {
       "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedSlow",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "PoisonApplyAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : 1.0
-          }
-        },
+        "$type" : "TActionCardCharge",
         "Target" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
+          "$type" : "TTargetCardRandom",
           "ExcludeSelf" : false,
+          "TargetSection" : "SelfHand",
           "Conditions" : {
             "$type" : "TCardConditionalAnd",
             "Conditions" : [ {
@@ -101,15 +83,43 @@
               "Tags" : [ "Poison" ],
               "Operator" : "Any"
             }, {
-              "$type" : "TCardConditionalAttributeHighest",
-              "AttributeType" : "CooldownMax"
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
             } ]
           }
         }
       },
-      "Prerequisites" : null,
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Low",
       "InternalName" : "Creeping Toxins",
-      "InternalDescription" : "Your slowest Poison item has +{aura.0} Poison.",
+      "InternalDescription" : "The first [-/-/5/10] times you Slow each fight, Charge 1 Poison item 1 second.",
       "MigrationData" : "0ee1b768-0fda-4a8d-8775-407cec071401",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -117,6 +127,89 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "f1af8812361bbbbee48104df4e195cab"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedSlow",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
+    }
+  },
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "2040a089-56e7-4813-93e8-1c876597171d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a193d872e6cb3a8dc2d05aedb98955c0"
     }
   }
 }

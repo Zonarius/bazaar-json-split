@@ -1,21 +1,11 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Silver",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 5,
-        "Custom_0" : 4
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 10,
-        "Custom_0" : 6
+        "Custom_0" : 1
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -24,7 +14,7 @@
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "Custom_0" : 8
+        "Custom_0" : 2
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -33,7 +23,7 @@
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "Custom_0" : 10
+        "Custom_0" : 3
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -43,29 +33,30 @@
   "Type" : "Skill",
   "Id" : "a80d8cc7-3472-45cb-ac33-11fe7e583e42",
   "Version" : "1.0.0",
-  "InternalName" : "Scoped Shot",
+  "InternalName" : "Loaded Fury",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Pygmalien", "Vanessa", "Dooley", "Jules", "Stelle", "Mak" ],
+  "Heroes" : [ "Vanessa" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "Crit" ],
+  "HiddenTags" : [ "Ammo", "DamageReference" ],
   "ArtKey" : "Icon_Skill_ScopedShot.png",
-  "CardPackId" : "Pygmalien_Core",
+  "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "ea5fdf40644af92feebc6e7042c104aa",
   "AudioKey" : "",
   "Localization" : {
     "Title" : {
       "Key" : "ea5fdf40644af92feebc6e7042c104aa",
-      "Text" : "Scoped Shot"
+      "Text" : "Loaded Fury"
     },
     "Description" : null,
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
-        "Key" : "ea5fdf40644af92feebc6e7042c104aa",
-        "Text" : "Your Medium items have +{aura.0}% Crit chance."
+        "Key" : "e5440329189164d30b1c32b311141ef9",
+        "Text" : "Your items have +{aura.0.mod} damage for each ammo you have on your items in play. [{aura.0}]"
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : { },
@@ -75,17 +66,31 @@
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "CritChance",
+        "AttributeType" : "DamageAmount",
         "Operation" : "Add",
         "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
+          "$type" : "TReferenceValueCardAttributeAggregate",
           "Target" : {
-            "$type" : "TTargetCardSelf",
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
             "Conditions" : null
           },
-          "AttributeType" : "Custom_0",
+          "AttributeType" : "Ammo",
           "DefaultValue" : 0.0,
-          "Modifier" : null
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
         },
         "Target" : {
           "$type" : "TTargetCardSection",
@@ -94,18 +99,10 @@
           "Conditions" : {
             "$type" : "TCardConditionalAnd",
             "Conditions" : [ {
-              "$type" : "TCardConditionalSize",
-              "Sizes" : [ "Medium" ],
-              "IsNot" : false
-            }, {
               "$type" : "TCardConditionalOr",
               "Conditions" : [ {
                 "$type" : "TCardConditionalTag",
                 "Tags" : [ "Weapon" ],
-                "Operator" : "Any"
-              }, {
-                "$type" : "TCardConditionalHiddenTag",
-                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
                 "Operator" : "Any"
               } ]
             } ]
@@ -113,15 +110,15 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Scoped Shot",
-      "InternalDescription" : "Your Medium items have +{aura.0}% Crit chance.",
-      "MigrationData" : "0821e92a-5aec-4d34-afb8-46aacb76ed89",
+      "InternalName" : "Shellshock",
+      "InternalDescription" : "",
+      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "ea5fdf40644af92feebc6e7042c104aa"
+      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
     }
   }
 }

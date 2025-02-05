@@ -3,49 +3,48 @@
   "Tiers" : {
     "Silver" : {
       "Attributes" : {
-        "CooldownMax" : 8000,
+        "CooldownMax" : 4000,
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "Multicast" : 1,
         "ReloadAmount" : 1,
         "ReloadTargets" : 2,
-        "HasteAmount" : 1000,
-        "HasteTargets" : 2
+        "ChargeTargets" : 1,
+        "ChargeAmount" : 1000,
+        "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
         "ReloadAmount" : 2,
-        "HasteAmount" : 2000,
-        "HasteTargets" : 2
+        "Custom_0" : 30
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
         "ReloadAmount" : 3,
-        "HasteAmount" : 3000,
-        "HasteTargets" : 2
+        "Custom_0" : 40
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     }
   },
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 2,
-        "SlowAmount" : 1000
+        "SlowTargets" : 1,
+        "SlowAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -91,9 +90,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "313fa2a1-53b4-4e91-b607-00ecefa95ac7",
-            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -102,7 +102,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 2000
+        "FreezeAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -142,7 +142,8 @@
             "Key" : "1e2196aa-455d-478a-8de9-ab009c9317af",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -150,28 +151,35 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
+        "HasteTargets" : 1,
         "HasteAmount" : 2000
       },
-      "Abilities" : { },
-      "Auras" : {
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "HasteAmount",
-            "Operation" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
+            "$type" : "TActionCardHaste",
             "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
             }
           },
           "Prerequisites" : null,
+          "Priority" : "Medium",
           "InternalName" : "Turbo Ramrod Ability",
           "InternalDescription" : "",
           "MigrationData" : "d250b33a-ae5d-41c6-978b-41eb9e03f586",
@@ -183,23 +191,25 @@
           "TranslationKey" : "7f7af683-b7b0-4974-975c-b8ef6ca08d04"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Haste" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d1",
-            "Text" : "This has double Haste duration."
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 40
+        "ShieldApplyAmount" : 20
       },
       "Abilities" : {
         "e1" : {
@@ -239,7 +249,8 @@
             "Key" : "039e3614-391a-42a0-a06c-2af5f952d5b1",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -247,7 +258,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 60
+        "HealAmount" : 30
       },
       "Abilities" : {
         "e1" : {
@@ -287,7 +298,8 @@
             "Key" : "9812b338-058a-4832-a3cf-41247caf8e03",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -295,7 +307,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 2
       },
       "Abilities" : {
         "e1" : {
@@ -335,7 +347,8 @@
             "Key" : "ae16215a-d7b8-4ec6-9696-f0c642fbad57",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -343,7 +356,7 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 6
+        "BurnApplyAmount" : 3
       },
       "Abilities" : {
         "e1" : {
@@ -383,7 +396,8 @@
             "Key" : "9da2cf65-1460-497d-a736-1d9eaa6fff47",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -429,7 +443,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -486,7 +501,8 @@
             "Key" : "e9fc075b-7398-4cd4-84a1-8f05e95aeefb",
             "Text" : "Adjacent items with Ammo have +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -583,7 +599,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -614,15 +631,24 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "78701790b8c34eca64cc14f82fa08063",
-        "Text" : "Reload adjacent items with Ammo {ability.0} Ammo and Haste them {ability.1} second(s)."
+        "Text" : "Reload adjacent Ammo items {ability.0} Ammo."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "78701790b8c34eca64cc14f82fa08063",
-        "Text" : "Reload adjacent items with Ammo {ability.0} Ammo and Haste them {ability.1} second(s)."
+        "Text" : "Your Ammo items have +{aura.2}% Crit Chance."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "78701790b8c34eca64cc14f82fa08063",
+        "Text" : "When one of your items run out of ammo, Charge this {ability.1} second."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -665,28 +691,42 @@
     "1" : {
       "Id" : "1",
       "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "AttributeChanged" : "Ammo",
+        "ChangeType" : "Loss"
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionCardHaste",
+        "$type" : "TActionCardCharge",
         "Target" : {
-          "$type" : "TTargetCardPositional",
-          "Origin" : "Self",
-          "TargetMode" : "Neighbor",
-          "IncludeOrigin" : false,
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
           "Conditions" : {
             "$type" : "TCardConditionalAttribute",
-            "Attribute" : "AmmoMax",
-            "ComparisonOperator" : "GreaterThan",
+            "Attribute" : "Ammo",
+            "ComparisonOperator" : "Equal",
             "ComparisonValue" : {
               "$type" : "TFixedValue",
               "Value" : 0.0
             }
           }
-        }
-      },
-      "Prerequisites" : null,
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
       "Priority" : "Lowest",
       "InternalName" : "Ramrod 2",
       "InternalDescription" : "Charge adjacent items with Ammo",
@@ -699,5 +739,63 @@
       "TranslationKey" : "cab0033d160b0156f8f25f6953d72b2b"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "AmmoMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Ramrod 3",
+      "InternalDescription" : "Your Ammo items have +[--/20/30/40]% Crit Chance.",
+      "MigrationData" : "2953b00f-5348-4de8-a64a-92401de782b4",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "cab0033d160b0156f8f25f6953d72b2b"
+    }
+  }
 }

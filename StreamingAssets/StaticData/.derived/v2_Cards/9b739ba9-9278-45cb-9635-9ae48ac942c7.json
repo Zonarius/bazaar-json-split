@@ -7,8 +7,8 @@
         "BuyPrice" : 24,
         "SellPrice" : 12,
         "Multicast" : 1,
-        "DamageAmount" : 20,
-        "Custom_0" : 20,
+        "DamageAmount" : 50,
+        "Custom_0" : 50,
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1
       },
@@ -20,7 +20,8 @@
       "Attributes" : {
         "BuyPrice" : 48,
         "SellPrice" : 24,
-        "Custom_0" : 40,
+        "DamageAmount" : 100,
+        "Custom_0" : 100,
         "ChargeAmount" : 2000
       },
       "AbilityIds" : [ "0", "1", "2", "3", "4", "5", "6" ],
@@ -32,19 +33,13 @@
     "Heavy" : {
       "Attributes" : {
         "SlowTargets" : 3,
-        "SlowAmount" : 4000
+        "SlowAmount" : 10000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedPoison",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -75,88 +70,6 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "1cb42a43-8fd5-41b0-91fe-b801eb0dec24"
-        },
-        "e2" : {
-          "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedFreeze",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionCardSlow",
-            "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "OpponentHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Heavy Slumbering Primordial Ability 2",
-          "InternalDescription" : "",
-          "MigrationData" : "795f2021-d5bc-4009-ac17-d315b0d7db1f",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "1cb42a43-8fd5-41b0-91fe-b801eb0dec24"
-        },
-        "e3" : {
-          "Id" : "e3",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedBurn",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionCardSlow",
-            "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "OpponentHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Heavy Slumbering Primordial Ability 3",
-          "InternalDescription" : "",
-          "MigrationData" : "795f2021-d5bc-4009-ac17-d315b0d7db1f",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "1cb42a43-8fd5-41b0-91fe-b801eb0dec24"
         }
       },
       "Auras" : { },
@@ -166,9 +79,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ebb9b57f-81e7-43d6-b809-17a34e855a06",
-            "Text" : "When you Poison, Freeze, or Burn, Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -177,7 +91,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 6000
+        "FreezeAmount" : 15000
       },
       "Abilities" : {
         "e1" : {
@@ -217,7 +131,8 @@
             "Key" : "84d6c118-328b-4b0f-8c0e-a3001b42a2ab",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -226,19 +141,13 @@
     "Turbo" : {
       "Attributes" : {
         "HasteTargets" : 3,
-        "HasteAmount" : 4000
+        "HasteAmount" : 10000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedPoison",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -269,88 +178,6 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "d1ab6c0b-9078-415c-9398-52c5021e5e9b"
-        },
-        "e2" : {
-          "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedFreeze",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionCardHaste",
-            "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "SelfHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Turbo Slumbering Primordial Ability 2",
-          "InternalDescription" : "",
-          "MigrationData" : "029d1a3f-089c-44ef-a95d-2e456e9fc1cd",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "d1ab6c0b-9078-415c-9398-52c5021e5e9b"
-        },
-        "e3" : {
-          "Id" : "e3",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedBurn",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionCardHaste",
-            "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "SelfHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Turbo Slumbering Primordial Ability 3",
-          "InternalDescription" : "",
-          "MigrationData" : "029d1a3f-089c-44ef-a95d-2e456e9fc1cd",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "d1ab6c0b-9078-415c-9398-52c5021e5e9b"
         }
       },
       "Auras" : { },
@@ -360,9 +187,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "4f96e1bc-51ee-4ae0-9b27-54a1e30b4833",
-            "Text" : "When you Poison, Freeze, or Burn, Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -370,19 +198,13 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 15
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedPoison",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -405,65 +227,40 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "86719c55-2389-4547-8594-2fae3bfb8b83"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedFreeze",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionPlayerShieldApply",
-            "ReferenceValue" : null,
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Self",
+              "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Shielded Slumbering Primordial Ability 2",
-          "InternalDescription" : "",
-          "MigrationData" : "85fe217c-5e7b-4195-b30c-8228af035ff5",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "86719c55-2389-4547-8594-2fae3bfb8b83"
-        },
-        "e3" : {
-          "Id" : "e3",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedBurn",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionPlayerShieldApply",
-            "ReferenceValue" : null,
-            "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Self",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Shielded Slumbering Primordial Ability 3",
-          "InternalDescription" : "",
+          "InternalName" : "Shielded Slumbering Primordial Aura",
+          "InternalDescription" : "Sets the value of shield",
           "MigrationData" : "85fe217c-5e7b-4195-b30c-8228af035ff5",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -473,36 +270,30 @@
           "TranslationKey" : "86719c55-2389-4547-8594-2fae3bfb8b83"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "67a93dfc-e8bd-4afa-acfe-e16760bbc728",
-            "Text" : "When you Poison, Freeze, or Burn, Shield {ability.e1}."
+            "Text" : "Shield equal to this item's damage."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 30
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedPoison",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -525,65 +316,40 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "dc0730ff-2733-4df8-b0b4-b7663cc99d6a"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedFreeze",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionPlayerHeal",
-            "ReferenceValue" : null,
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Self",
+              "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Restorative Slumbering Primordial Ability 2",
-          "InternalDescription" : "",
-          "MigrationData" : "41ab5e49-52e4-4542-8342-e25a4634ae1f",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "dc0730ff-2733-4df8-b0b4-b7663cc99d6a"
-        },
-        "e3" : {
-          "Id" : "e3",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedBurn",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionPlayerHeal",
-            "ReferenceValue" : null,
-            "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Self",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Restorative Slumbering Primordial Ability 3",
-          "InternalDescription" : "",
+          "InternalName" : "Restorative Slumbering Primordial Aura",
+          "InternalDescription" : "Sets the value of heal",
           "MigrationData" : "41ab5e49-52e4-4542-8342-e25a4634ae1f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -593,24 +359,24 @@
           "TranslationKey" : "dc0730ff-2733-4df8-b0b4-b7663cc99d6a"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "c5ced2e5-a5c3-4641-96a9-72367e3ac1ab",
-            "Text" : "When you Poison, Freeze, or Burn, Heal {ability.e1}."
+            "Text" : "Heal equal to this item's damage."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 15
+        "PoisonApplyAmount" : 30
       },
       "Abilities" : {
         "e1" : {
@@ -650,7 +416,8 @@
             "Key" : "2d9e0846-93ba-4fac-a3b4-b42461edc759",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -658,7 +425,7 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 20
+        "BurnApplyAmount" : 45
       },
       "Abilities" : {
         "e1" : {
@@ -698,7 +465,8 @@
             "Key" : "4da7fa17-7f60-4da8-95da-7fe6061931c4",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -744,7 +512,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -790,7 +559,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -887,7 +657,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -907,7 +678,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This has Lifesteal."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -940,13 +712,15 @@
         "Key" : "ad398d196b49ebd583df82a9caf98aa4",
         "Text" : "Deal {ability.0} damage."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "4b1c633cecb0210bbd5ed4e60ec67ba9",
         "Text" : "When you poison, freeze, or burn, charge this {ability.4} second(s) and this gains {ability.1} Damage for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {

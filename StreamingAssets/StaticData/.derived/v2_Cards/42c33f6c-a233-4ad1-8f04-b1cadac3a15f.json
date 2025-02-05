@@ -1,11 +1,21 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Diamond",
+  "StartingTier" : "Gold",
   "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "HasteAmount" : 2000,
+        "HasteTargets" : 2
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "HasteAmount" : 2000
+        "HasteTargets" : 3
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -18,7 +28,7 @@
   "InternalName" : "Toxin Injector",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Vanessa", "Dooley", "Mak" ],
+  "Heroes" : [ "Vanessa", "Mak" ],
   "Tags" : [ ],
   "HiddenTags" : [ "PoisonReference", "Haste" ],
   "ArtKey" : "Icon_Skill_ToxicInjector.png",
@@ -35,9 +45,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "20de17ce478dcdaaea59fd646ef30b74",
-        "Text" : "At the start of each fight, Haste your Poison items for {ability.0} second(s)."
+        "Text" : "At the start of each fight, Haste {ability.0.targets} Poison items for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -60,14 +71,22 @@
               "$type" : "TCardConditionalHiddenTag",
               "Tags" : [ "Poison" ],
               "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
             } ]
           }
         }
       },
       "Prerequisites" : null,
       "Priority" : "Medium",
-      "InternalName" : "Toxin Injecotr",
-      "InternalDescription" : "",
+      "InternalName" : "Toxin Injector",
+      "InternalDescription" : "At the start of each fight, Haste [--/--/2/3] of your Poison items for 2 seconds.",
       "MigrationData" : "d8278704-f3d5-44b6-a572-65ecaa0ce68a",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

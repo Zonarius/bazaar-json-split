@@ -1,20 +1,10 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Silver",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "Multicast" : 1,
-        "Custom_0" : 4,
-        "BuyPrice" : 5
-      },
-      "AbilityIds" : [ ],
-      "AuraIds" : [ "0" ],
-      "TooltipIds" : [ 0 ]
-    },
     "Silver" : {
       "Attributes" : {
-        "Custom_0" : 12,
+        "Custom_0" : 20,
         "BuyPrice" : 10
       },
       "AbilityIds" : [ ],
@@ -23,7 +13,7 @@
     },
     "Gold" : {
       "Attributes" : {
-        "Custom_0" : 24,
+        "Custom_0" : 25,
         "BuyPrice" : 20
       },
       "AbilityIds" : [ ],
@@ -32,7 +22,7 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "Custom_0" : 40,
+        "Custom_0" : 30,
         "BuyPrice" : 40
       },
       "AbilityIds" : [ ],
@@ -63,9 +53,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "e72e5a53cfa03961d3573303a204dc76",
-        "Text" : "Your fastest weapon has +{aura.0} Damage."
+        "Text" : "If you have at least 7 items in play, your Weapons deal +{aura.0} damage."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : { },
@@ -85,31 +76,32 @@
           },
           "AttributeType" : "Custom_0",
           "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : 1.0
-          }
+          "Modifier" : null
         },
         "Target" : {
           "$type" : "TTargetCardSection",
           "TargetSection" : "SelfHand",
           "ExcludeSelf" : false,
           "Conditions" : {
-            "$type" : "TCardConditionalAnd",
-            "Conditions" : [ {
-              "$type" : "TCardConditionalTag",
-              "Tags" : [ "Weapon" ],
-              "Operator" : "Any"
-            }, {
-              "$type" : "TCardConditionalAttributeLowest",
-              "AttributeType" : "CooldownMax"
-            } ]
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
           }
         }
       },
-      "Prerequisites" : null,
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 7
+      } ],
       "InternalName" : "Noisy Cricket",
-      "InternalDescription" : "Your fastest weapon has +{aura.0} Damage.",
+      "InternalDescription" : "If you have at least 7 items in play, your Weapons have +[--/20/25/30] damage.",
       "MigrationData" : "d8278704-f3d5-44b6-a572-65ecaa0ce68a",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

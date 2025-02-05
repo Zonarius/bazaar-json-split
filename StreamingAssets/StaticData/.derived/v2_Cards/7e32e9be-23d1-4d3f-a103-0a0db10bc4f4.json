@@ -1,11 +1,20 @@
 {
   "$type" : "TCardSkill",
-  "StartingTier" : "Gold",
+  "StartingTier" : "Silver",
   "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 10,
+        "Custom_0" : 2
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 20,
-        "HealAmount" : 30
+        "Custom_0" : 4
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -14,7 +23,7 @@
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 40,
-        "HealAmount" : 60
+        "Custom_0" : 8
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
@@ -29,7 +38,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Vanessa", "Mak", "Pygmalien", "Stelle", "Jules" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "Heal" ],
+  "HiddenTags" : [ "Regen", "BurnReference" ],
   "ArtKey" : "Icon_Skill_Cauterize.png",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "d89ae88d9311472dedeb9f363c82416a",
@@ -44,9 +53,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "1cb7161ca8235e454c3af878c3b0c3c1",
-        "Text" : "When you gain Burn, Heal {ability.0}."
+        "Text" : "When you gain Burn, gain {ability.0} Regeneration for this fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -64,11 +74,26 @@
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionPlayerHeal",
-        "ReferenceValue" : null,
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthRegen",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
         "Target" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
           "Conditions" : null
         }
       },

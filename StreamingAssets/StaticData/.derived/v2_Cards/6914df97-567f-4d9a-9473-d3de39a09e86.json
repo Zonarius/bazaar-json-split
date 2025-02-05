@@ -6,20 +6,27 @@
       "Attributes" : {
         "FreezeAmount" : 1000,
         "FreezeTargets" : 1,
-        "BuyPrice" : 20
+        "BuyPrice" : 20,
+        "Custom_0" : 0,
+        "Custom_1" : 4,
+        "Custom_2" : 4,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1", "2", "3" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
-        "FreezeAmount" : 2000,
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_0" : 0,
+        "Custom_1" : 8,
+        "Custom_2" : 8,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0", "1", "2", "3" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Type" : "Skill",
@@ -28,7 +35,7 @@
   "InternalName" : "Frozen Shot",
   "InternalDescription" : "",
   "Size" : "Medium",
-  "Heroes" : [ "Dooley", "Jules", "Stelle", "Pygmalien", "Vanessa", "Mak" ],
+  "Heroes" : [ "Pygmalien", "Dooley", "Jules", "Mak" ],
   "Tags" : [ "Weapon" ],
   "HiddenTags" : [ "Freeze" ],
   "ArtKey" : "Icon_Skill_FrozenShot.png",
@@ -45,15 +52,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "c327fc97e790844e3ed55fb257527b66",
-        "Text" : "When you use your slowest weapon, freeze a smaller item for {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you use your Slowest weapon each fight, Freeze {ability.0.targets} item of equal or smaller size for {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
-    }, {
-      "Content" : {
-        "Key" : "c327fc97e790844e3ed55fb257527b66",
-        "Text" : "When you use your slowest weapon, freeze a smaller item for {ability.0} second(s)."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -99,16 +101,38 @@
           "ExcludeSelf" : false,
           "Conditions" : {
             "$type" : "TCardConditionalSize",
-            "Sizes" : [ "Medium" ],
+            "Sizes" : [ "Small" ],
             "IsNot" : false
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      }, {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
           }
         },
         "Comparison" : "Equal",
         "Amount" : 1
       } ],
       "Priority" : "High",
-      "InternalName" : "Frozen Shot Medium",
-      "InternalDescription" : "If medium, freeze small",
+      "InternalName" : "Frozen Shot Small",
+      "InternalDescription" : "Small",
       "MigrationData" : "eefe5771-9bb2-418d-ac2e-710077f1cb11",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -159,16 +183,38 @@
           "ExcludeSelf" : false,
           "Conditions" : {
             "$type" : "TCardConditionalSize",
-            "Sizes" : [ "Large" ],
+            "Sizes" : [ "Medium" ],
             "IsNot" : false
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      }, {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
           }
         },
         "Comparison" : "Equal",
         "Amount" : 1
       } ],
       "Priority" : "High",
-      "InternalName" : "Frozen Shot Large",
-      "InternalDescription" : "If Large, freeze medium or small",
+      "InternalName" : "Frozen Shot Medium",
+      "InternalDescription" : "Medium",
       "MigrationData" : "eefe5771-9bb2-418d-ac2e-710077f1cb11",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -176,7 +222,177 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "c327fc97e790844e3ed55fb257527b66"
+    },
+    "2" : {
+      "Id" : "2",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttributeHighest",
+              "AttributeType" : "CooldownMax"
+            } ]
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Large" ],
+            "IsNot" : false
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      }, {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "High",
+      "InternalName" : "Frozen Shot Large",
+      "InternalDescription" : "Large",
+      "MigrationData" : "eefe5771-9bb2-418d-ac2e-710077f1cb11",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "c327fc97e790844e3ed55fb257527b66"
+    },
+    "3" : {
+      "Id" : "3",
+      "Trigger" : {
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttributeHighest",
+              "AttributeType" : "CooldownMax"
+            } ]
+          }
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "AttributeType" : "Custom_0",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

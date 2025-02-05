@@ -7,8 +7,8 @@
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "SlowAmount" : 2000,
-        "SlowTargets" : 2,
+        "SlowAmount" : 1000,
+        "SlowTargets" : 1,
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1
       },
@@ -20,7 +20,7 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ChargeAmount" : 2000
+        "SlowAmount" : 2000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -30,7 +30,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ChargeAmount" : 3000
+        "SlowAmount" : 3000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -40,7 +40,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 4000
+        "SlowAmount" : 4000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -88,7 +88,8 @@
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d2",
             "Text" : "This has double Slow duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -113,12 +114,9 @@
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
               "Conditions" : {
-                "$type" : "TCardConditionalAnd",
-                "Conditions" : [ {
-                  "$type" : "TCardConditionalSize",
-                  "Sizes" : [ "Small" ],
-                  "IsNot" : false
-                } ]
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
               }
             }
           },
@@ -142,9 +140,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ca49297e-cbcb-46cc-9f83-76c25c5f533d",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -152,7 +151,7 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
+        "HasteTargets" : 1,
         "HasteAmount" : 2000
       },
       "Abilities" : {
@@ -167,23 +166,8 @@
             "Target" : {
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
-              "TargetSection" : "SelfHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAnd",
-                "Conditions" : [ {
-                  "$type" : "TCardConditionalSize",
-                  "Sizes" : [ "Small" ],
-                  "IsNot" : false
-                }, {
-                  "$type" : "TCardConditionalAttribute",
-                  "Attribute" : "CooldownMax",
-                  "ComparisonOperator" : "GreaterThan",
-                  "ComparisonValue" : {
-                    "$type" : "TFixedValue",
-                    "Value" : 0.0
-                  }
-                } ]
-              }
+              "TargetSection" : "OpponentHand",
+              "Conditions" : null
             }
           },
           "Prerequisites" : null,
@@ -208,7 +192,8 @@
             "Key" : "9dd4e9ad-f172-4e51-ad15-dc7e58661aee",
             "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -256,7 +241,8 @@
             "Key" : "5e380901-f044-4441-9d11-f0309b7ef61d",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -304,7 +290,8 @@
             "Key" : "abcaed3b-7240-40a4-915c-dcff9de6591e",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -352,7 +339,8 @@
             "Key" : "b36a2130-95c8-4e2a-be79-9a24b4287c03",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -400,7 +388,8 @@
             "Key" : "ff14828b-5476-47be-8c61-77c76fd3bdcc",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -446,7 +435,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -543,7 +533,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -558,7 +549,7 @@
   "StartingTier" : "Bronze",
   "Size" : "Small",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ ],
+  "Tags" : [ "Toy" ],
   "HiddenTags" : [ "Slow" ],
   "ArtKey" : "ea31b1531184c2b4c92da9ade3924229",
   "CardPackId" : "Pygmalien_Core",
@@ -574,15 +565,17 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "7bb3a482798d0ad2071f1e52c7944fab",
-        "Text" : "Slow {ability.0.targets} Small item for {ability.0} second(s)."
+        "Text" : "Slow {ability.0.targets} item for {ability.0} second(s)."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "7bb3a482798d0ad2071f1e52c7944fac",
-        "Text" : "When you use an adjacent item, charge this {ability.1} second(s)."
+        "Text" : "When you use an adjacent item, charge this {ability.1} second."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -601,10 +594,6 @@
           "Conditions" : {
             "$type" : "TCardConditionalAnd",
             "Conditions" : [ {
-              "$type" : "TCardConditionalSize",
-              "Sizes" : [ "Small" ],
-              "IsNot" : false
-            }, {
               "$type" : "TCardConditionalAttribute",
               "Attribute" : "CooldownMax",
               "ComparisonOperator" : "GreaterThan",

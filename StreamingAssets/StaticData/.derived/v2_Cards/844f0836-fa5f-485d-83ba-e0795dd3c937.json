@@ -7,35 +7,34 @@
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 20,
         "HasteAmount" : 2000,
         "HasteTargets" : 1,
         "ChargeTargets" : 1,
         "ChargeAmount" : 1000
       },
-      "AbilityIds" : [ "0", "1", "2" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     },
     "Gold" : {
       "Attributes" : {
+        "CooldownMax" : 5000,
         "BuyPrice" : 16,
-        "SellPrice" : 8,
-        "ChargeAmount" : 2000
+        "SellPrice" : 8
       },
-      "AbilityIds" : [ "0", "1", "2" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
       "Attributes" : {
+        "CooldownMax" : 4000,
         "BuyPrice" : 32,
-        "SellPrice" : 16,
-        "ChargeAmount" : 3000
+        "SellPrice" : 16
       },
-      "AbilityIds" : [ "0", "1", "2" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     }
   },
   "Enchantments" : {
@@ -90,7 +89,8 @@
             "Key" : "8dfd22ec-7e86-48df-b5c0-bb077318252f",
             "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -139,7 +139,8 @@
             "Key" : "a1c719c8-8e5a-499f-8634-a3dbeea9bbf7",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -185,61 +186,65 @@
             "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d1",
             "Text" : "This has double Haste duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
       "HasAuras" : true
     },
     "Shielded" : {
-      "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 20
+      },
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "ShieldApplyAmount",
-            "Operation" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
             "Target" : {
-              "$type" : "TTargetCardSelf",
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Shielded Astrolabe Aura",
-          "InternalDescription" : "Shielded 1",
-          "MigrationData" : "",
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Astrolabe Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "9d73f61e-dfd3-41c9-aef2-774c18f23f3e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
+          "TranslationKey" : "f83d31ef-dd0c-43e4-8713-3cd9ab6b6a51"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
-            "Text" : "This has double Shield."
+            "Key" : "9b2894c4-e8dc-4558-9a6e-a98cad651494",
+            "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 0
+        "HealAmount" : 45
       },
       "Abilities" : {
         "e1" : {
@@ -261,70 +266,34 @@
           "Priority" : "Medium",
           "InternalName" : "Restorative Astrolabe Ability",
           "InternalDescription" : "",
-          "MigrationData" : "6882b015-7779-4669-8b1d-bf2edb67af72",
+          "MigrationData" : "18d7b15c-437a-43de-b3cc-bd71fd2e1d55",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "953fdf98-4823-46a5-8bd6-41a7d3082704"
+          "TranslationKey" : "25cbc239-8002-4008-a9d2-9e8a887605a8"
         }
       },
-      "Auras" : {
-        "e2" : {
-          "Id" : "e2",
-          "ActiveIn" : "HandAndStash",
-          "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "HealAmount",
-            "Operation" : "Add",
-            "Value" : {
-              "$type" : "TReferenceValueCardAttribute",
-              "Target" : {
-                "$type" : "TTargetCardSelf",
-                "Conditions" : null
-              },
-              "AttributeType" : "ShieldApplyAmount",
-              "DefaultValue" : 0.0,
-              "Modifier" : {
-                "ModifyMode" : "Multiply",
-                "Value" : 1.0
-              }
-            },
-            "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "InternalName" : "Restorative Astrolabe Aura",
-          "InternalDescription" : "Sets the value of heal",
-          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-        }
-      },
+      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "772eac0a-71d2-4412-a22f-37551b723aac",
-            "Text" : "Heal equal to this item's Shield."
+            "Key" : "a4e542b0-c346-428d-9d74-3c929c0cfdcc",
+            "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : true
+      "HasAuras" : false
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 3
       },
       "Abilities" : {
         "e1" : {
@@ -364,7 +333,8 @@
             "Key" : "ea76b03c-306f-457f-b6e4-7e4b95893a2b",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -412,7 +382,8 @@
             "Key" : "1a0eba47-01d1-4d76-8891-8b2e763949df",
             "Text" : "Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -458,7 +429,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -555,7 +527,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -563,49 +536,87 @@
     },
     "Deadly" : {
       "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "CritChance",
-            "Operation" : "Add",
+            "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 50.0
+              "Value" : 10.0
             },
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
             "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                }, {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "None"
+                }, {
+                  "$type" : "TCardConditionalOr",
+                  "Conditions" : [ {
+                    "$type" : "TCardConditionalTag",
+                    "Tags" : [ "Weapon" ],
+                    "Operator" : "Any"
+                  }, {
+                    "$type" : "TCardConditionalHiddenTag",
+                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                    "Operator" : "Any"
+                  } ]
+                } ]
+              }
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Deadly Astrolabe Aura",
-          "InternalDescription" : "Deadly 50",
-          "MigrationData" : "",
+          "Priority" : "Low",
+          "InternalName" : "Deadly Beach Ball Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "6b4c53a5-9b50-4419-a540-7927a0d0720g",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "952e3137-b274-4a57-b61c-d6077878f00e"
+          "TranslationKey" : "caff257f2eab824ef22f4356e2f06131"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ ],
+      "HiddenTags" : [ "Crit" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +{aura.e1}% Crit Chance."
+            "Key" : "c36134ba-5956-4e51-ae9e-96794d0e6508",
+            "Text" : "Your non-Weapon items gain +{ability.e1}% Crit Chance for the fight."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     }
   },
   "Type" : "Item",
@@ -617,7 +628,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
   "Tags" : [ "Tool" ],
-  "HiddenTags" : [ "Shield", "Haste" ],
+  "HiddenTags" : [ "Haste" ],
   "ArtKey" : "9087941554f742e4497bd39b19a9534f",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "8b4969f07bc0607a37a585b26a4e0e92",
@@ -631,54 +642,23 @@
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
-        "Key" : "fb4829a740d47005658955a63d5c849d",
-        "Text" : "Shield {ability.0}."
+        "Key" : "07549f871a65288885e1b5c7c0bf4f51",
+        "Text" : "Haste a non-weapon item for {ability.0} second(s)."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "07549f871a65288885e1b5c7c0bf4f51",
-        "Text" : "Haste a non-weapon item for {ability.1} second(s)."
+        "Text" : "When you use another non-weapon item, Charge this {ability.1} second(s)."
       },
-      "TooltipType" : "Active"
-    }, {
-      "Content" : {
-        "Key" : "07549f871a65288885e1b5c7c0bf4f51",
-        "Text" : "When you use another non-weapon item, Charge this {ability.2} second(s)."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
-      "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionPlayerShieldApply",
-        "ReferenceValue" : null,
-        "Target" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Medium",
-      "InternalName" : "Astrolabe 1",
-      "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "8eb48247-d43d-489e-ba50-dfedc62d1dba",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "fb4829a740d47005658955a63d5c849d"
-    },
-    "1" : {
-      "Id" : "1",
       "Trigger" : {
         "$type" : "TTriggerOnCardFired"
       },
@@ -709,7 +689,7 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Astrolabe 2",
+      "InternalName" : "Astrolabe 1",
       "InternalDescription" : "Haste a non-weapon item for 2 second(s).",
       "MigrationData" : "57cb09c6-058b-4ba0-939b-22a614f81a08",
       "VFXConfig" : {
@@ -719,8 +699,8 @@
       },
       "TranslationKey" : "07549f871a65288885e1b5c7c0bf4f51"
     },
-    "2" : {
-      "Id" : "2",
+    "1" : {
+      "Id" : "1",
       "Trigger" : {
         "$type" : "TTriggerOnItemUsed",
         "Subject" : {
@@ -744,8 +724,8 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Astrolabe 3",
-      "InternalDescription" : "When you use another non-weapon item, Charge this {ability.2} second(s).",
+      "InternalName" : "Astrolabe 2",
+      "InternalDescription" : "When you use another non-weapon item, Charge this {ability.1} second(s).",
       "MigrationData" : "57cb09c6-058b-4ba0-939b-22a614f81a08",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

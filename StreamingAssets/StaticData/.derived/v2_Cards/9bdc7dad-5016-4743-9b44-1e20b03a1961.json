@@ -1,50 +1,37 @@
 {
   "$type" : "TCardItem",
   "Tiers" : {
-    "Bronze" : {
-      "Attributes" : {
-        "CooldownMax" : 6000,
-        "BuyPrice" : 2,
-        "SellPrice" : 1,
-        "Multicast" : 1,
-        "SlowAmount" : 2000,
-        "SlowTargets" : 1,
-        "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
-      },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
-    },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ChargeAmount" : 2000
+        "Multicast" : 1,
+        "SlowAmount" : 1000,
+        "SlowTargets" : 1
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ChargeAmount" : 3000
+        "SlowAmount" : 2000
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 4000
+        "SlowAmount" : 3000
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Enchantments" : {
@@ -88,7 +75,8 @@
             "Key" : "515091f7-51ff-4576-8323-221e5f34e0d4",
             "Text" : "This has double Slow duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -103,7 +91,18 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -135,9 +134,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "86232e00-93a1-4fd7-b568-9e919c38e628",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you use an adjacent Weapon, Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -146,13 +146,24 @@
     "Turbo" : {
       "Attributes" : {
         "HasteTargets" : 1,
-        "HasteAmount" : 1000
+        "HasteAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -192,9 +203,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e2aac602-2382-4cd8-aa4d-3ce1bbaec9e3",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you use an adjacent Weapon, haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -208,7 +220,18 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -240,9 +263,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "6d94d99f-f8b3-435b-9381-fd1efd57965c",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "When you use an adjacent Weapon, Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -256,7 +280,18 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -288,9 +323,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "8fb02953-351f-4b60-a522-bdb89a9861dc",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "When you use an adjacent Weapon, Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -304,7 +340,18 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -336,9 +383,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9154b5f6-0213-463f-ba2c-3519182d2f6c",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "When you use an adjacent Weapon, poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -346,13 +394,24 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 2
+        "BurnApplyAmount" : 1
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -384,9 +443,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e57d0d99-9fef-409d-8c91-19e0fc7a4a4c",
-            "Text" : "Burn {ability.e1}"
+            "Text" : "When you use an adjacent Weapon, Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -401,11 +461,11 @@
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "Multicast",
-            "Operation" : "Add",
+            "AttributeType" : "SlowAmount",
+            "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 1.0
+              "Value" : 2.0
             },
             "Target" : {
               "$type" : "TTargetCardSelf",
@@ -414,7 +474,7 @@
           },
           "Prerequisites" : null,
           "InternalName" : "Shiny Neural Toxin Aura",
-          "InternalDescription" : "Shiny 1",
+          "InternalDescription" : "Shiny 2",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -430,9 +490,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "515091f7-51ff-4576-8323-221e5f34e0d4",
-            "Text" : "This has +1 Multicast."
+            "Text" : "This has double Slow duration."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -529,7 +590,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -541,7 +603,7 @@
   "Version" : "1.0.0",
   "InternalName" : "Neural Toxin",
   "InternalDescription" : "",
-  "StartingTier" : "Bronze",
+  "StartingTier" : "Silver",
   "Size" : "Small",
   "Heroes" : [ "Common" ],
   "Tags" : [ ],
@@ -560,22 +622,28 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "6a1cd63da6bd6a158f3d44a8a627b76d",
-        "Text" : "Slow {ability.0.targets} item for {ability.0} second(s)."
+        "Text" : "When you use an adjacent Weapon, Slow {ability.0.targets} item for {ability.0} second(s)."
       },
-      "TooltipType" : "Active"
-    }, {
-      "Content" : {
-        "Key" : "6a1cd63da6bd6a158f3d44a8a627b76d",
-        "Text" : "When you use an adjacent weapon, Charge this {ability.1} second(s)."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
       "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
+        "$type" : "TTriggerOnItemUsed",
+        "Subject" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        }
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
@@ -598,7 +666,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Neural Toxin 1",
-      "InternalDescription" : "Slow 1 item for 2 second(s).",
+      "InternalDescription" : "When you use an adjacent Weapon, Slow an item for {ability.0} second(s).",
       "MigrationData" : "ebe5cea2-cc2e-4248-b790-3e4815400628",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -606,42 +674,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "6a1cd63da6bd6a158f3d44a8a627b76d"
-    },
-    "1" : {
-      "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
-          "$type" : "TTargetCardPositional",
-          "Origin" : "Self",
-          "TargetMode" : "Neighbor",
-          "IncludeOrigin" : false,
-          "Conditions" : {
-            "$type" : "TCardConditionalTag",
-            "Tags" : [ "Weapon" ],
-            "Operator" : "Any"
-          }
-        }
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardCharge",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Neural Toxin 2",
-      "InternalDescription" : "When you use an adjacent Weapon, Charge this [1/2/3/4] second(s).",
-      "MigrationData" : "420fd12c-64ad-4af6-9f30-9b1ef0085ddc",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "4b4cf2264f5bc49b80dc743ab5ab2b37"
     }
   },
   "Auras" : { }

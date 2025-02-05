@@ -7,7 +7,10 @@
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1,
         "BuyPrice" : 20,
-        "Custom_0" : 0
+        "Custom_0" : 0,
+        "Custom_1" : 4,
+        "Custom_2" : 4,
+        "Custom_3" : 0
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -15,10 +18,10 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "ChargeAmount" : 2000,
-        "ChargeTargets" : 1,
         "BuyPrice" : 40,
-        "Custom_0" : 0
+        "Custom_0" : 0,
+        "Custom_1" : 8,
+        "Custom_2" : 8
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -48,9 +51,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "cf6355add686bcf6ff974b06bfaf56c1",
-        "Text" : "The first 5 times you Shield each fight, charge an item {ability.0} second(s)."
+        "Text" : "The first {aura.9} times you Shield each fight, Charge {ability.0.targets} item {ability.0} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -92,8 +96,14 @@
             "Attribute" : "Custom_0",
             "ComparisonOperator" : "LessThan",
             "ComparisonValue" : {
-              "$type" : "TFixedValue",
-              "Value" : 5.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -154,5 +164,45 @@
       "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

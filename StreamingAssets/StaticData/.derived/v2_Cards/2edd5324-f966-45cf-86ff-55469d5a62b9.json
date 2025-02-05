@@ -1,0 +1,152 @@
+{
+  "$type" : "TCardSkill",
+  "StartingTier" : "Silver",
+  "Tiers" : {
+    "Silver" : {
+      "Attributes" : {
+        "BuyPrice" : 10,
+        "Custom_0" : 3
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "BuyPrice" : 20,
+        "Custom_0" : 6
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 40,
+        "Custom_0" : 9
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Type" : "Skill",
+  "Id" : "2edd5324-f966-45cf-86ff-55469d5a62b9",
+  "Version" : "1.0.0",
+  "InternalName" : "[DEBUG] Streamline Weapon",
+  "InternalDescription" : "",
+  "Size" : "Medium",
+  "Heroes" : [ "Vanessa" ],
+  "Tags" : [ "Weapon" ],
+  "HiddenTags" : [ "DamageReference", "HasteReference" ],
+  "ArtKey" : "Icon_Skill_FinesseWeapon.png",
+  "CardPackId" : "Pygmalien_Core",
+  "TranslationKey" : "a644ad56cbd0ab4fd1c86735640de3da",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "a644ad56cbd0ab4fd1c86735640de3da",
+      "Text" : "[DEBUG] Streamline Weapon"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "663345f83843f36d468fbe191aa49da7",
+        "Text" : "When your Weapons gain Haste, if it already has Haste, it gains +{ability.0} damage."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardAttributeChanged",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Haste",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        },
+        "AttributeChanged" : "Haste",
+        "ChangeType" : "Gain"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "AttributeType" : "DamageAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "Any"
+            }, {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "Haste",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "[DEBUG] Streamline Weapon",
+      "InternalDescription" : "When one of your Weapons gains Haste, if it already has Haste, it gains [--/3/6/9] damage for the fight.",
+      "MigrationData" : "00fae0e5-2fa3-4495-955a-3f73bc799c68",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "779809c5ff5edd78289a5ae622d71550"
+    }
+  },
+  "Auras" : { }
+}

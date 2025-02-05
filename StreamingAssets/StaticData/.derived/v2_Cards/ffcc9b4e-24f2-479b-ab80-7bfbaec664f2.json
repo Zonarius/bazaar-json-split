@@ -3,107 +3,47 @@
   "Tiers" : {
     "Bronze" : {
       "Attributes" : {
-        "CooldownMax" : 4000,
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "DamageAmount" : 12,
-        "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "DamageAmount" : 4
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ChargeAmount" : 2000
+        "DamageAmount" : 8
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ChargeAmount" : 3000
+        "DamageAmount" : 12
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 4000
+        "DamageAmount" : 16
       },
-      "AbilityIds" : [ "0", "1" ],
+      "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Enchantments" : {
-    "Heavy" : {
-      "Attributes" : {
-        "SlowTargets" : 1,
-        "SlowAmount" : 1000
-      },
-      "Abilities" : {
-        "e1" : {
-          "Id" : "e1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TActionCardSlow",
-            "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "OpponentHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
-            }
-          },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Heavy Proboscis Ability",
-          "InternalDescription" : "",
-          "MigrationData" : "ac1e2ac2-61cc-49d8-af66-9c53c140f0c4",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "b37fd6db-72d1-4c11-82f4-49b9b71b07fb"
-        }
-      },
-      "Auras" : { },
-      "Tags" : [ ],
-      "HiddenTags" : [ "Slow" ],
-      "Localization" : {
-        "Tooltips" : [ {
-          "Content" : {
-            "Key" : "94c35938-c35f-48c9-9198-e4e6ab419b74",
-            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
-          },
-          "TooltipType" : "Active"
-        } ]
-      },
-      "HasAbilities" : true,
-      "HasAuras" : false
-    },
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
@@ -113,7 +53,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -145,9 +91,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "dcda2f94-cc32-4010-9cec-d0258c3fa78a",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you Slow, Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -162,7 +109,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -202,9 +155,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "4bbb5506-a479-4e22-95cb-780417891907",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you Slow, Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -218,7 +172,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -261,7 +221,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 1.0
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
               }
             },
             "Target" : {
@@ -287,9 +250,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "c4755b42-2538-4b56-aa6c-c5e333c12df2",
-            "Text" : "Shield equal to this item's damage."
+            "Text" : "When you Slow, Shield equal to this item's damage."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -303,7 +267,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -346,7 +316,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 1.0
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
               }
             },
             "Target" : {
@@ -372,9 +345,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "dffc593b-c15d-491b-8560-41aef9ce1585",
-            "Text" : "Heal equal to this item's Damage."
+            "Text" : "When you Slow, Heal equal to this item's damage."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -388,7 +362,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -420,9 +400,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9e82bed9-5027-4b8d-8a4e-86124611d17b",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "When you Slow, Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -436,7 +417,13 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedSlow",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -468,9 +455,10 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "363ca24d-3193-490b-ac41-ae8adfd3a1aa",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "When you Slow, Burn {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -485,11 +473,11 @@
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "Multicast",
-            "Operation" : "Add",
+            "AttributeType" : "DamageAmount",
+            "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 1.0
+              "Value" : 2.0
             },
             "Target" : {
               "$type" : "TTargetCardSelf",
@@ -509,60 +497,15 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ ],
+      "HiddenTags" : [ "Damage" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +1 Multicast."
+            "Text" : "This has double Damage."
           },
-          "TooltipType" : "Passive"
-        } ]
-      },
-      "HasAbilities" : false,
-      "HasAuras" : true
-    },
-    "Deadly" : {
-      "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
-        "e1" : {
-          "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
-          "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "CritChance",
-            "Operation" : "Add",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 50.0
-            },
-            "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "InternalName" : "Deadly Proboscis Aura",
-          "InternalDescription" : "Deadly 50",
-          "MigrationData" : "",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "60cd438e-a160-4cd8-8658-cb865af61241"
-        }
-      },
-      "Tags" : [ ],
-      "HiddenTags" : [ ],
-      "Localization" : {
-        "Tooltips" : [ {
-          "Content" : {
-            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +{aura.e1}% Crit Chance."
-          },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -659,7 +602,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -679,7 +623,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This has Lifesteal."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -710,22 +655,23 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "0e23a6770ef0b6b4e493fd8a747e0ce3",
-        "Text" : "Deal {ability.0} damage."
+        "Text" : "When you Slow, deal {ability.0} damage."
       },
-      "TooltipType" : "Active"
-    }, {
-      "Content" : {
-        "Key" : "0e23a6770ef0b6b4e493fd8a747e0ce3",
-        "Text" : "When you Slow, Charge this {ability.1} second(s)."
-      },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
       "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
+        "$type" : "TTriggerOnCardPerformedSlow",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
@@ -740,7 +686,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Proboscis 1",
-      "InternalDescription" : "Deal {ability.0} damage.",
+      "InternalDescription" : "When you Slow, deal {ability.0} damage.",
       "MigrationData" : "e7b7a9de-99e2-4acf-99e3-d0db2a7ceeca",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -748,37 +694,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "0e23a6770ef0b6b4e493fd8a747e0ce3"
-    },
-    "1" : {
-      "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnCardPerformedSlow",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfBoard",
-          "ExcludeSelf" : false,
-          "Conditions" : null
-        }
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardCharge",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Proboscis 2",
-      "InternalDescription" : "When you use an adjacent Weapon, Charge this [1/2/3/4] second(s).",
-      "MigrationData" : "420fd12c-64ad-4af6-9f30-9b1ef0085ddc",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "4b4cf2264f5bc49b80dc743ab5ab2b37"
     }
   },
   "Auras" : { }

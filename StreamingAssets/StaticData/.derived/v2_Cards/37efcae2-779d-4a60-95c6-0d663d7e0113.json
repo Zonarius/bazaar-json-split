@@ -35,9 +35,10 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "e72e5a53cfa03961d3573303a204dc76",
-        "Text" : "The first time you fall below half health each fight, double the damage of your lowest damage weapon for the fight."
+        "Text" : "The first time you fall below half health each fight, double the damage of your leftmost Weapon for the fight."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -62,22 +63,20 @@
         },
         "AttributeType" : "DamageAmount",
         "Operation" : "Multiply",
-        "Duration" : null,
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
         "TargetCount" : null,
         "Target" : {
-          "$type" : "TTargetCardSection",
+          "$type" : "TTargetCardXMost",
           "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
+          "TargetMode" : "LeftMostCard",
+          "ExcludeSelf" : true,
           "Conditions" : {
-            "$type" : "TCardConditionalAnd",
-            "Conditions" : [ {
-              "$type" : "TCardConditionalTag",
-              "Tags" : [ "Weapon" ],
-              "Operator" : "Any"
-            }, {
-              "$type" : "TCardConditionalAttributeLowest",
-              "AttributeType" : "DamageAmount"
-            } ]
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
           }
         }
       },
@@ -117,7 +116,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 0.5
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.5
+                }
               }
             }
           }
@@ -125,7 +127,7 @@
       } ],
       "Priority" : "Medium",
       "InternalName" : "Double Down",
-      "InternalDescription" : "The first time you fall below half health each fight, double the damage of your lowest damage weapon for the fight.",
+      "InternalDescription" : "The first time you fall below half health each fight, double the damage of your leftmost weapon  for the fight.",
       "MigrationData" : "d8278704-f3d5-44b6-a572-65ecaa0ce68a",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -185,7 +187,10 @@
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
-                "Value" : 0.5
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.5
+                }
               }
             }
           }

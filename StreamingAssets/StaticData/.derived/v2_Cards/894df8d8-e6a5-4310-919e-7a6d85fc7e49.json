@@ -7,9 +7,9 @@
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "BurnApplyAmount" : 5,
-        "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "BurnApplyAmount" : 4,
+        "HasteAmount" : 1000,
+        "HasteTargets" : 1
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -19,7 +19,8 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ChargeAmount" : 2000
+        "BurnApplyAmount" : 5,
+        "HasteAmount" : 2000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -29,7 +30,8 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ChargeAmount" : 3000
+        "BurnApplyAmount" : 6,
+        "HasteAmount" : 3000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -39,7 +41,8 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ChargeAmount" : 4000
+        "BurnApplyAmount" : 7,
+        "HasteAmount" : 4000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -98,7 +101,8 @@
             "Key" : "12507be3-decd-4e9e-b401-9a4e1753999e",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -147,44 +151,35 @@
             "Key" : "c229f37e-d3e8-449d-a62d-ac99112c3f37",
             "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
       "HasAuras" : false
     },
     "Turbo" : {
-      "Attributes" : {
-        "HasteTargets" : 1,
-        "HasteAmount" : 1000
-      },
-      "Abilities" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardHaste",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HasteAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
             "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "SelfHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAttribute",
-                "Attribute" : "CooldownMax",
-                "ComparisonOperator" : "GreaterThan",
-                "ComparisonValue" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 0.0
-                }
-              }
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Turbo Bomb Squad Ability",
+          "InternalName" : "Turbo Bomb Squad Aura",
           "InternalDescription" : "Turbo 3",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -192,23 +187,23 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "585d7e8d-e754-44d1-b4dc-1ab3759e8e9b"
+          "TranslationKey" : "f3d70cf1-a20c-403f-8b2e-8977ad0d48c5"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Haste" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "875e56c3-546d-44be-ba19-20447e4c321f",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d1",
+            "Text" : "This has double Haste duration."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAbilities" : false,
+      "HasAuras" : true
     },
     "Shielded" : {
       "Attributes" : {
@@ -252,7 +247,8 @@
             "Key" : "e7da7d96-34e7-4217-b958-6c54634625cc",
             "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -300,7 +296,8 @@
             "Key" : "0b38e636-89de-4c7a-968a-5d441ee1a2c6",
             "Text" : "Heal {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -348,7 +345,8 @@
             "Key" : "dc3dc7ec-1d15-48b4-8b31-29b27eef9795",
             "Text" : "Poison {ability.e1}."
           },
-          "TooltipType" : "Active"
+          "TooltipType" : "Active",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -394,7 +392,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has double Burn."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -440,7 +439,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +1 Multicast."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -486,7 +486,8 @@
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
             "Text" : "This has +{aura.e1}% Crit Chance."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
@@ -583,7 +584,8 @@
             "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
             "Text" : "This cannot be Frozen, Slowed or Destroyed."
           },
-          "TooltipType" : "Passive"
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
@@ -616,13 +618,15 @@
         "Key" : "4f4289db2b0c95bc97b270d89df1f5af",
         "Text" : "Burn {ability.0}."
       },
-      "TooltipType" : "Active"
+      "TooltipType" : "Active",
+      "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "82dd635628d5549ca93785c4e07ee508",
-        "Text" : "When you use an adjacent friend, charge this {ability.1} second(s)."
+        "Text" : "When you use an adjacent friend, Haste this {ability.1} second(s)."
       },
-      "TooltipType" : "Passive"
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
     } ]
   },
   "Abilities" : {
@@ -671,10 +675,18 @@
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionCardCharge",
+        "$type" : "TActionCardHaste",
         "Target" : {
           "$type" : "TTargetCardSelf",
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
         }
       },
       "Prerequisites" : null,
