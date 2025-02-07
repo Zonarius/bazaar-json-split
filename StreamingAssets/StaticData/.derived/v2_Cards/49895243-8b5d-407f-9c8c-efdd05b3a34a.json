@@ -8,7 +8,7 @@
         "BuyPrice" : 6,
         "SellPrice" : 3,
         "Multicast" : 1,
-        "HealAmount" : 10
+        "HealAmount" : 40
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -18,8 +18,7 @@
       "Attributes" : {
         "Custom_0" : 20,
         "BuyPrice" : 12,
-        "SellPrice" : 6,
-        "HealAmount" : 20
+        "SellPrice" : 6
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -29,8 +28,7 @@
       "Attributes" : {
         "Custom_0" : 30,
         "BuyPrice" : 24,
-        "SellPrice" : 12,
-        "HealAmount" : 30
+        "SellPrice" : 12
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -40,8 +38,7 @@
       "Attributes" : {
         "Custom_0" : 40,
         "BuyPrice" : 48,
-        "SellPrice" : 24,
-        "HealAmount" : 40
+        "SellPrice" : 24
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -293,7 +290,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Shielded money tree Ability",
+          "InternalName" : "Shielded Money Tree Ability",
           "InternalDescription" : "",
           "MigrationData" : "4bae8c22-9453-4e94-91a3-05b09f911f48",
           "VFXConfig" : {
@@ -334,7 +331,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "",
+          "InternalName" : "Shielded Money Tree Aura",
           "InternalDescription" : "Sets the value of shield",
           "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
@@ -382,7 +379,7 @@
           },
           "Prerequisites" : null,
           "InternalName" : "Restorative Money Tree Aura",
-          "InternalDescription" : "Restorative 30",
+          "InternalDescription" : "Restorative 1",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -409,7 +406,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 7
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -440,25 +437,65 @@
           "TranslationKey" : "4fb0938a-121d-4598-8129-f9203b6541bb"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Money Tree Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "10ebff86-e849-4bf1-90d0-d36c27e69252",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 11
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -489,21 +526,61 @@
           "TranslationKey" : "f51c34d5-ce8d-409b-8618-f9bc9f3fd8f2"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Money Tree Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "4cb20e8e-9cb7-4ec4-9de9-c51aeb615fd7",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -736,7 +813,7 @@
     }, {
       "Content" : {
         "Key" : "86b7510b2aec423404de347aa34fc04d",
-        "Text" : "When you sell a Spare Change, this gains {ability.2} Heal."
+        "Text" : "When you sell a Spare Change, this gains +{ability.2} Heal."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null

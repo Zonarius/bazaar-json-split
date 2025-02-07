@@ -125,7 +125,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +152,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "8293996b-b742-4b36-b64c-c2dc9f98514e",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -237,14 +241,14 @@
           },
           "Prerequisites" : null,
           "InternalName" : "Shielded Goggles Aura",
-          "InternalDescription" : "Shielded 12",
+          "InternalDescription" : "Shielded 1",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9c02566e-51f7-4a5f-8f32-9acdec85e8fe"
+          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
         }
       },
       "Tags" : [ ],
@@ -264,7 +268,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 60
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -284,36 +288,76 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Restorative Goggles Ability",
+          "InternalName" : "Restorative Goggles Bar Ability",
           "InternalDescription" : "",
-          "MigrationData" : "54b0cc6c-0095-4249-9b80-1ce68d44ecb2",
+          "MigrationData" : "24dc223b-fde5-44c4-bc4a-c69072c3e23a",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "af34434f-53ee-42b1-ad0e-0412255210ec"
+          "TranslationKey" : "a3ec8ef9-c172-4c3a-b7e8-7486d0034985"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Goggles Bar Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "d2cce46e-700d-4d65-b0ed-1309943a7abf",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "d2c9e8b6-fb21-46dd-b43e-96a1bea2ed66",
+            "Text" : "Heal equal to this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -333,36 +377,76 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Toxic Goggles Ability",
+          "InternalName" : "Toxic Goggles Bar Ability",
           "InternalDescription" : "",
-          "MigrationData" : "f0fffef6-e9b7-494e-adf1-35d1d30f996b",
+          "MigrationData" : "56896f0b-7abe-4ab5-9bde-5421b612cb29",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "52eebe7d-9091-41b1-a422-2105d4a5bcd7"
+          "TranslationKey" : "e8f4ba29-21ef-4db8-a329-7d933fc49995"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Goggles Bar Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "a3477593-8890-4557-bed3-28f8e691a722",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 6
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -382,32 +466,72 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Fiery Goggles Ability",
+          "InternalName" : "Fiery Goggles Bar Ability",
           "InternalDescription" : "",
-          "MigrationData" : "ff9c610e-3d4d-49a2-810a-16da813072e6",
+          "MigrationData" : "78a56bad-dc8f-41f8-8de7-2de01d61fcdb",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "d254e5b7-04f6-437a-ab16-d1b50c57d01c"
+          "TranslationKey" : "0ea865ce-cb15-4013-801a-b1b30c010f88"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Goggles Bar Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "71a97c02-ddc1-4b83-8d41-92bf55b26b7b",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -610,7 +734,7 @@
   "StartingTier" : "Bronze",
   "Size" : "Small",
   "Heroes" : [ "Stelle" ],
-  "Tags" : [ "Tool" ],
+  "Tags" : [ "Tool", "Apparel" ],
   "HiddenTags" : [ "Shield", "Crit", "HasteReference" ],
   "ArtKey" : "783c219b4d7f3db4ab70d33ec2e9c1d2",
   "CardPackId" : "Stelle_Core",
@@ -736,7 +860,7 @@
       "Prerequisites" : null,
       "Priority" : "High",
       "InternalName" : "Goggles 2",
-      "InternalDescription" : "When this gains Haste, give your Items +[2/4/6/8]% crit chance for the fight.",
+      "InternalDescription" : "When this gains Haste, your items gain +[2/4/6/8]% crit chance for the fight.",
       "MigrationData" : "d193ea97-d664-4750-8d21-de45e4782d33",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

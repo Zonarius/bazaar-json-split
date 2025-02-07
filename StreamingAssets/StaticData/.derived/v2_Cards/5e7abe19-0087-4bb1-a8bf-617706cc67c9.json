@@ -115,7 +115,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -138,7 +142,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "806db59b-12a4-4cc9-a59c-4d525b326a6e",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -385,7 +389,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 18
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -416,25 +420,65 @@
           "TranslationKey" : "970809a1-ad91-42b2-9969-130053e8318b"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Musket Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "d12dbfde-2e4b-4903-86b8-e7c3342207a8",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 24
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -465,21 +509,61 @@
           "TranslationKey" : "f7f3e3da-1b57-4df7-9afd-5f36d7e48179"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Musket Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "32f4bde3-e22b-426f-8c19-e1fc3b0b155e",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

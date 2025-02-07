@@ -123,7 +123,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -146,7 +150,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "b413e954-e21e-4c06-9df8-f65c358c428b",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -393,7 +397,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -424,25 +428,65 @@
           "TranslationKey" : "afee7ebf-ca9b-4da5-a5c3-556410ad77cf"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Jaballian Longbow Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "332a844e-5a1b-4886-9ebc-68c2899cdc53",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -473,21 +517,61 @@
           "TranslationKey" : "9490b2ce-02ca-4523-9261-efdb808af2ec"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Jaballian Longbow Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "4acabb0f-0d0a-4248-a0aa-56e8d5a57985",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

@@ -1,15 +1,26 @@
 {
   "$type" : "TCardItem",
   "Tiers" : {
-    "Silver" : {
+    "Bronze" : {
       "Attributes" : {
         "CooldownMax" : 6000,
+        "BuyPrice" : 2,
+        "SellPrice" : 1,
+        "Multicast" : 1,
+        "DamageAmount" : 12,
+        "SlowAmount" : 2000,
+        "SlowTargets" : 1
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Silver" : {
+      "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "Multicast" : 1,
-        "DamageAmount" : 10,
-        "SlowAmount" : 3000,
-        "SlowTargets" : 1
+        "DamageAmount" : 18,
+        "SlowAmount" : 3000
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -19,7 +30,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "DamageAmount" : 20,
+        "DamageAmount" : 24,
         "SlowAmount" : 4000
       },
       "AbilityIds" : [ "0", "1" ],
@@ -30,7 +41,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 40,
+        "DamageAmount" : 32,
         "SlowAmount" : 5000
       },
       "AbilityIds" : [ "0", "1" ],
@@ -104,7 +115,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -127,7 +142,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "28379937-ab48-4c80-bebb-3ae8da06081f",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -374,7 +389,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -405,25 +420,65 @@
           "TranslationKey" : "ed332e83-1338-4085-b5eb-661da6ccc5ea"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Grappling Hook Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c37cccc0-7012-4c34-8636-55461a591e6a",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 5
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -454,21 +509,61 @@
           "TranslationKey" : "8376b42a-9d34-4121-89f7-ebae8b389c41"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Grappling Hook Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "72def2e8-8f91-4e02-87f0-1ff46274a907",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -689,7 +784,7 @@
   "Version" : "1.0.0",
   "InternalName" : "Grappling Hook",
   "InternalDescription" : null,
-  "StartingTier" : "Silver",
+  "StartingTier" : "Bronze",
   "Size" : "Small",
   "Heroes" : [ "Vanessa" ],
   "Tags" : [ "Weapon", "Tool" ],

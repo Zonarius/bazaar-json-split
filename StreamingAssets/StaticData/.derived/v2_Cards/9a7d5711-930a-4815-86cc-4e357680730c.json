@@ -105,7 +105,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -128,7 +132,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "51e6778f-2f57-4008-8777-936765d37cbd",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -197,7 +201,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 120
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -228,25 +232,65 @@
           "TranslationKey" : "f675099e-dbd2-4c6d-8586-1654d7d897fe"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Lion Cane Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "62167977-55c9-4965-9937-cc88c9eb4840",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "94497f63-4982-492e-be92-50e87290aaa0",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 180
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -277,25 +321,65 @@
           "TranslationKey" : "d3bda94c-22de-4957-850e-b78209e8c087"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Lion Cane Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "5ab37a8e-b405-4d66-ad5b-545f23ede833",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "4de9e1e5-b2db-4022-81aa-d977030adbfb",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 12
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -326,25 +410,65 @@
           "TranslationKey" : "0a89c3a6-f0db-44af-ad67-599a9e6b63db"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Lion Cane Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "85935fc0-4bb3-4ace-809c-0a319a0fda89",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 18
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -375,21 +499,61 @@
           "TranslationKey" : "bc51c298-c8c9-4d73-a12b-9c31be24d357"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Lion Cane Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "aa296b81-eac0-489e-a6fe-09d7d2c4191c",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -636,7 +800,7 @@
     }, {
       "Content" : {
         "Key" : "6fa57d5324d1f8720ebe6885f01f481c",
-        "Text" : "When you Level Up, gain {ability.1} Max Health."
+        "Text" : "When you Level Up, permanently gain {ability.1} Max Health."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -713,7 +877,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Lion Cane 2",
-      "InternalDescription" : "When you Level Up, gain {ability.1} Max Health.",
+      "InternalDescription" : "When you Level Up, permanently gain {ability.1} Max Health.",
       "MigrationData" : "a6819efe-4158-423b-baca-4e9dfb522072",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

@@ -3,12 +3,12 @@
   "Tiers" : {
     "Bronze" : {
       "Attributes" : {
-        "CooldownMax" : 4000,
+        "CooldownMax" : 5000,
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 10,
-        "Custom_0" : 5
+        "ShieldApplyAmount" : 20,
+        "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -18,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "Custom_0" : 10
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -28,7 +28,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "Custom_0" : 15
+        "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -38,7 +38,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "Custom_0" : 20
+        "Custom_0" : 25
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -122,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -145,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "50f7ab2e-c1ef-4dbf-8bca-b8e54d41988b",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -350,7 +354,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -381,25 +385,65 @@
           "TranslationKey" : "04d16410-f689-427f-99ec-c6df06f87879"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Barrel Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 6
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -430,21 +474,61 @@
           "TranslationKey" : "bb898717-22d7-4bca-b88e-e930072c9e5f"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Barrel Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -670,7 +754,7 @@
     }, {
       "Content" : {
         "Key" : "14d07473e74b7666cdbe789d39307f5a",
-        "Text" : "When you use a non-weapon item, this gains {ability.1} Shield for the fight."
+        "Text" : "When you use an adjacent non-weapon item, this gains {ability.1} Shield for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -694,24 +778,25 @@
       },
       "Prerequisites" : null,
       "Priority" : "Medium",
-      "InternalName" : "Barrel 1 Shield",
+      "InternalName" : "Barrel 1",
       "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "a714c591-a605-47d0-b4d4-63872a3b02cc",
+      "MigrationData" : "6c543107-074f-48ac-8ad8-6b1aedfb290b",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "df1519f2258ca61d0d83ad7bd9d8b31d"
+      "TranslationKey" : "7b49b8b43691b947735bb62676fb96c3"
     },
     "1" : {
       "Id" : "1",
       "Trigger" : {
         "$type" : "TTriggerOnItemUsed",
         "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
           "Conditions" : {
             "$type" : "TCardConditionalTag",
             "Tags" : [ "Weapon" ],
@@ -745,16 +830,16 @@
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Low",
+      "Priority" : "High",
       "InternalName" : "Barrel 2",
-      "InternalDescription" : "When you use a non-weapon item, this gains {ability.1} Shield for the fight.",
-      "MigrationData" : "adae5611-0ace-4c80-9900-a3db5c2a3727",
+      "InternalDescription" : "When you use an adjacent Friend, this gains {ability.1} Shield for the fight.",
+      "MigrationData" : "f35435a6-6520-413d-9a80-dd9c0a459cce",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "14d07473e74b7666cdbe789d39307f5a"
+      "TranslationKey" : "0b6387d0eaf7e82d6e14b31c7b5b2815"
     }
   },
   "Auras" : { }

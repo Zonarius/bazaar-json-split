@@ -8,7 +8,7 @@
         "SellPrice" : 1,
         "AmmoMax" : 2,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 20
+        "ShieldApplyAmount" : 30
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -18,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ShieldApplyAmount" : 40
+        "ShieldApplyAmount" : 60
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -28,7 +28,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ShieldApplyAmount" : 80
+        "ShieldApplyAmount" : 90
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -122,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -145,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "23327ab5-cfa3-4051-b31a-b20158d5da40",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -350,7 +354,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -381,25 +385,65 @@
           "TranslationKey" : "e8f4ba29-21ef-4db8-a329-7d933fc49995"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Gearnola Bar Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "2ba96d1a-3c88-4bc6-9bcb-42fa979fe0cb",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 6
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -430,21 +474,61 @@
           "TranslationKey" : "0ea865ce-cb15-4013-801a-b1b30c010f88"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Gearnola Bar Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "0abbb16b-8f0d-4e95-a39b-70c267ab6339",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

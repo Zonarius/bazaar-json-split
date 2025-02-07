@@ -7,7 +7,8 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "HealAmount" : 0
+        "HealAmount" : 0,
+        "Custom_0" : 1
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ "1" ],
@@ -17,21 +18,21 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "HealAmount" : 0
+        "Custom_0" : 2
       },
       "AbilityIds" : [ "0" ],
-      "AuraIds" : [ "2" ],
-      "TooltipIds" : [ 1 ]
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "HealAmount" : 0
+        "Custom_0" : 3
       },
       "AbilityIds" : [ "0" ],
-      "AuraIds" : [ "3" ],
-      "TooltipIds" : [ 2 ]
+      "AuraIds" : [ "1" ],
+      "TooltipIds" : [ 0 ]
     }
   },
   "Enchantments" : {
@@ -111,7 +112,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -134,7 +139,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "bce78466-c42d-473a-8077-f9600dad6be2",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -339,7 +344,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -370,25 +375,65 @@
           "TranslationKey" : "2c0dd9d9-2b3e-4f68-822e-86172b26a8bb"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Oinkment Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "65152e41-c650-4fb3-a964-762c714402fa",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -419,21 +464,61 @@
           "TranslationKey" : "9e16abce-ea8f-41a3-bb73-5a6abf94fe42"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Oinkment Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c3e9e989-5f15-4a53-a5ce-cccb2bc3e405",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -652,21 +737,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "94227c126125ead366a467db37f44fb8",
-        "Text" : "Heal equal to your gold."
-      },
-      "TooltipType" : "Active",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "94227c126125ead366a467db37f44fb8",
-        "Text" : "Heal equal to double your gold."
-      },
-      "TooltipType" : "Active",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "94227c126125ead366a467db37f44fb8",
-        "Text" : "Heal equal to triple your gold."
+        "Text" : "Heal equal to {aura.1.mod} times your gold."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -691,7 +762,7 @@
       "Prerequisites" : null,
       "Priority" : "Medium",
       "InternalName" : "Oinkment 1",
-      "InternalDescription" : "set ",
+      "InternalDescription" : "Heal equal to [--/1/2/3] times your Gold.",
       "MigrationData" : "5d2022fe-8223-4178-8408-f98c8e39103d",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -721,8 +792,14 @@
           "Modifier" : {
             "ModifyMode" : "Multiply",
             "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -732,88 +809,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Oinkment silver heal",
-      "InternalDescription" : "Sets heal",
-      "MigrationData" : "475addae-1726-4336-b277-4df21e11ccf2",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "93826b7b7a154c7823629388e16a3823"
-    },
-    "2" : {
-      "Id" : "2",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttribute",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "AttributeType" : "Gold",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Oinkment gold heal",
-      "InternalDescription" : "Sets heal",
-      "MigrationData" : "475addae-1726-4336-b277-4df21e11ccf2",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "93826b7b7a154c7823629388e16a3823"
-    },
-    "3" : {
-      "Id" : "3",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttribute",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "AttributeType" : "Gold",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 3.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Oinkment diamond heal",
-      "InternalDescription" : "Sets heal",
+      "InternalName" : "Oinkment heal",
+      "InternalDescription" : "Sets the value of heal",
       "MigrationData" : "475addae-1726-4336-b277-4df21e11ccf2",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

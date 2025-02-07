@@ -1,11 +1,11 @@
 {
   "$type" : "TCardItem",
   "Tiers" : {
-    "Silver" : {
+    "Gold" : {
       "Attributes" : {
         "CooldownMax" : 6000,
-        "BuyPrice" : 8,
-        "SellPrice" : 4,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
         "Multicast" : 1,
         "ShieldApplyAmount" : 25,
         "Custom_0" : 10,
@@ -16,21 +16,11 @@
       "AuraIds" : [ ],
       "TooltipIds" : [ 0, 1, 2 ]
     },
-    "Gold" : {
-      "Attributes" : {
-        "BuyPrice" : 16,
-        "SellPrice" : 8,
-        "Custom_0" : 15
-      },
-      "AbilityIds" : [ "0", "1", "2" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1, 2 ]
-    },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "Custom_0" : 20
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -114,7 +104,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -137,7 +131,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "05ff7c6c-4756-410a-bf2c-fbf69ec7f4e8",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -342,7 +336,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -373,25 +367,65 @@
           "TranslationKey" : "4a6551da-c433-4659-b168-25419d9c8d14"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Turtle Shell Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "19b277c5-806d-4065-84ca-25dd65fe3dc0",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 6
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -422,21 +456,61 @@
           "TranslationKey" : "755f4aef-b3a9-4e08-a33e-2e25d4e2f7e8"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Turtle Shell Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "73500ac5-d435-4064-9a08-6afaebfd9bcf",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -636,7 +710,7 @@
   "Version" : "1.0.0",
   "InternalName" : "Turtle Shell",
   "InternalDescription" : null,
-  "StartingTier" : "Silver",
+  "StartingTier" : "Gold",
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
   "Tags" : [ "Aquatic" ],

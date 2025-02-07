@@ -7,7 +7,7 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "DamageAmount" : 12,
+        "DamageAmount" : 30,
         "Custom_0" : 1
       },
       "AbilityIds" : [ "0", "1" ],
@@ -18,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "DamageAmount" : 24,
+        "DamageAmount" : 40,
         "Custom_0" : 2
       },
       "AbilityIds" : [ "0", "1" ],
@@ -29,7 +29,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 48,
+        "DamageAmount" : 50,
         "Custom_0" : 3
       },
       "AbilityIds" : [ "0", "1" ],
@@ -73,7 +73,14 @@
       "Tags" : [ ],
       "HiddenTags" : [ "Income" ],
       "Localization" : {
-        "Tooltips" : [ ]
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a6d7121b-b1af-4b9f-94f9-b128cea2b83c",
+            "Text" : "This has double value gain."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
       },
       "HasAbilities" : false,
       "HasAuras" : true
@@ -154,7 +161,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -177,7 +188,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "bc768c0e-6e30-4fd9-b186-0dd28d6f1ee0",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -424,7 +435,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -455,25 +466,65 @@
           "TranslationKey" : "d8843552-1e19-4f5f-9899-516001836d31"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Concealed Dagger Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "0db75278-6a2d-4054-a112-a365a68d3e87",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% 0f this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 5
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -504,21 +555,61 @@
           "TranslationKey" : "617d7699-1384-41fe-8fbb-f9da5a5be0df"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Concealed Dagger Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "f814a69d-8321-47f8-87a0-aef011034f9d",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

@@ -66,7 +66,7 @@
             },
             "Target" : {
               "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfHand",
+              "TargetSection" : "SelfHandAndStash",
               "ExcludeSelf" : false,
               "Conditions" : {
                 "$type" : "TCardConditionalTag",
@@ -76,7 +76,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Golden Silk Aura",
+          "InternalName" : "Golden Silk Scarf Aura",
           "InternalDescription" : "Golden 1",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -93,7 +93,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "a6d7121b-b1af-4b9f-94f9-b128cea2b83c",
-            "Text" : "Your non-weapon items have +1 value."
+            "Text" : "Your non-weapon items have +{aura.e1} value."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -133,7 +133,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Heavy Silk Ability",
+          "InternalName" : "Heavy Silk Scarf Ability",
           "InternalDescription" : "",
           "MigrationData" : "d9450a29-802f-4f79-9cd9-cad7807c2001",
           "VFXConfig" : {
@@ -178,12 +178,16 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Icy Silk Ability",
+          "InternalName" : "Icy Silk Scarf Ability",
           "InternalDescription" : "",
           "MigrationData" : "54caea4f-519b-4ffe-aec4-b1e06d36de86",
           "VFXConfig" : {
@@ -201,7 +205,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "b12e42ba-293b-4c5e-bba5-c255cd1c02ae",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -241,7 +245,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Turbo Silk Ability",
+          "InternalName" : "Turbo Silk Scarf Ability",
           "InternalDescription" : "",
           "MigrationData" : "2a9bc115-b17a-4898-ada3-45a508a7631f",
           "VFXConfig" : {
@@ -289,7 +293,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Shielded Silk Aura",
+          "InternalName" : "Shielded Silk Scarf Aura",
           "InternalDescription" : "Heavy 2",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -337,7 +341,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Restorative Silk Ability",
+          "InternalName" : "Restorative Silk Scarf Ability",
           "InternalDescription" : "",
           "MigrationData" : "f3c29621-787f-4b76-a136-369684b6da45",
           "VFXConfig" : {
@@ -378,7 +382,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Restorative Silk Aura",
+          "InternalName" : "Restorative Silk Scarf Aura",
           "InternalDescription" : "Sets the value of heal",
           "MigrationData" : "475addae-1726-4336-b277-4df21e11ccf2",
           "VFXConfig" : {
@@ -406,7 +410,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 7
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -426,7 +430,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Toxic Silk Ability",
+          "InternalName" : "Toxic Silk Scarf Ability",
           "InternalDescription" : "",
           "MigrationData" : "1f3a8534-c56f-4d8d-854b-a83374fe6993",
           "VFXConfig" : {
@@ -437,25 +441,65 @@
           "TranslationKey" : "20b2b3ae-a5da-4225-94e2-c69c66a85f55"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Silk Scarf Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "694afb11-e26f-49cb-99f0-04def1eed00d",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 10
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -475,7 +519,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Fiery Silk Ability",
+          "InternalName" : "Fiery Silk Scarf Ability",
           "InternalDescription" : "",
           "MigrationData" : "96bd6424-203e-491f-92c1-5b2f1caf2edf",
           "VFXConfig" : {
@@ -486,21 +530,61 @@
           "TranslationKey" : "6e39eda0-113a-4f48-8ba5-be0d90f38ff7"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Silk Scarf Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c9b62943-1a4d-47e3-b28a-8dcb63c6c5db",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -523,7 +607,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Shiny Silk Aura",
+          "InternalName" : "Shiny Silk Scarf Aura",
           "InternalDescription" : "Shiny 1",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -570,7 +654,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Deadly Silk Aura",
+          "InternalName" : "Deadly Silk Scarf Aura",
           "InternalDescription" : "Deadly 50",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -698,12 +782,12 @@
   "Type" : "Item",
   "Id" : "aff2d8f4-528a-4229-8175-8901fcadcb70",
   "Version" : "1.0.0",
-  "InternalName" : "Silk",
+  "InternalName" : "Silk Scarf",
   "InternalDescription" : "",
   "StartingTier" : "Bronze",
   "Size" : "Medium",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ ],
+  "Tags" : [ "Apparel" ],
   "HiddenTags" : [ "Shield" ],
   "ArtKey" : "ab23e24d8d8a93641aadf698d0c43c78",
   "CardPackId" : "Pygmalien_Core",
@@ -712,7 +796,7 @@
   "Localization" : {
     "Title" : {
       "Key" : "a2a3a0347f0f001a4473dd54dca2462e",
-      "Text" : "Silk"
+      "Text" : "Silk Scarf"
     },
     "Description" : null,
     "FlavorText" : null,
@@ -750,7 +834,7 @@
       },
       "Prerequisites" : null,
       "Priority" : "Medium",
-      "InternalName" : "Silk 1",
+      "InternalName" : "Silk Scarf 1",
       "InternalDescription" : "Shield {ability.0}.",
       "MigrationData" : "8ee8642c-0c9d-4a53-bdd1-39eddace9d49",
       "VFXConfig" : {
@@ -811,7 +895,7 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Silk 2",
+      "InternalName" : "Silk Scarf 2",
       "InternalDescription" : "When you buy a non-weapon item, this gains Shield {ability.1}.",
       "MigrationData" : "f78912bf-b293-4b77-a765-da43505fbdf2",
       "VFXConfig" : {

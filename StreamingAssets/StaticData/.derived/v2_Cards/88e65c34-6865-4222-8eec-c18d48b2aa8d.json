@@ -7,7 +7,7 @@
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "HealAmount" : 10,
+        "HealAmount" : 20,
         "Custom_0" : 5
       },
       "AbilityIds" : [ "0", "1" ],
@@ -29,8 +29,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "Custom_0" : 15,
-        "HealAmount" : 40
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -40,8 +39,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "Custom_0" : 20,
-        "HealAmount" : 80
+        "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -125,7 +123,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +150,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e38ba149-18ed-440f-aad7-4d107c919f7d",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -353,7 +355,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -382,73 +384,67 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "57b6ca83-15de-44ca-9d2b-f3022f8e7199"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnItemUsed",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfHand",
-              "ExcludeSelf" : false,
-              "Conditions" : {
-                "$type" : "TCardConditionalTag",
-                "Tags" : [ "Aquatic" ],
-                "Operator" : "Any"
-              }
-            }
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "PoisonApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Toxic Seaweed Ability 2",
-          "InternalDescription" : "When you use an Aquatic item, this gains +{ability.e2} Poison for the fight.",
-          "MigrationData" : "be16a003-39c4-4305-88be-fc395bfdd3b6",
+          "InternalName" : "Toxic Seaweed Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "45fe61d257cc5b8c730bf40e00d38e02"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
-            "Text" : "Poison {ability.e1}. When you use an Aquatic item, this gains +{ability.e2} Poison for the fight."
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -477,69 +473,63 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "297edaf5-a938-48ec-97f8-754875d09078"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnItemUsed",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfHand",
-              "ExcludeSelf" : false,
-              "Conditions" : {
-                "$type" : "TCardConditionalTag",
-                "Tags" : [ "Aquatic" ],
-                "Operator" : "Any"
-              }
-            }
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "BurnApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Fiery Seaweed Ability 2",
-          "InternalDescription" : "When you use an Aquatic item, this gains +{ability.e2} Burn for the fight.",
-          "MigrationData" : "be16a003-39c4-4305-88be-fc395bfdd3b6",
+          "InternalName" : "Fiery Seaweed Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "45fe61d257cc5b8c730bf40e00d38e02"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
-            "Text" : "Burn {ability.e1}. When you use an Aquatic item, this gains +{ability.e2} Burn for the fight."
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

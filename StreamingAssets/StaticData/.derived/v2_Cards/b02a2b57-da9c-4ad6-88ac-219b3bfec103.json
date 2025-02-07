@@ -7,8 +7,8 @@
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "DamageAmount" : 5,
-        "Custom_0" : 3
+        "DamageAmount" : 10,
+        "Custom_0" : 6
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ "1" ],
@@ -18,8 +18,8 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "DamageAmount" : 10,
-        "Custom_0" : 6
+        "DamageAmount" : 15,
+        "Custom_0" : 9
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ "1" ],
@@ -30,7 +30,7 @@
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "DamageAmount" : 20,
-        "Custom_0" : 9
+        "Custom_0" : 12
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ "1" ],
@@ -40,7 +40,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 40,
+        "DamageAmount" : 25,
         "Custom_0" : 15
       },
       "AbilityIds" : [ "0" ],
@@ -125,7 +125,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +152,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e883c804-488a-4584-a157-c3dd22b68ee0",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -479,7 +483,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -510,25 +514,105 @@
           "TranslationKey" : "ce06946c-f5f8-4585-b7fb-34960b3ad95a"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Handaxe Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        },
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Poison" ],
+                "Operator" : "Any"
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Handaxe Aura 2",
+          "InternalDescription" : "Your other Poison items have +1 Poison.",
+          "MigrationData" : "eb7ce879-5f5c-4536-b7b6-cc0a0f4def79",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "979608f87a0c2ed7baf5d05e4ee935f1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "d4154bb5-722a-4acf-9496-a3ac658b5644",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Your other Poison items have +{aura.e3} Poison."
+          },
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 5
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -559,21 +643,101 @@
           "TranslationKey" : "145e153a-3d71-4534-b0de-99058713a176"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Handaxe Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        },
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Burn" ],
+                "Operator" : "Any"
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Handaxe Aura 2",
+          "InternalDescription" : "Your other Fiery items have +2 Burn.",
+          "MigrationData" : "eb7ce879-5f5c-4536-b7b6-cc0a0f4def79",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "979608f87a0c2ed7baf5d05e4ee935f1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "7927bc0a-6ead-4907-9a3c-e246629c1ab3",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Your other Burn items have +{aura.e3} Burn."
+          },
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

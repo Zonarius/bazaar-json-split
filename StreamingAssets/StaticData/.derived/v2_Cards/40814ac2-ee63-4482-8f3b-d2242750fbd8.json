@@ -7,7 +7,7 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 10,
+        "ShieldApplyAmount" : 50,
         "Custom_0" : 5
       },
       "AbilityIds" : [ "0", "1" ],
@@ -18,7 +18,6 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ShieldApplyAmount" : 20,
         "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1" ],
@@ -29,7 +28,6 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ShieldApplyAmount" : 40,
         "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1" ],
@@ -40,7 +38,6 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ShieldApplyAmount" : 80,
         "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1" ],
@@ -125,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "0e377832-7f55-4120-8e37-0341d408f2c1",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -353,7 +354,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 6
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -384,25 +385,65 @@
           "TranslationKey" : "65600da1-6df1-48f0-9335-f9645cd11834"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Coral Armor Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "6e7f1e38-2eae-4e04-ae6a-951aff199452",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 9
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -433,21 +474,61 @@
           "TranslationKey" : "150b6d65-b492-454f-90fe-96b7432bb5b8"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Coral Armor Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "da13fceb-31e6-4240-a202-85e3f9250296",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -650,7 +731,7 @@
   "StartingTier" : "Bronze",
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
-  "Tags" : [ "Aquatic" ],
+  "Tags" : [ "Aquatic", "Apparel" ],
   "HiddenTags" : [ "Shield" ],
   "ArtKey" : "dd191e859103d024897bda5dde0a9546",
   "CardPackId" : "Vanessa_Core",

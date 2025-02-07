@@ -7,23 +7,23 @@
         "BuyPrice" : 6,
         "SellPrice" : 3,
         "Multicast" : 1,
-        "DamageAmount" : 20,
+        "DamageAmount" : 40,
         "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     },
     "Silver" : {
       "Attributes" : {
         "BuyPrice" : 12,
         "SellPrice" : 6,
-        "DamageAmount" : 40,
+        "DamageAmount" : 60,
         "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     },
     "Gold" : {
       "Attributes" : {
@@ -33,19 +33,19 @@
         "Custom_0" : 30
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 48,
         "SellPrice" : 24,
-        "DamageAmount" : 160,
+        "DamageAmount" : 100,
         "Custom_0" : 40
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
     }
   },
   "Enchantments" : {
@@ -457,7 +457,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 15
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -488,25 +488,65 @@
           "TranslationKey" : "da01fa8c-4d4e-4f00-9439-2e60eab00b2a"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Beast of Burden Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "425ed39e-753a-4766-9434-ccccccf6d36c",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 22
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -537,21 +577,61 @@
           "TranslationKey" : "cb3ca6e5-0748-4f1d-81bc-f46725b0c6c9"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Beast of Burden Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "372b0180-c84d-46f7-901c-5568cedbea01",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -798,7 +878,14 @@
     }, {
       "Content" : {
         "Key" : "543c5ad885c5fdd0aa8c30d80d6fb9e7",
-        "Text" : "When you buy another item, this gains {ability.1} damage."
+        "Text" : "When you buy another item, this gains that item's Types."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "543c5ad885c5fdd0aa8c30d80d6fb9e8",
+        "Text" : "This has +1 Multicast for each of its Types."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -848,21 +935,12 @@
       },
       "ActiveIn" : "HandAndStash",
       "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
+        "$type" : "TActionCardAddTagsBySource",
+        "Source" : {
+          "$type" : "TTargetCardTriggerSource",
+          "ExcludeSelf" : true,
+          "Conditions" : null
         },
-        "AttributeType" : "DamageAmount",
-        "Operation" : "Add",
-        "Duration" : null,
-        "TargetCount" : null,
         "Target" : {
           "$type" : "TTargetCardSelf",
           "Conditions" : null
@@ -881,5 +959,45 @@
       "TranslationKey" : "543c5ad885c5fdd0aa8c30d80d6fb9e7"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardTagCount",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "Distinct" : true,
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "",
+      "InternalDescription" : "",
+      "MigrationData" : "cb15d894-1e3e-42a4-95c1-1f0098806f0d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "bc41f32c4aa542fc83ca13079e73dc0d"
+    }
+  }
 }

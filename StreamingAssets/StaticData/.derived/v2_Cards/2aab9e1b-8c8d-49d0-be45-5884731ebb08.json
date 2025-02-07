@@ -8,29 +8,32 @@
         "SellPrice" : 2,
         "Multicast" : 1,
         "HealAmount" : 0,
-        "Custom_0" : 0
+        "Custom_0" : 0,
+        "Custom_1" : 1
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ "2", "5" ],
-      "TooltipIds" : [ 0, 3 ]
+      "AuraIds" : [ "2", "3" ],
+      "TooltipIds" : [ 0, 1 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 8,
-        "SellPrice" : 4
+        "SellPrice" : 4,
+        "Custom_1" : 2
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ "3", "5" ],
-      "TooltipIds" : [ 1, 3 ]
+      "AuraIds" : [ "2", "3" ],
+      "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 16,
-        "SellPrice" : 8
+        "SellPrice" : 8,
+        "Custom_1" : 3
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ "4", "5" ],
-      "TooltipIds" : [ 2, 3 ]
+      "AuraIds" : [ "2", "3" ],
+      "TooltipIds" : [ 0, 1 ]
     }
   },
   "Enchantments" : {
@@ -157,7 +160,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -180,7 +187,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "fcd2eee7-4bb5-482e-8333-f3c69c2072e9",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -291,21 +298,16 @@
             "Value" : {
               "$type" : "TReferenceValueCardAttribute",
               "Target" : {
-                "$type" : "TTargetCardSection",
-                "TargetSection" : "SelfHand",
-                "ExcludeSelf" : false,
-                "Conditions" : {
-                  "$type" : "TCardConditionalAttributeHighest",
-                  "AttributeType" : "SellPrice"
-                }
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
               },
-              "AttributeType" : "SellPrice",
+              "AttributeType" : "HealAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
                 "Value" : {
                   "$type" : "TFixedValue",
-                  "Value" : 2.0
+                  "Value" : 1.0
                 }
               }
             },
@@ -315,8 +317,8 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "",
-          "InternalDescription" : "",
+          "InternalName" : "Shielded Truffles Aura",
+          "InternalDescription" : "Sets the value of shield",
           "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -331,8 +333,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "b0a74625-71a0-4226-8521-c4f6ee579eff",
-            "Text" : "Shield equal to double the value of your highest value item."
+            "Key" : "45a39d85-14c0-425a-bf78-9e4a9ccb90eb",
+            "Text" : "Shield equal to this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -390,7 +392,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -421,25 +423,65 @@
           "TranslationKey" : "906297a1-24eb-4ae6-ae64-3581f750878b"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Truffles Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "bf26a871-0b0a-4b22-8f19-af98a7647347",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 5
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -470,21 +512,61 @@
           "TranslationKey" : "b982225a-601c-46b5-8869-e68f5512f5ce"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Truffles Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "3bf993d3-068c-4d09-ab9c-3dbf85bcc440",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -703,21 +785,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "14183af566b6a9368585c125c9081a4e",
-        "Text" : "Heal equal to the value of your highest value item."
-      },
-      "TooltipType" : "Active",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "14183af566b6a9368585c125c9081a4c",
-        "Text" : "Heal equal to double the value of your highest value item."
-      },
-      "TooltipType" : "Active",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "15183af566b6a9368585c125c9081a4d",
-        "Text" : "Heal equal to triple the value of your highest value item."
+        "Text" : "Heal equal to {aura.2.mod} times the value of your highest value item."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -807,50 +875,6 @@
   },
   "Auras" : {
     "2" : {
-      "Id" : "1",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSection",
-            "TargetSection" : "SelfHand",
-            "ExcludeSelf" : false,
-            "Conditions" : {
-              "$type" : "TCardConditionalAttributeHighest",
-              "AttributeType" : "SellPrice"
-            }
-          },
-          "AttributeType" : "SellPrice",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Truffles 3",
-      "InternalDescription" : "Sets the value of Truffles 1.",
-      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "3" : {
       "Id" : "2",
       "ActiveIn" : "HandAndStash",
       "Action" : {
@@ -873,8 +897,14 @@
           "Modifier" : {
             "ModifyMode" : "Multiply",
             "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -884,8 +914,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Truffles 3",
-      "InternalDescription" : "Sets the value of Truffles 1.",
+      "InternalName" : "Truffles Heal Value",
+      "InternalDescription" : "Sets the value of Heal",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -894,52 +924,8 @@
       },
       "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
     },
-    "4" : {
+    "3" : {
       "Id" : "3",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSection",
-            "TargetSection" : "SelfHand",
-            "ExcludeSelf" : false,
-            "Conditions" : {
-              "$type" : "TCardConditionalAttributeHighest",
-              "AttributeType" : "SellPrice"
-            }
-          },
-          "AttributeType" : "SellPrice",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 3.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Truffles 4",
-      "InternalDescription" : "Sets the value of Truffles 1.",
-      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "5" : {
-      "Id" : "5",
       "ActiveIn" : "HandAndStash",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
@@ -961,8 +947,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Truffles 5",
-      "InternalDescription" : "Sets the value of Truffles 1.",
+      "InternalName" : "Truffles Sell Value",
+      "InternalDescription" : "Sets the value of SellPrice",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

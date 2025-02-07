@@ -342,7 +342,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 12
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -373,25 +373,65 @@
           "TranslationKey" : "fd0f96d4-c0f1-4982-a381-162f44e68927"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Vineyard Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "b26a1579-b0c8-45bb-aa89-d9908e223bbe",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 18
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -422,21 +462,61 @@
           "TranslationKey" : "498c422a-4ef0-468e-86bc-710cd8d1b6bf"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Vineyard Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "1cb5732d-c35b-439a-adcc-80c87a522f49",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -708,7 +788,7 @@
       "Trigger" : {
         "$type" : "TTriggerOnHourStarted"
       },
-      "ActiveIn" : "HandAndStash",
+      "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TActionCardModifyAttribute",
         "Value" : {
@@ -729,10 +809,7 @@
         },
         "AttributeType" : "SellPrice",
         "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
+        "Duration" : null,
         "TargetCount" : null,
         "Target" : {
           "$type" : "TTargetCardSelf",
@@ -742,7 +819,7 @@
       "Prerequisites" : null,
       "Priority" : "Medium",
       "InternalName" : "Vineyard 2",
-      "InternalDescription" : "When you use another item, this gains Heal equal to the value of that item for the fight.",
+      "InternalDescription" : "At the start of each hour, this gains +[--/1/2/3] value.",
       "MigrationData" : "b699723f-ac0a-4de9-befc-66bbf3d62606",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -790,8 +867,8 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Landscraper 2",
-      "InternalDescription" : "When you use an item.",
+      "InternalName" : "Vineyard 3",
+      "InternalDescription" : "When you use another item, this gains +Heal equal to the value of that item for the fight",
       "MigrationData" : "420fd12c-64ad-4af6-9f30-9b1ef0085ddc",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -831,8 +908,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Vineyard Silver",
-      "InternalDescription" : "Sets the value of HealAmount",
+      "InternalName" : "Vineyard Heal",
+      "InternalDescription" : "Sets the value of Heal",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -840,45 +917,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "9" : {
-      "Id" : "9",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "Custom_2",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_1",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Tooltip Handling",
-      "InternalDescription" : "",
-      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
     }
   }
 }

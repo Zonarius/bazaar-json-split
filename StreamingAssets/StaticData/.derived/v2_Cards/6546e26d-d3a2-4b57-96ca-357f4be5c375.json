@@ -8,7 +8,7 @@
         "SellPrice" : 4,
         "Multicast" : 1,
         "FreezeAmount" : 1000,
-        "HealAmount" : 10
+        "Custom_0" : 5
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -18,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "HealAmount" : 20
+        "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -28,7 +28,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "HealAmount" : 30
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -201,13 +201,19 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 100
+        "ShieldApplyAmount" : 10
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedFreeze",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -239,9 +245,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "When you Freeze, Shield {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -297,13 +303,19 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 10
+        "PoisonApplyAmount" : 1
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedFreeze",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -335,9 +347,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "04bf9d5c-079a-46d2-abd8-5a76c978dda1",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "When you Freeze, Poison {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -346,13 +358,19 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 15
+        "BurnApplyAmount" : 2
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnCardPerformedFreeze",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfBoard",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -384,9 +402,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "01ed7299-7417-4d36-bd70-b5a8392056f7",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "When you Freeze, Burn {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -446,22 +464,20 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardAttributeChanged",
+            "$type" : "TTriggerOnCardPerformedFreeze",
             "Subject" : {
               "$type" : "TTargetCardSection",
-              "TargetSection" : "AllHands",
+              "TargetSection" : "SelfBoard",
               "ExcludeSelf" : false,
               "Conditions" : null
-            },
-            "AttributeChanged" : "Freeze",
-            "ChangeType" : "Gain"
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 5.0
+              "Value" : 10.0
             },
             "AttributeType" : "CritChance",
             "Operation" : "Add",
@@ -519,7 +535,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "c36134ba-5956-4e51-ae9e-96794d0e6508",
-            "Text" : "When any item gains Freeze, your items gain +{ability.e1}% Crit Chance for the fight."
+            "Text" : "When you Freeze, your items gain +{ability.e1}% Crit Chance for the fight."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -658,7 +674,7 @@
     }, {
       "Content" : {
         "Key" : "0a412ade517ebd34dbe653b1f9a26939",
-        "Text" : "When you Freeze, Heal {ability.1}."
+        "Text" : "When you Freeze, gain {ability.1} Regeneration for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -705,8 +721,29 @@
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionPlayerHeal",
-        "ReferenceValue" : null,
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "HealthRegen",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
         "Target" : {
           "$type" : "TTargetPlayerRelative",
           "TargetMode" : "Self",
@@ -716,7 +753,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Cold Room 2",
-      "InternalDescription" : "When any item gains Freeze, Heal {ability.1}.",
+      "InternalDescription" : "When you Freeze, Heal {ability.1}.",
       "MigrationData" : "f85aeff1-49ec-4a20-bf19-76be83466917",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

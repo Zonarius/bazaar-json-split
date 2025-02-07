@@ -7,7 +7,7 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 6,
+        "ShieldApplyAmount" : 10,
         "BurnApplyAmount" : 1
       },
       "AbilityIds" : [ "0", "1" ],
@@ -18,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ShieldApplyAmount" : 12,
+        "ShieldApplyAmount" : 15,
         "BurnApplyAmount" : 2
       },
       "AbilityIds" : [ "0", "1" ],
@@ -29,7 +29,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ShieldApplyAmount" : 24,
+        "ShieldApplyAmount" : 20,
         "BurnApplyAmount" : 3
       },
       "AbilityIds" : [ "0", "1" ],
@@ -40,7 +40,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ShieldApplyAmount" : 48,
+        "ShieldApplyAmount" : 25,
         "BurnApplyAmount" : 5
       },
       "AbilityIds" : [ "0", "1" ],
@@ -125,7 +125,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +152,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ce887696-facd-4f53-8354-4fc5949f8d47",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -353,7 +357,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -384,21 +388,61 @@
           "TranslationKey" : "c663f0e7-4bdd-41da-8d10-f191cffd72e2"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Welding Helmet Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "09c0cf68-9736-458b-b57e-bc497daa1b5c",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "3396dbaf-0f72-42d4-8b36-1b9cf0a115df",
+            "Text" : "Poison equal to this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : { },

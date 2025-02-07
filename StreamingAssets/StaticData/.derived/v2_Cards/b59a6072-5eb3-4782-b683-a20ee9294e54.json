@@ -235,13 +235,12 @@
             "AttributeType" : "ShieldApplyAmount",
             "Operation" : "Add",
             "Value" : {
-              "$type" : "TReferenceValuePlayerAttribute",
+              "$type" : "TReferenceValueCardAttribute",
               "Target" : {
-                "$type" : "TTargetPlayerRelative",
-                "TargetMode" : "Self",
+                "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "HealthMax",
+              "AttributeType" : "DamageAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
@@ -274,7 +273,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "bd5a9c4e-222b-4ab6-811b-4448ffd8618d",
-            "Text" : "Shield equal to your Max Health."
+            "Text" : "Shield equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -325,13 +324,12 @@
             "AttributeType" : "HealAmount",
             "Operation" : "Add",
             "Value" : {
-              "$type" : "TReferenceValuePlayerAttribute",
+              "$type" : "TReferenceValueCardAttribute",
               "Target" : {
-                "$type" : "TTargetPlayerRelative",
-                "TargetMode" : "Self",
+                "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "HealthMax",
+              "AttributeType" : "DamageAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
@@ -359,12 +357,12 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ "Heal", "HealthReference" ],
+      "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "3f492606-807c-4279-a190-4d1b74a2ac3a",
-            "Text" : "Heal equal to your Max Health."
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -375,7 +373,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 100
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -406,25 +404,65 @@
           "TranslationKey" : "c2d9d3ee-2cac-4140-8972-41ae146427c6"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic The Boulder Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "5d33055a-59bf-4f70-a6ca-847568534887",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 50
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -455,21 +493,61 @@
           "TranslationKey" : "8fb80698-5745-4249-af82-0955af398360"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery The Boulder Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "58f287f3-6c62-44f4-9d6d-359a9bbfcbdd",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

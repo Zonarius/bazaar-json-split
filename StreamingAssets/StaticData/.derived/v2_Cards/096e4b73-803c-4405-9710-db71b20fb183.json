@@ -8,7 +8,7 @@
         "SellPrice" : 12,
         "AmmoMax" : 2,
         "Multicast" : 1,
-        "DamageAmount" : 100,
+        "DamageAmount" : 150,
         "Custom_0" : 1
       },
       "AbilityIds" : [ "0", "1" ],
@@ -373,7 +373,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 15
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -404,25 +404,65 @@
           "TranslationKey" : "ba49e1f1-1969-4e35-965e-57ca0b149c7d"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Ballista Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e78e8bfc-b127-463c-aad0-4f8a4f99ffe9",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 22
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -453,21 +493,61 @@
           "TranslationKey" : "27f6198e-0f11-44b6-acf3-15f7e3af107b"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Ballista Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "12bf9cd9-c612-435d-9ae1-42de071e5f40",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -714,7 +794,7 @@
     }, {
       "Content" : {
         "Key" : "eda447915b89c11753ba35e8e8ce8fdd",
-        "Text" : "When you use another item with Ammo, this gains {ability.1} Multicast for the fight."
+        "Text" : "When you use another Ammo item, this gains {ability.1} Multicast for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -795,7 +875,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Ballista [onOtherItemUse] Ammo - Self Damage Buff/20",
-      "InternalDescription" : "When you use another item with Ammo, this gains {ability.1} damage for the fight.",
+      "InternalDescription" : "When you use another Ammo item, this gains {ability.1} damage for the fight.",
       "MigrationData" : "dbec01a4-daee-4aaf-9c58-4d35b1473167",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

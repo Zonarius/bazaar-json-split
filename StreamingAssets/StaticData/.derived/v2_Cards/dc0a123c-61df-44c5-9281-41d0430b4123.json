@@ -70,13 +70,13 @@
           "Priority" : "Medium",
           "InternalName" : "Heavy Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "5cb16a25-3957-4190-8460-fdaa765725eb",
+          "MigrationData" : "1e0337a5-0a1a-4a62-b7d0-72da91943aa1",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "e0ab052e-1338-438a-b385-ce3ede7ae5be"
+          "TranslationKey" : "3e0ae5b0-fe0d-4468-93ea-89d6ef2330e6"
         }
       },
       "Auras" : { },
@@ -85,8 +85,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "25aa28a7-4163-4962-9eba-3d5eedff3412",
-            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "3b01dd33-b614-4aa2-97a4-c4f188f7a559",
+            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -113,20 +113,24 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
           "InternalName" : "Icy Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "d9a73034-03bf-43a9-8c31-8a33be25fc02",
+          "MigrationData" : "fdb99464-2fcc-4829-8b60-0cbe60ad62b9",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "938bcbdb-2d8d-45eb-a728-25072df40412"
+          "TranslationKey" : "c48bdb4f-7ef8-4644-8f8c-377743d5d59a"
         }
       },
       "Auras" : { },
@@ -135,8 +139,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "cd951f08-ce37-49eb-b480-982dc581cc7a",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "fc43a7e9-64f9-4d60-9dc9-273fe99ee0c4",
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -178,13 +182,13 @@
           "Priority" : "Medium",
           "InternalName" : "Turbo Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "ecd659c3-f95a-49dc-ba1a-a1038419fec0",
+          "MigrationData" : "756af378-af75-40b8-95b8-c3b2b3181912",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "3bfbcdb1-64b8-4d57-974a-f440d397fb70"
+          "TranslationKey" : "1246135c-aff1-4f63-84bc-6dac9d869ab8"
         }
       },
       "Auras" : { },
@@ -193,8 +197,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "f3456c54-f59e-489a-9ef9-3d4a12804abf",
-            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "448d6797-032b-400f-b1a0-6457598a1d1f",
+            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -205,7 +209,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 20
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -227,34 +231,74 @@
           "Priority" : "Medium",
           "InternalName" : "Shielded Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "ff17ac5d-b3f2-4486-8033-1e3cb4ad282f",
+          "MigrationData" : "cde2fe46-cd06-4480-8460-394f0e7f36d4",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "a4be4b72-da16-4806-a325-ae39058e1272"
+          "TranslationKey" : "a1399e92-6e1e-4864-be80-eb3e2b54b72c"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Knife Set Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "01038181-67b2-44b4-b77f-3cf707b6b2b3",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "efa960b0-3cff-4a39-a3ea-ee1e68ff35cc",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 30
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -276,34 +320,74 @@
           "Priority" : "Medium",
           "InternalName" : "Restorative Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "fc470b6d-52ef-4abf-a030-bdd39b9b65ac",
+          "MigrationData" : "e6be57c8-8e5e-407e-ae2e-c6aa2d6bb9b5",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "72969e11-3b28-488d-8b2b-cd58c9f34ff5"
+          "TranslationKey" : "f1741d35-ad24-46a8-bee9-e5976b8a0f5f"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Knife Set Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "dd40f799-41eb-4fc7-813f-c0bc6c933fde",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "5e971c57-ad7d-413e-a585-d3b9ec94b9a6",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -325,34 +409,74 @@
           "Priority" : "Medium",
           "InternalName" : "Toxic Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "8fbed637-fa45-4c69-8859-cffcede2e99c",
+          "MigrationData" : "55dc5986-0e93-4b18-9ac1-bcdfc434ab67",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "252bc173-6da8-42fa-a1fc-0fc67de1c023"
+          "TranslationKey" : "ceb625f2-9e65-4323-a022-170973b44cb5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Knife Set Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "4c1870f8-ba53-4032-ae48-ff4f58252036",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -374,30 +498,70 @@
           "Priority" : "Medium",
           "InternalName" : "Fiery Knife Set Ability",
           "InternalDescription" : "",
-          "MigrationData" : "b2e77753-efe8-43d4-a7bf-8da232df7524",
+          "MigrationData" : "43f2e774-8d8b-4cd9-97d3-17c6282b978e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "1fd399dc-420a-472c-8b85-5f65d5eaa50a"
+          "TranslationKey" : "d19b97de-9dca-41cf-aa9c-a6dc2ef3c8d5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Knife Set Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "d8770d3f-432a-4f2d-92b1-1a22b67e308d",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -428,7 +592,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "3e2c0155-bb54-4007-9fac-eee9ac57309f"
+          "TranslationKey" : "0d782ddd-ac95-40c9-b62b-e1857e348ff7"
         }
       },
       "Tags" : [ ],
@@ -475,7 +639,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "02d37536-5257-47de-958a-e17535f89630"
+          "TranslationKey" : "dbe9ef4a-4291-4df9-b55f-dd2bc3e633cf"
         }
       },
       "Tags" : [ ],

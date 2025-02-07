@@ -7,7 +7,7 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 20,
+        "ShieldApplyAmount" : 50,
         "Custom_0" : 20
       },
       "AbilityIds" : [ "0" ],
@@ -18,7 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ShieldApplyAmount" : 40,
+        "ShieldApplyAmount" : 75,
         "Custom_0" : 30
       },
       "AbilityIds" : [ "0" ],
@@ -29,7 +29,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ShieldApplyAmount" : 80,
+        "ShieldApplyAmount" : 100,
         "Custom_0" : 40
       },
       "AbilityIds" : [ "0" ],
@@ -40,7 +40,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ShieldApplyAmount" : 160,
+        "ShieldApplyAmount" : 125,
         "Custom_0" : 50
       },
       "AbilityIds" : [ "0" ],
@@ -125,20 +125,24 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
           "InternalName" : "Icy Security Camera Ability",
           "InternalDescription" : "",
-          "MigrationData" : "d7d4dee0-afe3-4baa-ae8b-c097b2fb21b4",
+          "MigrationData" : "4bd30756-598d-46e1-ba51-f6fb0574ba7e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "5b6baa4c-0623-4a58-8dc5-f074097ad9bb"
+          "TranslationKey" : "8e27ff26-169d-4410-931a-8b79be17ca08"
         }
       },
       "Auras" : { },
@@ -147,8 +151,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "68b9e295-7910-46c0-8159-4e383f8aad8c",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "e6417dac-e295-4495-81ec-8f1274dfecf0",
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -375,7 +379,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Security Camera Aura 2",
+          "InternalName" : "Restorative Security Camera Aura 2",
           "InternalDescription" : "Your Heal items have +{aura.1}% Crit Chance.",
           "MigrationData" : "69613584-b9c1-43c1-8e35-d213cd35d382",
           "VFXConfig" : {
@@ -410,7 +414,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 8
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -441,25 +445,122 @@
           "TranslationKey" : "dc1f6d02-3d7b-4db3-8f50-49248dcd2cd3"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Security Camera Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        },
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            },
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalHiddenTag",
+                  "Tags" : [ "Poison" ],
+                  "Operator" : "Any"
+                }, {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Security Camera Aura 2",
+          "InternalDescription" : "Your other Poison items have +{aura.1}% Crit Chance.",
+          "MigrationData" : "69613584-b9c1-43c1-8e35-d213cd35d382",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "e45684454d745b0e77f71face9b2ebb6"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "dd707829-8aa4-4f9e-a2c7-1dc84080e4d1",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "e0c45e8f-4028-45bb-8243-d0aecc2f718c",
+            "Text" : "Your other Poison items have +{aura.e3}% Crit Chance."
+          },
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 12
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -490,21 +591,118 @@
           "TranslationKey" : "6f9bd6a5-0dd8-4870-ae80-9ce5d324beff"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Security Camera Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        },
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            },
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalHiddenTag",
+                  "Tags" : [ "Burn" ],
+                  "Operator" : "Any"
+                }, {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Security Camera Aura 2",
+          "InternalDescription" : "Your other Burn items have +{aura.1}% Crit Chance.",
+          "MigrationData" : "69613584-b9c1-43c1-8e35-d213cd35d382",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "e45684454d745b0e77f71face9b2ebb6"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "461f3170-6c95-4c9a-b174-f33c8a87ffdf",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "e0c45e8f-4028-45bb-8243-d0aecc2f718c",
+            "Text" : "Your other Burn items have +{aura.e3}% Crit Chance."
+          },
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

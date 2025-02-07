@@ -1,21 +1,12 @@
 {
   "$type" : "TCardEncounterEvent",
-  "SelectionContext" : {
-    "Rules" : {
-      "CanSelectMultiple" : true,
-      "SelectionIsFree" : true,
-      "CanExit" : true,
-      "RerollRules" : null,
-      "WillAutoSellOnExit" : false,
-      "NextEncounterOnExit" : null
-    }
-  },
+  "SelectionContext" : null,
   "SelectionRequirements" : null,
   "Type" : "EventEncounter",
   "Attributes" : null,
   "Id" : "146907bc-135e-4d54-bf13-f530605ee673",
   "Version" : "1.0.0",
-  "InternalName" : "Bronze Loot",
+  "InternalName" : "Bronze Loot (Level Up)",
   "InternalDescription" : null,
   "StartingTier" : "Bronze",
   "Size" : "Medium",
@@ -33,11 +24,78 @@
     },
     "Description" : {
       "Key" : "89c959c385ad753a0146ae8f03816f8b",
-      "Text" : "Get 2 Gold and a Bronze-tier Loot item."
+      "Text" : "Get {ability.0} Gold and a Bronze-tier Loot item."
     },
     "FlavorText" : null,
     "Tooltips" : [ ]
   },
-  "Abilities" : { },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSelected"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionPlayerModifyAttribute",
+        "AttributeType" : "Gold",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 2.0
+        },
+        "Operation" : "Add",
+        "Duration" : null,
+        "Target" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Gain 2 gold",
+      "InternalDescription" : "Gain {ability.0} gold",
+      "MigrationData" : "ce3ceea5-420f-450f-ae42-92208a32a16a",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "6c6ee22592d252c3b451e21f9a86b260"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSelected"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
+          "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Limit" : {
+            "$type" : "TFixedValue",
+            "Value" : 1.0
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Spawn Cards Dummy Effect",
+      "InternalDescription" : " ",
+      "MigrationData" : "46844be9-b76f-40bf-b631-f8046a7e9f2c",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "270a45b1e1ec4c882b73073c6a2c2910"
+    }
+  },
   "Auras" : { }
 }

@@ -8,7 +8,7 @@
         "SellPrice" : 2,
         "Multicast" : 1,
         "BurnApplyAmount" : 4,
-        "Custom_0" : 1
+        "Custom_0" : 2
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -19,7 +19,7 @@
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "BurnApplyAmount" : 6,
-        "Custom_0" : 2
+        "Custom_0" : 3
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -30,7 +30,7 @@
         "BuyPrice" : 16,
         "SellPrice" : 8,
         "BurnApplyAmount" : 8,
-        "Custom_0" : 3
+        "Custom_0" : 4
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -114,7 +114,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -137,7 +141,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "dbb1a3d3-c027-4ab5-9e11-ac847e4c46d3",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -206,7 +210,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 30
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -237,25 +241,65 @@
           "TranslationKey" : "bb644392-e4d2-4b62-9b9a-bbd185ae1e51"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Omega Ray Aura",
+          "InternalDescription" : "Sets the value of Shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "929e02a3-014d-460c-a5de-2653010b2a55",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "abc83049-66c5-414e-9ea2-a837574a3df6",
+            "Text" : "Shield equal to 10 times this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 45
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -286,25 +330,65 @@
           "TranslationKey" : "f9a84ef6-9d0d-4008-85c7-6649258689eb"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Omega Ray Aura",
+          "InternalDescription" : "Sets the value of Heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "a697975a-097d-4db0-b95d-6c7d4931c36e",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "339c0427-0088-42ee-bbb2-e4d6b9337aaa",
+            "Text" : "Heal equal to 10 times this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -335,21 +419,61 @@
           "TranslationKey" : "4754c765-a3c1-4793-ae69-6b3e7f3e1c90"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Omega Ray Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "7f155160-4c98-4ff8-bc9b-9e6f9f92fa6b",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "3396dbaf-0f72-42d4-8b36-1b9cf0a115df",
+            "Text" : "Poison equal to this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : { },

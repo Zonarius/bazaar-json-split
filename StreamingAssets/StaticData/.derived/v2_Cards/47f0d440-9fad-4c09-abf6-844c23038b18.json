@@ -1,0 +1,95 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "0" ],
+      "TooltipIds" : [ 0 ]
+    }
+  },
+  "Enchantments" : null,
+  "Type" : "Item",
+  "Id" : "47f0d440-9fad-4c09-abf6-844c23038b18",
+  "Version" : "1.0.0",
+  "InternalName" : "[DEBUG] Time Contraction",
+  "InternalDescription" : "",
+  "StartingTier" : "Diamond",
+  "Size" : "Small",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ "Loot" ],
+  "HiddenTags" : [ "Cooldown" ],
+  "ArtKey" : "d924e000300dd7441ac77349c1a83e3e",
+  "CardPackId" : "Core",
+  "TranslationKey" : "5000a68e43f946c726a17e1008e230a7",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "5000a68e43f946c726a17e1008e230a7",
+      "Text" : "[DEBUG] Time Contraction"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "5000a68e43f946c726a17e1008e230a7",
+        "Text" : "When you sell this, reduce your items' cooldowns by 99% (Down to 1 second floor)."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardSold",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 0.01
+        },
+        "AttributeType" : "CooldownMax",
+        "Operation" : "Multiply",
+        "Duration" : null,
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "AbsolutePlayerHandAndStash",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "[DEBUG] Time Contraction",
+      "InternalDescription" : "When you sell this, reduce your leftmost item's cooldown by +{ability.0}% (Down to 1 second floor).",
+      "MigrationData" : "e82f8541-f973-4550-ba84-01a412c9ca6d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "5000a68e43f946c726a17e1008e230a7"
+    }
+  },
+  "Auras" : { }
+}

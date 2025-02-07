@@ -8,7 +8,7 @@
         "SellPrice" : 3,
         "Multicast" : 1,
         "BurnApplyAmount" : 4,
-        "DamageAmount" : 25,
+        "DamageAmount" : 40,
         "ChargeAmount" : 2000,
         "ChargeTargets" : 1
       },
@@ -21,7 +21,7 @@
         "BuyPrice" : 12,
         "SellPrice" : 6,
         "BurnApplyAmount" : 6,
-        "DamageAmount" : 50
+        "DamageAmount" : 60
       },
       "AbilityIds" : [ "0", "1", "2", "3" ],
       "AuraIds" : [ ],
@@ -32,7 +32,7 @@
         "BuyPrice" : 24,
         "SellPrice" : 12,
         "BurnApplyAmount" : 8,
-        "DamageAmount" : 75
+        "DamageAmount" : 80
       },
       "AbilityIds" : [ "0", "1", "2", "3" ],
       "AuraIds" : [ ],
@@ -397,7 +397,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 5
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -428,21 +428,61 @@
           "TranslationKey" : "b4fb9216-bef9-4d1a-a1bd-9ecaf1a663a1"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Trebuchet Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "5b86a1fb-1e27-4ce7-a597-26161c0097a8",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "3396dbaf-0f72-42d4-8b36-1b9cf0a115df",
+            "Text" : "Poison equal to this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : { },

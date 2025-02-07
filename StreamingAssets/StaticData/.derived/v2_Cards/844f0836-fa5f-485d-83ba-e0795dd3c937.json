@@ -114,7 +114,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -137,7 +141,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "a1c719c8-8e5a-499f-8634-a3dbeea9bbf7",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -195,7 +199,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 20
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -226,25 +230,70 @@
           "TranslationKey" : "f83d31ef-dd0c-43e4-8713-3cd9ab6b6a51"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "None"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 8.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Astrolabe Aura",
+          "InternalDescription" : "Shield 8 for each non-Weapon item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9b2894c4-e8dc-4558-9a6e-a98cad651494",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "Shield {aura.e2.mod} for each non-Weapon item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 45
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -275,25 +324,70 @@
           "TranslationKey" : "25cbc239-8002-4008-a9d2-9e8a887605a8"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "None"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 12.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Astrolabe Aura",
+          "InternalDescription" : "Heal 12 for each non-Weapon item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "a4e542b0-c346-428d-9d74-3c929c0cfdcc",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "Heal {aura.e2.mod} for each non-Weapon item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -324,25 +418,70 @@
           "TranslationKey" : "6f0dc043-178e-4a51-98a0-cef8b159c9fe"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "None"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Astrolabe Aura",
+          "InternalDescription" : "Poison 1 for each non-Weapon item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ea76b03c-306f-457f-b6e4-7e4b95893a2b",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison {aura.e2.mod} for each non-Weapon item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -373,21 +512,66 @@
           "TranslationKey" : "473bae47-4e1f-4491-bacf-91cf4bfb015c"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "None"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Astrolabe Aura",
+          "InternalDescription" : "Burn 1 for each non-Weapon item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "1a0eba47-01d1-4d76-8891-8b2e763949df",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn {aura.e2.mod} for each non-Weapon item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -591,7 +775,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Low",
-          "InternalName" : "Deadly Beach Ball Ability",
+          "InternalName" : "Deadly Astrolabe Ability",
           "InternalDescription" : "",
           "MigrationData" : "6b4c53a5-9b50-4419-a540-7927a0d0720g",
           "VFXConfig" : {

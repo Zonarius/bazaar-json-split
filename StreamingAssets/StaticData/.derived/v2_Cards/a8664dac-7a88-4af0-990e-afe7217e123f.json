@@ -7,10 +7,10 @@
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "DamageAmount" : 20,
+        "DamageAmount" : 36,
         "FreezeAmount" : 1000,
         "FreezeTargets" : 1,
-        "Custom_0" : 5
+        "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -20,9 +20,9 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "DamageAmount" : 40,
+        "DamageAmount" : 48,
         "FreezeAmount" : 2000,
-        "Custom_0" : 10
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -32,9 +32,9 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 80,
+        "DamageAmount" : 60,
         "FreezeAmount" : 3000,
-        "Custom_0" : 15
+        "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -385,7 +385,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -416,25 +416,65 @@
           "TranslationKey" : "e836f0f1-be58-4697-b727-e557ca25738e"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Ice Pick Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "0d1d5409-3905-4eee-a621-6dafb8b0e388",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 5
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -465,21 +505,61 @@
           "TranslationKey" : "b5c08da8-f1cb-4674-81e6-49f3bae521b2"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Ice Pick Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "47fcaaa7-ff54-4a7f-90b3-7d8e7a3fa51c",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -726,7 +806,7 @@
     }, {
       "Content" : {
         "Key" : "bdea18be2c9c5e614225985b8320b022",
-        "Text" : "Freeze {ability.1.targets} item for {ability.1} second(s)."
+        "Text" : "Freeze {ability.1.targets} small item for {ability.1} second(s)."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -779,13 +859,17 @@
           "$type" : "TTargetCardRandom",
           "ExcludeSelf" : false,
           "TargetSection" : "OpponentHand",
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small" ],
+            "IsNot" : false
+          }
         }
       },
       "Prerequisites" : null,
       "Priority" : "Medium",
       "InternalName" : "Ice Pick 2",
-      "InternalDescription" : "Freeze {ability.1.targets} item for {ability.1} second(s).",
+      "InternalDescription" : "Freeze 1 small item for [--/1/2/3] seconds.",
       "MigrationData" : "01771797-d725-423c-ba96-021e5d53a5bb",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

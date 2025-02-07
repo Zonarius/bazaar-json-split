@@ -5,7 +5,7 @@
       "Attributes" : {
         "CooldownMax" : 6000,
         "Multicast" : 1,
-        "BurnApplyAmount" : 6,
+        "BurnApplyAmount" : 4,
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1,
         "Custom_0" : 1
@@ -16,7 +16,7 @@
     },
     "Silver" : {
       "Attributes" : {
-        "BurnApplyAmount" : 9,
+        "BurnApplyAmount" : 7,
         "ChargeAmount" : 1000,
         "Custom_0" : 2
       },
@@ -26,7 +26,7 @@
     },
     "Gold" : {
       "Attributes" : {
-        "BurnApplyAmount" : 12,
+        "BurnApplyAmount" : 10,
         "ChargeAmount" : 1000,
         "Custom_0" : 3
       },
@@ -36,7 +36,7 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "BurnApplyAmount" : 15,
+        "BurnApplyAmount" : 13,
         "ChargeAmount" : 1000,
         "Custom_0" : 4
       },
@@ -48,8 +48,8 @@
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 2,
-        "SlowAmount" : 3000
+        "SlowTargets" : 1,
+        "SlowAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -95,7 +95,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "cbb36f8e-ba41-4f33-824c-c8e86e3aca8f",
-            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -107,7 +107,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 3000
+        "FreezeAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -122,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -145,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "39323f81-0371-483e-ad65-b5f1853e6155",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -156,8 +160,8 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
-        "HasteAmount" : 3000
+        "HasteTargets" : 1,
+        "HasteAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -203,7 +207,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "0a2bc6ad-6f54-422d-b6b6-5c8c99355bcb",
-            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -214,7 +218,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 80
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -245,25 +249,65 @@
           "TranslationKey" : "93588d30-2b9c-4759-8cc5-e207b5bdafea"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Ignition Core Aura",
+          "InternalDescription" : "Sets the value of Shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c8d3e1f1-9370-46ca-b8b2-000f9472717e",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "abc83049-66c5-414e-9ea2-a837574a3df6",
+            "Text" : "Shield equal to 10 times this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 120
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -294,25 +338,65 @@
           "TranslationKey" : "3fbf1175-2ebe-4e16-a596-ec86bea6c936"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Ignition Core Aura",
+          "InternalDescription" : "Sets the value of Heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "776ac3ee-f083-4142-ac68-174c458595ee",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "339c0427-0088-42ee-bbb2-e4d6b9337aaa",
+            "Text" : "Heal equal to 10 times this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 8
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -343,21 +427,61 @@
           "TranslationKey" : "a1590f6c-7a32-4d1a-9efe-d716af4518f2"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "BurnApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Ignition Core Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "02373643-3c86-4371-887b-d57782c88b3f",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "3396dbaf-0f72-42d4-8b36-1b9cf0a115df",
+            "Text" : "Poison equal to this item's Burn."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : { },
@@ -380,7 +504,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Fiery Ignition Aura",
+          "InternalName" : "Fiery Ignition Core Aura",
           "InternalDescription" : "Fiery 2",
           "MigrationData" : "",
           "VFXConfig" : {

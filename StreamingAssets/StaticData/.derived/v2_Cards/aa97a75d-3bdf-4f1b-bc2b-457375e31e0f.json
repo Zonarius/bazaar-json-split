@@ -7,8 +7,8 @@
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 2,
-        "DamageAmount" : 5,
-        "ShieldApplyAmount" : 5
+        "DamageAmount" : 10,
+        "ShieldApplyAmount" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -18,8 +18,8 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "DamageAmount" : 10,
-        "ShieldApplyAmount" : 10
+        "DamageAmount" : 15,
+        "ShieldApplyAmount" : 15
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -40,8 +40,8 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 40,
-        "ShieldApplyAmount" : 40
+        "DamageAmount" : 25,
+        "ShieldApplyAmount" : 25
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -125,7 +125,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +152,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "546f819e-1811-446a-bc7f-a4a13465842d",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -353,7 +357,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 5
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -384,25 +388,65 @@
           "TranslationKey" : "cfd8cf3f-d0a0-4b16-aaad-782af39b8da1"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Tusked Helm Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "e07f830c-4f2a-4106-8f1e-bf9df99d8caa",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 7
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -433,21 +477,61 @@
           "TranslationKey" : "3dee6e1d-5480-45e4-8594-16250d5c65ad"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Tusked Helm Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "2bcd058c-89bb-446d-a6c7-eff170f50edf",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -671,7 +755,7 @@
   "StartingTier" : "Bronze",
   "Size" : "Small",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ "Weapon" ],
+  "Tags" : [ "Weapon", "Apparel" ],
   "HiddenTags" : [ "Damage", "Shield" ],
   "ArtKey" : "e236ee3819bc9eb40b851fba18a0ff08",
   "CardPackId" : "Pygmalien_Core",

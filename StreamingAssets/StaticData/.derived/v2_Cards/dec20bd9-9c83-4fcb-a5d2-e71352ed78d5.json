@@ -80,15 +80,15 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Heavy Sunderer Ability",
+          "InternalName" : "Heavy Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "7973ec36-46ef-4478-97d5-da82a5675f3e",
+          "MigrationData" : "13c938c3-106c-49da-a048-78e5e4d37f26",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "f4ccde0c-1f9f-48e2-be52-f00843529257"
+          "TranslationKey" : "0cd2c2fc-26ee-4838-8a0c-bc155c86f6d2"
         }
       },
       "Auras" : { },
@@ -97,7 +97,7 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "e10d5cbb-db19-4cea-abd7-00fbcba306eb",
+            "Key" : "2c219a37-ec23-4ffc-98c3-02009f0e8a18",
             "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
@@ -125,20 +125,24 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Icy Sunderer Ability",
+          "InternalName" : "Icy Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "7c6cf051-7225-49a2-8a44-1c770a3a3fc9",
+          "MigrationData" : "b75cd069-a950-498f-bd45-61f06676f356",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "fdd57797-69be-4ee7-ac9f-67d935edc936"
+          "TranslationKey" : "2c317f2f-5e21-497f-8b20-dd8b1297d03e"
         }
       },
       "Auras" : { },
@@ -147,8 +151,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "e16d5aa2-4849-4887-9aeb-8ada12eae957",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "de1b9356-b839-45da-89b7-002f07a2199b",
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -188,15 +192,15 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Turbo Sunderer Ability",
+          "InternalName" : "Turbo Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "1c5307f4-15ea-4729-80b3-870324fce6bb",
+          "MigrationData" : "9d0def55-4fc5-4cf8-be35-642f840519c3",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "48ae273b-0287-454e-b341-ff750f619827"
+          "TranslationKey" : "002aa9fc-98f5-4039-80ff-5f44289cf680"
         }
       },
       "Auras" : { },
@@ -205,7 +209,7 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "5df86f87-1409-4d1a-b2a8-302f834de6be",
+            "Key" : "6426be1c-e46e-4796-b9bf-439da177ee11",
             "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
@@ -217,7 +221,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 20
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -237,36 +241,76 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Shielded Sunderer Ability",
+          "InternalName" : "Shielded Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "2ce95f8d-f39e-4b32-81a0-a19e7083e7cf",
+          "MigrationData" : "04eee3db-17d7-41ee-bbbd-001ac3a67df5",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "0e247427-2270-4438-b8f3-bfcfd617de65"
+          "TranslationKey" : "20dd1f54-4ff4-434a-ad24-742c960b2679"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Alpha Ray Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "fc72f7af-3455-4c02-aa1f-61d192d6229c",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "55efcc46-c886-4103-81ae-251b32cf077a",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 30
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -286,36 +330,76 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Restorative Sunderer Ability",
+          "InternalName" : "Restorative Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "7109ec21-d821-4f22-ac3b-58d3cfb6336c",
+          "MigrationData" : "b0236b3d-8776-42f1-9999-50dd82f7dfb4",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "19236ecf-d2f0-4381-a478-abac76bfb92c"
+          "TranslationKey" : "452dce9c-11ce-4014-945e-56cbf98bd672"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Alpha Ray Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "933b6a2f-202a-4027-92f7-7e6aed4ceb9e",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "4104b0f4-b6b7-460b-b865-001b65e47f62",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -335,36 +419,76 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Toxic Sunderer Ability",
+          "InternalName" : "Toxic Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "a509f643-3da4-4436-9963-47cb748e8b97",
+          "MigrationData" : "55dc5986-0e93-4b18-9ac1-bcdfc434ab67",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "f9288df5-cece-4db9-946b-cb6c050d84c8"
+          "TranslationKey" : "ceb625f2-9e65-4323-a022-170973b44cb5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Alpha Ray Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "1b7ecbf2-ed05-424a-9b8c-366815320dfc",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 3
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -384,32 +508,72 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Fiery Sunderer Ability",
+          "InternalName" : "Fiery Alpha Ray Ability",
           "InternalDescription" : "",
-          "MigrationData" : "110ce846-c33a-4544-98a7-2783e11916d1",
+          "MigrationData" : "43f2e774-8d8b-4cd9-97d3-17c6282b978e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "c088e6f2-dd09-4417-895a-cc9d14f61fb1"
+          "TranslationKey" : "d19b97de-9dca-41cf-aa9c-a6dc2ef3c8d5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Alpha Ray Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -432,7 +596,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Shiny Sunderer Aura",
+          "InternalName" : "Shiny Alpha Ray Aura",
           "InternalDescription" : "Shiny 1",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -440,7 +604,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "25712d70-763c-49bd-b953-ce412e81b509"
+          "TranslationKey" : "7a98ee48-7112-40d0-9cc4-aff6dcbc5d98"
         }
       },
       "Tags" : [ ],
@@ -479,7 +643,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Deadly Sunderer Aura",
+          "InternalName" : "Deadly Alpha Ray Aura",
           "InternalDescription" : "Deadly 50",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -487,7 +651,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "a8c20622-0d69-4547-ac1d-a8aa50462d9f"
+          "TranslationKey" : "6b11a592-511c-4153-927f-596a5a36e006"
         }
       },
       "Tags" : [ ],

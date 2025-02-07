@@ -7,8 +7,8 @@
         "BuyPrice" : 2,
         "SellPrice" : 1,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 5,
-        "Custom_0" : 5
+        "ShieldApplyAmount" : 10,
+        "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -18,8 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "ShieldApplyAmount" : 10,
-        "Custom_0" : 10
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -29,8 +28,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "ShieldApplyAmount" : 15,
-        "Custom_0" : 15
+        "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -40,8 +38,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ShieldApplyAmount" : 20,
-        "Custom_0" : 20
+        "Custom_0" : 25
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -125,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "224c2be1-daa0-4900-aefb-b641e80c1f78",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -353,7 +354,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -382,63 +383,67 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "e553a783-10b8-41ef-9d62-f08148584726"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "PoisonApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Toxic Wallace Ability 2",
-          "InternalDescription" : "Tthis gains +{ability.e2} Poison for the fight.",
-          "MigrationData" : "be16a003-39c4-4305-88be-fc395bfdd3b6",
+          "InternalName" : "Toxic Wallace Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "45fe61d257cc5b8c730bf40e00d38e02"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "8b27ef94-34fd-425a-b812-0ea09264b99e",
-            "Text" : "Poison {ability.e1}. This item gains +{ability.e2} Poison for the fight."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -467,59 +472,63 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "b5e9e699-ce2d-4839-8e66-72bfd21c9ad9"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "BurnApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Fiery Wallace Ability 2",
-          "InternalDescription" : "This gains +{ability.e2} Burn for the fight.",
-          "MigrationData" : "be16a003-39c4-4305-88be-fc395bfdd3b6",
+          "InternalName" : "Fiery Wallace Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "45fe61d257cc5b8c730bf40e00d38e02"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "2edbb85d-36dc-4c16-b1b1-3403a7e76366",
-            "Text" : "Burn {ability.e1}. This item gains +{ability.e2} Burn for the fight."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

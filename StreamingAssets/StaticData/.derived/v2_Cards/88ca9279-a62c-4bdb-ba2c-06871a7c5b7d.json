@@ -7,8 +7,8 @@
         "Multicast" : 1,
         "ChargeAmount" : 1000,
         "ChargeTargets" : 1,
-        "ShieldApplyAmount" : 15,
-        "Custom_0" : 5
+        "ShieldApplyAmount" : 20,
+        "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -17,7 +17,7 @@
     "Silver" : {
       "Attributes" : {
         "ShieldApplyAmount" : 30,
-        "Custom_0" : 10
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -25,7 +25,7 @@
     },
     "Gold" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 60,
+        "ShieldApplyAmount" : 40,
         "Custom_0" : 20
       },
       "AbilityIds" : [ "0", "1", "2" ],
@@ -34,8 +34,8 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 120,
-        "Custom_0" : 40
+        "ShieldApplyAmount" : 50,
+        "Custom_0" : 25
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -45,8 +45,8 @@
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 2,
-        "SlowAmount" : 3000
+        "SlowTargets" : 1,
+        "SlowAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -92,7 +92,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ed4a1a70-7469-4f64-9acb-76a5abf99b2e",
-            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -104,7 +104,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 3000
+        "FreezeAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -119,7 +119,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -142,7 +146,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "1f05b1c3-3d8b-48d8-b770-384f2a35d0f6",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -153,8 +157,8 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
-        "HasteAmount" : 3000
+        "HasteTargets" : 1,
+        "HasteAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -200,7 +204,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "3574b871-425e-4709-9654-42866582a44f",
-            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -258,7 +262,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 120
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -289,25 +293,65 @@
           "TranslationKey" : "f2fc0df3-cc0e-466f-ae74-67f77e2f1417"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Armored Core Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "ba74e353-eda5-4a23-8fab-cdc2c3167cd7",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "10b132df-300e-44f3-81cc-80ed2f2b14ca",
+            "Text" : "Heal equal to this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 8
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -338,25 +382,65 @@
           "TranslationKey" : "529536b5-4a84-40e0-a456-9a33a8532bc8"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Armored Core Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "bbf7b8dd-2ff4-4fc4-be2f-ee59f9bb18a1",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 12
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -387,21 +471,61 @@
           "TranslationKey" : "b0945b70-b4f6-4466-9214-76f41ba38a37"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Armored Core Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "0c5f0235-ac13-418e-b8a8-375d2e2c8eb7",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -627,7 +751,7 @@
     }, {
       "Content" : {
         "Key" : "e70d3cd2c249bc10a140d920457b27c0",
-        "Text" : "Give Shield items to the right of this +{ability.1} Shield for the fight."
+        "Text" : "Shield items to the right of this gain +{ability.1} Shield for the fight."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -708,7 +832,7 @@
       "Prerequisites" : null,
       "Priority" : "High",
       "InternalName" : "Armored Core 2",
-      "InternalDescription" : "Give Shield items to the right of this +{ability.1} Shield for the fight",
+      "InternalDescription" : "Shield items to the right of this gain +{ability.1} Shield for the fight",
       "MigrationData" : "b8eae74e-ed8d-4a33-8e70-5e0bd64d2207",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

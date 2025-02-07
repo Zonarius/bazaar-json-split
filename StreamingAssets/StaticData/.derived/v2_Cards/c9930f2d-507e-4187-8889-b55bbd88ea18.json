@@ -3,12 +3,12 @@
   "Tiers" : {
     "Silver" : {
       "Attributes" : {
-        "CooldownMax" : 6000,
+        "CooldownMax" : 5000,
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 5,
-        "Custom_0" : 1
+        "ShieldApplyAmount" : 20,
+        "Custom_0" : 5
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -18,8 +18,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "ShieldApplyAmount" : 10,
-        "Custom_0" : 2
+        "Custom_0" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -29,8 +28,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ShieldApplyAmount" : 15,
-        "Custom_0" : 3
+        "Custom_0" : 15
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -114,7 +112,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -137,7 +139,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "74119462-4e2e-4807-b10c-24a23e064d88",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -213,7 +215,7 @@
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "ShieldApplyAmount",
+            "AttributeType" : "Custom_0",
             "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
@@ -242,7 +244,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
-            "Text" : "This has double Shield."
+            "Text" : "This has double Shield bonus."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -252,25 +254,48 @@
       "HasAuras" : true
     },
     "Restorative" : {
-      "Attributes" : { },
+      "Attributes" : {
+        "HealAmount" : 0
+      },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedShield",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
               "Conditions" : null
             }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Robe Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "c8ad8cc4-db11-4891-9ef9-ed45fd61471d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "ff95612c-a8ee-4ad5-bb96-bdf5bdef87da"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 2.0
+              "Value" : 15.0
             },
             "AttributeType" : "HealAmount",
             "Operation" : "Add",
@@ -282,7 +307,7 @@
             "Target" : {
               "$type" : "TTargetCardSection",
               "TargetSection" : "SelfHand",
-              "ExcludeSelf" : false,
+              "ExcludeSelf" : true,
               "Conditions" : {
                 "$type" : "TCardConditionalHiddenTag",
                 "Tags" : [ "Heal" ],
@@ -292,8 +317,8 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Restorative Robe Aura",
-          "InternalDescription" : "Shielded 1",
+          "InternalName" : "Restorative Robe Ability 2",
+          "InternalDescription" : "",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -303,42 +328,112 @@
           "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Robe Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
-      "HiddenTags" : [ "HealReference" ],
+      "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "b4c69273-942d-477f-a613-f4d8db204f1e",
-            "Text" : "When you Shield, your Heal items gain {ability.e1} Heal for the fight."
+            "Key" : "10b132df-300e-44f3-81cc-80ed2f2b14ca",
+            "Text" : "Heal equal to this item's Shield."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "10b132df-300e-44f3-81cc-80ed2f2b14ca",
+            "Text" : "Your other Heal items gain +{ability.e2} Heal for the fight."
+          },
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
-      "Attributes" : { },
+      "Attributes" : {
+        "PoisonApplyAmount" : 0
+      },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedShield",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerPoisonApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
               "Conditions" : null
             }
           },
-          "ActiveIn" : "HandAndStash",
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Toxic Robe Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "b58b479e-354b-4e86-afac-911e3e77d5fc",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "04d16410-f689-427f-99ec-c6df06f87879"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 1.0
+              "Value" : 3.0
             },
             "AttributeType" : "PoisonApplyAmount",
             "Operation" : "Add",
@@ -350,7 +445,7 @@
             "Target" : {
               "$type" : "TTargetCardSection",
               "TargetSection" : "SelfHand",
-              "ExcludeSelf" : false,
+              "ExcludeSelf" : true,
               "Conditions" : {
                 "$type" : "TCardConditionalHiddenTag",
                 "Tags" : [ "Poison" ],
@@ -359,54 +454,124 @@
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Toxic Robe Aura",
-          "InternalDescription" : "Shielded 1",
-          "MigrationData" : "",
+          "Priority" : "High",
+          "InternalName" : "Toxic Robe Ability 2",
+          "InternalDescription" : "Your other Poison items gain +3 Poison for the fight.",
+          "MigrationData" : "990e2c87-5dbd-4390-bd9f-3f1e9f5f6514",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
+          "TranslationKey" : "94b6b97fa820b28535181c40302b5363"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Robe Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
-      "HiddenTags" : [ "PoisonReference" ],
+      "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "ea839569-c377-461b-97b1-a4a09b6fc5a0",
-            "Text" : "When you Shield, your Poison items gain {ability.e1} Poison for the fight."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "10b132df-300e-44f3-81cc-80ed2f2b14ca",
+            "Text" : "Your other Poison items gain +{ability.e2} Poison for the fight."
+          },
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
-      "Attributes" : { },
+      "Attributes" : {
+        "BurnApplyAmount" : 0
+      },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedShield",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerBurnApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
               "Conditions" : null
             }
           },
-          "ActiveIn" : "HandAndStash",
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Fiery Robe Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "edfb619d-5889-462e-becf-ca624d6a6293",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "bb898717-22d7-4bca-b88e-e930072c9e5f"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 1.0
+              "Value" : 3.0
             },
             "AttributeType" : "BurnApplyAmount",
             "Operation" : "Add",
@@ -418,7 +583,7 @@
             "Target" : {
               "$type" : "TTargetCardSection",
               "TargetSection" : "SelfHand",
-              "ExcludeSelf" : false,
+              "ExcludeSelf" : true,
               "Conditions" : {
                 "$type" : "TCardConditionalHiddenTag",
                 "Tags" : [ "Burn" ],
@@ -427,33 +592,80 @@
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Fiery Robe Aura",
-          "InternalDescription" : "Shielded 1",
-          "MigrationData" : "",
+          "Priority" : "High",
+          "InternalName" : "Fiery Robe Ability 2",
+          "InternalDescription" : "Your other Burn items gain +3 Burn for the fight.",
+          "MigrationData" : "990e2c87-5dbd-4390-bd9f-3f1e9f5f6514",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
+          "TranslationKey" : "94b6b97fa820b28535181c40302b5363"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e3" : {
+          "Id" : "e3",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Robe Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
-      "HiddenTags" : [ "BurnReference" ],
+      "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "f7c04c95-242e-4465-ba80-c99f2a2fc076",
-            "Text" : "When you Shield, your Burn items gain {ability.e1} Burn for the fight."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "10b132df-300e-44f3-81cc-80ed2f2b14ca",
+            "Text" : "Your other Burn items gain +{ability.e2} Burn for the fight."
+          },
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -508,20 +720,14 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedShield",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
-          "ActiveIn" : "HandAndStash",
+          "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 6.0
+              "Value" : 10.0
             },
             "AttributeType" : "CritChance",
             "Operation" : "Add",
@@ -545,31 +751,24 @@
                     "Value" : 0.0
                   }
                 }, {
-                  "$type" : "TCardConditionalOr",
-                  "Conditions" : [ {
-                    "$type" : "TCardConditionalTag",
-                    "Tags" : [ "Weapon" ],
-                    "Operator" : "Any"
-                  }, {
-                    "$type" : "TCardConditionalHiddenTag",
-                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
-                    "Operator" : "Any"
-                  } ]
+                  "$type" : "TCardConditionalHiddenTag",
+                  "Tags" : [ "Shield" ],
+                  "Operator" : "Any"
                 } ]
               }
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Deadly Robe Aura",
-          "InternalDescription" : "1",
-          "MigrationData" : "",
+          "Priority" : "High",
+          "InternalName" : "Deadly Robe Ability",
+          "InternalDescription" : "Your Shield items gain +10% Crit Chance for the fight.",
+          "MigrationData" : "990e2c87-5dbd-4390-bd9f-3f1e9f5f6514",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
+          "TranslationKey" : "94b6b97fa820b28535181c40302b5363"
         }
       },
       "Auras" : { },
@@ -579,9 +778,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "015c5af3-71e4-402c-a94b-ba3ae19bb2d1",
-            "Text" : "When you Shield, your items gain +6% Crit Chance for the fight."
+            "Text" : "Your Shield items gain +{ability.e1}% Crit Chance for the fight."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
@@ -695,7 +894,7 @@
   "StartingTier" : "Silver",
   "Size" : "Medium",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ ],
+  "Tags" : [ "Apparel" ],
   "HiddenTags" : [ "Shield" ],
   "ArtKey" : "8bdc883c6577e154d8c3971a98bcaba3",
   "CardPackId" : "Pygmalien_Core",
@@ -718,9 +917,9 @@
     }, {
       "Content" : {
         "Key" : "0a9de6216d1d3139f0bbbf399b1145f4",
-        "Text" : "When you Shield, your Shield items gain {ability.1} Shield for the fight."
+        "Text" : "Your Shield items gain {ability.1} Shield for the fight."
       },
-      "TooltipType" : "Passive",
+      "TooltipType" : "Active",
       "Prerequisites" : null
     } ]
   },
@@ -755,13 +954,7 @@
     "1" : {
       "Id" : "1",
       "Trigger" : {
-        "$type" : "TTriggerOnCardPerformedShield",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfBoard",
-          "ExcludeSelf" : false,
-          "Conditions" : null
-        }
+        "$type" : "TTriggerOnCardFired"
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
@@ -770,7 +963,11 @@
           "$type" : "TReferenceValueCardAttribute",
           "Target" : {
             "$type" : "TTargetCardSelf",
-            "Conditions" : null
+            "Conditions" : {
+              "$type" : "TCardConditionalHiddenTag",
+              "Tags" : [ "Shield" ],
+              "Operator" : "Any"
+            }
           },
           "AttributeType" : "Custom_0",
           "DefaultValue" : 0.0,
@@ -799,7 +996,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Robe 2",
-      "InternalDescription" : "When you Shield, all your items gain +{ability.1} Shield for the fight.",
+      "InternalDescription" : "Your Shield items gain +{ability.1} Shield for the fight.",
       "MigrationData" : "cfacb223-5b15-4bac-af1d-c743229364c0",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

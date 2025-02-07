@@ -1,16 +1,36 @@
 {
   "$type" : "TCardItem",
   "Tiers" : {
-    "Diamond" : {
+    "Silver" : {
       "Attributes" : {
-        "CooldownMax" : 9000,
-        "BuyPrice" : 32,
-        "SellPrice" : 16,
-        "BurnApplyAmount" : 6,
+        "CooldownMax" : 10000,
+        "BuyPrice" : 8,
+        "SellPrice" : 4,
+        "BurnApplyAmount" : 4,
         "PoisonApplyAmount" : 4,
         "FreezeTargets" : 1,
         "FreezeAmount" : 1000,
         "AmmoMax" : 1
+      },
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ "3" ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Gold" : {
+      "Attributes" : {
+        "CooldownMax" : 9000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8
+      },
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ "3" ],
+      "TooltipIds" : [ 0, 1 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 32,
+        "SellPrice" : 16
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ "3" ],
@@ -20,8 +40,8 @@
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 2,
-        "SlowAmount" : 4000
+        "SlowTargets" : 1,
+        "SlowAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -67,7 +87,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "01585b5d-fe7c-43fe-8cd1-d1aa06a71d58",
-            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -125,8 +145,8 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
-        "HasteAmount" : 4000
+        "HasteTargets" : 1,
+        "HasteAmount" : 2000
       },
       "Abilities" : {
         "e1" : {
@@ -172,7 +192,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9bae2c49-cc3c-4c43-b48d-4afdbfea4357",
-            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -183,7 +203,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 120
+        "ShieldApplyAmount" : 20
       },
       "Abilities" : {
         "e1" : {
@@ -232,7 +252,7 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 180
+        "HealAmount" : 30
       },
       "Abilities" : {
         "e1" : {
@@ -571,11 +591,11 @@
   "Version" : "1.0.0",
   "InternalName" : "Primordial Depth Charge",
   "InternalDescription" : null,
-  "StartingTier" : "Diamond",
+  "StartingTier" : "Silver",
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
-  "Tags" : [ "Aquatic" ],
-  "HiddenTags" : [ "Burn", "Poison", "Freeze" ],
+  "Tags" : [ "Aquatic", "Tech" ],
+  "HiddenTags" : [ "Burn", "Poison", "Freeze", "Ammo" ],
   "ArtKey" : "66dd0c00c20765b42a0cef76226e891d",
   "CardPackId" : "Vanessa_Mysteries_of_the_Deep",
   "TranslationKey" : "59ec2623a8ed6db5357f9ab3eeec3dab",
@@ -590,7 +610,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "d0c1df27cbe6392b17c0666761164964",
-        "Text" : "Poison {ability.1}, Burn {ability.0}, and Freeze {ability.2.targets} item for {ability.2} second(s)."
+        "Text" : "Poison {ability.1}, Burn {ability.0}, and Freeze {ability.2.targets} medium or small item for {ability.2} second(s)."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -670,7 +690,11 @@
           "$type" : "TTargetCardRandom",
           "ExcludeSelf" : false,
           "TargetSection" : "OpponentHand",
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalSize",
+            "Sizes" : [ "Small", "Medium" ],
+            "IsNot" : false
+          }
         }
       },
       "Prerequisites" : null,

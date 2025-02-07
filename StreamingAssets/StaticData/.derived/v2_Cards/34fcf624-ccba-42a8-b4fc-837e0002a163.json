@@ -3,13 +3,13 @@
   "Tiers" : {
     "Bronze" : {
       "Attributes" : {
-        "CooldownMax" : 5000,
+        "CooldownMax" : 6000,
         "BuyPrice" : 4,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "Custom_0" : 5,
-        "Custom_1" : 5,
-        "ChargeAmount" : 2000,
+        "Custom_0" : 10,
+        "Custom_1" : 10,
+        "ChargeAmount" : 1000,
         "ChargeTargets" : 1
       },
       "AbilityIds" : [ "0", "1", "2" ],
@@ -20,8 +20,8 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "Custom_0" : 10,
-        "Custom_1" : 10
+        "Custom_0" : 15,
+        "Custom_1" : 15
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -31,8 +31,8 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "Custom_0" : 15,
-        "Custom_1" : 15
+        "Custom_0" : 20,
+        "Custom_1" : 20
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -42,8 +42,8 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "Custom_0" : 20,
-        "Custom_1" : 20
+        "Custom_0" : 25,
+        "Custom_1" : 25
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -127,7 +127,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Medium", "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -150,7 +154,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "2fdc9ba9-32ab-4c4e-8530-11c89724cfb3",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -317,7 +321,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This gives double + Heal."
+            "Text" : "This has double Heal bonus."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -503,13 +507,7 @@
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnItemUsed",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfHand",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -713,7 +711,7 @@
     }, {
       "Content" : {
         "Key" : "97b26754a01f66d673559c5fe0f25997",
-        "Text" : "When you heal while at max health, charge this {ability.2} second(s)."
+        "Text" : "When you Over-heal, charge this {ability.2} second(s)."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -831,7 +829,7 @@
     "2" : {
       "Id" : "2",
       "Trigger" : {
-        "$type" : "TTriggerOnCardPerformedHeal",
+        "$type" : "TTriggerOnCardPerformedOverHeal",
         "Subject" : {
           "$type" : "TTargetCardSection",
           "TargetSection" : "SelfBoard",
@@ -847,35 +845,7 @@
           "Conditions" : null
         }
       },
-      "Prerequisites" : [ {
-        "$type" : "TPrerequisitePlayer",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : {
-            "$type" : "TPlayerConditionalAttribute",
-            "Attribute" : "Health",
-            "ComparisonOperator" : "GreaterThanOrEqual",
-            "ComparisonValue" : {
-              "$type" : "TReferenceValuePlayerAttribute",
-              "Target" : {
-                "$type" : "TTargetPlayerRelative",
-                "TargetMode" : "Self",
-                "Conditions" : null
-              },
-              "AttributeType" : "HealthMax",
-              "DefaultValue" : 0.0,
-              "Modifier" : {
-                "ModifyMode" : "Multiply",
-                "Value" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 1.0
-                }
-              }
-            }
-          }
-        }
-      } ],
+      "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Weights",
       "InternalDescription" : "When you overheal, use this.",

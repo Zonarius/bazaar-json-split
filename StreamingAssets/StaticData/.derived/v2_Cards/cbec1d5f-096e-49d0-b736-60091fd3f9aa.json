@@ -9,20 +9,21 @@
         "Multicast" : 2,
         "DamageAmount" : 100,
         "ChargeAmount" : 1000,
-        "ChargeTargets" : 1
+        "ChargeTargets" : 1,
+        "CritChance" : 25
       },
-      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     },
     "Legendary" : {
       "Attributes" : {
         "BuyPrice" : 100,
         "SellPrice" : 50
       },
-      "AbilityIds" : [ "0", "1", "2", "3" ],
+      "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     }
   },
   "Enchantments" : {
@@ -633,14 +634,7 @@
     }, {
       "Content" : {
         "Key" : "3b206bb0a750236dc4b7383f08bbc826",
-        "Text" : "When you use an adjacent Friend or item with Ammo, charge this {ability.1} second(s)."
-      },
-      "TooltipType" : "Passive",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "3b206bb0a750236dc4b7383f08bbc826",
-        "Text" : "When you take damage or lose shield, this gains {ability.2}% Crit Chance for the fight."
+        "Text" : "When you use another Toy, Friend or Ammo item, charge this {ability.1} second(s)."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -679,13 +673,16 @@
       "Trigger" : {
         "$type" : "TTriggerOnItemUsed",
         "Subject" : {
-          "$type" : "TTargetCardPositional",
-          "Origin" : "Self",
-          "TargetMode" : "Neighbor",
-          "IncludeOrigin" : false,
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
           "Conditions" : {
             "$type" : "TCardConditionalOr",
             "Conditions" : [ {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Toy" ],
+              "Operator" : "Any"
+            }, {
               "$type" : "TCardConditionalTag",
               "Tags" : [ "Friend" ],
               "Operator" : "Any"
@@ -712,7 +709,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Teddy 2",
-      "InternalDescription" : "When you use an adjacent item with Ammo or friend, charge this {ability.1} second(s).",
+      "InternalDescription" : "When you use another Toy, Friend or Ammo item, charge this {ability.1} second(s).",
       "MigrationData" : "f2082d72-d127-40ab-b697-66f3cecb7b26",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -720,92 +717,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "7eac3b064039df39b9b8ab118be95d89"
-    },
-    "2" : {
-      "Id" : "2",
-      "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Health",
-        "ChangeType" : "Loss"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TFixedValue",
-          "Value" : 5.0
-        },
-        "AttributeType" : "CritChance",
-        "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "High",
-      "InternalName" : "Teddy 3",
-      "InternalDescription" : "",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
-    },
-    "3" : {
-      "Id" : "3",
-      "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Shield",
-        "ChangeType" : "Loss"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TFixedValue",
-          "Value" : 5.0
-        },
-        "AttributeType" : "CritChance",
-        "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "High",
-      "InternalName" : "Teddy 3",
-      "InternalDescription" : "",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
     }
   },
   "Auras" : { }

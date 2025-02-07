@@ -632,7 +632,11 @@
               "$type" : "TTargetCardSection",
               "TargetSection" : "SelfHand",
               "ExcludeSelf" : false,
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }
             }
           },
           "ActiveIn" : "HandOnly",
@@ -650,10 +654,24 @@
             },
             "TargetCount" : null,
             "Target" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfHand",
+              "$type" : "TTargetCardTriggerSource",
               "ExcludeSelf" : false,
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "Any"
+                }, {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                } ]
+              }
             }
           },
           "Prerequisites" : null,
@@ -676,7 +694,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "68b21f15-2d20-4372-9595-15d25ead2655",
-            "Text" : "When your enemy uses an item, your items gain +10% Crit Chance for the fight."
+            "Text" : "When you use a Weapon, it gains +10% Crit Chance for the fight."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -775,7 +793,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Jaballian Drum 1",
-      "InternalDescription" : "When you use a weapon, give all your weapons +{ability.0} Damage for the fight.",
+      "InternalDescription" : "When you use a weapon, Your Weapons gain +{ability.0} Damage for the fight.",
       "MigrationData" : "7a914cec-81f5-42e0-a5c8-368435083f48",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -826,7 +844,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Jaballian Drum 2",
-      "InternalDescription" : "When you use a Weapon, give it Haste for {ability.1} second(s).",
+      "InternalDescription" : "When you use a Weapon, Haste it for {ability.1} second(s).",
       "MigrationData" : "7ae766fe-b467-43e4-a634-df12965778e7",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

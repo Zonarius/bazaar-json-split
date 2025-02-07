@@ -100,7 +100,8 @@
     },
     "Icy" : {
       "Attributes" : {
-        "FreezeAmount" : 1000
+        "FreezeAmount" : 2000,
+        "FreezeTargets" : 10
       },
       "Abilities" : {
         "e1" : {
@@ -112,10 +113,14 @@
           "Action" : {
             "$type" : "TActionCardFreeze",
             "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
+              "$type" : "TTargetCardSection",
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -138,7 +143,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "51b4f9b8-d171-403f-98b3-7beaff03184a",
-            "Text" : "Freeze all enemy items for {ability.e1} second(s)."
+            "Text" : "Freeze all enemy small items for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -683,7 +688,7 @@
       "InternalDescription" : "Burn both players {ability.0}.",
       "MigrationData" : "2c786b73-65c7-45e0-8119-54275bafa661",
       "VFXConfig" : {
-        "VFXOverrideKey" : "Assets/TheBazaar/Projectiles/Cooldown/Projectile_Cooldown_Opponent_PV.prefab",
+        "VFXOverrideKey" : "Projectile_Electric_PV",
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },

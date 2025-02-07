@@ -46,15 +46,20 @@
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 2,
-        "SlowAmount" : 4000
+        "SlowTargets" : 1,
+        "SlowAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -94,7 +99,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "dd682896-3385-4757-bb19-de4b6c40908c",
-            "Text" : "At the start of each fight, Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "When you Crit, Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -106,14 +111,19 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 4000
+        "FreezeAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -122,7 +132,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -145,7 +159,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "2cb7a66f-683d-4b56-9362-c7c8dc2f4057",
-            "Text" : "At the start of each fight, Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "When you Crit, Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -156,15 +170,20 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
-        "HasteAmount" : 4000
+        "HasteTargets" : 1,
+        "HasteAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -204,7 +223,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "b6ddc4e1-d558-4f09-ac5e-2ed449e1a2e9",
-            "Text" : "At the start of each fight, Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "When you Crit, Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -215,14 +234,19 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 60
+        "ShieldApplyAmount" : 10
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -254,7 +278,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "949b1d38-7818-4af6-9aea-4313ccd696a8",
-            "Text" : "At the start of each fight, Shield {ability.e1}."
+            "Text" : "When you Crit, Shield {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -264,20 +288,25 @@
       "HasAuras" : false
     },
     "Restorative" : {
-      "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
+      "Attributes" : {
+        "HealAmount" : 0
+      },
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
+          },
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionPlayerModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 6.0
-            },
-            "AttributeType" : "HealthRegen",
-            "Operation" : "Add",
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
             "Target" : {
               "$type" : "TTargetPlayerRelative",
               "TargetMode" : "Self",
@@ -285,42 +314,49 @@
             }
           },
           "Prerequisites" : null,
+          "Priority" : "Medium",
           "InternalName" : "Restorative Vanessa's Amulet Ability",
           "InternalDescription" : "",
-          "MigrationData" : "5470cd1a-5f8f-4377-819f-4b3ba2ec94ab",
+          "MigrationData" : "d23bbb07-05a4-4e21-8094-96dba2faf713",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9b15126a-fb33-4fba-b165-4e9dd3e4891f"
+          "TranslationKey" : "dd933188-aefa-4bd4-a9bd-143e2c2bc8e0"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ "Regen" ],
+      "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "3df4d83c-f1b5-4053-b160-cfc722f40d83",
-            "Text" : "You have +{aura.e1} Regeneration."
+            "Text" : "When you Crit, Heal {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 6
+        "PoisonApplyAmount" : 1
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -352,7 +388,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "71692f0c-4e37-4440-8eda-68abceb426dc",
-            "Text" : "At the start of each fight, poison {ability.e1}."
+            "Text" : "When you Crit, poison {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -363,14 +399,19 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 8
+        "BurnApplyAmount" : 2
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -402,7 +443,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "08125e7a-5f7d-4ffa-af68-a43c620200f7",
-            "Text" : "At the start of each fight, burn {ability.e1}."
+            "Text" : "When you Crit, burn {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -410,46 +451,6 @@
       },
       "HasAbilities" : true,
       "HasAuras" : false
-    },
-    "Shiny" : {
-      "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
-        "e1" : {
-          "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
-          "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "Custom_0",
-            "Operation" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
-            "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "InternalName" : "Shiny Vanessa's Amulet Aura",
-          "InternalDescription" : "XP 2x",
-          "MigrationData" : "",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
-        }
-      },
-      "Tags" : [ ],
-      "HiddenTags" : [ ],
-      "Localization" : {
-        "Tooltips" : [ ]
-      },
-      "HasAbilities" : false,
-      "HasAuras" : true
     },
     "Deadly" : {
       "Attributes" : { },
@@ -489,7 +490,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This gives double + Crit Chance."
+            "Text" : "This has double Crit Chance bonus."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null

@@ -122,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -145,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "8403ae74-9ff2-4308-b85e-4b26b72c7dc8",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -214,7 +218,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 30
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -243,69 +247,67 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "97ee4745-7476-4eee-8a89-c9836a02d4e3"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
-          "Id" : "1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardAttributeChanged",
-            "Subject" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            },
-            "AttributeChanged" : "Haste",
-            "ChangeType" : "Gain"
-          },
-          "ActiveIn" : "HandOnly",
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 30.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "ShieldApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "PoisonApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Shielded Catfish Ability 2",
-          "InternalDescription" : "When this gains Haste, this gains +{ability.e2} Shield for the fight.",
-          "MigrationData" : "d7b0a778-f2d5-4fa9-ac79-68766430b007",
+          "InternalName" : "Shielded Catfish Aura",
+          "InternalDescription" : "Sets the value of Shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "79f7d938ac5f5f1744529ddc07c9d276"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "abc83049-66c5-414e-9ea2-a837574a3df6",
-            "Text" : "Shield {ability.e1}. When this gains Haste, this gains +{ability.e2} Shield for the fight."
+            "Text" : "Shield equal to 10 times this item's Poison."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 45
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -334,65 +336,63 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "7d312db3-efde-420c-b354-7308ccf04924"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
-          "Id" : "1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardAttributeChanged",
-            "Subject" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            },
-            "AttributeChanged" : "Haste",
-            "ChangeType" : "Gain"
-          },
-          "ActiveIn" : "HandOnly",
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 45.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "HealAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "PoisonApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Restorative Catfish Ability 2",
-          "InternalDescription" : "When this gains Haste, this gains +{ability.e2} Heal for the fight.",
-          "MigrationData" : "d7b0a778-f2d5-4fa9-ac79-68766430b007",
+          "InternalName" : "Restorative Catfish Aura",
+          "InternalDescription" : "Sets the value of Heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "79f7d938ac5f5f1744529ddc07c9d276"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "339c0427-0088-42ee-bbb2-e4d6b9337aaa",
-            "Text" : "Heal {ability.e1}. When this gains Haste, this gains +{ability.e2} Heal for the fight."
+            "Text" : "Heal equal to 10 times this item's Poison."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : { },
@@ -443,7 +443,7 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -472,65 +472,63 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "cdc9838b-0ac9-4f9e-a6cc-e7a5ec95eeab"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
-          "Id" : "1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardAttributeChanged",
-            "Subject" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            },
-            "AttributeChanged" : "Haste",
-            "ChangeType" : "Gain"
-          },
-          "ActiveIn" : "HandOnly",
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 4.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "BurnApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "PoisonApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Fiery Catfish Ability 2",
-          "InternalDescription" : "When this gains Haste, this gains +{ability.e2} Burn for the fight.",
-          "MigrationData" : "d7b0a778-f2d5-4fa9-ac79-68766430b007",
+          "InternalName" : "Fiery Catfish Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "79f7d938ac5f5f1744529ddc07c9d276"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "43353b11-82ed-4fb7-bfc5-143da187c46d",
-            "Text" : "Burn {ability.e1}. When this gains Haste, this gains +{ability.e2} Burn for the fight."
+            "Text" : "Burn equal to this item's Poison."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

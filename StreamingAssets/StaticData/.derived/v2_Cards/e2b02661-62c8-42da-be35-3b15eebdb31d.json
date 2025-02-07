@@ -4,20 +4,25 @@
   "Tiers" : {
     "Gold" : {
       "Attributes" : {
-        "Custom_0" : 3,
-        "Multicast" : 1,
-        "BuyPrice" : 20
+        "FreezeAmount" : 2000,
+        "FreezeTargets" : 1,
+        "BuyPrice" : 20,
+        "Custom_0" : 0,
+        "Custom_1" : 3,
+        "Custom_2" : 3,
+        "Custom_3" : 0
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
-        "Custom_0" : 5,
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_1" : 6,
+        "Custom_2" : 6
       },
-      "AbilityIds" : [ "0" ],
+      "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
       "TooltipIds" : [ 0 ]
     }
@@ -30,7 +35,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Common" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "Shield", "FreezeReference" ],
+  "HiddenTags" : [ "Freeze", "ShieldReference" ],
   "ArtKey" : "Icon_Skill_MON_VolkasEnforcer_03.png",
   "CardPackId" : "Core",
   "TranslationKey" : "3d14103c405a496b422d283c251dc2d4",
@@ -45,7 +50,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "3d14103c405a496b422d283c251dc2d4",
-        "Text" : "When you Freeze, your Shield items gain {ability.0} Shield for the fight."
+        "Text" : "The first {aura.9} times you Shield each fight, Freeze {ability.0.targets} item for {ability.0} second(s)."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -55,7 +60,62 @@
     "0" : {
       "Id" : "0",
       "Trigger" : {
-        "$type" : "TTriggerOnCardPerformedFreeze",
+        "$type" : "TTriggerOnCardPerformedShield",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfBoard",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardFreeze",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "Custom_0",
+            "ComparisonOperator" : "LessThan",
+            "ComparisonValue" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
+            }
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 1
+      } ],
+      "Priority" : "Medium",
+      "InternalName" : "Cryomastery",
+      "InternalDescription" : "The first [--/--/3/6] times you Shield each fight, Freeze an item for 2 seconds.",
+      "MigrationData" : "ec46cd3f-0612-4933-a414-2fb412d9dcaa",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "3d14103c405a496b422d283c251dc2d4"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardPerformedShield",
         "Subject" : {
           "$type" : "TTargetCardSection",
           "TargetSection" : "SelfBoard",
@@ -67,16 +127,10 @@
       "Action" : {
         "$type" : "TActionCardModifyAttribute",
         "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : null
+          "$type" : "TFixedValue",
+          "Value" : 1.0
         },
-        "AttributeType" : "ShieldApplyAmount",
+        "AttributeType" : "Custom_0",
         "Operation" : "Add",
         "Duration" : {
           "$type" : "TDeterminantDuration",
@@ -84,28 +138,62 @@
         },
         "TargetCount" : null,
         "Target" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
-          "Conditions" : {
-            "$type" : "TCardConditionalHiddenTag",
-            "Tags" : [ "Shield" ],
-            "Operator" : "Any"
-          }
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Cryomastery",
-      "InternalDescription" : "When you Freeze, your items gain +{ability.0} Shield for the fight.",
-      "MigrationData" : "ec46cd3f-0612-4933-a414-2fb412d9dcaa",
+      "Priority" : "Immediate",
+      "InternalName" : "Counter Increment",
+      "InternalDescription" : "",
+      "MigrationData" : "4d12191b-10d1-45a6-af84-29da3247be03",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "3d14103c405a496b422d283c251dc2d4"
+      "TranslationKey" : "d149d6ad387a086f529598c243a01248"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

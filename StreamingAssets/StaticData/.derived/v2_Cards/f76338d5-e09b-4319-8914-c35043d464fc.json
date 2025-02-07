@@ -1,0 +1,814 @@
+{
+  "$type" : "TCardItem",
+  "Tiers" : {
+    "Gold" : {
+      "Attributes" : {
+        "CooldownMax" : 8000,
+        "BuyPrice" : 16,
+        "SellPrice" : 8,
+        "Multicast" : 1,
+        "SlowAmount" : 2000,
+        "SlowTargets" : 2,
+        "ChargeAmount" : 2000,
+        "ChargeTargets" : 1,
+        "Custom_0" : 25
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    },
+    "Diamond" : {
+      "Attributes" : {
+        "BuyPrice" : 32,
+        "SellPrice" : 16,
+        "SlowAmount" : 3000,
+        "Custom_0" : 50
+      },
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2" ],
+      "TooltipIds" : [ 0, 1, 2 ]
+    }
+  },
+  "Enchantments" : {
+    "Heavy" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "SlowAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Heavy Nargile Aura",
+          "InternalDescription" : "Heavy 2",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "25c00cb2-e60b-4893-bc6b-8d28e16e036d"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Slow" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "025298f1-9272-46e4-8b50-91edecc8c4d2",
+            "Text" : "This has double Slow duration."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Icy" : {
+      "Attributes" : {
+        "FreezeTargets" : 1,
+        "FreezeAmount" : 1000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardFreeze",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "OpponentHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Icy Nargile Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "408ca9e3-7dd9-4b57-97c7-f57da7fc1c9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "28873b03-6a7d-4eb2-bb02-9b95a583771b"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Freeze" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "305e4ec6-89c5-4eac-af7c-4f38d18d23e0",
+            "Text" : "When you Crit, Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Turbo" : {
+      "Attributes" : {
+        "HasteTargets" : 1,
+        "HasteAmount" : 2000
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardHaste",
+            "Target" : {
+              "$type" : "TTargetCardRandom",
+              "ExcludeSelf" : false,
+              "TargetSection" : "SelfHand",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "CooldownMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Turbo Sextant Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "284071be-c429-48aa-884f-58ac095140a3",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "2021c761-aba3-426e-8afc-9d325b770cd1"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Haste" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "35ab23ce-c022-45ff-8a93-4866dee6a100",
+            "Text" : "When you Crit, Haste {ability.e1.targets} items for {ability.e1} second(s)."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shielded" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 40
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Nargile Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "957e32cd-fa5c-446c-9802-578a14b46db0",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "37249ad3-3e74-44be-a3be-96bd17d107fb"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Shield" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "9816cf73-6c49-442b-85b2-19db00195fd2",
+            "Text" : "When you Crit, Shield {ability.e1}."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Restorative" : {
+      "Attributes" : {
+        "HealAmount" : 20
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Nargile Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "f2d64b45-c531-4233-969e-99b062949229",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "6933e76c-1af6-4752-9e06-18b88d4fb719"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Heal" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "d0cadc04-cda6-4a69-84ea-4974ac3ad689",
+            "Text" : "When you Crit, Heal {ability.e1}."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Toxic" : {
+      "Attributes" : {
+        "PoisonApplyAmount" : 1
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerPoisonApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Toxic Nargile Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "1ee3fe64-21e2-4e41-b6f9-dd62f6a78cbb",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "7e2ff64a-dcc0-493c-b866-ca349a37928f"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Poison" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "9d5b61a2-459d-4c18-82dc-ba57f23a5a56",
+            "Text" : "When you Crit, Poison {ability.e1}."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Fiery" : {
+      "Attributes" : {
+        "BurnApplyAmount" : 2
+      },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardCritted",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : true,
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionPlayerBurnApply",
+            "ReferenceValue" : null,
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Opponent",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Medium",
+          "InternalName" : "Fiery Nargile Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "3118aea9-6e63-4e08-a4c5-7efd2c35b74b",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a5b4f24d-e196-48b1-8ff3-5a26858d2781"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Burn" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "fb341d3d-edb0-478a-9124-c7bb5abcd54b",
+            "Text" : "When you Crit, Burn {ability.e1}."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    },
+    "Shiny" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Multicast",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Nargile Aura",
+          "InternalDescription" : "Shiny 1",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "cec1e104-bf0c-47d7-ac3e-7de4e1560357"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "51d66bd4-caab-4946-a7f3-1addb8c95d03",
+            "Text" : "This has +{aura.e1} Multicast."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Deadly" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 25.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                }, {
+                  "$type" : "TCardConditionalOr",
+                  "Conditions" : [ {
+                    "$type" : "TCardConditionalTag",
+                    "Tags" : [ "Weapon" ],
+                    "Operator" : "Any"
+                  }, {
+                    "$type" : "TCardConditionalHiddenTag",
+                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                    "Operator" : "Any"
+                  } ]
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Deadly Nargile Aura",
+          "InternalDescription" : "Deadly 25",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "f41a4bfc-5d37-4783-852f-3bbd717dfea6"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Crit" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "51d66bd4-caab-4946-a7f3-1addb8c95d03",
+            "Text" : "Adjacent items have +{aura.0}% Crit Chance."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Radiant" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Freeze",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Freeze",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant ",
+          "InternalDescription" : "When this item gains Freeze, remove Freeze from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeChanged" : "Slow",
+            "ChangeType" : "Gain"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1000000.0
+            },
+            "AttributeType" : "Slow",
+            "Operation" : "Subtract",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Radiant Slow",
+          "InternalDescription" : "When this item gains Slow, remove Slow from it.",
+          "MigrationData" : "169c15f1-2082-410e-8633-ebe1a843c97c",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "db02baf95ec3866b3bcf0761025fd005"
+        }
+      },
+      "Auras" : { },
+      "Tags" : [ ],
+      "HiddenTags" : [ ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a399d031-4ca7-4078-a81a-511c58dc17c0",
+            "Text" : "This cannot be Frozen, Slowed or Destroyed."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
+      "HasAuras" : false
+    }
+  },
+  "Type" : "Item",
+  "Id" : "f76338d5-e09b-4319-8914-c35043d464fc",
+  "Version" : "1.0.0",
+  "InternalName" : "Nargile",
+  "InternalDescription" : "",
+  "StartingTier" : "Gold",
+  "Size" : "Medium",
+  "Heroes" : [ "Common" ],
+  "Tags" : [ ],
+  "HiddenTags" : [ "Slow", "Crit" ],
+  "ArtKey" : "a270a7c0e94b7aa4fbea2dd836d62ee3",
+  "CardPackId" : "Core",
+  "TranslationKey" : "b3d4e2f221f5e0a49ab3276484165bac",
+  "AudioKey" : "",
+  "Localization" : {
+    "Title" : {
+      "Key" : "b3d4e2f221f5e0a49ab3276484165bac",
+      "Text" : "Nargile"
+    },
+    "Description" : null,
+    "FlavorText" : null,
+    "Tooltips" : [ {
+      "Content" : {
+        "Key" : "22b2fad160b550c32a1ea038701a913c",
+        "Text" : "Slow {ability.0.targets} items for {ability.0} second(s)."
+      },
+      "TooltipType" : "Active",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "563e76d5cf16be8119c89df06ff3a0b4",
+        "Text" : "Adjacent items have +{aura.2}% Crit Chance."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "b33b8d191b46bbe60e90c36d2d9b0ba0",
+        "Text" : "When you Crit, Charge this {ability.1} second(s)."
+      },
+      "TooltipType" : "Passive",
+      "Prerequisites" : null
+    } ]
+  },
+  "Abilities" : {
+    "0" : {
+      "Id" : "0",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardSlow",
+        "Target" : {
+          "$type" : "TTargetCardRandom",
+          "ExcludeSelf" : false,
+          "TargetSection" : "OpponentHand",
+          "Conditions" : {
+            "$type" : "TCardConditionalAttribute",
+            "Attribute" : "CooldownMax",
+            "ComparisonOperator" : "GreaterThan",
+            "ComparisonValue" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.0
+            }
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Medium",
+      "InternalName" : "Nargile 1",
+      "InternalDescription" : "Slow enemy items for {ability.0} second(s).",
+      "MigrationData" : "2cecd0fc-8478-4e83-a144-1b98060d048f",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "22b2fad160b550c32a1ea038701a913c"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardCritted",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : null
+        }
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardCharge",
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "Low",
+      "InternalName" : "Nargile 2",
+      "InternalDescription" : "When you Crit, Haste an item for {ability.1} second(s).",
+      "MigrationData" : "d5166643-4512-48b0-9334-54cd8e27445b",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "3eaf9cff9a61f957086f086bc0cfe898"
+    }
+  },
+  "Auras" : {
+    "2" : {
+      "Id" : "2",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "CritChance",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : null
+        },
+        "Target" : {
+          "$type" : "TTargetCardPositional",
+          "Origin" : "Self",
+          "TargetMode" : "Neighbor",
+          "IncludeOrigin" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalOr",
+              "Conditions" : [ {
+                "$type" : "TCardConditionalTag",
+                "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                "Operator" : "Any"
+              } ]
+            } ]
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Nargile 3",
+      "InternalDescription" : "The item to the left of this has +{aura.0}% Crit Chance.",
+      "MigrationData" : "15338ada-86ca-4aa7-94b4-20a1b0763f45",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "563e76d5cf16be8119c89df06ff3a0b4"
+    }
+  }
+}

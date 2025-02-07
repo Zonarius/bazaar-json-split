@@ -91,7 +91,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -114,7 +118,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "2ba1e49d-89bc-4db5-8c81-14fe5fc4f801",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -183,7 +187,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 1
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -212,22 +216,23 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "7807318c-a088-4455-9fb4-b44d32d05859"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
             "Value" : {
               "$type" : "TReferenceValueCardAttribute",
               "Target" : {
                 "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "ShieldApplyAmount",
+              "AttributeType" : "DamageAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
@@ -237,50 +242,41 @@
                 }
               }
             },
-            "AttributeType" : "ShieldApplyAmount",
-            "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
-            },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "High",
-          "InternalName" : "",
-          "InternalDescription" : "Double this",
-          "MigrationData" : "ebf20272-a45d-49a8-83c0-0837ab956023",
+          "InternalName" : "Shielded Atlas Stone Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "dee927e1ac08e61d444996ac07f357c2"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "4d908c18-2c7a-4915-aeae-c4e7284bba27",
-            "Text" : "Shield {ability.e1}\n\ndouble this item's shield for the fight"
+            "Key" : "94497f63-4982-492e-be92-50e87290aaa0",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 1
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -309,22 +305,23 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "86ace26f-9fef-4567-b2a3-a50c7d1337a4"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
             "Value" : {
               "$type" : "TReferenceValueCardAttribute",
               "Target" : {
                 "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "HealAmount",
+              "AttributeType" : "DamageAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
@@ -334,50 +331,41 @@
                 }
               }
             },
-            "AttributeType" : "HealAmount",
-            "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
-            },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "High",
-          "InternalName" : "",
-          "InternalDescription" : "Double this",
-          "MigrationData" : "ebf20272-a45d-49a8-83c0-0837ab956023",
+          "InternalName" : "Restorative Atlas Stone Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "dee927e1ac08e61d444996ac07f357c2"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c7504877-14a8-44d6-8199-408553ecf211",
-            "Text" : "Heal {ability.e1}\n\ndouble this item's healing for the fight"
+            "Key" : "4de9e1e5-b2db-4022-81aa-d977030adbfb",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 1
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -406,75 +394,67 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "aab00867-0ed9-4568-90da-b8224ace0696"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
             "Value" : {
               "$type" : "TReferenceValueCardAttribute",
               "Target" : {
                 "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "PoisonApplyAmount",
+              "AttributeType" : "DamageAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
                 "Value" : {
                   "$type" : "TFixedValue",
-                  "Value" : 1.0
+                  "Value" : 0.1
                 }
               }
             },
-            "AttributeType" : "PoisonApplyAmount",
-            "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
-            },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "High",
-          "InternalName" : "",
-          "InternalDescription" : "Double this",
-          "MigrationData" : "ebf20272-a45d-49a8-83c0-0837ab956023",
+          "InternalName" : "Toxic Atlas Stone Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "dee927e1ac08e61d444996ac07f357c2"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "2598ce8b-71d4-41e9-be1e-d385b353bbf1",
-            "Text" : "Poison {ability.e1}\n\ndouble this item's poison for the fight"
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 1
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -503,71 +483,63 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "67ed9ea0-e065-4982-8d35-10e4adb28f25"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
             "Value" : {
               "$type" : "TReferenceValueCardAttribute",
               "Target" : {
                 "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "BurnApplyAmount",
+              "AttributeType" : "DamageAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
                 "Value" : {
                   "$type" : "TFixedValue",
-                  "Value" : 1.0
+                  "Value" : 0.1
                 }
               }
             },
-            "AttributeType" : "BurnApplyAmount",
-            "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
-            },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "High",
-          "InternalName" : "",
-          "InternalDescription" : "Double this",
-          "MigrationData" : "ebf20272-a45d-49a8-83c0-0837ab956023",
+          "InternalName" : "Fiery Atlas Stone Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "dee927e1ac08e61d444996ac07f357c2"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "1fa44e22-0cb3-4698-9bb9-fee573bfdb01",
-            "Text" : "Burn {ability.e1}\n\ndouble this item's burn for the fight"
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

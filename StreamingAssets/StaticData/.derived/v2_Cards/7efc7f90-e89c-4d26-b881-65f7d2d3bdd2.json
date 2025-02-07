@@ -18,34 +18,31 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "HasteAmount" : 2000,
         "HasteTargets" : 2
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "HasteAmount" : 2000,
         "HasteTargets" : 3
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "HasteAmount" : 2000,
         "HasteTargets" : 4
       },
       "AbilityIds" : [ "0" ],
       "AuraIds" : [ ],
-      "TooltipIds" : [ 1 ]
+      "TooltipIds" : [ 0 ]
     }
   },
   "Enchantments" : {
@@ -125,7 +122,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -148,7 +149,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "4f4bcba0-b236-4dde-b13c-6f14686df46f",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -206,7 +207,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 40
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -237,25 +238,70 @@
           "TranslationKey" : "27bffe62-d415-4f42-80ec-25f9f5bc6c29"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Aquatic", "Toy" ],
+                  "Operator" : "Any"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 10.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Beach Ball Aura",
+          "InternalDescription" : "Shield 10 for each Aquatic or Toy item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "09a10e63-65ed-40b6-8ee6-88cd3144f037",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "Shield {aura.e2.mod} for each Aquatic or Toy item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 60
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -286,25 +332,70 @@
           "TranslationKey" : "bfcab9cb-115e-49da-8793-eae545bcf5b3"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Aquatic", "Toy" ],
+                  "Operator" : "Any"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 15.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Beach Ball Aura",
+          "InternalDescription" : "Heal 15 for each Aquatic or Toy item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "b04d7f12-43e3-43dd-9e1c-ce0c679148cd",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "Heal {aura.e2.mod} for each Aquatic or Toy item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 4
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -335,25 +426,70 @@
           "TranslationKey" : "70225980-7794-420d-b76a-f757cc65e1db"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Aquatic", "Toy" ],
+                  "Operator" : "Any"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Beach Ball Aura",
+          "InternalDescription" : "Poison 1 for each Aquatic or Toy item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "a5e8a3df-89d1-4626-ad02-2170c1d4f1de",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison {aura.e2.mod} for each Aquatic or Toy item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 6
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -384,21 +520,66 @@
           "TranslationKey" : "d3cb1cf3-587b-4f09-8ace-e46c7e6c409d"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardCount",
+              "Target" : {
+                "$type" : "TTargetCardSection",
+                "TargetSection" : "SelfHand",
+                "ExcludeSelf" : false,
+                "Conditions" : {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Aquatic", "Toy" ],
+                  "Operator" : "Any"
+                }
+              },
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Beach Ball Aura",
+          "InternalDescription" : "Burn 1 for each Aquatic or Toy item you have.",
+          "MigrationData" : "69d8607a-5448-4904-86ec-5cb6f563b94d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "c19c6bec481e8c69ab1e74a008f67fd7"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e1b64bf6-1bbd-4ca2-aab6-48bb99e7b6b9",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn {aura.e2.mod} for each Aquatic or Toy item you have."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -485,7 +666,7 @@
                   }
                 }, {
                   "$type" : "TCardConditionalTag",
-                  "Tags" : [ "Aquatic" ],
+                  "Tags" : [ "Aquatic", "Toy" ],
                   "Operator" : "Any"
                 }, {
                   "$type" : "TCardConditionalOr",
@@ -522,7 +703,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "c36134ba-5956-4e51-ae9e-96794d0e6508",
-            "Text" : "Your Aquatic items gain +{ability.e1}% Crit Chance for the fight."
+            "Text" : "Your Aquatic and Toy items gain +{ability.e1}% Crit Chance for the fight."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -638,7 +819,7 @@
   "StartingTier" : "Bronze",
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
-  "Tags" : [ "Aquatic" ],
+  "Tags" : [ "Aquatic", "Toy" ],
   "HiddenTags" : [ "Haste" ],
   "ArtKey" : "3abf88a09dcbc8e439c9bec98ba10c86",
   "CardPackId" : "Vanessa_Core",
@@ -654,14 +835,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "e80e1883e69fb1ff6c867d0130d1959a",
-        "Text" : "Haste {ability.0.targets} Aquatic item for {ability.0} second(s)."
-      },
-      "TooltipType" : "Active",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "e80e1883e69fb1ff6c867d0130d19591",
-        "Text" : "Haste {ability.0.targets} Aquatic items for {ability.0} second(s)."
+        "Text" : "Haste {ability.0.targets} Aquatic or Toy item(s) for {ability.0} second(s)."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -684,7 +858,7 @@
             "$type" : "TCardConditionalAnd",
             "Conditions" : [ {
               "$type" : "TCardConditionalTag",
-              "Tags" : [ "Aquatic" ],
+              "Tags" : [ "Aquatic", "Toy" ],
               "Operator" : "Any"
             }, {
               "$type" : "TCardConditionalAttribute",
@@ -700,8 +874,8 @@
       },
       "Prerequisites" : null,
       "Priority" : "High",
-      "InternalName" : "Beach Ball OnCombat another aquatic item Haste 1s",
-      "InternalDescription" : "Haste {ability.0.targets} Aquatic items for {ability.0} second(s).",
+      "InternalName" : "Beach Ball 1",
+      "InternalDescription" : "Haste [1/2/3/4] Aquatic or Toy items for 2 seconds.",
       "MigrationData" : "56eb205d-8bf9-432b-8dad-fa0ff1dc2c57",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

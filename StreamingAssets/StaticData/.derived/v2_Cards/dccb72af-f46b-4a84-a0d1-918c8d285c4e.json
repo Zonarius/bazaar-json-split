@@ -63,13 +63,13 @@
           "Priority" : "Medium",
           "InternalName" : "Heavy Flamethrower Ability",
           "InternalDescription" : "",
-          "MigrationData" : "2b33a9c4-79c2-47c7-adbb-2d4da3ab38b3",
+          "MigrationData" : "1e0337a5-0a1a-4a62-b7d0-72da91943aa1",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "6f615327-0534-4c00-a2e4-4c051e372fe8"
+          "TranslationKey" : "3e0ae5b0-fe0d-4468-93ea-89d6ef2330e6"
         }
       },
       "Auras" : { },
@@ -78,7 +78,7 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "269d9ea3-f203-4e48-9d4d-f0760de3b66e",
+            "Key" : "3b01dd33-b614-4aa2-97a4-c4f188f7a559",
             "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
@@ -106,20 +106,24 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
           "InternalName" : "Icy Flamethrower Ability",
           "InternalDescription" : "",
-          "MigrationData" : "8281861e-22af-4806-b3ea-6eaa30290ecc",
+          "MigrationData" : "fdb99464-2fcc-4829-8b60-0cbe60ad62b9",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "fc6ea3de-0fd0-40e5-852b-0da97603955e"
+          "TranslationKey" : "c48bdb4f-7ef8-4644-8f8c-377743d5d59a"
         }
       },
       "Auras" : { },
@@ -128,8 +132,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "a54b6ddc-1380-4d36-92b4-66a26d63981e",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "fc43a7e9-64f9-4d60-9dc9-273fe99ee0c4",
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -171,13 +175,13 @@
           "Priority" : "Medium",
           "InternalName" : "Turbo Flamethrower Ability",
           "InternalDescription" : "",
-          "MigrationData" : "45167f17-da4e-4087-b0f2-d30b7350372b",
+          "MigrationData" : "756af378-af75-40b8-95b8-c3b2b3181912",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "7d7472c3-2d53-4144-831a-59eaa6ca1564"
+          "TranslationKey" : "1246135c-aff1-4f63-84bc-6dac9d869ab8"
         }
       },
       "Auras" : { },
@@ -186,7 +190,7 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "0d32c8b2-99e6-4049-a38c-5820ba44d3be",
+            "Key" : "448d6797-032b-400f-b1a0-6457598a1d1f",
             "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
@@ -198,7 +202,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 60
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -220,34 +224,74 @@
           "Priority" : "Medium",
           "InternalName" : "Shielded Flamethrower Ability",
           "InternalDescription" : "",
-          "MigrationData" : "1f44641b-ae0c-4ff4-be73-8d94ef8b3e92",
+          "MigrationData" : "cde2fe46-cd06-4480-8460-394f0e7f36d4",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "0a8e4a47-ff85-4991-9a63-43b360ebf07f"
+          "TranslationKey" : "a1399e92-6e1e-4864-be80-eb3e2b54b72c"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Flamethrower Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "399aa50a-b12e-4bd6-b34e-a070e4266f01",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "efa960b0-3cff-4a39-a3ea-ee1e68ff35cc",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 90
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -269,35 +313,74 @@
           "Priority" : "Medium",
           "InternalName" : "Restorative Flamethrower Ability",
           "InternalDescription" : "",
-          "MigrationData" : "38343804-d4b6-47a4-af84-5e17e57a2c9f",
+          "MigrationData" : "e6be57c8-8e5e-407e-ae2e-c6aa2d6bb9b5",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9c5793c3-1eaf-46e5-a9ac-9935628c3589"
+          "TranslationKey" : "f1741d35-ad24-46a8-bee9-e5976b8a0f5f"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Flamethrower Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c1a62917-e1d3-46f2-b168-83980c822c20",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "5e971c57-ad7d-413e-a585-d3b9ec94b9a6",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 0,
-        "Custom_3" : 2
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -319,13 +402,13 @@
           "Priority" : "Medium",
           "InternalName" : "Toxic Flamethrower Ability",
           "InternalDescription" : "",
-          "MigrationData" : "d2865e4a-11f9-4639-ae2a-f1795cadfbb8",
+          "MigrationData" : "55dc5986-0e93-4b18-9ac1-bcdfc434ab67",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "61a1e642-9f9b-4a8d-9b9a-a56caf2ba605"
+          "TranslationKey" : "ceb625f2-9e65-4323-a022-170973b44cb5"
         }
       },
       "Auras" : {
@@ -348,7 +431,7 @@
                 "ModifyMode" : "Multiply",
                 "Value" : {
                   "$type" : "TFixedValue",
-                  "Value" : 2.0
+                  "Value" : 0.1
                 }
               }
             },
@@ -359,47 +442,14 @@
           },
           "Prerequisites" : null,
           "InternalName" : "Toxic Flamethrower Aura",
-          "InternalDescription" : "",
-          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9u",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e6"
-        },
-        "e9" : {
-          "Id" : "e9",
-          "ActiveIn" : "HandOnly",
-          "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "Custom_2",
-            "Operation" : "Add",
-            "Value" : {
-              "$type" : "TReferenceValueCardAttribute",
-              "Target" : {
-                "$type" : "TTargetCardSelf",
-                "Conditions" : null
-              },
-              "AttributeType" : "Custom_3",
-              "DefaultValue" : 0.0,
-              "Modifier" : null
-            },
-            "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "InternalName" : "Tooltip Handling",
-          "InternalDescription" : "",
-          "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
       "Tags" : [ ],
@@ -407,8 +457,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "e2ee7e05-7807-4429-a171-03976343891d",
-            "Text" : "Poison equal to {aura.e9} time(s) this item's damage."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -439,14 +489,14 @@
           },
           "Prerequisites" : null,
           "InternalName" : "Fiery Flamethrower Aura",
-          "InternalDescription" : "Fiery 1",
+          "InternalDescription" : "Fiery 2",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "359cf6be-8d92-4a8f-b7c7-a87b374724ae"
+          "TranslationKey" : "78ff1877-952f-4802-a94e-a8b034101f96"
         }
       },
       "Tags" : [ ],
@@ -454,8 +504,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has double Burn."
+            "Key" : "391db51d-2ad3-45eb-a1cb-a17cb3014962",
+            "Text" : "This has double burn."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -493,7 +543,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "0483e9e6-6c8e-40df-9e31-519700a7adb5"
+          "TranslationKey" : "0d782ddd-ac95-40c9-b62b-e1857e348ff7"
         }
       },
       "Tags" : [ ],
@@ -540,7 +590,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "2ec0cdf5-af1b-48fb-899b-5b139a4aea51"
+          "TranslationKey" : "dbe9ef4a-4291-4df9-b55f-dd2bc3e633cf"
         }
       },
       "Tags" : [ ],
@@ -709,7 +759,7 @@
     }, {
       "Content" : {
         "Key" : "2d758634bb0726388f24cc2f0764320e",
-        "Text" : "Burn equal to {aura.9} time(s) this item's damage."
+        "Text" : "Burn equal to {aura.9} times this item's damage."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null

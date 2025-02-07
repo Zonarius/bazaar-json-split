@@ -8,22 +8,20 @@
         "SellPrice" : 12,
         "Multicast" : 1,
         "HealAmount" : 0,
-        "Custom_0" : 4,
-        "Custom_1" : 0
+        "Custom_0" : 4
       },
-      "AbilityIds" : [ "0", "1", "2" ],
-      "AuraIds" : [ "2", "4" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 48,
         "SellPrice" : 24,
-        "Custom_0" : 6,
-        "Custom_1" : 0
+        "Custom_0" : 6
       },
-      "AbilityIds" : [ "0", "1", "2" ],
-      "AuraIds" : [ "3", "4" ],
+      "AbilityIds" : [ "0", "1" ],
+      "AuraIds" : [ "2" ],
       "TooltipIds" : [ 0, 1 ]
     }
   },
@@ -63,7 +61,14 @@
       "Tags" : [ ],
       "HiddenTags" : [ ],
       "Localization" : {
-        "Tooltips" : [ ]
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a6d7121b-b1af-4b9f-94f9-b128cea2b83c",
+            "Text" : "This has double value."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
       },
       "HasAbilities" : false,
       "HasAuras" : true
@@ -270,20 +275,18 @@
       "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "ShieldApplyAmount",
             "Operation" : "Add",
             "Value" : {
-              "$type" : "TReferenceValueCardAttributeAggregate",
+              "$type" : "TReferenceValueCardAttribute",
               "Target" : {
-                "$type" : "TTargetCardSection",
-                "TargetSection" : "SelfHand",
-                "ExcludeSelf" : false,
+                "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "SellPrice",
+              "AttributeType" : "HealAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
@@ -299,8 +302,8 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "",
-          "InternalDescription" : "Sets shield",
+          "InternalName" : "Shielded Subscraper Aura",
+          "InternalDescription" : "Sets the value of shield",
           "MigrationData" : "475addae-1726-4336-b277-4df21e11ccf2",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -315,8 +318,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "824d72e1-2f5a-485a-9360-c45e36adbb4e",
-            "Text" : "Shield equal the value of your items."
+            "Key" : "45a39d85-14c0-425a-bf78-9e4a9ccb90eb",
+            "Text" : "Shield equal to this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -374,7 +377,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 6
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -405,25 +408,65 @@
           "TranslationKey" : "4ee91eb3-4cad-48e4-989d-1d0446a12c2f"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Subscraper Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "864e08db-a0f9-4370-bb03-8273262a6608",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 9
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -454,21 +497,61 @@
           "TranslationKey" : "8f26c2d1-8ba5-458d-bc40-218167acf156"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Subscraper Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "baed1d0e-a2d9-4b09-aa12-ac52f3661cd6",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -687,14 +770,14 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "905c8d50055b25071c039e8720e59726",
-        "Text" : "Heal equal to {aura.4} time(s) the value of your items."
+        "Text" : "Heal equal to {aura.2.mod} times the value of your items."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "61f2a245695ee0b03b53c32ed6f24464",
-        "Text" : "Your other items gain +value equal to this item's value in combat."
+        "Text" : "At the start of each fight, your other items gain Value equal to this item's Value for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -770,7 +853,7 @@
       "Prerequisites" : null,
       "Priority" : "Medium",
       "InternalName" : "Subscraper 2",
-      "InternalDescription" : "During fights, your other items +value equal to this item's value.",
+      "InternalDescription" : "At the start of each fight, your other items gain Value equal to this item's Value for the fight.",
       "MigrationData" : "5c27a941-e5bc-4d4a-ab86-3414d25c8618",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -801,8 +884,14 @@
           "Modifier" : {
             "ModifyMode" : "Multiply",
             "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 4.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -814,86 +903,6 @@
       "Prerequisites" : null,
       "InternalName" : "Subscraper 3",
       "InternalDescription" : "Sets the value of Subscraper 1",
-      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "3" : {
-      "Id" : "3",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttributeAggregate",
-          "Target" : {
-            "$type" : "TTargetCardSection",
-            "TargetSection" : "SelfHand",
-            "ExcludeSelf" : false,
-            "Conditions" : null
-          },
-          "AttributeType" : "SellPrice",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 6.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Subscraper 3",
-      "InternalDescription" : "Sets the value of Subscraper 1",
-      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "4" : {
-      "Id" : "4",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "Custom_1",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_0",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Tooltip Handling",
-      "InternalDescription" : "",
       "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

@@ -4,8 +4,7 @@
   "Tiers" : {
     "Silver" : {
       "Attributes" : {
-        "Custom_0" : 8,
-        "Multicast" : 1,
+        "Custom_0" : 10,
         "BuyPrice" : 10
       },
       "AbilityIds" : [ ],
@@ -14,7 +13,7 @@
     },
     "Gold" : {
       "Attributes" : {
-        "Custom_0" : 12,
+        "Custom_0" : 15,
         "BuyPrice" : 20
       },
       "AbilityIds" : [ ],
@@ -23,7 +22,7 @@
     },
     "Diamond" : {
       "Attributes" : {
-        "Custom_0" : 16,
+        "Custom_0" : 20,
         "BuyPrice" : 40
       },
       "AbilityIds" : [ ],
@@ -54,7 +53,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "79e5933122ac53d2059a9f3117087eb2",
-        "Text" : "You have +{aura.0} Regeneration."
+        "Text" : "You have +{aura.0.mod} Regeneration for each non-weapon item you have in play. [{aura.0}]"
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -68,18 +67,29 @@
       "Action" : {
         "$type" : "TAuraActionPlayerModifyAttribute",
         "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
+          "$type" : "TReferenceValueCardCount",
           "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
+            "$type" : "TTargetCardSection",
+            "TargetSection" : "SelfHand",
+            "ExcludeSelf" : false,
+            "Conditions" : {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Weapon" ],
+              "Operator" : "None"
+            }
           },
-          "AttributeType" : "Custom_0",
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",
             "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_0",
+              "DefaultValue" : 0.0,
+              "Modifier" : null
             }
           }
         },
@@ -92,8 +102,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Waters of Infinity.",
-      "InternalDescription" : "You have +{aura.0} Regeneration.",
+      "InternalName" : "Waters of Infinity",
+      "InternalDescription" : "You have +[--/10/15/20] Regeneration for each non-weapon item you have in play.",
       "MigrationData" : "03408d27-e776-4ca1-ac1e-0e328ba55531",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

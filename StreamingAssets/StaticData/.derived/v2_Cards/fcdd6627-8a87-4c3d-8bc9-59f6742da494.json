@@ -117,7 +117,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -140,7 +144,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "1e2196aa-455d-478a-8de9-ab009c9317af",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -209,13 +213,27 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 20
+        "ShieldApplyAmount" : 10
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "AmmoMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -247,9 +265,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "039e3614-391a-42a0-a06c-2af5f952d5b1",
-            "Text" : "Shield {ability.e1}."
+            "Text" : "When you use an Ammo item, Shield {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -258,13 +276,27 @@
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 30
+        "HealAmount" : 15
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "AmmoMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -296,9 +328,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9812b338-058a-4832-a3cf-41247caf8e03",
-            "Text" : "Heal {ability.e1}."
+            "Text" : "When you use an Ammo item, Heal {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -307,13 +339,27 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 1
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "AmmoMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -345,9 +391,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ae16215a-d7b8-4ec6-9696-f0c642fbad57",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "When you use an Ammo item, Poison {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -356,13 +402,27 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 3
+        "BurnApplyAmount" : 1
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
+            "$type" : "TTriggerOnItemUsed",
+            "Subject" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "AmmoMax",
+                "ComparisonOperator" : "GreaterThan",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            }
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -394,9 +454,9 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "9da2cf65-1460-497d-a736-1d9eaa6fff47",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "When you use an Ammo item, Burn {ability.e1}."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
@@ -499,7 +559,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e9fc075b-7398-4cd4-84a1-8f05e95aeefb",
-            "Text" : "Adjacent items with Ammo have +{aura.e1}% Crit Chance."
+            "Text" : "Adjacent Ammo items have +{aura.e1}% Crit Chance."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -645,7 +705,7 @@
     }, {
       "Content" : {
         "Key" : "78701790b8c34eca64cc14f82fa08063",
-        "Text" : "When one of your items run out of ammo, Charge this {ability.1} second."
+        "Text" : "When one of your items run out of ammo, Charge this {ability.1} second(s)."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -729,7 +789,7 @@
       } ],
       "Priority" : "Lowest",
       "InternalName" : "Ramrod 2",
-      "InternalDescription" : "Charge adjacent items with Ammo",
+      "InternalDescription" : "Charge adjacent Ammo items",
       "MigrationData" : "2953b00f-5348-4de8-a64a-92401de782b4",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

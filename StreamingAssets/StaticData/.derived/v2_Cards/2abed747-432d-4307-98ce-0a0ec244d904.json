@@ -3,47 +3,49 @@
   "Tiers" : {
     "Silver" : {
       "Attributes" : {
-        "CooldownMax" : 5000,
+        "CooldownMax" : 6000,
         "BuyPrice" : 8,
         "SellPrice" : 2,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 25,
-        "Custom_0" : 10
+        "Custom_0" : 6,
+        "Custom_1" : 6,
+        "Custom_2" : 6
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ "3", "4", "5", "6" ],
+      "TooltipIds" : [ 0, 1, 2, 3 ]
     },
     "Gold" : {
       "Attributes" : {
-        "CooldownMax" : 5000,
         "BuyPrice" : 16,
         "SellPrice" : 8,
         "Multicast" : 1,
-        "ShieldApplyAmount" : 50,
-        "Custom_0" : 20
+        "Custom_0" : 9,
+        "Custom_1" : 9,
+        "Custom_2" : 9
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ "3", "4", "5", "6" ],
+      "TooltipIds" : [ 0, 1, 2, 3 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "ShieldApplyAmount" : 100,
-        "Custom_0" : 30
+        "Custom_0" : 12,
+        "Custom_1" : 12,
+        "Custom_2" : 12
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
-      "TooltipIds" : [ 0, 1 ]
+      "AbilityIds" : [ "0", "1", "2" ],
+      "AuraIds" : [ "3", "4", "5", "6" ],
+      "TooltipIds" : [ 0, 1, 2, 3 ]
     }
   },
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 2,
-        "SlowAmount" : 2000
+        "SlowTargets" : 1,
+        "SlowAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -101,7 +103,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 2000
+        "FreezeAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -116,7 +118,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -139,7 +145,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "c20e2d1b-aa9f-4e51-8941-e13b9812dd5d",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -150,8 +156,8 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 2,
-        "HasteAmount" : 2000
+        "HasteTargets" : 1,
+        "HasteAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -207,55 +213,57 @@
       "HasAuras" : false
     },
     "Shielded" : {
-      "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
+      "Attributes" : {
+        "ShieldApplyAmount" : 30
+      },
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "ShieldApplyAmount",
-            "Operation" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
+            "$type" : "TActionPlayerShieldApply",
+            "ReferenceValue" : null,
             "Target" : {
-              "$type" : "TTargetCardSelf",
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Shielded Apropos Chapeau Aura",
-          "InternalDescription" : "Shielded 1",
-          "MigrationData" : "",
+          "Priority" : "Medium",
+          "InternalName" : "Shielded Apropos Chapeau Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "42209d4e-3fdd-483e-af2e-fa2e8792dc76",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "adb239b2-d071-4ee6-b83a-24b5b7634161"
+          "TranslationKey" : "fac9ad8ddae6379e6d530c2121e4cd2d"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "10e47fe3-040f-47ed-b417-f0b52116de91",
-            "Text" : "This has double Shield."
+            "Key" : "e7db41b1-d7be-418d-892f-bb8b5510c2ef",
+            "Text" : "Shield {ability.e1}."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 0
+        "HealAmount" : 45
       },
       "Abilities" : {
         "e1" : {
@@ -277,75 +285,33 @@
           "Priority" : "Medium",
           "InternalName" : "Restorative Apropos Chapeau Ability",
           "InternalDescription" : "",
-          "MigrationData" : "37570625-c6a4-460e-97be-ef346c033023",
+          "MigrationData" : "42209d4e-3fdd-483e-af2e-fa2e8792dc76",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "13c9e397-d7e4-4a9b-853f-c3709229a743"
+          "TranslationKey" : "fac9ad8ddae6379e6d530c2121e4cd2d"
         }
       },
-      "Auras" : {
-        "e2" : {
-          "Id" : "e2",
-          "ActiveIn" : "HandAndStash",
-          "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "HealAmount",
-            "Operation" : "Add",
-            "Value" : {
-              "$type" : "TReferenceValueCardAttribute",
-              "Target" : {
-                "$type" : "TTargetCardSelf",
-                "Conditions" : null
-              },
-              "AttributeType" : "ShieldApplyAmount",
-              "DefaultValue" : 0.0,
-              "Modifier" : {
-                "ModifyMode" : "Multiply",
-                "Value" : {
-                  "$type" : "TFixedValue",
-                  "Value" : 1.0
-                }
-              }
-            },
-            "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
-            }
-          },
-          "Prerequisites" : null,
-          "InternalName" : "Restorative Apropos Chapeau Aura",
-          "InternalDescription" : "Sets the value of heal",
-          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-          "VFXConfig" : {
-            "VFXOverrideKey" : null,
-            "VFXShouldPlay" : true,
-            "VFXIsTakeover" : false
-          },
-          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-        }
-      },
+      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "38e700c8-a03a-43b2-8ce6-72bd1e0d8868",
-            "Text" : "Heal equal to this item's Shield."
+            "Key" : "e7db41b1-d7be-418d-892f-bb8b5510c2ef",
+            "Text" : "Heal {ability.e1}."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : true
+      "HasAuras" : false
     },
     "Toxic" : {
-      "Attributes" : {
-        "PoisonApplyAmount" : 5
-      },
+      "Attributes" : { },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
@@ -354,35 +320,50 @@
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TActionPlayerPoisonApply",
-            "ReferenceValue" : null,
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Opponent",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Poison" ],
+                "Operator" : "Any"
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
           "InternalName" : "Toxic Apropos Chapeau Ability",
           "InternalDescription" : "",
-          "MigrationData" : "11ea4f35-9ad5-4840-b2a9-e68d2f2b6ab1",
+          "MigrationData" : "f36bc88d-96f2-48f4-98c4-7399e9623e8e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "2001c3af-9661-433e-b3f1-4907fa776198"
+          "TranslationKey" : "3f9dbc8a-8cb7-47db-9105-723da1aadfe4"
         }
       },
       "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ "Poison" ],
+      "HiddenTags" : [ "PoisonReference" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "254491e7-04f8-4011-a7cf-71af81f1fa95",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "a815e98e-8574-4722-8c35-5b115970d5dd",
+            "Text" : "Your Poison items gain +{ability.e1} poison for the fight."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -392,9 +373,7 @@
       "HasAuras" : false
     },
     "Fiery" : {
-      "Attributes" : {
-        "BurnApplyAmount" : 7
-      },
+      "Attributes" : { },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
@@ -403,35 +382,50 @@
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TActionPlayerBurnApply",
-            "ReferenceValue" : null,
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Opponent",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Burn" ],
+                "Operator" : "Any"
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
           "InternalName" : "Fiery Apropos Chapeau Ability",
           "InternalDescription" : "",
-          "MigrationData" : "31a5736d-1a01-431c-b5a0-26f16b9c0043",
+          "MigrationData" : "f36bc88d-96f2-48f4-98c4-7399e9623e8e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "b5e688eb-85dd-4508-9a1e-5efcbeb53cf2"
+          "TranslationKey" : "3f9dbc8a-8cb7-47db-9105-723da1aadfe4"
         }
       },
       "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ "Burn" ],
+      "HiddenTags" : [ "BurnReference" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "a9dd3730-584c-41b7-9aee-28cede976524",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "813818c5-937a-4d62-b4a3-4de6aebb10d8",
+            "Text" : "Your Burn items gain +{ability.e1} burn for the fight."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -489,50 +483,83 @@
     },
     "Deadly" : {
       "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandAndStash",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardFired"
+          },
+          "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "CritChance",
-            "Operation" : "Add",
+            "$type" : "TActionCardModifyAttribute",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 50.0
+              "Value" : 3.0
             },
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
             "Target" : {
-              "$type" : "TTargetCardSelf",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                }, {
+                  "$type" : "TCardConditionalOr",
+                  "Conditions" : [ {
+                    "$type" : "TCardConditionalTag",
+                    "Tags" : [ "Weapon" ],
+                    "Operator" : "Any"
+                  }, {
+                    "$type" : "TCardConditionalHiddenTag",
+                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                    "Operator" : "Any"
+                  } ]
+                } ]
+              }
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Deadly Apropos Chapeau Aura",
-          "InternalDescription" : "Deadly 50",
+          "Priority" : "Medium",
+          "InternalName" : "Deadly Apropos Chapeau Ability",
+          "InternalDescription" : "Deadly 5",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "3397fd08-c747-4139-a070-1537c5ffcf2b"
+          "TranslationKey" : "8dc73184-9ca8-4e81-855b-b0dca9df931c"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ ],
+      "HiddenTags" : [ "Crit" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +{aura.e1}% Crit Chance."
+            "Key" : "675076ed-b72d-4d6b-ba1d-6b952bb2c498",
+            "Text" : "Your items gain {ability.e1}% Crit Chance for the fight."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     },
     "Radiant" : {
       "Attributes" : { },
@@ -641,7 +668,7 @@
   "StartingTier" : "Silver",
   "Size" : "Medium",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ ],
+  "Tags" : [ "Apparel" ],
   "HiddenTags" : [ "Shield", "DamageReference" ],
   "ArtKey" : "4065cc0474ae00246aba39eae32366b0",
   "CardPackId" : "Pygmalien_Core",
@@ -656,50 +683,37 @@
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
-        "Key" : "0db1703f38fa47c6149fe982506b351d",
-        "Text" : "Shield {ability.0}."
+        "Key" : "b81634ff5df12f6cb28e7c739e95bb68",
+        "Text" : "Your weapons gain {ability.0} Damage for the fight."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
     }, {
       "Content" : {
-        "Key" : "525e161876d885448d13cac32cb68080",
-        "Text" : "Adjacent weapons gain {ability.1} damage for the fight."
+        "Key" : "b81634ff5df12f6cb28e7c739e95bb69",
+        "Text" : "Your Heal items gain {ability.1} Heal for the fight."
       },
       "TooltipType" : "Active",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "b81634ff5df12f6cb28e7c739e95bb60",
+        "Text" : "Your Shield items gain {ability.2} Shield for the fight."
+      },
+      "TooltipType" : "Active",
+      "Prerequisites" : null
+    }, {
+      "Content" : {
+        "Key" : "bc41f32c4aa542fc83ca13079e73dc0d",
+        "Text" : "If you have another Tool, Weapon, Property or Apparel this has +{aura.3} Multicast for each."
+      },
+      "TooltipType" : "Passive",
       "Prerequisites" : null
     } ]
   },
   "Abilities" : {
     "0" : {
       "Id" : "0",
-      "Trigger" : {
-        "$type" : "TTriggerOnCardFired"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionPlayerShieldApply",
-        "ReferenceValue" : null,
-        "Target" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Medium",
-      "InternalName" : "Apropos Chapeau",
-      "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "b62125b6-a18a-40e5-a3cd-35e4b0d4220f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "0db1703f38fa47c6149fe982506b351d"
-    },
-    "1" : {
-      "Id" : "1",
       "Trigger" : {
         "$type" : "TTriggerOnCardFired"
       },
@@ -730,10 +744,9 @@
         },
         "TargetCount" : null,
         "Target" : {
-          "$type" : "TTargetCardPositional",
-          "Origin" : "Self",
-          "TargetMode" : "Neighbor",
-          "IncludeOrigin" : false,
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
           "Conditions" : {
             "$type" : "TCardConditionalTag",
             "Tags" : [ "Weapon" ],
@@ -742,17 +755,290 @@
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Highest",
-      "InternalName" : "Apropos Chapeau 2",
-      "InternalDescription" : "When you Shield, adjacent weapons gain {ability.1} damage for the fight.",
-      "MigrationData" : "b841f269-88d3-4085-971c-8eb34645c6f1",
+      "Priority" : "High",
+      "InternalName" : "Ganjo 1",
+      "InternalDescription" : "Adjacent items gain {ability.0} Damage, Heal and Shield for the fight.",
+      "MigrationData" : "65777468-a309-4466-b432-08635c6e2027",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "525e161876d885448d13cac32cb68080"
+      "TranslationKey" : "b81634ff5df12f6cb28e7c739e95bb68"
+    },
+    "1" : {
+      "Id" : "1",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "AttributeType" : "HealAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Heal" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "InternalName" : "Ganjo 2",
+      "InternalDescription" : "",
+      "MigrationData" : "eab3e43c-702d-4213-a6c1-f5daabed73e4",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "f08e97204cea492c8eda0c2cc0e10d3b"
+    },
+    "2" : {
+      "Id" : "2",
+      "Trigger" : {
+        "$type" : "TTriggerOnCardFired"
+      },
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TActionCardModifyAttribute",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "AttributeType" : "ShieldApplyAmount",
+        "Operation" : "Add",
+        "Duration" : {
+          "$type" : "TDeterminantDuration",
+          "DurationType" : "UntilEndOfCombat"
+        },
+        "TargetCount" : null,
+        "Target" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalHiddenTag",
+            "Tags" : [ "Shield" ],
+            "Operator" : "Any"
+          }
+        }
+      },
+      "Prerequisites" : null,
+      "Priority" : "High",
+      "InternalName" : "Ganjo 3",
+      "InternalDescription" : "",
+      "MigrationData" : "36f6dc62-6e6e-4529-9aa3-7ec3542a23dc",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "c6b3b5c759c42fa59748ceb4d9b77395"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "3" : {
+      "Id" : "3",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Property" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Flagship 2",
+      "InternalDescription" : "If you have another Tool, Ammo, Property or Friend this has +{aura.1} Multicast for each.",
+      "MigrationData" : "cb15d894-1e3e-42a4-95c1-1f0098806f0d",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "bc41f32c4aa542fc83ca13079e73dc0d"
+    },
+    "4" : {
+      "Id" : "4",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Tool" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Flagship 3",
+      "InternalDescription" : "",
+      "MigrationData" : "55af8c49-bc70-49bc-b7fc-2c28af3b46dc",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "a215a6ff25e061d8376ff69b318fa7aa"
+    },
+    "5" : {
+      "Id" : "5",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Apparel" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Flagship 4",
+      "InternalDescription" : "",
+      "MigrationData" : "d3aa8849-1190-47d2-86c3-1f9dfa934ea9",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9f68d6bc393d944c07e8ecc274cdff0f"
+    },
+    "6" : {
+      "Id" : "6",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TFixedValue",
+          "Value" : 1.0
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : true,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "GreaterThanOrEqual",
+        "Amount" : 1
+      } ],
+      "InternalName" : "Flagship 5",
+      "InternalDescription" : "",
+      "MigrationData" : "ce58d9c3-27c4-4392-af33-fbb72e5f0d57",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "21f7359c618f05eee0d98b7b252569a9"
+    }
+  }
 }

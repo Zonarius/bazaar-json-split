@@ -118,7 +118,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -141,7 +145,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "f5e93ad6-07dd-42ee-823c-d87d902c5c82",
-            "Text" : "At the start of each fight, Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "At the start of each fight, Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -247,9 +251,57 @@
       "HasAbilities" : true,
       "HasAuras" : false
     },
+    "Restorative" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionPlayerModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 8.0
+            },
+            "AttributeType" : "HealthRegen",
+            "Operation" : "Add",
+            "Target" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Holsters Ability",
+          "InternalDescription" : "",
+          "MigrationData" : "5470cd1a-5f8f-4377-819f-4b3ba2ec94ab",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "9b15126a-fb33-4fba-b165-4e9dd3e4891f"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Regen" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "3df4d83c-f1b5-4053-b160-cfc722f40d83",
+            "Text" : "You have +{aura.e1} Regeneration."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 4
       },
       "Abilities" : {
         "e1" : {
@@ -299,7 +351,7 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 3
+        "BurnApplyAmount" : 8
       },
       "Abilities" : {
         "e1" : {

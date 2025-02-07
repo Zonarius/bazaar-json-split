@@ -9,11 +9,12 @@
         "Multicast" : 1,
         "HealAmount" : 0,
         "Custom_0" : 10,
-        "Custom_1" : 5,
-        "Custom_2" : 0
+        "Custom_1" : 4,
+        "Custom_2" : 4,
+        "Custom_3" : 0
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ "2", "5" ],
+      "AuraIds" : [ "2" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Gold" : {
@@ -21,10 +22,11 @@
         "BuyPrice" : 24,
         "SellPrice" : 12,
         "Custom_0" : 20,
-        "Custom_1" : 10
+        "Custom_1" : 8,
+        "Custom_2" : 8
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ "3", "5" ],
+      "AuraIds" : [ "2" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
@@ -32,10 +34,11 @@
         "BuyPrice" : 48,
         "SellPrice" : 24,
         "Custom_0" : 40,
-        "Custom_1" : 15
+        "Custom_1" : 12,
+        "Custom_2" : 12
       },
       "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ "4", "5" ],
+      "AuraIds" : [ "2" ],
       "TooltipIds" : [ 0, 1 ]
     }
   },
@@ -362,19 +365,13 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 3
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedHeal",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -390,46 +387,80 @@
           "Priority" : "Medium",
           "InternalName" : "Toxic Hogwash Ability",
           "InternalDescription" : "",
-          "MigrationData" : "82c16b56-d3d2-4dd9-b692-d4323fedb772",
+          "MigrationData" : "8f8fd7a0-4bd1-43e3-b4b0-7386b917cb37",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "dc66d3e3-33f1-4e95-89b5-8b81be733b0e"
+          "TranslationKey" : "57b6ca83-15de-44ca-9d2b-f3022f8e7199"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Hogwash Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "74e458eb-082e-4b83-9c27-04aef2308b79",
-            "Text" : "When you Heal, Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 4
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedHeal",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
+            "$type" : "TTriggerOnCardFired"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -445,30 +476,70 @@
           "Priority" : "Medium",
           "InternalName" : "Fiery Hogwash Ability",
           "InternalDescription" : "",
-          "MigrationData" : "49618f1a-6ac7-4611-9677-a81a00dd6a49",
+          "MigrationData" : "dca06b3d-0fda-4a63-893c-5fdf5fd8622f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "e9740b76-301c-434f-b714-a9119668e186"
+          "TranslationKey" : "297edaf5-a938-48ec-97f8-754875d09078"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Hogwash Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "e78f5679-8c3d-4e5b-9c79-fea6ec7534b9",
-            "Text" : "When you Heal, Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
-          "TooltipType" : "Passive",
+          "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -726,7 +797,7 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "dd5125fc13d3b211d33bff94980cc835",
-        "Text" : "Heal equal to {aura.5}% of your Max Health."
+        "Text" : "Heal equal to {aura.9}% of your Max Health."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
@@ -758,7 +829,7 @@
       "Prerequisites" : null,
       "Priority" : "Medium",
       "InternalName" : "Hogwash",
-      "InternalDescription" : "Heal {ability.0}.",
+      "InternalDescription" : "Heal equal to [--/4/8/12]% of your Max Health.",
       "MigrationData" : "f7e4e0aa-d965-4cb2-a4a6-59b19302632b",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -805,8 +876,8 @@
       },
       "Prerequisites" : null,
       "Priority" : "Low",
-      "InternalName" : "Hog wash 2",
-      "InternalDescription" : "When you heal, gain max health for the fight.",
+      "InternalName" : "Hogwash 2",
+      "InternalDescription" : "When you Heal, gain [--/10/20/40] Max Health for the fight.",
       "MigrationData" : "cb0ddd27-eec0-425f-87ae-e74af566606f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -836,8 +907,20 @@
           "Modifier" : {
             "ModifyMode" : "Multiply",
             "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.05
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "Custom_1",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.01
+                }
+              }
             }
           }
         },
@@ -847,8 +930,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Hogwash- Heal Set",
-      "InternalDescription" : "Sets the heal of the item",
+      "InternalName" : "Hogwash Heal Value",
+      "InternalDescription" : "Sets the value of Heal",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -857,92 +940,12 @@
       },
       "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
     },
-    "3" : {
-      "Id" : "3",
+    "9" : {
+      "Id" : "9",
       "ActiveIn" : "HandAndStash",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttribute",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "AttributeType" : "HealthMax",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.1
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Hogwash Set",
-      "InternalDescription" : "Sets the Heal of the item",
-      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "4" : {
-      "Id" : "4",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "HealAmount",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttribute",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "AttributeType" : "HealthMax",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.15
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Hogwash Set",
-      "InternalDescription" : "Sets the Heal of the item",
-      "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "5" : {
-      "Id" : "5",
-      "ActiveIn" : "HandAndStash",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "Custom_2",
+        "AttributeType" : "Custom_3",
         "Operation" : "Add",
         "Value" : {
           "$type" : "TReferenceValueCardAttribute",
@@ -950,7 +953,7 @@
             "$type" : "TTargetCardSelf",
             "Conditions" : null
           },
-          "AttributeType" : "Custom_1",
+          "AttributeType" : "Custom_2",
           "DefaultValue" : 0.0,
           "Modifier" : {
             "ModifyMode" : "Multiply",

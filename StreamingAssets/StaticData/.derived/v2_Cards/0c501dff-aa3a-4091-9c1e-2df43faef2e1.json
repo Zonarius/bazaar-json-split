@@ -8,22 +8,26 @@
         "SellPrice" : 8,
         "Multicast" : 1,
         "HealAmount" : 0,
-        "Custom_0" : 2
+        "Custom_0" : 5,
+        "Custom_1" : 5,
+        "Custom_2" : 5,
+        "Custom_3" : 0
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ "2" ],
-      "TooltipIds" : [ 0, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "HealAmount" : 0,
-        "Custom_0" : 4
+        "Custom_0" : 10,
+        "Custom_1" : 10,
+        "Custom_2" : 10
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ "3" ],
-      "TooltipIds" : [ 1, 2 ]
+      "TooltipIds" : [ 0, 1 ]
     }
   },
   "Enchantments" : {
@@ -103,7 +107,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -126,7 +134,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e6417dac-e295-4495-81ec-8f1274dfecf0",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -331,7 +339,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 6
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -362,25 +370,65 @@
           "TranslationKey" : "0ed8da5a-cf49-4948-9ca2-7feacebed244"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Tea Set Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "37f36281-89e3-4f31-b0d7-318dd25413fb",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "9b12e75f-0573-41cc-9670-4eb715575579",
+            "Text" : "Poison equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 9
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -411,21 +459,61 @@
           "TranslationKey" : "405fb82d-75ed-4cd9-977e-c30c592ee08c"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "HealAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Tea Set Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "5982ae23-bf98-434d-99c0-d8ef67187551",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "304d3766-db95-4e0e-b942-555123ca3474",
+            "Text" : "Burn equal to 10% of this item's Heal."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -644,23 +732,16 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "c37e47d98ecb12b696c8c1b229f1d461",
-        "Text" : "Heal equal to 4% of your Max Health."
-      },
-      "TooltipType" : "Active",
-      "Prerequisites" : null
-    }, {
-      "Content" : {
-        "Key" : "c38e47d98ecb12b696c8c1b229f1d462",
-        "Text" : "Heal equal to 8% of your Max Health."
+        "Text" : "Heal equal to {aura.9}% of your Max Health."
       },
       "TooltipType" : "Active",
       "Prerequisites" : null
     }, {
       "Content" : {
         "Key" : "c1db006c3cf5c00be610c9d7a2fd0603",
-        "Text" : "When you use a non-weapon item, permanently gain +{ability.1} Max Health."
+        "Text" : "Permanently gain {ability.1} Max Health."
       },
-      "TooltipType" : "Passive",
+      "TooltipType" : "Active",
       "Prerequisites" : null
     } ]
   },
@@ -695,17 +776,7 @@
     "1" : {
       "Id" : "1",
       "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
-          "Conditions" : {
-            "$type" : "TCardConditionalTag",
-            "Tags" : [ "Weapon" ],
-            "Operator" : "None"
-          }
-        }
+        "$type" : "TTriggerOnCardFired"
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
@@ -738,7 +809,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Tea Set 2",
-      "InternalDescription" : "When you use a non-weapon item, permanently gain +{ability.1} Max Health.",
+      "InternalDescription" : "Permanently gain [--/--/5/10] Max Health.",
       "MigrationData" : "dedb3d2b-df36-4e48-9615-25f0d84d6783",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -769,7 +840,7 @@
             "ModifyMode" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 0.04
+              "Value" : 0.05
             }
           }
         },
@@ -779,8 +850,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Tea Set 3",
-      "InternalDescription" : "Sets the value of Tea Set 2",
+      "InternalName" : "Tea Set Heal Value",
+      "InternalDescription" : "Sets the value of Heal",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -809,7 +880,7 @@
             "ModifyMode" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 0.08
+              "Value" : 0.1
             }
           }
         },
@@ -819,8 +890,8 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Tea Set 3",
-      "InternalDescription" : "Sets the value of Tea Set 2",
+      "InternalName" : "Tea Set Heal Value",
+      "InternalDescription" : "Sets the value of Heal",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -828,6 +899,45 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+    },
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandAndStash",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_3",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_2",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
     }
   }
 }

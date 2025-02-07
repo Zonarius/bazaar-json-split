@@ -7,8 +7,8 @@
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "Multicast" : 1,
-        "DamageAmount" : 50,
-        "Custom_0" : 25,
+        "DamageAmount" : 100,
+        "Custom_0" : 60,
         "AmmoMax" : 1
       },
       "AbilityIds" : [ "0", "1" ],
@@ -19,8 +19,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 100,
-        "Custom_0" : 50
+        "Custom_0" : 80
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -30,8 +29,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "DamageAmount" : 200,
-        "Custom_0" : 75
+        "Custom_0" : 100
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -115,7 +113,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -138,7 +140,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "7af1923b-0a2c-4b2e-b35f-35ea8dfe920e",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -385,7 +387,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 8
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -414,76 +416,67 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "a106ea1c-d711-44b6-be24-29c849a7aae8"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedHaste",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 2.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "PoisonApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Toxic Arbalest Ability 2",
-          "InternalDescription" : "",
-          "MigrationData" : "099e00ae-4c79-436b-8bdd-f476bd87d374",
+          "InternalName" : "Toxic Arbalest Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "eb97514a5753c3a217293ee4a45b6823"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "d0cc210f-d135-4214-b629-bd99d9046cf2",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
-          "Prerequisites" : null
-        }, {
-          "Content" : {
-            "Key" : "d0cc210f-d135-4214-b629-bd99d9046cf2",
-            "Text" : "When you Haste, this gains +{ability.e2} Poison for the fight."
-          },
-          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 12
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -512,72 +505,63 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "05c131fa-577b-4c14-95d7-32b3d9ae9fc0"
-        },
+        }
+      },
+      "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardPerformedHaste",
-            "Subject" : {
-              "$type" : "TTargetCardSection",
-              "TargetSection" : "SelfBoard",
-              "ExcludeSelf" : false,
-              "Conditions" : null
-            }
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 3.0
-            },
+            "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "BurnApplyAmount",
             "Operation" : "Add",
-            "Duration" : {
-              "$type" : "TDeterminantDuration",
-              "DurationType" : "UntilEndOfCombat"
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
             },
-            "TargetCount" : null,
             "Target" : {
               "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Low",
-          "InternalName" : "Fiery Arbalest Ability",
-          "InternalDescription" : "",
-          "MigrationData" : "099e00ae-4c79-436b-8bdd-f476bd87d374",
+          "InternalName" : "Fiery Arbalest Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "eb97514a5753c3a217293ee4a45b6823"
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "90fb1b7e-453f-4723-a07a-698872341643",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
-          "Prerequisites" : null
-        }, {
-          "Content" : {
-            "Key" : "d0cc210f-d135-4214-b629-bd99d9046cf2",
-            "Text" : "When you Haste, this gains +{ability.e2} Burn for the fight."
-          },
-          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -802,7 +786,7 @@
   "Size" : "Medium",
   "Heroes" : [ "Vanessa" ],
   "Tags" : [ "Weapon" ],
-  "HiddenTags" : [ "Damage", "HasteReference" ],
+  "HiddenTags" : [ "Damage", "Ammo", "HasteReference" ],
   "ArtKey" : "a586875066ae3a5478a6ea620f79847e",
   "CardPackId" : "Vanessa_Core",
   "TranslationKey" : "a3c50b5eb947322df0bb692e04ffa543",

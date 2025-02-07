@@ -3,15 +3,15 @@
   "Tiers" : {
     "Silver" : {
       "Attributes" : {
-        "CooldownMax" : 10000,
+        "CooldownMax" : 8000,
         "BuyPrice" : 8,
         "SellPrice" : 4,
         "AmmoMax" : 1,
         "Multicast" : 1,
-        "DamageAmount" : 50,
+        "DamageAmount" : 100,
         "ReloadAmount" : 1,
         "ReloadTargets" : 1,
-        "Custom_0" : 20
+        "Custom_0" : 25
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -21,8 +21,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 100,
-        "Custom_0" : 40
+        "Custom_0" : 50
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -32,8 +31,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "DamageAmount" : 200,
-        "Custom_0" : 60
+        "Custom_0" : 75
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -44,7 +42,7 @@
     "Heavy" : {
       "Attributes" : {
         "SlowTargets" : 2,
-        "SlowAmount" : 6000
+        "SlowAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -102,7 +100,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 6000
+        "FreezeAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -117,7 +115,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -140,7 +142,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "bad1747e-5336-4e5f-9527-b77226b5bffd",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -152,7 +154,7 @@
     "Turbo" : {
       "Attributes" : {
         "HasteTargets" : 2,
-        "HasteAmount" : 6000
+        "HasteAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
@@ -387,7 +389,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 12
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -418,25 +420,65 @@
           "TranslationKey" : "17e73f1f-4b4b-4081-bed9-138c8e04ed44"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Torpedo Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "890b5197-494c-4c2a-a5d9-ca043875702f",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 18
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -467,21 +509,61 @@
           "TranslationKey" : "98f03a92-2709-4c9e-8fb4-3d1893d1e5d0"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Torpedo Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "302c1663-9b5b-4f96-97d0-383a0e2d3bf9",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -728,7 +810,7 @@
     }, {
       "Content" : {
         "Key" : "3abb5ecc335510235db32c1908d1d44a",
-        "Text" : "When you use another Aquatic or item with Ammo, this gains {ability.1} damage for the fight."
+        "Text" : "When you use another Aquatic or Ammo item, this gains {ability.1} damage for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -823,7 +905,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Torpedo 2",
-      "InternalDescription" : "When you use another Aquatic or item with Ammo, this gains {ability.1} damage for the fight.",
+      "InternalDescription" : "When you use another Aquatic or Ammo item, this gains {ability.1} damage for the fight.",
       "MigrationData" : "4514d4b3-b232-4be1-a293-2b8418cc74c3",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

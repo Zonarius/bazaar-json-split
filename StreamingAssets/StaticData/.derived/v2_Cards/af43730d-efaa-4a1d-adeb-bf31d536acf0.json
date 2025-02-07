@@ -6,11 +6,8 @@
         "CooldownMax" : 4000,
         "BuyPrice" : 4,
         "SellPrice" : 2,
-        "AmmoMax" : 1,
-        "Multicast" : 2,
-        "DamageAmount" : 15,
-        "ReloadAmount" : 1,
-        "ReloadTargets" : 1
+        "DamageAmount" : 20,
+        "Custom_0" : 1
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -20,8 +17,7 @@
       "Attributes" : {
         "BuyPrice" : 8,
         "SellPrice" : 4,
-        "DamageAmount" : 45,
-        "ReloadAmount" : 1
+        "DamageAmount" : 30
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -31,8 +27,7 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "DamageAmount" : 90,
-        "ReloadAmount" : 1
+        "DamageAmount" : 40
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -42,8 +37,7 @@
       "Attributes" : {
         "BuyPrice" : 32,
         "SellPrice" : 16,
-        "DamageAmount" : 150,
-        "ReloadAmount" : 1
+        "DamageAmount" : 50
       },
       "AbilityIds" : [ "0", "1" ],
       "AuraIds" : [ ],
@@ -51,10 +45,57 @@
     }
   },
   "Enchantments" : {
+    "Golden" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Custom_0",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Golden Boomerang Aura",
+          "InternalDescription" : "Golden 1",
+          "MigrationData" : "ba2a50fb-e674-4f0d-a1d0-5dc42115513a",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "95be5ed18d0949fc895e297af5520b47"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "EconomyReference" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a6d7121b-b1af-4b9f-94f9-b128cea2b83c",
+            "Text" : "Get an additional Loot item."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
+    },
     "Heavy" : {
       "Attributes" : {
         "SlowTargets" : 2,
-        "SlowAmount" : 2000
+        "SlowAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -112,7 +153,7 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 1,
-        "FreezeAmount" : 2000
+        "FreezeAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -127,7 +168,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -150,7 +195,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ab40777a-c527-4d71-9fb3-f9da98317603",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -162,7 +207,7 @@
     "Turbo" : {
       "Attributes" : {
         "HasteTargets" : 2,
-        "HasteAmount" : 2000
+        "HasteAmount" : 1000
       },
       "Abilities" : {
         "e1" : {
@@ -219,7 +264,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 10
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -241,34 +286,74 @@
           "Priority" : "Medium",
           "InternalName" : "Shielded Boomerang Ability",
           "InternalDescription" : "",
-          "MigrationData" : "f3656995-726a-4d07-a442-1ad2db1fab51",
+          "MigrationData" : "acafa2f6-0dc4-4526-9768-b51af3dac07e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "c9d11097-0b5b-4964-9c48-c3581e542bf7"
+          "TranslationKey" : "fc87e8c1-7874-46d8-80a9-04d558ba8fc4"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Boomerang Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "34dc71b2-11a3-4e30-b5fd-c0d2e665f926",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "94497f63-4982-492e-be92-50e87290aaa0",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 15
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -290,34 +375,74 @@
           "Priority" : "Medium",
           "InternalName" : "Restorative Boomerang Ability",
           "InternalDescription" : "",
-          "MigrationData" : "fcbb7587-ed86-4197-9df3-b2a717c06b1e",
+          "MigrationData" : "011bb1e6-94af-4d51-9afa-3a0aae9b5d8a",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "96e11d24-d256-4eaf-be81-7c582ee02517"
+          "TranslationKey" : "0c9cfc57-2f54-44c8-940d-f69781abfe36"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Boomerang Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "66ae66c0-9944-4441-84ce-b838dc018944",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "4de9e1e5-b2db-4022-81aa-d977030adbfb",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -339,34 +464,74 @@
           "Priority" : "Medium",
           "InternalName" : "Toxic Boomerang Ability",
           "InternalDescription" : "",
-          "MigrationData" : "6f7deade-6540-4c42-98d1-ad6de3409662",
+          "MigrationData" : "55dc5986-0e93-4b18-9ac1-bcdfc434ab67",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9b1cee24-efe3-4543-b64b-1c5f7b3f8c27"
+          "TranslationKey" : "ceb625f2-9e65-4323-a022-170973b44cb5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Boomerang Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "1f45386a-5380-48f5-8066-a4a9962c23f7",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 3
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -388,30 +553,70 @@
           "Priority" : "Medium",
           "InternalName" : "Fiery Boomerang Ability",
           "InternalDescription" : "",
-          "MigrationData" : "0923ab69-7dd7-402c-8b5f-d16e52d176b5",
+          "MigrationData" : "43f2e774-8d8b-4cd9-97d3-17c6282b978e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "6e850902-8091-49c8-b120-6816a3cc5637"
+          "TranslationKey" : "d19b97de-9dca-41cf-aa9c-a6dc2ef3c8d5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Boomerang Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "68492875-fdfe-49e7-99aa-8ce7aeb9ee19",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -635,8 +840,8 @@
   "StartingTier" : "Bronze",
   "Size" : "Medium",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ "Weapon" ],
-  "HiddenTags" : [ "Damage", "Ammo", "HealReference" ],
+  "Tags" : [ "Weapon", "Toy" ],
+  "HiddenTags" : [ "Damage", "EconomyReference" ],
   "ArtKey" : "6123ccb942cdee140925a0204db5dfb8",
   "CardPackId" : "Pygmalien_Core",
   "TranslationKey" : "8c9d96b1ef82662dd41a42e8528876b6",
@@ -658,7 +863,7 @@
     }, {
       "Content" : {
         "Key" : "f8694858f930aaf56901d4b090cf8fce",
-        "Text" : "When you Heal, reload this {ability.1} Ammo."
+        "Text" : "When you win a fight against a Monster with this, get a random Loot item."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -695,33 +900,49 @@
     "1" : {
       "Id" : "1",
       "Trigger" : {
-        "$type" : "TTriggerOnCardPerformedHeal",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "SelfBoard",
-          "ExcludeSelf" : false,
-          "Conditions" : null
-        }
+        "$type" : "TTriggerOnFightEnded",
+        "CombatType" : "PVE",
+        "CombatOutcome" : "Win"
       },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionCardReload",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
+        "$type" : "TActionGameSpawnCards",
+        "TargetPlayer" : {
+          "$type" : "TTargetPlayerAbsolute",
+          "TargetMode" : "Player",
           "Conditions" : null
+        },
+        "SpawnContext" : {
+          "$type" : "TSpawnContextQuery",
+          "Limit" : {
+            "$type" : "TReferenceValueCardAttribute",
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            },
+            "AttributeType" : "Custom_0",
+            "DefaultValue" : 0.0,
+            "Modifier" : {
+              "ModifyMode" : "Multiply",
+              "Value" : {
+                "$type" : "TFixedValue",
+                "Value" : 1.0
+              }
+            }
+          }
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Lowest",
+      "Priority" : "High",
       "InternalName" : "Boomerang 2",
-      "InternalDescription" : "When you Heal, reload this {ability.1} Ammo.",
-      "MigrationData" : "827413fd-3cd0-4b90-afb9-54bd341baad0",
+      "InternalDescription" : "",
+      "MigrationData" : "afd9d203-b879-4807-9d86-a374d5a99779",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "f8694858f930aaf56901d4b090cf8fce"
+      "TranslationKey" : "44b5c12cddef1bfadd5da4fbd0ab70b8"
     }
   },
   "Auras" : { }

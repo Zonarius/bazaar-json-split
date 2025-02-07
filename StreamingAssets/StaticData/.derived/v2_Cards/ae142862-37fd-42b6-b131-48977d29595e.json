@@ -69,22 +69,36 @@
       "Tags" : [ ],
       "HiddenTags" : [ "Value" ],
       "Localization" : {
-        "Tooltips" : [ ]
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "777a95d1-0a93-477b-92be-daa867612d13",
+            "Text" : "This has double Value gain."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
       },
       "HasAbilities" : false,
       "HasAuras" : true
     },
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 3,
-        "SlowAmount" : 4000
+        "SlowTargets" : 2,
+        "SlowAmount" : 4000,
+        "Custom_4" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -104,8 +118,52 @@
               }
             }
           },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_4",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Low",
           "InternalName" : "Heavy Lockbox Ability",
           "InternalDescription" : "",
           "MigrationData" : "5b1ab2a1-99a2-4858-9ca8-ffacd94b4ea4",
@@ -114,7 +172,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "06a3e460-4424-4e78-a984-0a45b65101f2"
+          "TranslationKey" : "0a412ade517ebd34dbe653b1f9a26939"
+        },
+        "3" : {
+          "Id" : "3",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_4",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -124,7 +253,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "777a95d1-0a93-477b-92be-daa867612d13",
-            "Text" : "At the start of each fight, Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "The first time you fall below half health each fight, Slow {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -136,14 +265,21 @@
     "Icy" : {
       "Attributes" : {
         "FreezeTargets" : 2,
-        "FreezeAmount" : 4000
+        "FreezeAmount" : 2000,
+        "Custom_4" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -152,11 +288,59 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_4",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Low",
           "InternalName" : "Icy Lockbox Ability",
           "InternalDescription" : "",
           "MigrationData" : "5a1d6c07-a6a4-4b8c-8482-facedd1fb10a",
@@ -165,7 +349,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9b79b5e4-6a9a-4b44-b0d1-e74e82a4a240"
+          "TranslationKey" : "0a412ade517ebd34dbe653b1f9a26939"
+        },
+        "3" : {
+          "Id" : "3",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_4",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -175,7 +430,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "b1b894a7-29d1-423c-a497-1249c86fb82f",
-            "Text" : "At the start of each fight, Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "The first time you fall below half health each fight, Freeze {ability.e1.targets} medium or small items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -186,15 +441,22 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 3,
-        "HasteAmount" : 4000
+        "HasteTargets" : 2,
+        "HasteAmount" : 4000,
+        "Custom_4" : 0
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -214,8 +476,52 @@
               }
             }
           },
-          "Prerequisites" : null,
-          "Priority" : "Medium",
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_4",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Low",
           "InternalName" : "Turbo Lockbox Ability",
           "InternalDescription" : "",
           "MigrationData" : "3ea1bd03-bdcb-4459-a7a1-2048d49f7de7",
@@ -224,7 +530,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9a328306-7b81-41d8-b991-064ae6683c5f"
+          "TranslationKey" : "0a412ade517ebd34dbe653b1f9a26939"
+        },
+        "3" : {
+          "Id" : "3",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_4",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -234,7 +611,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "1c384383-42eb-4288-9ab7-abf396a1a0a8",
-            "Text" : "At the start of each fight, Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "The first time you fall below half health each fight, Haste {ability.e1.targets} items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -244,7 +621,9 @@
       "HasAuras" : false
     },
     "Shielded" : {
-      "Attributes" : { },
+      "Attributes" : {
+        "Custom_4" : 0
+      },
       "Abilities" : { },
       "Auras" : {
         "e1" : {
@@ -294,7 +673,7 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ "Shield" ],
+      "HiddenTags" : [ "ShieldReference" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
@@ -316,7 +695,9 @@
           "Id" : "e1",
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionPlayerModifyAttribute",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
             "Value" : {
               "$type" : "TReferenceValueCardAttribute",
               "Target" : {
@@ -333,12 +714,15 @@
                 }
               }
             },
-            "AttributeType" : "HealthRegen",
-            "Operation" : "Add",
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Self",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Heal" ],
+                "Operator" : "Any"
+              }
             }
           },
           "Prerequisites" : null,
@@ -354,12 +738,12 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ "Regen" ],
+      "HiddenTags" : [ "HealReference" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "f8d52f8d-5593-483b-a56b-24d933309267",
-            "Text" : "You have +Regeneration equal to this item's value."
+            "Text" : "Your Heal items have + Heal equal to this item's value."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -369,104 +753,134 @@
       "HasAuras" : true
     },
     "Toxic" : {
-      "Attributes" : {
-        "PoisonApplyAmount" : 12
-      },
-      "Abilities" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
-          },
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TActionPlayerPoisonApply",
-            "ReferenceValue" : null,
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "SellPrice",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Opponent",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Poison" ],
+                "Operator" : "Any"
+              }
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Toxic Lockbox Ability",
-          "InternalDescription" : "",
-          "MigrationData" : "7805a9f0-b0aa-46e6-ba71-824dcb27ba8d",
+          "InternalName" : "Toxic Lockbox Aura",
+          "InternalDescription" : "Deadly",
+          "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "67d44781-360d-41d6-8818-d669691b6bd2"
+          "TranslationKey" : "0d6513c8-b72c-4d10-888d-2db8051aebfd"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ "Poison" ],
+      "HiddenTags" : [ "PoisonReference" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ca05ebfa-9173-47d6-90b9-c5b22394acf4",
-            "Text" : "At the start of each fight, poison {ability.e1}."
+            "Text" : "Your Poison items have + Poison equal to 10% of this item's value."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAbilities" : false,
+      "HasAuras" : true
     },
     "Fiery" : {
-      "Attributes" : {
-        "BurnApplyAmount" : 16
-      },
-      "Abilities" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
-          },
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TActionPlayerBurnApply",
-            "ReferenceValue" : null,
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "SellPrice",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
             "Target" : {
-              "$type" : "TTargetPlayerRelative",
-              "TargetMode" : "Opponent",
-              "Conditions" : null
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Burn" ],
+                "Operator" : "Any"
+              }
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Fiery Lockbox Ability",
-          "InternalDescription" : "",
-          "MigrationData" : "2c31f945-8419-4759-92bb-e5c831324994",
+          "InternalName" : "Fiery Lockbox Aura",
+          "InternalDescription" : "Deadly",
+          "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "6e9a0516-a877-42ab-af4a-02be9033b491"
+          "TranslationKey" : "0d6513c8-b72c-4d10-888d-2db8051aebfd"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ "Burn" ],
+      "HiddenTags" : [ "BurnReference" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "d5cc5b39-7d7f-41cb-bcaa-802733f5579a",
-            "Text" : "At the start of each fight, burn {ability.e1}."
+            "Text" : "Your Burn items have + Burn equal to 10% of this item's value."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAbilities" : false,
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

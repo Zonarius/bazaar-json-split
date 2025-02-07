@@ -9,6 +9,8 @@
         "FreezeAmount" : 1000,
         "FreezeTargets" : 2,
         "Custom_0" : 1000,
+        "Custom_1" : 1,
+        "Custom_2" : 0,
         "AmmoMax" : 1
       },
       "AbilityIds" : [ "0", "1", "2" ],
@@ -19,7 +21,8 @@
       "Attributes" : {
         "BuyPrice" : 16,
         "SellPrice" : 8,
-        "Custom_0" : 2000
+        "Custom_0" : 2000,
+        "Custom_1" : 2
       },
       "AbilityIds" : [ "0", "1", "2" ],
       "AuraIds" : [ ],
@@ -90,50 +93,50 @@
         "FreezeTargets" : 1,
         "FreezeAmount" : 1000
       },
-      "Abilities" : {
+      "Abilities" : { },
+      "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "Trigger" : {
-            "$type" : "TTriggerOnCardFired"
-          },
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
-            "$type" : "TActionCardFreeze",
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "FreezeAmount",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 0.5
+            },
             "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
-              "TargetSection" : "OpponentHand",
+              "$type" : "TTargetCardSelf",
               "Conditions" : null
             }
           },
           "Prerequisites" : null,
-          "Priority" : "Medium",
-          "InternalName" : "Icy Ice Luge Ability",
-          "InternalDescription" : "",
-          "MigrationData" : "a34d548d-bd80-4326-9df9-4908b1c6102e",
+          "InternalName" : "Icy Ice Luge Aura",
+          "InternalDescription" : "Icy 1/2",
+          "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "13bc6ba8-4728-4e23-87a0-d368d3e25705"
+          "TranslationKey" : "359cf6be-8d92-4a8f-b7c7-a87b374724ae"
         }
       },
-      "Auras" : { },
       "Tags" : [ ],
       "HiddenTags" : [ "Freeze" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "bcf0f464-056f-4f7d-9791-95e71623918c",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "This has half Freeze duration."
           },
-          "TooltipType" : "Active",
+          "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAbilities" : false,
+      "HasAuras" : true
     },
     "Turbo" : {
       "Attributes" : {
@@ -726,7 +729,7 @@
     }, {
       "Content" : {
         "Key" : "0a412ade517ebd34dbe653b1f9a26939",
-        "Text" : "When an adjacent item gains Freeze, reduce its cooldown by {ability.1} second(s) for the fight."
+        "Text" : "When an adjacent item gains Freeze, reduce its cooldown by {aura.9} second(s) for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -886,5 +889,45 @@
       "TranslationKey" : "0a412ade517ebd34dbe653b1f9a26939"
     }
   },
-  "Auras" : { }
+  "Auras" : {
+    "9" : {
+      "Id" : "9",
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Custom_2",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_1",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
+          "$type" : "TTargetCardSelf",
+          "Conditions" : null
+        }
+      },
+      "Prerequisites" : null,
+      "InternalName" : "Tooltip Handling",
+      "InternalDescription" : "",
+      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
+      "VFXConfig" : {
+        "VFXOverrideKey" : null,
+        "VFXShouldPlay" : true,
+        "VFXIsTakeover" : false
+      },
+      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
+    }
+  }
 }

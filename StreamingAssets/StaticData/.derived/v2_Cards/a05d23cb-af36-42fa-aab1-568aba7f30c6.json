@@ -89,7 +89,7 @@
       "Auras" : {
         "e1" : {
           "Id" : "e1",
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "SellPrice",
@@ -151,7 +151,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -174,7 +178,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "d96596db-ee87-43ed-a995-5f79ab31741a",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -262,7 +266,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Shielded abacus Aura",
+          "InternalName" : "Shielded Abacus Aura",
           "InternalDescription" : "Shielded 1",
           "MigrationData" : "",
           "VFXConfig" : {
@@ -310,7 +314,7 @@
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
-          "InternalName" : "Restorative abacus Ability",
+          "InternalName" : "Restorative Abacus Ability",
           "InternalDescription" : "",
           "MigrationData" : "1de3c24a-95b9-490f-ba25-c43dae77e416",
           "VFXConfig" : {
@@ -324,21 +328,18 @@
       "Auras" : {
         "e2" : {
           "Id" : "e2",
-          "ActiveIn" : "HandOnly",
+          "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
             "AttributeType" : "HealAmount",
             "Operation" : "Add",
             "Value" : {
-              "$type" : "TReferenceValueCardAttributeAggregate",
+              "$type" : "TReferenceValueCardAttribute",
               "Target" : {
-                "$type" : "TTargetCardPositional",
-                "Origin" : "Self",
-                "TargetMode" : "Neighbor",
-                "IncludeOrigin" : false,
+                "$type" : "TTargetCardSelf",
                 "Conditions" : null
               },
-              "AttributeType" : "SellPrice",
+              "AttributeType" : "ShieldApplyAmount",
               "DefaultValue" : 0.0,
               "Modifier" : {
                 "ModifyMode" : "Multiply",
@@ -354,7 +355,7 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Abacus 1x",
+          "InternalName" : "Restorative Abacus Aura",
           "InternalDescription" : "Sets shield",
           "MigrationData" : "475addae-1726-4336-b277-4df21e11ccf2",
           "VFXConfig" : {
@@ -371,7 +372,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e3769c10-158c-4545-8974-0da60fa34b8c",
-            "Text" : "Heal equal to the value of adjacent items."
+            "Text" : "Heal equal to this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -382,7 +383,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -413,25 +414,65 @@
           "TranslationKey" : "8d54687c-ff16-4c4f-8125-4c608573873a"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Abacus Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "36b9a3c7-6cea-45de-a1b5-a29925769f5e",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 3
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -462,21 +503,61 @@
           "TranslationKey" : "f11ea849-5b39-4bf1-93eb-437abe6ae2d6"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Abacus Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "411a6736-1415-4803-9bb8-26895b726df9",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },

@@ -4,8 +4,8 @@
   "Tiers" : {
     "Diamond" : {
       "Attributes" : {
-        "Multicast" : 1,
-        "BuyPrice" : 40
+        "BuyPrice" : 40,
+        "Custom_0" : 50
       },
       "AbilityIds" : [ ],
       "AuraIds" : [ "0" ],
@@ -15,12 +15,12 @@
   "Type" : "Skill",
   "Id" : "4a443bdd-f949-4fb5-9ccd-a710f74d2311",
   "Version" : "1.0.0",
-  "InternalName" : "Shellshock",
+  "InternalName" : "Dual Wield",
   "InternalDescription" : "",
   "Size" : "Medium",
   "Heroes" : [ "Common" ],
   "Tags" : [ ],
-  "HiddenTags" : [ "Charge" ],
+  "HiddenTags" : [ "Crit" ],
   "ArtKey" : "Icon_Skill_MON_BarrelOfThieves_01.png",
   "CardPackId" : "Core",
   "TranslationKey" : "e5440329189164d30b1c32b311141ef9",
@@ -28,14 +28,14 @@
   "Localization" : {
     "Title" : {
       "Key" : "e5440329189164d30b1c32b311141ef9",
-      "Text" : "Shellshock"
+      "Text" : "Dual Wield"
     },
     "Description" : null,
     "FlavorText" : null,
     "Tooltips" : [ {
       "Content" : {
         "Key" : "e5440329189164d30b1c32b311141ef9",
-        "Text" : "Your items have +{aura.0.mod} damage for each ammo you have on your items in play. [{aura.0}]"
+        "Text" : "If you have exactly 2 Weapons in play, your items have +{aura.0} Crit Chance."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -48,25 +48,17 @@
       "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "DamageAmount",
+        "AttributeType" : "CritChance",
         "Operation" : "Add",
         "Value" : {
-          "$type" : "TReferenceValueCardAttributeAggregate",
+          "$type" : "TReferenceValueCardAttribute",
           "Target" : {
-            "$type" : "TTargetCardSection",
-            "TargetSection" : "SelfHand",
-            "ExcludeSelf" : false,
+            "$type" : "TTargetCardSelf",
             "Conditions" : null
           },
-          "AttributeType" : "Ammo",
+          "AttributeType" : "Custom_0",
           "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            }
-          }
+          "Modifier" : null
         },
         "Target" : {
           "$type" : "TTargetCardSection",
@@ -75,18 +67,44 @@
           "Conditions" : {
             "$type" : "TCardConditionalAnd",
             "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
               "$type" : "TCardConditionalOr",
               "Conditions" : [ {
                 "$type" : "TCardConditionalTag",
                 "Tags" : [ "Weapon" ],
+                "Operator" : "Any"
+              }, {
+                "$type" : "TCardConditionalHiddenTag",
+                "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
                 "Operator" : "Any"
               } ]
             } ]
           }
         }
       },
-      "Prerequisites" : null,
-      "InternalName" : "Shellshock",
+      "Prerequisites" : [ {
+        "$type" : "TPrerequisiteCardCount",
+        "Subject" : {
+          "$type" : "TTargetCardSection",
+          "TargetSection" : "SelfHand",
+          "ExcludeSelf" : false,
+          "Conditions" : {
+            "$type" : "TCardConditionalTag",
+            "Tags" : [ "Weapon" ],
+            "Operator" : "Any"
+          }
+        },
+        "Comparison" : "Equal",
+        "Amount" : 2
+      } ],
+      "InternalName" : "Dual Wield",
       "InternalDescription" : "",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {

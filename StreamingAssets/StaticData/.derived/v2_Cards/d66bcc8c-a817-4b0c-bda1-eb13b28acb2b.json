@@ -78,13 +78,13 @@
           "Priority" : "Medium",
           "InternalName" : "Heavy Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "bbdc26c0-4d91-44a7-8b19-13eba044a278",
+          "MigrationData" : "13c938c3-106c-49da-a048-78e5e4d37f26",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "9eb67466-e547-402d-8c39-8c9134ce9157"
+          "TranslationKey" : "0cd2c2fc-26ee-4838-8a0c-bc155c86f6d2"
         }
       },
       "Auras" : { },
@@ -93,8 +93,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "4e479025-822b-4792-a791-f90a199b201b",
-            "Text" : "Slow {ability.e1.targets} items for {ability.e1} second(s)."
+            "Key" : "2c219a37-ec23-4ffc-98c3-02009f0e8a18",
+            "Text" : "Slow {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -121,20 +121,24 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
           "Priority" : "Medium",
           "InternalName" : "Icy Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "cf792e1d-0af1-4905-b18a-043ff9ea8220",
+          "MigrationData" : "b75cd069-a950-498f-bd45-61f06676f356",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "7d702120-5e95-4b27-b6af-6ff52fd80cb9"
+          "TranslationKey" : "2c317f2f-5e21-497f-8b20-dd8b1297d03e"
         }
       },
       "Auras" : { },
@@ -143,8 +147,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "802f49c5-72e6-4ac7-b6fd-92a2f3f666bb",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Key" : "de1b9356-b839-45da-89b7-002f07a2199b",
+            "Text" : "Freeze {ability.e1.targets} small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -186,13 +190,13 @@
           "Priority" : "Medium",
           "InternalName" : "Turbo Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "71add48c-eb07-4755-b907-e9aa65e9c6f5",
+          "MigrationData" : "9d0def55-4fc5-4cf8-be35-642f840519c3",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "48fdfeff-17d9-43d1-831c-27721b8c393b"
+          "TranslationKey" : "002aa9fc-98f5-4039-80ff-5f44289cf680"
         }
       },
       "Auras" : { },
@@ -201,8 +205,8 @@
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c691aead-cbd7-4f06-a575-35e1046efda0",
-            "Text" : "Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Key" : "6426be1c-e46e-4796-b9bf-439da177ee11",
+            "Text" : "Haste {ability.e1.targets} item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -213,7 +217,7 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 20
+        "ShieldApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -235,34 +239,74 @@
           "Priority" : "Medium",
           "InternalName" : "Shielded Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "6a8986fa-10cf-4463-85ca-439b82aa251e",
+          "MigrationData" : "04eee3db-17d7-41ee-bbbd-001ac3a67df5",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "f236bd11-5877-4cec-b0f9-1951fc18b2f9"
+          "TranslationKey" : "20dd1f54-4ff4-434a-ad24-742c960b2679"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "ShieldApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shielded Claws Aura",
+          "InternalDescription" : "Sets the value of shield",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Shield" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "94c54d8f-a60e-416f-ba71-a118662eb17a",
-            "Text" : "Shield {ability.e1}."
+            "Key" : "55efcc46-c886-4103-81ae-251b32cf077a",
+            "Text" : "Shield equal to this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Restorative" : {
       "Attributes" : {
-        "HealAmount" : 30
+        "HealAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -284,34 +328,74 @@
           "Priority" : "Medium",
           "InternalName" : "Restorative Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "94073ee5-2897-4a47-abb9-de04af767e4e",
+          "MigrationData" : "b0236b3d-8776-42f1-9999-50dd82f7dfb4",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "da300254-40d5-4f8a-b6d0-6a2900bc0256"
+          "TranslationKey" : "452dce9c-11ce-4014-945e-56cbf98bd672"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "HealAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 1.0
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Restorative Claws Aura",
+          "InternalDescription" : "Sets the value of heal",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "dc8781de-eed1-4aab-b6ea-293e42bea18f",
-            "Text" : "Heal {ability.e1}."
+            "Key" : "4104b0f4-b6b7-460b-b865-001b65e47f62",
+            "Text" : "Heal equal to this item's Damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 2
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -333,34 +417,74 @@
           "Priority" : "Medium",
           "InternalName" : "Toxic Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "45974ae5-7369-46d7-9121-c2de19a6a2bf",
+          "MigrationData" : "55dc5986-0e93-4b18-9ac1-bcdfc434ab67",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "70fe5150-0421-4462-b3b9-f6c599938c51"
+          "TranslationKey" : "ceb625f2-9e65-4323-a022-170973b44cb5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Claws Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "e886b676-4188-40c0-8a23-f90223595495",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 3
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -382,30 +506,70 @@
           "Priority" : "Medium",
           "InternalName" : "Fiery Claws Ability",
           "InternalDescription" : "",
-          "MigrationData" : "4b06e00a-befd-4916-bb9f-4c6fb2a19ce8",
+          "MigrationData" : "43f2e774-8d8b-4cd9-97d3-17c6282b978e",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "ac7c3a2d-d432-4eee-b56f-4c6f499d0d94"
+          "TranslationKey" : "d19b97de-9dca-41cf-aa9c-a6dc2ef3c8d5"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Claws Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "abb24000-7de3-4f17-b5ce-a82c91704610",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -436,7 +600,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "0259997e-88d3-42e9-b737-6971fa3017a8"
+          "TranslationKey" : "7a98ee48-7112-40d0-9cc4-aff6dcbc5d98"
         }
       },
       "Tags" : [ ],
@@ -483,7 +647,7 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "bf74868e-71f6-4490-ac3e-d1fa0b5281af"
+          "TranslationKey" : "6b11a592-511c-4153-927f-596a5a36e006"
         }
       },
       "Tags" : [ ],

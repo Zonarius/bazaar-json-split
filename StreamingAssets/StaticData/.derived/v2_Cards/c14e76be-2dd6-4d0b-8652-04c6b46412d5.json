@@ -8,11 +8,10 @@
         "SellPrice" : 4,
         "Multicast" : 1,
         "ShieldApplyAmount" : 30,
-        "ChargeTargets" : 1,
-        "ChargeAmount" : 1000
+        "Custom_0" : 1
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Gold" : {
@@ -21,8 +20,8 @@
         "SellPrice" : 8,
         "ShieldApplyAmount" : 40
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     },
     "Diamond" : {
@@ -31,8 +30,8 @@
         "SellPrice" : 16,
         "ShieldApplyAmount" : 50
       },
-      "AbilityIds" : [ "0", "1" ],
-      "AuraIds" : [ ],
+      "AbilityIds" : [ "0" ],
+      "AuraIds" : [ "1" ],
       "TooltipIds" : [ 0, 1 ]
     }
   },
@@ -113,7 +112,11 @@
               "$type" : "TTargetCardRandom",
               "ExcludeSelf" : false,
               "TargetSection" : "OpponentHand",
-              "Conditions" : null
+              "Conditions" : {
+                "$type" : "TCardConditionalSize",
+                "Sizes" : [ "Small", "Medium" ],
+                "IsNot" : false
+              }
             }
           },
           "Prerequisites" : null,
@@ -136,7 +139,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "53e3c92a-f701-4016-95de-eef0b9c64a08",
-            "Text" : "Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "Freeze {ability.e1.targets} medium or small item for {ability.e1} second(s)."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
@@ -341,7 +344,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 1
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -372,25 +375,65 @@
           "TranslationKey" : "299d7ba7-a488-497c-a762-7bcb64ac505d"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Model Ship Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "b27158d4-8fd8-479a-a572-9d13f6be797a",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 2
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -421,21 +464,61 @@
           "TranslationKey" : "2465863c-dcec-49d3-81bd-37e4ba4561c7"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Model Ship Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "c46c5f31-8318-4fa0-b6db-a57dde44b473",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -638,7 +721,7 @@
   "StartingTier" : "Silver",
   "Size" : "Medium",
   "Heroes" : [ "Pygmalien" ],
-  "Tags" : [ "Aquatic", "Vehicle" ],
+  "Tags" : [ "Aquatic", "Vehicle", "Toy" ],
   "HiddenTags" : [ "Shield" ],
   "ArtKey" : "b1f80971ada2d6340ae758f09a3cc817",
   "CardPackId" : "Pygmalien_Core",
@@ -661,7 +744,7 @@
     }, {
       "Content" : {
         "Key" : "7ef5f856e2b8b553f2ef48cfd84087ec",
-        "Text" : "When you use an adjacent item, charge this {ability.1} seconds."
+        "Text" : "Adjacent Toys have +{aura.1} Multicast."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -694,39 +777,65 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "7ef5f856e2b8b553f2ef48cfd84087ec"
-    },
+    }
+  },
+  "Auras" : {
     "1" : {
       "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnItemUsed",
-        "Subject" : {
+      "ActiveIn" : "HandOnly",
+      "Action" : {
+        "$type" : "TAuraActionCardModifyAttribute",
+        "AttributeType" : "Multicast",
+        "Operation" : "Add",
+        "Value" : {
+          "$type" : "TReferenceValueCardAttribute",
+          "Target" : {
+            "$type" : "TTargetCardSelf",
+            "Conditions" : null
+          },
+          "AttributeType" : "Custom_0",
+          "DefaultValue" : 0.0,
+          "Modifier" : {
+            "ModifyMode" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            }
+          }
+        },
+        "Target" : {
           "$type" : "TTargetCardPositional",
           "Origin" : "Self",
           "TargetMode" : "Neighbor",
           "IncludeOrigin" : false,
-          "Conditions" : null
-        }
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardCharge",
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
+          "Conditions" : {
+            "$type" : "TCardConditionalAnd",
+            "Conditions" : [ {
+              "$type" : "TCardConditionalAttribute",
+              "Attribute" : "CooldownMax",
+              "ComparisonOperator" : "GreaterThan",
+              "ComparisonValue" : {
+                "$type" : "TFixedValue",
+                "Value" : 0.0
+              }
+            }, {
+              "$type" : "TCardConditionalTag",
+              "Tags" : [ "Toy" ],
+              "Operator" : "Any"
+            } ]
+          }
         }
       },
       "Prerequisites" : null,
-      "Priority" : "Low",
       "InternalName" : "Model Ship 2",
-      "InternalDescription" : "When you use an adjacent item charge.",
-      "MigrationData" : "4a6b41b8-74d1-4c2a-a25d-b21859b4df34",
+      "InternalDescription" : "Your adjacent Toys have +{aura.0} Multicast.",
+      "MigrationData" : "3fd62b57-a581-4ec2-8ecf-316b03a628f8",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
         "VFXShouldPlay" : true,
         "VFXIsTakeover" : false
       },
-      "TranslationKey" : "7ef5f856e2b8b553f2ef48cfd84087ec"
+      "TranslationKey" : "6c2934b996c6098dfa6eea9556a1e1a1"
     }
-  },
-  "Auras" : { }
+  }
 }

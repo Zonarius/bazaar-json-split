@@ -49,20 +49,6 @@
   },
   "Enchantments" : {
     "Shiny" : {
-      "Attributes" : {
-        "DamageAmount" : 0
-      },
-      "Abilities" : { },
-      "Auras" : { },
-      "Tags" : [ ],
-      "HiddenTags" : [ "Damage" ],
-      "Localization" : {
-        "Tooltips" : [ ]
-      },
-      "HasAbilities" : false,
-      "HasAuras" : false
-    },
-    "Deadly" : {
       "Attributes" : { },
       "Abilities" : { },
       "Auras" : {
@@ -71,11 +57,11 @@
           "ActiveIn" : "HandAndStash",
           "Action" : {
             "$type" : "TAuraActionCardModifyAttribute",
-            "AttributeType" : "CritChance",
-            "Operation" : "Add",
+            "AttributeType" : "Custom_0",
+            "Operation" : "Multiply",
             "Value" : {
               "$type" : "TFixedValue",
-              "Value" : 50.0
+              "Value" : 2.0
             },
             "Target" : {
               "$type" : "TTargetCardSelf",
@@ -83,8 +69,35 @@
             }
           },
           "Prerequisites" : null,
-          "InternalName" : "Deadly Exoskeleton Aura",
-          "InternalDescription" : "Deadly 50",
+          "InternalName" : "Shiny Exoskeleton Aura",
+          "InternalDescription" : "Shiny 2",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "9bdfd7f6-5480-43ba-a90a-5f649b5f48f7"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "Custom_1",
+            "Operation" : "Multiply",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 2.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Shiny Exoskeleton Aura 2",
+          "InternalDescription" : "Shiny 2",
           "MigrationData" : "",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
@@ -95,18 +108,145 @@
         }
       },
       "Tags" : [ ],
-      "HiddenTags" : [ "Crit" ],
+      "HiddenTags" : [ ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "de279dd1-f245-4353-b917-f84e3983ed3c",
-            "Text" : "This has +{aura.e1}% Crit Chance."
+            "Text" : "This has double damage bonus."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : false,
+      "HasAuras" : true
+    },
+    "Deadly" : {
+      "Attributes" : { },
+      "Abilities" : {
+        "e1" : {
+          "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnCardSold",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 5.0
+            },
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Duration" : null,
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHandAndStash",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "Any"
+                }, {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "Priority" : "Low",
+          "InternalName" : "Exoskeleton 2",
+          "InternalDescription" : "When you sell this, your weapons gain 5% Crit Chance.",
+          "MigrationData" : "deaa60be-80a6-4bc4-8de2-8cd5b943904d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "4efc822a8e2bcad27959965495779915"
+        }
+      },
+      "Auras" : {
+        "e2" : {
+          "Id" : "1",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 20.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardPositional",
+              "Origin" : "Self",
+              "TargetMode" : "Neighbor",
+              "IncludeOrigin" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalTag",
+                  "Tags" : [ "Weapon" ],
+                  "Operator" : "Any"
+                }, {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Exoskeleton",
+          "InternalDescription" : "Adjacent Weapons have +20% Crit Chance.",
+          "MigrationData" : "4e5d859a-3516-40be-b937-2686d5ccd380",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "a182c5580315b6419d861a761e107ca2"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Crit" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "a182c5580315b6419d861a761e107ca3",
+            "Text" : "Adjacent Weapons have +{aura.e2}% Crit Chance."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        }, {
+          "Content" : {
+            "Key" : "4efc822a8e2bcad27959965495779916",
+            "Text" : "When you sell this, your Weapons gain {ability.e1}% Crit Chance."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : true,
       "HasAuras" : true
     },
     "Radiant" : {
@@ -216,7 +356,7 @@
   "StartingTier" : "Bronze",
   "Size" : "Medium",
   "Heroes" : [ "Common" ],
-  "Tags" : [ ],
+  "Tags" : [ "Apparel" ],
   "HiddenTags" : [ "DamageReference" ],
   "ArtKey" : "42b684e5cb87d2f4c8989925cd87579b",
   "CardPackId" : "Core",

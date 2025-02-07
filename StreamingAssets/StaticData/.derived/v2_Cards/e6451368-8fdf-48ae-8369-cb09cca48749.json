@@ -383,7 +383,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 7
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -414,25 +414,65 @@
           "TranslationKey" : "8ac79154-4675-4ff0-b570-daf7d27f06ca"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Railgun Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "9d49ee91-69f1-4de6-99f4-109d113b1aac",
-            "Text" : "Poison {ability.e1}."
+            "Key" : "d1867418-db27-4177-9a2c-4e4963dfc164",
+            "Text" : "Poison equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 11
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -463,21 +503,61 @@
           "TranslationKey" : "5df9be90-ba64-4b41-abcc-5550066fcb0f"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "DamageAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Railgun Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "8ef420ad-6de9-4450-9737-14148eb6458b",
-            "Text" : "Burn {ability.e1}."
+            "Key" : "a2588083-ec1b-480f-8f29-c1cba2b41b3f",
+            "Text" : "Burn equal to 10% of this item's damage."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -701,7 +781,7 @@
   "StartingTier" : "Silver",
   "Size" : "Large",
   "Heroes" : [ "Dooley" ],
-  "Tags" : [ "Weapon" ],
+  "Tags" : [ "Weapon", "Tech" ],
   "HiddenTags" : [ "Damage" ],
   "ArtKey" : "ccef1ce2678c745498165b9cc5f5c415",
   "CardPackId" : "Dooley_Core",
@@ -724,7 +804,7 @@
     }, {
       "Content" : {
         "Key" : "aca53e5cf2ffc889c78b2b39cfe02b85",
-        "Text" : "When you use a Tech, charge this {ability.1} second(s)."
+        "Text" : "When you use another Tech, charge this {ability.1} second(s)."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -765,7 +845,7 @@
         "Subject" : {
           "$type" : "TTargetCardSection",
           "TargetSection" : "SelfHand",
-          "ExcludeSelf" : false,
+          "ExcludeSelf" : true,
           "Conditions" : {
             "$type" : "TCardConditionalOr",
             "Conditions" : [ {
@@ -787,7 +867,7 @@
       "Prerequisites" : null,
       "Priority" : "Low",
       "InternalName" : "Railgun 2",
-      "InternalDescription" : "When you use a Tech, this gains {ability.1} damage for the fight.",
+      "InternalDescription" : "When you use another Tech, this gains {ability.1} damage for the fight.",
       "MigrationData" : "9eb3773a-10f0-41d3-bbea-7bbe816a9f74",
       "VFXConfig" : {
         "VFXOverrideKey" : null,

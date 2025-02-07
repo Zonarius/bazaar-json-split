@@ -342,7 +342,7 @@
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 12
+        "PoisonApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -373,25 +373,65 @@
           "TranslationKey" : "04d16410-f689-427f-99ec-c6df06f87879"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "PoisonApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Toxic Landscraper Aura",
+          "InternalDescription" : "Sets the value of poison",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Poison" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "e6aa4f09-4857-4f60-be02-5caead75c6dc",
-            "Text" : "Poison {ability.e1}."
+            "Text" : "Poison equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 18
+        "BurnApplyAmount" : 0
       },
       "Abilities" : {
         "e1" : {
@@ -422,21 +462,61 @@
           "TranslationKey" : "bb898717-22d7-4bca-b88e-e930072c9e5f"
         }
       },
-      "Auras" : { },
+      "Auras" : {
+        "e2" : {
+          "Id" : "e2",
+          "ActiveIn" : "HandAndStash",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "BurnApplyAmount",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TReferenceValueCardAttribute",
+              "Target" : {
+                "$type" : "TTargetCardSelf",
+                "Conditions" : null
+              },
+              "AttributeType" : "ShieldApplyAmount",
+              "DefaultValue" : 0.0,
+              "Modifier" : {
+                "ModifyMode" : "Multiply",
+                "Value" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.1
+                }
+              }
+            },
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Fiery Landscraper Aura",
+          "InternalDescription" : "Sets the value of burn",
+          "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
+        }
+      },
       "Tags" : [ ],
       "HiddenTags" : [ "Burn" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
             "Key" : "4f8bb212-0feb-43ea-968c-4dad0b2ddb0f",
-            "Text" : "Burn {ability.e1}."
+            "Text" : "Burn equal to 10% of this item's Shield."
           },
           "TooltipType" : "Active",
           "Prerequisites" : null
         } ]
       },
       "HasAbilities" : true,
-      "HasAuras" : false
+      "HasAuras" : true
     },
     "Shiny" : {
       "Attributes" : { },
@@ -662,7 +742,7 @@
     }, {
       "Content" : {
         "Key" : "8f56e693725f268a6e25d777bb83ad86",
-        "Text" : "When you use another item, this gains Shield equal to the value of that item for the fight."
+        "Text" : "When you use another item, this gains +Shield equal to the value of that item for the fight."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
@@ -708,7 +788,7 @@
       "Trigger" : {
         "$type" : "TTriggerOnHourStarted"
       },
-      "ActiveIn" : "HandAndStash",
+      "ActiveIn" : "HandOnly",
       "Action" : {
         "$type" : "TActionCardModifyAttribute",
         "Value" : {
@@ -739,7 +819,7 @@
       "Prerequisites" : null,
       "Priority" : "Medium",
       "InternalName" : "Landscraper 2",
-      "InternalDescription" : "At the start of each hour, this gains {ability.1} value.",
+      "InternalDescription" : "At the start of each hour, this gains +[--/1/2/3] value.",
       "MigrationData" : "b699723f-ac0a-4de9-befc-66bbf3d62606",
       "VFXConfig" : {
         "VFXOverrideKey" : null,
@@ -828,7 +908,7 @@
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Landscraper Silver",
+      "InternalName" : "Landscraper Shield",
       "InternalDescription" : "Sets the value of ShieldApplyAmount",
       "MigrationData" : "7f59e379-81e5-4d42-a492-d9f32fbe6b9f",
       "VFXConfig" : {
@@ -837,45 +917,6 @@
         "VFXIsTakeover" : false
       },
       "TranslationKey" : "b7b4b93275c7490d6e2b0997872ba2e1"
-    },
-    "9" : {
-      "Id" : "9",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "Custom_2",
-        "Operation" : "Add",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "Custom_1",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            }
-          }
-        },
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "InternalName" : "Tooltip Handling",
-      "InternalDescription" : "",
-      "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "9ed8516049000a0e1a90054e0aab06ce"
     }
   }
 }

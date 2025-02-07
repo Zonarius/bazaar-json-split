@@ -5,71 +5,108 @@
       "Attributes" : {
         "BuyPrice" : 12,
         "SellPrice" : 6,
-        "Multicast" : 1,
-        "ShieldApplyAmount" : 0,
-        "Custom_0" : 30,
+        "Custom_0" : 20,
         "Custom_1" : 0
       },
-      "AbilityIds" : [ "0", "1", "4" ],
-      "AuraIds" : [ "5" ],
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
       "TooltipIds" : [ 0 ]
     },
     "Gold" : {
       "Attributes" : {
         "BuyPrice" : 24,
         "SellPrice" : 12,
-        "Custom_0" : 40
+        "Custom_0" : 30,
+        "Custom_1" : 0
       },
-      "AbilityIds" : [ "0", "2", "4" ],
-      "AuraIds" : [ "5" ],
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
       "TooltipIds" : [ 0 ]
     },
     "Diamond" : {
       "Attributes" : {
         "BuyPrice" : 48,
         "SellPrice" : 24,
-        "Custom_0" : 50
+        "Custom_0" : 40
       },
-      "AbilityIds" : [ "0", "3", "4" ],
-      "AuraIds" : [ "5" ],
+      "AbilityIds" : [ ],
+      "AuraIds" : [ "0" ],
       "TooltipIds" : [ 0 ]
     }
   },
   "Enchantments" : {
     "Heavy" : {
       "Attributes" : {
-        "SlowTargets" : 4,
         "SlowAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardSlow",
             "Target" : {
-              "$type" : "TTargetCardRandom",
-              "ExcludeSelf" : false,
+              "$type" : "TTargetCardSection",
               "TargetSection" : "OpponentHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAnd",
-                "Conditions" : [ {
-                  "$type" : "TCardConditionalAttribute",
-                  "Attribute" : "CooldownMax",
-                  "ComparisonOperator" : "GreaterThan",
-                  "ComparisonValue" : {
-                    "$type" : "TFixedValue",
-                    "Value" : 0.0
-                  }
-                } ]
-              }
+              "ExcludeSelf" : false,
+              "Conditions" : null
             }
           },
-          "Prerequisites" : null,
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
           "Priority" : "Medium",
           "InternalName" : "Heavy Bunker Ability",
           "InternalDescription" : "",
@@ -80,6 +117,77 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -89,7 +197,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ca59c855-537c-4746-91b4-b215f3b20534",
-            "Text" : "At the start of each fight, Slow {ability.e1.targets} enemy items for {ability.e1} second(s)."
+            "Text" : "The first time you fall below half health each fight, Slow all enemy items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -100,15 +208,20 @@
     },
     "Icy" : {
       "Attributes" : {
-        "FreezeTargets" : 2,
         "FreezeAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -120,7 +233,51 @@
               "Conditions" : null
             }
           },
-          "Prerequisites" : null,
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
           "Priority" : "Medium",
           "InternalName" : "Icy Bunker Ability",
           "InternalDescription" : "",
@@ -130,7 +287,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "d55707d0-223f-46ad-bb7e-a64119ced5db"
+          "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -140,7 +368,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "f5e93ad6-07dd-42ee-823c-d87d902c5c82",
-            "Text" : "At the start of each fight, Freeze {ability.e1.targets} item for {ability.e1} second(s)."
+            "Text" : "The first time you fall below half health each fight, Freeze all enemy items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -151,38 +379,76 @@
     },
     "Turbo" : {
       "Attributes" : {
-        "HasteTargets" : 4,
         "HasteAmount" : 4000
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
             "$type" : "TActionCardHaste",
             "Target" : {
-              "$type" : "TTargetCardRandom",
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "OpponentHand",
               "ExcludeSelf" : false,
-              "TargetSection" : "SelfHand",
-              "Conditions" : {
-                "$type" : "TCardConditionalAnd",
-                "Conditions" : [ {
-                  "$type" : "TCardConditionalAttribute",
-                  "Attribute" : "CooldownMax",
-                  "ComparisonOperator" : "GreaterThan",
-                  "ComparisonValue" : {
-                    "$type" : "TFixedValue",
-                    "Value" : 0.0
-                  }
-                } ]
-              }
+              "Conditions" : null
             }
           },
-          "Prerequisites" : null,
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
           "Priority" : "Medium",
           "InternalName" : "Turbo Bunker Ability",
           "InternalDescription" : "",
@@ -193,6 +459,77 @@
             "VFXIsTakeover" : false
           },
           "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -202,7 +539,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "ca59c855-537c-4746-91b4-b215f3b20534",
-            "Text" : "At the start of each fight, Haste {ability.e1.targets} items for {ability.e1} second(s)."
+            "Text" : "The first time you fall below half health each fight, Haste your items for {ability.e1} second(s)."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -213,14 +550,20 @@
     },
     "Shielded" : {
       "Attributes" : {
-        "ShieldApplyAmount" : 180
+        "ShieldApplyAmount" : 300
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -232,7 +575,51 @@
               "Conditions" : null
             }
           },
-          "Prerequisites" : null,
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
           "Priority" : "Medium",
           "InternalName" : "Shielded Bunker Ability",
           "InternalDescription" : "",
@@ -242,7 +629,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "66ec8f48-c999-4344-b3c4-53b73e372c17"
+          "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -252,7 +710,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "6a2c2e29-6ba2-4617-b33d-0282a95cb038",
-            "Text" : "At the start of each fight, shield {ability.e1}."
+            "Text" : "The first time you fall below half health each fight, Shield {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -262,63 +720,192 @@
       "HasAuras" : false
     },
     "Restorative" : {
-      "Attributes" : { },
-      "Abilities" : { },
-      "Auras" : {
+      "Attributes" : {
+        "HealAmount" : 500
+      },
+      "Abilities" : {
         "e1" : {
           "Id" : "e1",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
           "ActiveIn" : "HandOnly",
           "Action" : {
-            "$type" : "TAuraActionPlayerModifyAttribute",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 18.0
-            },
-            "AttributeType" : "HealthRegen",
-            "Operation" : "Add",
+            "$type" : "TActionPlayerHeal",
+            "ReferenceValue" : null,
             "Target" : {
               "$type" : "TTargetPlayerRelative",
               "TargetMode" : "Self",
               "Conditions" : null
             }
           },
-          "Prerequisites" : null,
-          "InternalName" : "Restorative Bunker Aura",
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Medium",
+          "InternalName" : "Restorative Bunker Ability",
           "InternalDescription" : "",
-          "MigrationData" : "f6c98aeb-43ea-40a5-b397-ea5953edfb2d",
+          "MigrationData" : "17f6e6ac-2a99-43e1-aa0b-e3fa8f3564ce",
           "VFXConfig" : {
             "VFXOverrideKey" : null,
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "7aeb68df-e177-4c16-bc1a-a2c6e448e8cl"
+          "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
+      "Auras" : { },
       "Tags" : [ ],
-      "HiddenTags" : [ "Regen" ],
+      "HiddenTags" : [ "Heal" ],
       "Localization" : {
         "Tooltips" : [ {
           "Content" : {
-            "Key" : "76d9e50a-43f0-4653-900d-4a4f2e62cb54",
-            "Text" : "You have +{aura.e1} Regeneration."
+            "Key" : "6a2c2e29-6ba2-4617-b33d-0282a95cb038",
+            "Text" : "The first time you fall below half health each fight, Heal {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
         } ]
       },
-      "HasAbilities" : false,
-      "HasAuras" : true
+      "HasAbilities" : true,
+      "HasAuras" : false
     },
     "Toxic" : {
       "Attributes" : {
-        "PoisonApplyAmount" : 18
+        "PoisonApplyAmount" : 30
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -330,7 +917,51 @@
               "Conditions" : null
             }
           },
-          "Prerequisites" : null,
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
           "Priority" : "Medium",
           "InternalName" : "Toxic Bunker Ability",
           "InternalDescription" : "",
@@ -340,7 +971,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "82b39f8b-9e69-4f98-8e87-8696bf0af272"
+          "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -350,7 +1052,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "99cde047-6b31-4745-81c1-135026ab63b9",
-            "Text" : "At the start of each fight, poison {ability.e1}."
+            "Text" : "The first time you fall below half health each fight, Poison {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -361,14 +1063,20 @@
     },
     "Fiery" : {
       "Attributes" : {
-        "BurnApplyAmount" : 24
+        "BurnApplyAmount" : 30
       },
       "Abilities" : {
         "e1" : {
           "Id" : "e1",
           "Trigger" : {
-            "$type" : "TTriggerOnFightStarted",
-            "CombatType" : null
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
           },
           "ActiveIn" : "HandOnly",
           "Action" : {
@@ -380,7 +1088,51 @@
               "Conditions" : null
             }
           },
-          "Prerequisites" : null,
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisiteCardCount",
+            "Subject" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : {
+                "$type" : "TCardConditionalAttribute",
+                "Attribute" : "Custom_1",
+                "ComparisonOperator" : "Equal",
+                "ComparisonValue" : {
+                  "$type" : "TFixedValue",
+                  "Value" : 0.0
+                }
+              }
+            },
+            "Comparison" : "Equal",
+            "Amount" : 1
+          }, {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
           "Priority" : "Medium",
           "InternalName" : "Fiery Bunker Ability",
           "InternalDescription" : "",
@@ -390,7 +1142,78 @@
             "VFXShouldPlay" : true,
             "VFXIsTakeover" : false
           },
-          "TranslationKey" : "1128d6fb-f697-4cf6-8ace-3be7adf7b32e"
+          "TranslationKey" : "51b31987-0b77-4c96-87e4-21ae5b1d16a6"
+        },
+        "e2" : {
+          "Id" : "e2",
+          "Trigger" : {
+            "$type" : "TTriggerOnPlayerAttributeChanged",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : null
+            },
+            "AttributeType" : "Health",
+            "ChangeType" : "Loss"
+          },
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TActionCardModifyAttribute",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 1.0
+            },
+            "AttributeType" : "Custom_1",
+            "Operation" : "Add",
+            "Duration" : {
+              "$type" : "TDeterminantDuration",
+              "DurationType" : "UntilEndOfCombat"
+            },
+            "TargetCount" : null,
+            "Target" : {
+              "$type" : "TTargetCardSelf",
+              "Conditions" : null
+            }
+          },
+          "Prerequisites" : [ {
+            "$type" : "TPrerequisitePlayer",
+            "Subject" : {
+              "$type" : "TTargetPlayerRelative",
+              "TargetMode" : "Self",
+              "Conditions" : {
+                "$type" : "TPlayerConditionalAttribute",
+                "Attribute" : "Health",
+                "ComparisonOperator" : "LessThan",
+                "ComparisonValue" : {
+                  "$type" : "TReferenceValuePlayerAttribute",
+                  "Target" : {
+                    "$type" : "TTargetPlayerRelative",
+                    "TargetMode" : "Self",
+                    "Conditions" : null
+                  },
+                  "AttributeType" : "HealthMax",
+                  "DefaultValue" : 0.0,
+                  "Modifier" : {
+                    "ModifyMode" : "Multiply",
+                    "Value" : {
+                      "$type" : "TFixedValue",
+                      "Value" : 0.5
+                    }
+                  }
+                }
+              }
+            }
+          } ],
+          "Priority" : "Immediate",
+          "InternalName" : "Counter Increment",
+          "InternalDescription" : "",
+          "MigrationData" : "6ceaab96-0e76-4db6-8b6b-51c6f690f21d",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "1765d39b625142ba0ad0f322f5e114ca"
         }
       },
       "Auras" : { },
@@ -400,7 +1223,7 @@
         "Tooltips" : [ {
           "Content" : {
             "Key" : "3e193e1d-547c-4509-a86f-87fd1cf8049f",
-            "Text" : "At the start of each fight, burn {ability.e1}."
+            "Text" : "The first time you fall below half health each fight, Burn {ability.e1}."
           },
           "TooltipType" : "Passive",
           "Prerequisites" : null
@@ -408,6 +1231,77 @@
       },
       "HasAbilities" : true,
       "HasAuras" : false
+    },
+    "Deadly" : {
+      "Attributes" : { },
+      "Abilities" : { },
+      "Auras" : {
+        "e1" : {
+          "Id" : "e1",
+          "ActiveIn" : "HandOnly",
+          "Action" : {
+            "$type" : "TAuraActionCardModifyAttribute",
+            "AttributeType" : "CritChance",
+            "Operation" : "Add",
+            "Value" : {
+              "$type" : "TFixedValue",
+              "Value" : 25.0
+            },
+            "Target" : {
+              "$type" : "TTargetCardSection",
+              "TargetSection" : "SelfHand",
+              "ExcludeSelf" : false,
+              "Conditions" : {
+                "$type" : "TCardConditionalAnd",
+                "Conditions" : [ {
+                  "$type" : "TCardConditionalAttribute",
+                  "Attribute" : "CooldownMax",
+                  "ComparisonOperator" : "GreaterThan",
+                  "ComparisonValue" : {
+                    "$type" : "TFixedValue",
+                    "Value" : 0.0
+                  }
+                }, {
+                  "$type" : "TCardConditionalOr",
+                  "Conditions" : [ {
+                    "$type" : "TCardConditionalTag",
+                    "Tags" : [ "Weapon" ],
+                    "Operator" : "Any"
+                  }, {
+                    "$type" : "TCardConditionalHiddenTag",
+                    "Tags" : [ "Shield", "Heal", "Joy", "Burn", "Poison" ],
+                    "Operator" : "Any"
+                  } ]
+                } ]
+              }
+            }
+          },
+          "Prerequisites" : null,
+          "InternalName" : "Deadly Bunker Aura",
+          "InternalDescription" : "Deadly 25",
+          "MigrationData" : "",
+          "VFXConfig" : {
+            "VFXOverrideKey" : null,
+            "VFXShouldPlay" : true,
+            "VFXIsTakeover" : false
+          },
+          "TranslationKey" : "8e86c895-5bbd-4474-949e-0be8c6697db7"
+        }
+      },
+      "Tags" : [ ],
+      "HiddenTags" : [ "Crit" ],
+      "Localization" : {
+        "Tooltips" : [ {
+          "Content" : {
+            "Key" : "335317c6-5142-4d8d-b5e0-235aba20e7f7",
+            "Text" : "Your items have +{aura.e1}% Crit Chance."
+          },
+          "TooltipType" : "Passive",
+          "Prerequisites" : null
+        } ]
+      },
+      "HasAbilities" : false,
+      "HasAuras" : true
     },
     "Radiant" : {
       "Attributes" : { },
@@ -517,7 +1411,7 @@
   "Size" : "Large",
   "Heroes" : [ "Dooley" ],
   "Tags" : [ "Property" ],
-  "HiddenTags" : [ "Shield" ],
+  "HiddenTags" : [ ],
   "ArtKey" : "bc087bcdb212d2b449365c5aab69473b",
   "CardPackId" : "Dooley_Core",
   "TranslationKey" : "432b9dd4e6a90d90173cc025c7710861",
@@ -532,275 +1426,19 @@
     "Tooltips" : [ {
       "Content" : {
         "Key" : "78d5e8670d88516a486726c28e6a37f1",
-        "Text" : "When you take damage from an item, Shield equal to {aura.5}% of the damage dealt."
+        "Text" : "You take {aura.0}% less damage."
       },
       "TooltipType" : "Passive",
       "Prerequisites" : null
     } ]
   },
-  "Abilities" : {
+  "Abilities" : { },
+  "Auras" : {
     "0" : {
       "Id" : "0",
-      "Trigger" : {
-        "$type" : "TTriggerOnCardPerformedDamage",
-        "Subject" : {
-          "$type" : "TTargetCardSection",
-          "TargetSection" : "OpponentBoard",
-          "ExcludeSelf" : false,
-          "Conditions" : null
-        }
-      },
       "ActiveIn" : "HandOnly",
       "Action" : {
-        "$type" : "TActionPlayerShieldApply",
-        "ReferenceValue" : null,
-        "Target" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Medium",
-      "InternalName" : "Bunker 1",
-      "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
-    },
-    "1" : {
-      "Id" : "1",
-      "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Health",
-        "ChangeType" : "Loss"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttributeChange",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.3
-            }
-          }
-        },
-        "AttributeType" : "ShieldApplyAmount",
-        "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "High",
-      "InternalName" : "Bunker 1",
-      "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
-    },
-    "2" : {
-      "Id" : "2",
-      "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Health",
-        "ChangeType" : "Loss"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttributeChange",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.4
-            }
-          }
-        },
-        "AttributeType" : "ShieldApplyAmount",
-        "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "High",
-      "InternalName" : "Bunker 1",
-      "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
-    },
-    "3" : {
-      "Id" : "3",
-      "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Health",
-        "ChangeType" : "Loss"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TReferenceValuePlayerAttributeChange",
-          "Target" : {
-            "$type" : "TTargetPlayerRelative",
-            "TargetMode" : "Self",
-            "Conditions" : null
-          },
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 0.5
-            }
-          }
-        },
-        "AttributeType" : "ShieldApplyAmount",
-        "Operation" : "Add",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "High",
-      "InternalName" : "Bunker 1",
-      "InternalDescription" : "Shield {ability.0}.",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
-    },
-    "4" : {
-      "Id" : "4",
-      "Trigger" : {
-        "$type" : "TTriggerOnPlayerAttributeChanged",
-        "Subject" : {
-          "$type" : "TTargetPlayerRelative",
-          "TargetMode" : "Self",
-          "Conditions" : null
-        },
-        "AttributeType" : "Health",
-        "ChangeType" : "Loss"
-      },
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TActionCardModifyAttribute",
-        "Value" : {
-          "$type" : "TReferenceValueCardAttribute",
-          "Target" : {
-            "$type" : "TTargetCardSelf",
-            "Conditions" : null
-          },
-          "AttributeType" : "ShieldApplyAmount",
-          "DefaultValue" : 0.0,
-          "Modifier" : {
-            "ModifyMode" : "Multiply",
-            "Value" : {
-              "$type" : "TFixedValue",
-              "Value" : 1.0
-            }
-          }
-        },
-        "AttributeType" : "ShieldApplyAmount",
-        "Operation" : "Subtract",
-        "Duration" : {
-          "$type" : "TDeterminantDuration",
-          "DurationType" : "UntilEndOfCombat"
-        },
-        "TargetCount" : null,
-        "Target" : {
-          "$type" : "TTargetCardSelf",
-          "Conditions" : null
-        }
-      },
-      "Prerequisites" : null,
-      "Priority" : "Low",
-      "InternalName" : "Bunker 2",
-      "InternalDescription" : "Shield Reset",
-      "MigrationData" : "39c54ff6-161b-450c-9c60-94a84f474cc1",
-      "VFXConfig" : {
-        "VFXOverrideKey" : null,
-        "VFXShouldPlay" : true,
-        "VFXIsTakeover" : false
-      },
-      "TranslationKey" : "78d5e8670d88516a486726c28e6a37f1"
-    }
-  },
-  "Auras" : {
-    "5" : {
-      "Id" : "5",
-      "ActiveIn" : "HandOnly",
-      "Action" : {
-        "$type" : "TAuraActionCardModifyAttribute",
-        "AttributeType" : "Custom_1",
-        "Operation" : "Add",
+        "$type" : "TAuraActionPlayerModifyAttribute",
         "Value" : {
           "$type" : "TReferenceValueCardAttribute",
           "Target" : {
@@ -817,13 +1455,16 @@
             }
           }
         },
+        "AttributeType" : "PercentDamageReduction",
+        "Operation" : "Add",
         "Target" : {
-          "$type" : "TTargetCardSelf",
+          "$type" : "TTargetPlayerRelative",
+          "TargetMode" : "Self",
           "Conditions" : null
         }
       },
       "Prerequisites" : null,
-      "InternalName" : "Tooltip Handling",
+      "InternalName" : "",
       "InternalDescription" : "",
       "MigrationData" : "5e95759d-caaf-40a6-9ca4-b1c2135e29ac",
       "VFXConfig" : {
